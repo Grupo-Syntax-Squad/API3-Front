@@ -1,4 +1,4 @@
-
+import Roteador from './components/roteador';
 import './App.css';
 
 function App() {
