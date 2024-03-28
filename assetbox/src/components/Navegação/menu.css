@@ -1,0 +1,21 @@
+:root{
+  --verde: #459EB5;
+  --branco: #FFFFFF;
+}
+
+.custom-background {
+    background-color: var(--verde);
+  }
+
+.navbar-burger{
+  color: var(--branco);
+}
+
+.navbar-item{
+  color: var(--branco);
+}
+
+.navbar-item:hoover{
+  background-color: var(--verde);
+
+}

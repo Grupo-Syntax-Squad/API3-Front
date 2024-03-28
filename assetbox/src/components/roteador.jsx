@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Menu from "./Menu";
+import Menu from "./Navegação/Menu";
 
 export default function Roteador(){
     const [tela, setTela] = useState('Ativos')
@@ -14,15 +14,15 @@ export default function Roteador(){
         if (tela === 'Ativos') {
             return (
                 <>
-                    <Menu seletorView={selecionarView} tema="#87c7fd" botoes={botoes} />
-                    {/* <ListaCliente tema="#5eb4fc" red="#fc6464" green="#00ff00" seletorView={selecionarView} /> */}
+                    <Menu seletorView={selecionarView} botoes={botoes} />
+                    {/* <Ativos tema="#5eb4fc" red="#fc6464" green="#00ff00" seletorView={selecionarView} /> */}
                 </>
             )
         }
         else if (tela === 'Usuários') {
             return (
                 <>
-                    <Menu seletorView={selecionarView} tema="#87c7fd" botoes={botoes} />
+                    <Menu seletorView={selecionarView} botoes={botoes} />
                     {/* <FormularioCadastroCliente tema="#5eb4fc" azul="#5eb4fc" seletorView={selecionarView} /> */}
                 </>
             )
@@ -30,22 +30,21 @@ export default function Roteador(){
         else if (tela === 'Manutenções') {
             return (
                 <>
-                    <Menu seletorView={selecionarView} tema="#87c7fd" botoes={botoes} />
+                    <Menu seletorView={selecionarView} botoes={botoes} />
                     {/* <Produtos tema="#5eb4fc" red="#fc6464" green="#00ff00" /> */}
                 </>
             )
         }
         else if (tela === 'Dashboard') {
-            return (
-                <>
-                    <Menu seletorView={selecionarView} tema="#87c7fd" botoes={botoes} />
+            return (  <>
+                    <Menu seletorView={selecionarView} botoes={botoes} />
                     {/* <Serviços tema="#5eb4fc" red="#fc6464" green="#00ff00" /> */}
                 </>
             )
         } else {
             return (
                 <>
-                    <Menu seletorView={selecionarView} tema="#87c7fd" botoes={botoes} />
+                    <Menu seletorView={selecionarView} botoes={botoes} />
                     {/* <FormularioCadastroCliente seletorView={selecionarView} tema="#5eb4fc" azul="#5eb4fc" /> */}
                 </>
             )
