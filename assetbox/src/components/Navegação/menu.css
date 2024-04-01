@@ -19,3 +19,11 @@
   background-color: var(--verde);
 
 }
+
+a:hover{
+  background-color: #367E90;
+}
+
+a.active{
+  background-color: #367E90;
+}
