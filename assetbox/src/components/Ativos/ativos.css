@@ -1,0 +1,58 @@
+
+.page-full{
+    align-items: stretch;
+    justify-content: space-around;
+    background-color: #D9D9D9;
+    margin: 1% 10% 1% 10%;
+  }
+  
+  h2{
+    text-align: center;
+    background-color: #459eb6;
+    margin: auto;
+    font-size: x-large;
+    color: #fff;
+  }
+  
+  h1{
+    text-align: center;
+    font-size: larger;
+    padding: 0.5%;
+  }
+ .indice{
+    background-color: #459EB5;
+ }
+
+ .filtro{
+    background-color: #367E90;
+ }
+
+ .indices{
+    color: white;
+    font-size: 28px;
+    font-weight: 350;
+ }
+
+ .filtros{
+    color: white;
+    font-size: 25px;
+    font-weight: 200;
+ }
+
+ .dado-ativo{
+    font-size: 20px;
+    font-weight: 600;
+    color: #000;
+ }
+  
+   .top-one{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 2%;
+  }
+  
+  

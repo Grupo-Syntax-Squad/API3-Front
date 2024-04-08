@@ -3,7 +3,7 @@ import "./cadastro.css";
 import imgadd from "./imgadd.png"
 import docadd from "./docadd.png"
 
-function CadastroAtivos() {
+function CadastroAtivos ({setTela}) {
   // Definindo estados para armazenar os dados do ativo
   const [numeroAtivo, setNumAtivo] = useState('');
   const [tipoAtivo, setTipoAtivo] = useState('');
@@ -46,6 +46,7 @@ function CadastroAtivos() {
   };
 
   return (
+  <body>
     <div class='page-full'>
       <div class='field'>
       <h2>Cadastro de Ativos</h2>
@@ -110,7 +111,7 @@ function CadastroAtivos() {
             placeholder='Insira o Destinatário:'
             value={destinatarioAtivo}
             onChange={(event) => setDestinatarioAtivo(event.target.value)}
-          />
+            />
         </div>
         
 
@@ -126,7 +127,6 @@ function CadastroAtivos() {
             onChange={(event) => setTituloAtivo(event.target.value)}
           />
         
-
         <div className="field" >
           <label className="form-label">Complemento:</label>
           
@@ -356,17 +356,19 @@ function CadastroAtivos() {
         </button>
       </p>
       <p class="control">
-        <button class="button is-light" type="submit">
+        <button class="button is-light" onClick={() => setTela('Ativos')}>
           Cancelar
-        </button>
+          </button>
       </p>
     
     </div>
 
 
+
     
   
   </div>
+  </body>
   
 
   

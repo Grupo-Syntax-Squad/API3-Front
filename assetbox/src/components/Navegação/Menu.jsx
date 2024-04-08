@@ -20,7 +20,7 @@ function Menu(props) {
       <nav className={`navbar custom-background ${isActive ? 'is-active' : ''}`} role="navigation" aria-label="main navigation">
         <div className="navbar-brand">
           <img src={LogoIcon} class=' navbar-item pl-6 pr-0' alt="AssetBox" />
-          <a className="navbar-item mr-2 is-size-3 p-0 has-text-weight-bold" href="#">Empresa</a>
+          <a className="navbar-item mr-2 is-size-3 p-0 has-text-weight-bold empresa" href="#">Empresa</a>
           <a role="button" className={`navbar-burger ${isActive ? 'is-active' : ''}`} onClick={toggleMenu} aria-label="menu" aria-expanded={isActive ? 'true' : 'false'}>
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
@@ -30,24 +30,26 @@ function Menu(props) {
         </div>
 
         <div className={`navbar-menu ${isActive ? 'is-active' : ''}`} id="navMenu">
-          <div className="navbar-start is-left mr-1 is-flex ml-auto">
+          {/* <div className="navbar-start is-left mr-1 is-flex ml-auto"> */}
+          <div id="navbarBasicExample" className={`navbar-menu ${isActive ? 'is-active' : ''}`}>
 
-            <a className="navbar-item pr-6 pl-6 is-size-4 has-text-weight-bold">
-            <img src={UserIcon} class='mr-3'alt="Usuários" />
+            <a className="navbar-item pr-6 pl-6 is-size-5 has-text-weight-bold" style={{ margin: '0 0.5rem' }}>
+              <img src={UserIcon} class='mr-3' alt="Usuários" />
               Usuários
             </a>
 
-            <a className="navbar-item pr-6 pl-6 is-size-4 active has-text-weight-bold">
-            <img src={AssetsIcon} class='mr-3' alt="Ativos" />
+            <a className="navbar-item pr-6 pl-6 is-size-5 active has-text-weight-bold" style={{ margin: '0 0.5rem' }}>
+              <img src={AssetsIcon} class='mr-3' alt="Ativos" />
               Ativos
             </a>
 
-            <a className="navbar-item pr-6 pl-6 is-size-4 has-text-weight-bold">
-            <img src={MainteinIcon} class='mr-3' alt="Manutenções" />
+            <a className="navbar-item pr-6 pl-6 is-size-5 has-text-weight-bold" style={{ margin: '0 0.5rem' }}>
+              <img src={MainteinIcon} class='mr-3' alt="Manutenções" />
               Manutenções
             </a>
-            <a className="navbar-item pr-6 pl-6 is-size-4 has-text-weight-bold">
-            <img src={DashboardIcon} class='mr-3' alt="Dashboard" />
+
+            <a className="navbar-item pr-6 pl-6 is-size-5 has-text-weight-bold" style={{ margin: '0 0.5rem' }}>
+              <img src={DashboardIcon} class='mr-3' alt="Dashboard" />
               Dashboard
             </a>
           </div>

@@ -1,5 +1,7 @@
 import { useState } from "react";
 import Menu from "./Navegação/Menu";
+import Ativos from "./Ativos/Ativos";
+import CadastroAtivos from "./Cadastro/Cadastro";
 
 export default function Roteador(){
     const [tela, setTela] = useState('Ativos')
@@ -15,7 +17,15 @@ export default function Roteador(){
             return (
                 <>
                     <Menu seletorView={selecionarView} botoes={botoes} />
-                    {/* <Ativos tema="#5eb4fc" red="#fc6464" green="#00ff00" seletorView={selecionarView} /> */}
+                    <Ativos setTela={setTela}/>
+                </>
+            )
+        }
+        else if (tela === 'CadastroAtivos') {
+            return (
+                <>
+                    <Menu seletorView={selecionarView} botoes={botoes} />
+                    <CadastroAtivos setTela={setTela} />
                 </>
             )
         }
