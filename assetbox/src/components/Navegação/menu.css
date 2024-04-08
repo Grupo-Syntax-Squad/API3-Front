@@ -1,5 +1,6 @@
 :root{
   --verde: #459EB5;
+  --verdeEscuro: #367E90;
   --branco: #FFFFFF;
 }
 
@@ -31,7 +32,11 @@ a.active{
   .navbar-item {
     font-size: 0.8rem;
     margin: 0 0.2rem;
-    background-color: #459EB5;
+    background-color: #459EB5 !important;
+  }
+
+  .navbar-item:hover{
+    background-color: var(--verdeEscuro) !important;
   }
 
 

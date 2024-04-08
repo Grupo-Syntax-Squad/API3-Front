@@ -1,4 +1,6 @@
-
+:root{
+   --cinza:  rgb(189, 189, 189);
+}
 .page-full{
     align-items: stretch;
     justify-content: space-around;
@@ -54,5 +56,11 @@
     align-items: baseline;
     gap: 2%;
   }
+
+  .SemHover:hover{
+   background-color: transparent;
+  }
   
-  
+  .asset:hover{
+   background-color:var(--cinza);
+  }
