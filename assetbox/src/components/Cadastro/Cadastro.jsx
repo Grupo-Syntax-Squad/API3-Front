@@ -53,7 +53,7 @@ function CadastroAtivos ({setTela}) {
       </div>
       <div class="columns m-3">
 
-      <div class="column is-half"> <img src={imgadd} alt="imgadd"  style={{width: '100px', height: '100px'}}/> 
+      <div class="column is-half has-text-centered"> <img src={imgadd} alt="imgadd"  style={{width: '100px', height: '100px'}}/> 
       <div>
       <input className='image-button' type='file' id='img' name="img" accept="image/*"/>
       </div>
@@ -300,7 +300,7 @@ function CadastroAtivos ({setTela}) {
       <div className="columns m-3">
 
       
-      <div class="column is-half"><img src={docadd} alt="docadd"  style={{width: '100px', height: '100px'}} />.
+      <div class="column is-half has-text-centered"><img src={docadd} alt="docadd"  style={{width: '100px', height: '100px'}} />.
       <div>
       <input className='image-button' type='file' id='doc' name="doc" accept="doc/*"/>
       </div>

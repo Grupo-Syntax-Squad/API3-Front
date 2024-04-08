@@ -128,3 +128,6 @@ h1{
   gap: 2%;
 }
 
+.has-text-centered {
+  align-self: center;
+}
