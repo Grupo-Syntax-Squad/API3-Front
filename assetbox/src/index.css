@@ -29,3 +29,7 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+:root{
+  --bulma-body-background-color: #F2F3EE;
+}
