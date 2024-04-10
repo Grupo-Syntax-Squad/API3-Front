@@ -17,49 +17,44 @@ function Menu(props) {
 
   return (
     <div>
-      <nav className={`navbar custom-background ${isActive ? 'is-active' : ''}`} role="navigation" aria-label="main navigation">
-        <div className="navbar-brand">
-          <img src={LogoIcon} class=' navbar-item pl-6 pr-0' alt="AssetBox" />
-          <a className="navbar-item mr-2 is-size-3 p-0 has-text-weight-bold empresa" href="##">Empresa</a>
-          <a role="button" className={`navbar-burger ${isActive ? 'is-active' : ''}`} onClick={toggleMenu} aria-label="menu" aria-expanded={isActive ? 'true' : 'false'} href='##'>
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-          </a>
-        </div>
-
-        <div className={`navbar-menu ${isActive ? 'is-active' : ''}`} id="navMenu">
-          {/* <div className="navbar-start is-left mr-1 is-flex ml-auto"> */}
-          <div id="navbarBasicExample" className={`navbar-menu ${isActive ? 'is-active' : ''}`}>
-
-            <a className="navbar-item pr-6 pl-6 is-size-5 has-text-weight-bold my-0 mx-1" href='##'>
-              <img src={UserIcon} class='mr-3' alt="Usuários" />
-              Usuários
+      <nav className={`navbar  m-0 custom-background ${isActive ? 'is-active' : ''}`} role="navigation" aria-label="main navigation">
+          <div className='container'>
+            <img src={LogoIcon} class='navbar-brand pl-6 pr-0' alt="AssetBox" />
+            <a className="navbar-item mr-2 is-size-3 p-0 has-text-weight-bold empresa" href="##">AssetBox</a>
+            <a role="button" className={`navbar-burger ${isActive ? 'is-active' : ''}`} onClick={toggleMenu} aria-label="menu" aria-expanded={isActive ? 'true' : 'false'} href='##'>
+              <span aria-hidden="true"></span>
+              <span aria-hidden="true"></span>
+              <span aria-hidden="true"></span>
+              <span aria-hidden="true"></span>
             </a>
-
-            <a className="navbar-item pr-6 pl-6 is-size-5 active has-text-weight-bold my-0 mx-1" href='##'>
-              <img src={AssetsIcon} class='mr-3' alt="Ativos" />
-              Ativos
-            </a>
-
-            <a className="navbar-item pr-6 pl-6 is-size-5 has-text-weight-bold my-0 mx-1" href='##'>
-              <img src={MainteinIcon} class='mr-3' alt="Manutenções" />
-              Manutenções
-            </a>
-
-            <a className="navbar-item pr-6 pl-6 is-size-5 has-text-weight-bold my-0 mx-1" href='##'>
-              <img src={DashboardIcon} class='mr-3' alt="Dashboard" />
-              Dashboard
-            </a>
-          </div>
-
-          <div className="navbar-end">
-            <div className="navbar-item">
-              <a className="navbar-item" href="##"><img src={SettingsIcon} alt="" /></a>
+                    <div className={`navbar-menu ${isActive ? 'is-active' : ''}`} id="navMenu">
+            {/* <div className="navbar-start is-left mr-1 is-flex ml-auto"> */}
+            <div id="navbarBasicExample" className={`navbar-menu ${isActive ? 'is-active' : ''} `}>
+              {/* <a className="navbar-item pr-6 pl-6 is-size-5 has-text-weight-bold my-0 mx-1" href='##'>
+                <img src={UserIcon} class='mr-3' alt="Usuários" />
+                Usuários
+              </a> */}
+              <a className="navbar-item pr-6 pl-6 is-size-5 active has-text-weight-bold my-0 mx-1" href='##'>
+                <img src={AssetsIcon} class='mr-3' alt="Ativos" />
+                Ativos
+              </a>
+              {/* <a className="navbar-item pr-6 pl-6 is-size-5 has-text-weight-bold my-0 mx-1" href='##'>
+                <img src={MainteinIcon} class='mr-3' alt="Manutenções" />
+                Manutenções
+              </a> */}
+              {/* <a className="navbar-item pr-6 pl-6 is-size-5 has-text-weight-bold my-0 mx-1" href='##'>
+                <img src={DashboardIcon} class='mr-3' alt="Dashboard" />
+                Dashboard
+              </a> */}
             </div>
+            
+                    </div>
+            {/* <div className="navbar-end">
+              <div className="navbar-item">
+                <a className="navbar-item" href="##"><img src={SettingsIcon} alt="" /></a>
+              </div>
+            </div> */}
           </div>
-        </div>
       </nav>
     </div>
     
