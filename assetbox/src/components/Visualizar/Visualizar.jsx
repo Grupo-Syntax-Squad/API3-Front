@@ -1,49 +1,79 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect} from 'react';
 import "./visualizar.css";
 import imgadd from "./imgadd.png"
 import docadd from "./docadd.png"
+import axios from 'axios';
+
+class ViewAtivo {
+  constructor(numero, tipo, localizacao, status, destinatario, titulo, complemento, marca, capacidade, modelo, condicoes, n_serie,
+              fornecedor, aquisicao, fabricacao, tamanho, validade, nfe, url, observacoes) {
+      this.numero = numero;
+      this.tipo = tipo;
+      this.localizacao = localizacao;
+      this.status = status;
+      this.destinatario = destinatario;
+      this.titulo = titulo;
+      this.complemento = complemento;
+      this.marca = marca;
+      this.capacidade = capacidade;
+      this.modelo = modelo;
+      this.condicoes = condicoes;
+      this.n_serie = n_serie;
+      this.fornecedor = fornecedor;
+      this.aquisicao = aquisicao;
+      this.fabricacao = fabricacao;
+      this.tamanho = tamanho;
+      this.validade = validade;
+      this.nfe = nfe;
+      this.url = url;
+      this.observacoes = observacoes;
+  }
+}
 
 function VisualizarAtivos ({setTela}) {
-  // Definindo estados para armazenar os dados do ativo
-  const [numeroAtivo, setNumAtivo] = useState('');
-  const [tipoAtivo, setTipoAtivo] = useState('');
-  const [localizacaoAtivo, setLocalizacaoAtivo] = useState('');
-  const [statusAtivo, setStatusAtivo] = useState('');
-  const [destinatarioAtivo, setDestinatarioAtivo] = useState('');
-  const [tituloAtivo, setTituloAtivo] = useState('');
-  const [complementoAtivo, setComplementoAtivo] = useState('');
-  const [marcaAtivo, setMarcaAtivo] = useState('');
-  const [modeloAtivo, setModeloAtivo] = useState('');
-  const [serieAtivo, setSerieAtivo] = useState('');
-  const [valorAtivo, setValorAtivo] = useState('');
-  const [tamanhoAtivo, setTamanhoAtivo] = useState('');
-  const [capacidadeAtivo, setCapacidadeAtivo] = useState('');
-  const [qtdadeAtivo, setQuantidadeAtivo] = useState('');
-  const [usoAtivo, setUsoAtivo] = useState('');
-  const [fornecedorAtivo, setFornecedorAtivo] = useState('');
-  const [fabricacaoAtivo, setFabricacaoAtivo] = useState('');
-  const [validadeAtivo, setValidadeAtivo] = useState('');
-  const [nfeAtivo, setNfeAtivo] = useState('');
-  const [urlAtivo, setUrlAtivo] = useState('');
-  const [comentarioAtivo, setComentarioAtivo] = useState('');
+  const [dadosAtivo, setDadosAtivo] = useState({
+    numeroAtivo : '',
+    tipoAtivo :'',
+    localizacaoAtivo : '',
+    statusAtivo : '',
+    destinatarioAtivo : '',
+    tituloAtivo : '',
+    complementoAtivo : '',
+    marcaAtivo : '',
+    modeloAtivo : '',
+    serieAtivo : '',
+    valorAtivo : '',
+    tamanhoAtivo : '',
+    capacidadeAtivo : '',
+    qtdadeAtivo : '',
+    usoAtivo : '',
+    fornecedorAtivo : '',
+    fabricacaoAtivo : '',
+    validadeAtivo : '',
+    urlAtivo : '',
+    nfeAtivo : '',
+    comentarioAtivo : ''
+  })
+
+  useEffect((id) => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`http://localhost8080/ativo/${id}`);
+        const dados = response.data; 
+        setDadosAtivo(dados);
+      } catch (error) {
+        console.error(`Erro ao buscar dados do ativo ${id}:`, error);
+      }
+    };
+    fetchData();
+  }, []);
 
 
-
-
-  // Função para lidar com o envio do formulário
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    // Aqui você pode enviar os dados do ativo para o backend ou fazer outras operações
-    console.log("Dados do ativo:", { numeroAtivo, tipoAtivo, localizacaoAtivo, statusAtivo, destinatarioAtivo, tituloAtivo, complementoAtivo });
-    // Limpar os campos do formulário após o envio
-    setNumAtivo('');
-    setTipoAtivo('');
-    setLocalizacaoAtivo('');
-    setStatusAtivo('');
-    setDestinatarioAtivo('');
-    setTituloAtivo('');
-    setComplementoAtivo('');
-  };
+  function handleDelete(id) {
+    axios.delete(`http://localhost:8080/ativos/${id}`).then((resposta) => {
+        console.log(resposta.data);
+    }); 
+};
 
   return (
   <body>
@@ -60,7 +90,7 @@ function VisualizarAtivos ({setTela}) {
       </div>
 
       <div class="column is-half">
-      <form onSubmit={handleSubmit}>
+      <form >
       <div className='top-one'>
         
         <div class="field">
@@ -69,8 +99,8 @@ function VisualizarAtivos ({setTela}) {
             class="input is-small"
             type="text"
             placeholder='Digite um Número:'
-            value={numeroAtivo}
-            onChange={(event) => setNumAtivo(event.target.value)}
+            value={dadosAtivo.numeroAtivo}
+            
           />
         </div>
         <div class="field">
@@ -109,8 +139,8 @@ function VisualizarAtivos ({setTela}) {
             class="input is-small"
             type="text"
             placeholder='Insira o Destinatário:'
-            value={destinatarioAtivo}
-            onChange={(event) => setDestinatarioAtivo(event.target.value)}
+            value={dadosAtivo.destinatarioAtivo}
+            
             />
         </div>
         
@@ -123,8 +153,8 @@ function VisualizarAtivos ({setTela}) {
             class="input is-small"
             type="text"
             placeholder='Insira o Título:'
-            value={tituloAtivo}
-            onChange={(event) => setTituloAtivo(event.target.value)}
+            value={dadosAtivo.tituloAtivo}
+            
           />
         
         <div className="field" >
@@ -135,8 +165,8 @@ function VisualizarAtivos ({setTela}) {
             type="text"
             placeholder='Insira um Complemento:'
             rows="4"
-            value={complementoAtivo}
-            onChange={(event) => setComplementoAtivo(event.target.value)}
+            value={dadosAtivo.complementoAtivo}
+            
           />
         </div>
         </div>
@@ -154,7 +184,7 @@ function VisualizarAtivos ({setTela}) {
       
 
       <div class="column is-half">
-      <form onSubmit={handleSubmit}>
+      <form >
       <div className="field" >
           <label className="form-label">Marca:</label>
           
@@ -162,8 +192,8 @@ function VisualizarAtivos ({setTela}) {
             class="input is-small"
             type="text"
             placeholder='Digite a Marca:'
-            value={marcaAtivo}
-            onChange={(event) => setMarcaAtivo(event.target.value)}
+            value={dadosAtivo.marcaAtivo}
+            
           />
         </div>
         <div className="field" >
@@ -173,8 +203,8 @@ function VisualizarAtivos ({setTela}) {
             class="input is-small"
             type="text"
             placeholder='Digite o Modelo:'
-            value={modeloAtivo}
-            onChange={(event) => setModeloAtivo(event.target.value)}
+            value={dadosAtivo.modeloAtivo}
+            
           />
         </div>
         <div className="field" >
@@ -184,8 +214,8 @@ function VisualizarAtivos ({setTela}) {
             class="input is-small"
             type="text"
             placeholder='Insira o Número de Série:'
-            value={serieAtivo}
-            onChange={(event) => setSerieAtivo(event.target.value)}
+            value={dadosAtivo.serieAtivo}
+            
           />
         </div>
 
@@ -196,8 +226,8 @@ function VisualizarAtivos ({setTela}) {
             class="input is-small"
             type="text"
             placeholder='Insira o Valor de Aquisição:'
-            value={valorAtivo}
-            onChange={(event) => setValorAtivo(event.target.value)}
+            value={dadosAtivo.valorAtivo}
+            
           />
         </div>
         
@@ -210,15 +240,15 @@ function VisualizarAtivos ({setTela}) {
             class="input is-small"
             type="text"
             placeholder='Insira as Dimensões do Ativo:'
-            value={tamanhoAtivo}
-            onChange={(event) => setTamanhoAtivo(event.target.value)}
+            value={dadosAtivo.tamanhoAtivo}
+            
           />
         </div>
         </form>
         </div>
 
         <div class="column is-half">
-        <form onSubmit={handleSubmit}>
+        <form >
       
         <div className="field" >
           <label className="form-label">Capacidade:</label>
@@ -227,8 +257,8 @@ function VisualizarAtivos ({setTela}) {
             class="input is-small"
             type="text"
             placeholder='Insira a Capacidade do Ativo:'
-            value={capacidadeAtivo}
-            onChange={(event) => setCapacidadeAtivo(event.target.value)}
+            value={dadosAtivo.capacidadeAtivo}
+            
           />
         </div>
         {/* <div className="field" >
@@ -249,8 +279,8 @@ function VisualizarAtivos ({setTela}) {
             class="input is-small"
             type="text"
             placeholder='Condições de Uso:'
-            value={usoAtivo}
-            onChange={(event) => setUsoAtivo(event.target.value)}
+            value={dadosAtivo.usoAtivo}
+            
           />
         </div>
         
@@ -272,8 +302,8 @@ function VisualizarAtivos ({setTela}) {
             class="input is-small"
             type="text"
             placeholder='Insira a Data de Fabricação:'
-            value={fabricacaoAtivo}
-            onChange={(event) => setFabricacaoAtivo(event.target.value)}
+            value={dadosAtivo.fabricacaoAtivo}
+            
           />
         </div>
         <div className="field" >
@@ -283,8 +313,8 @@ function VisualizarAtivos ({setTela}) {
             class="input is-small"
             type="text"
             placeholder='Insira a Data de Validade:'
-            value={validadeAtivo}
-            onChange={(event) => setValidadeAtivo(event.target.value)}
+            value={dadosAtivo.validadeAtivo}
+            
           />
         </div>
         </form>
@@ -309,7 +339,7 @@ function VisualizarAtivos ({setTela}) {
 
      
       <div class='column is-half'>
-      <form className='documentos-ativo'onSubmit={handleSubmit}>
+      <form className='documentos-ativo'>
       <div className="field" >
           <label className="form-label">Chave NFe:</label>
           
@@ -317,8 +347,8 @@ function VisualizarAtivos ({setTela}) {
             class="input is-small"
             type="text"
             placeholder='Insira a Chave NFe:'
-            value={nfeAtivo}
-            onChange={(event) => setNfeAtivo(event.target.value)}
+            value={dadosAtivo.nfeAtivo}
+            
           />
         </div>
 
@@ -329,8 +359,8 @@ function VisualizarAtivos ({setTela}) {
             class="input is-small"
             type="text"
             placeholder='Insira a Url do Ativo:'
-            value={urlAtivo}
-            onChange={(event) => setUrlAtivo(event.target.value)}
+            value={dadosAtivo.urlAtivo}
+            
           />
         </div>
         <div className="field" >
@@ -340,8 +370,7 @@ function VisualizarAtivos ({setTela}) {
             class="input is-small"
             type="text"
             placeholder='Escreva aqui as Observações:'
-            value={comentarioAtivo}
-            onChange={(event) => setComentarioAtivo(event.target.value)}
+            value={dadosAtivo.comentarioAtivo}
           />
         </div>
         </form>
@@ -351,7 +380,7 @@ function VisualizarAtivos ({setTela}) {
    
     <div class="field is-grouped is-grouped-centered">
       <p class="control">
-        <button class="button is-danger" type="submit" formMethod='POST'>
+        <button class="button is-danger" type="submit" formMethod='POST' onClick={(id) => handleDelete(`http://localhost8080/ativo/deletar/${id}`)}>
           Deletar
         </button>
       </p>

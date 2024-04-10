@@ -28,7 +28,10 @@ a.active{
   background-color: #367E90;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1024px) {
+  .navbar-start {
+    flex-direction: column;
+  }
   .navbar-item {
     font-size: 0.8rem;
     margin: 0 0.2rem;
@@ -38,19 +41,9 @@ a.active{
   .navbar-item:hover{
     background-color: var(--verdeEscuro) !important;
   }
-
-
   .empresa {
     display: none;
   }
-}
-
-@media screen and (max-width: 1024px) {
-  .navbar-start {
-    flex-direction: column;
-  }
-}
-@media screen and (max-width: 1024px) {
   .navbar-menu {
     flex-direction: column;
   }
