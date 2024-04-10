@@ -35,6 +35,10 @@
     font-weight: 350;
  }
 
+ .filtro {
+   flex-direction: row;
+ }
+
  .filtros{
     color: white;
     font-size: 25px;
@@ -63,4 +67,14 @@
   
   .asset:hover{
    background-color:var(--cinza);
+  }
+
+  @media screen and (max-width: 1200px) {
+   .filtro {
+      flex-direction: column;
+   }
+   .input {
+      width: 50rem;
+      flex-grow: 4;
+   }
   }

@@ -29,9 +29,6 @@ a.active{
 }
 
 @media screen and (max-width: 1024px) {
-  .navbar-start {
-    flex-direction: column;
-  }
   .navbar-item {
     font-size: 0.8rem;
     margin: 0 0.2rem;
@@ -47,4 +44,12 @@ a.active{
   .navbar-menu {
     flex-direction: column;
   }
+}
+
+
+ul{
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  padding-left: 0px;
 }

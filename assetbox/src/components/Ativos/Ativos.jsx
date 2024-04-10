@@ -36,16 +36,16 @@ const Ativos = ({ setTela }) => {
                     <div class='field'>
                         <div class="columns filtro mx-0" style={{ borderTopLeftRadius: '10px', borderTopRightRadius: '10px' }}>
                             <div class="column is-one-fifth" style={{ display: 'flex', alignItems: 'center' }}>
-                                <img src={Filtro} style={{ margin: '0.5rem' }}></img><label className='filtros' style={{ marginRight: '1rem' }}>ID:</label>
-                                <input class="input is-small" type="text" placeholder='Digite um ID:' style={{ flexGrow: 1 }} />
+                                <img src={Filtro} class="mx-1" alt='filter'></img><label className='filtros mx-1'>ID:</label>
+                                <input class="input is-small is-flex-grow-1" type="text" placeholder='Digite um ID:'/>
                             </div>
                             <div class="column is-two-fifths is-flex is-align-items-center">
-                                <label className='filtros mr-1' >Titulo:</label>
-                                <input class="input is-small" type="text" placeholder='Digite um Nome:' style={{ flexGrow: 7 }} />
+                                <label className='filtros mx-1' >Titulo:</label>
+                                <input class="input is-small is-flex-grow-3" type="text" placeholder='Digite um Nome:'/>
                             </div>
                             <div class="column is-one-fifth is-flex is-align-items-center">
-                                <label className='filtros mr-1'>Status:</label>
-                                <input class="input is-small" type="text" placeholder='Digite um ID:' style={{ flexGrow: 1 }} />
+                                <label className='filtros mx-1'>Status:</label>
+                                <input class="input is-small is-flex-grow-2" type="text" placeholder='Digite um Status:'/>
                             </div>
                             <div class="column is-one-fifth">
                                 <button class="button is-primary m-2" style={{ backgroundColor: '#459EB5', color: '#fff' }}>Aplicar Filtros</button>
@@ -68,13 +68,13 @@ const Ativos = ({ setTela }) => {
                         {/*aqui eu percorro o array de objetos e crio um card para cada objeto*/}
                         {assets.map((asset) => (
                             <div key={asset.id} className='asset' class=' asset is-flex is-justify-content-center'>
-                                <a class='SemHover column is-one-third mr-2 dado-ativo is-flex is-justify-content-center is-align-items-center'>
+                                <a class='SemHover column is-one-third mr-2 dado-ativo is-flex is-justify-content-center is-align-items-center' href='##'>
                                     <p>{asset.id}</p>
                                 </a>
-                                <a class='SemHover column is-one-third mr-2 dado-ativo is-flex is-justify-content-center is-align-items-center'>
+                                <a class='SemHover column is-one-third mr-2 dado-ativo is-flex is-justify-content-center is-align-items-center' href='##'>
                                     <p> {asset.description}</p>
                                 </a>
-                                <a class='SemHover column is-one-third mr-2 dado-ativo is-flex is-justify-content-center is-align-items-center'>
+                                <a class='SemHover column is-one-third mr-2 dado-ativo is-flex is-justify-content-center is-align-items-center' href='##'>
                                     <p> {asset.status}</p>
                                 </a>
                             </div>
