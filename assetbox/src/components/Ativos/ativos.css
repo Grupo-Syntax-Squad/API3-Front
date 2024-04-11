@@ -29,12 +29,6 @@
     background-color: #367E90;
  }
 
- .indices{
-    color: white;
-    font-size: 28px;
-    font-weight: 350;
- }
-
  .filtro {
    flex-direction: row;
  }

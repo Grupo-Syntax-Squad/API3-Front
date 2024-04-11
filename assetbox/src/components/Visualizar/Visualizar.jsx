@@ -309,14 +309,9 @@ function VisualizarAtivos ({setTela}) {
       
       
 
-      <h1>Documentos</h1>
       <div className="columns m-3">
 
-      
-
-      
-
-     
+         
       <div class='column is-half'>
       <form className='documentos-ativo'>
       <div className="field" >
@@ -354,10 +349,14 @@ function VisualizarAtivos ({setTela}) {
         </div>
         </form>
       </div>
-      <div class="column is-half has-text-centered"><img src={docadd} alt="docadd"  style={{width: '100px', height: '100px'}} />.
-      <div>
-      <input className='image-button' type='file' id='doc' name="doc" accept="doc/*"/>
-      </div>
+
+      <div className='container'>
+        <h1>Documentos</h1>
+        <div class="container column is-half has-text-centered"><img src={docadd} alt="docadd"  style={{width: '100px', height: '100px'}} />
+          <div>
+            <input className='image-button' type='file' id='doc' name="doc" accept="doc/*"/>
+          </div>
+        </div>
       </div>
       
     </div>
