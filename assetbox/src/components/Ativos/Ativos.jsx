@@ -36,31 +36,31 @@ const Ativos = ({ setTela }) => {
                     <div class='field'>
                         <div class="columns filtro mx-0" style={{ borderTopLeftRadius: '10px', borderTopRightRadius: '10px' }}>
                             <div class="column is-one-fifth" style={{ display: 'flex', alignItems: 'center' }}>
-                                <img src={Filtro} class="mx-1" alt='filter'></img><label className='filtros mx-1'>ID:</label>
-                                <input class="input is-small is-flex-grow-1" type="text" placeholder='Digite um ID:'/>
+                                <img src={Filtro} class="mx-1" alt='filter'></img><label className='filtros mx-1 has-text-weight-medium mr-3'>ID</label>
+                                <input class="input is-small is-flex-grow-1 is-rounded" type="text" placeholder='Digite um ID:'/>
                             </div>
                             <div class="column is-two-fifths is-flex is-align-items-center">
-                                <label className='filtros mx-1' >Titulo:</label>
-                                <input class="input is-small is-flex-grow-3" type="text" placeholder='Digite um Nome:'/>
+                                <label className='filtros mx-1 has-text-weight-medium mr-3' >Titulo</label>
+                                <input class="input is-small is-flex-grow-3 is-rounded" type="text" placeholder='Digite um Nome:'/>
                             </div>
                             <div class="column is-one-fifth is-flex is-align-items-center">
-                                <label className='filtros mx-1'>Status:</label>
-                                <input class="input is-small is-flex-grow-2" type="text" placeholder='Digite um Status:'/>
+                                <label className='filtros mx-1 has-text-weight-medium mr-3'>Status</label>
+                                <input class="input is-small is-flex-grow-2 is-rounded" type="text" placeholder='Digite um Status:'/>
                             </div>
                             <div class="column is-one-fifth">
-                                <button class="button is-primary m-2" style={{ backgroundColor: '#459EB5', color: '#fff' }}>Aplicar Filtros</button>
+                                <button class="button is-primary m-2 is-rounded" style={{ backgroundColor: '#459EB5', color: '#fff' }}>Aplicar Filtros</button>
                             </div>
                         </div>
                     </div>
                     <div class="columns indice m-0 is-flex is-justify-content-center" >
                         <div class="column is-one-third ml-2 is-flex is-justify-content-center is-align-items-center">
-                            <label className='indices'>Número</label>
+                            <label className='indices has-text-weight-medium'>Número</label>
                         </div>
                         <div class="column is-one-third ml-2 mr-2 is-flex is-justify-content-center is-align-items-center">
-                            <label className='indices'>Título</label>
+                            <label className='indices has-text-weight-medium'>Título</label>
                         </div>
                         <div class="column is-one-third mr-2 is-flex is-justify-content-center is-align-items-center">
-                            <label className='indices'>Status</label>
+                            <label className='indices has-text-weight-medium'>Status</label>
                         </div>
                     </div>
 
@@ -68,13 +68,13 @@ const Ativos = ({ setTela }) => {
                         {/*aqui eu percorro o array de objetos e crio um card para cada objeto*/}
                         {assets.map((asset) => (
                             <div key={asset.id} className='asset' class=' asset is-flex is-justify-content-center'>
-                                <a class='SemHover column is-one-third mr-2 dado-ativo is-flex is-justify-content-center is-align-items-center' href='##'>
+                                <a class='SemHover column is-one-third mr-2 dado-ativo is-flex is-justify-content-center is-align-items-center has-text-weight-medium' href='##'>
                                     <p>{asset.id}</p>
                                 </a>
-                                <a class='SemHover column is-one-third mr-2 dado-ativo is-flex is-justify-content-center is-align-items-center' href='##'>
+                                <a class='SemHover column is-one-third mr-2 dado-ativo is-flex is-justify-content-center is-align-items-center has-text-weight-medium' href='##'>
                                     <p> {asset.description}</p>
                                 </a>
-                                <a class='SemHover column is-one-third mr-2 dado-ativo is-flex is-justify-content-center is-align-items-center' href='##'>
+                                <a class='SemHover column is-one-third mr-2 dado-ativo is-flex is-justify-content-center is-align-items-center has-text-weight-medium' href='##'>
                                     <p> {asset.status}</p>
                                 </a>
                             </div>
