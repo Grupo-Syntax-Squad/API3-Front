@@ -20,7 +20,7 @@ function Menu(props) {
       <nav className={`navbar  m-0 custom-background ${isActive ? 'is-active' : ''}`} role="navigation" aria-label="main navigation">
           <div className='container'>
             <img src={LogoIcon} class='navbar-brand pl-6 pr-0' alt="AssetBox" />
-            <a className="navbar-item mr-2 is-size-3 p-0 has-text-weight-bold empresa" href="##">AssetBox</a>
+            <p className="navbar-item mr-2 is-size-3 p-0 has-text-weight-bold empresa" href="##">AssetBox</p>
             <a role="button" className={`navbar-burger ${isActive ? 'is-active' : ''}`} onClick={toggleMenu} aria-label="menu" aria-expanded={isActive ? 'true' : 'false'} href='##'>
               <span aria-hidden="true"></span>
               <span aria-hidden="true"></span>
