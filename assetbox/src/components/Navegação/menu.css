@@ -12,9 +12,15 @@
   color: var(--branco);
 }
 
-.navbar-item{
+.navbar-item {
   color: var(--branco);
+  background-color: #459EB5;
 }
+
+/* .navbar-item.is-active {
+  background-color: blue; 
+  color: var(--branco); 
+} */
 
 a.navbar-item:hover{
   background-color: #367E90;
@@ -26,6 +32,9 @@ a:hover{
 
 a:active{
   background-color: #367E90;
+}
+.navbar-menu {
+  background-color: #459EB5 !important;
 }
 
 @media screen and (max-width: 1024px) {
@@ -45,7 +54,6 @@ a:active{
     flex-direction: column;
   }
 }
-
 
 ul{
   display: flex;
