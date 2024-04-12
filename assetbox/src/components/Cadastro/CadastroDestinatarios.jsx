@@ -49,306 +49,123 @@ function CadastroDestinatarios ({setTela}) {
   <body>
     <div class='page-full'>
       <div class='field'>
-      <h2>Cadastro de Destinatarios</h2>
+      <h2>Destinatário: </h2>
       </div>
-      <div class="columns m-3">
+      <h1 className='has-text-weight-light'>Dados</h1>
 
-      <div class="column is-half has-text-centered"> <img src={imgadd} alt="imgadd"  style={{width: '100px', height: '100px'}}/> 
-      <div>
-      <input className='image-button' type='file' id='img' name="img" accept="image/*"/>
-      </div>
-      </div>
-
-      <div class="column is-half">
-      <form onSubmit={handleSubmit}>
-      <div className='top-one'>
-        
-        <div class="field">
-          <label class="label">Número:</label>
-          <input
-            class="input is-small"
-            type="text"
-            placeholder='Digite um Número:'
-            value={numeroAtivo}
-            onChange={(event) => setNumAtivo(event.target.value)}
-          />
-        </div>
-        <div class="field">
-          <label class="label">Tipo:</label>
-        <div class="select is-small"> 
-            <select class="is-hovered">
-            <option></option>
-            <option></option>
-            </select>
-        </div>
-        </div>
-        
-        <div class="field">
-          <label class="label">Localização:</label>
-        <div class="select is-small"> 
-            <select class="is-hovered">
-            <option></option>
-            <option></option>
-            </select>
-        </div>
-        </div>
-        <div class="field">
-          <label class="label">Status:</label>
-        <div class="select is-small"> 
-            <select class="is-hovered">
-            <option></option>
-            <option></option>
-            </select>
-        </div>
-        </div>
-
-        
-        <div className="field" >
-          <label className="form-label">Destinatário:</label>
-          <input
-            class="input is-small"
-            type="text"
-            placeholder='Insira o Destinatário:'
-            value={destinatarioAtivo}
-            onChange={(event) => setDestinatarioAtivo(event.target.value)}
+      <form>
+          
+          <div class="field column ">
+            <label class="form-label">Nome</label>
+            <input
+              class="input is-small"
+              type="text"
+              placeholder='Digite um Número:'
+              // value={dadosAtivo.numeroAtivo}
+              
             />
-        </div>
+          </div>
+          <div class="field column">
+          <label class="form-label">Telefone</label>
+            <input
+              class="input is-small"
+              type="text"
+              placeholder='Digite um Número:'
+              // value={dadosAtivo.numeroAtivo}
+              
+            />
+          </div>
+          <div class="field column">
+          <label class="form-label">E-mail</label>
+            <input
+              class="input is-small"
+              type="text"
+              placeholder='Digite um Número:'
+              // value={dadosAtivo.numeroAtivo}
+              
+            />
+          </div>
+          <div class="field column">
+          <label class="form-label">Senha</label>
+            <input
+              class="input is-small"
+              type="text"
+              placeholder='Digite um Número:'
+              // value={dadosAtivo.numeroAtivo}
+              
+            />
+          </div>
         
-
-        
-        <div className="field" >
-          <label className="form-label">Titulo:</label>
-          
-          <input
-            class="input is-small"
-            type="text"
-            placeholder='Insira o Título:'
-            value={tituloAtivo}
-            onChange={(event) => setTituloAtivo(event.target.value)}
-          />
-        
-        <div className="field" >
-          <label className="form-label">Complemento:</label>
-          
-          <input
-            class="input is-small"
-            type="text"
-            placeholder='Insira um Complemento:'
-            rows="4"
-            value={complementoAtivo}
-            onChange={(event) => setComplementoAtivo(event.target.value)}
-          />
-        </div>
-        </div>
-        
-      </div> 
-      </form>
-      </div>
-      </div>
-
-      <h1>Características</h1>
-
-      <div class="mid-page" > 
-     
-      <div class="columns m-3">
-      
-
-      <div class="column is-half">
-      <form onSubmit={handleSubmit}>
-      <div className="field" >
-          <label className="form-label">Marca:</label>
-          
-          <input
-            class="input is-small"
-            type="text"
-            placeholder='Digite a Marca:'
-            value={marcaAtivo}
-            onChange={(event) => setMarcaAtivo(event.target.value)}
-          />
-        </div>
-        <div className="field" >
-          <label className="form-label">Modelo:</label>
-          
-          <input
-            class="input is-small"
-            type="text"
-            placeholder='Digite o Modelo:'
-            value={modeloAtivo}
-            onChange={(event) => setModeloAtivo(event.target.value)}
-          />
-        </div>
-        <div className="field" >
-          <label className="form-label">Nº de Série:</label>
-          
-          <input
-            class="input is-small"
-            type="text"
-            placeholder='Insira o Número de Série:'
-            value={serieAtivo}
-            onChange={(event) => setSerieAtivo(event.target.value)}
-          />
-        </div>
-
-        <div className="field" >
-          <label className="form-label">Valor de Aquisição:</label>
-          
-          <input
-            class="input is-small"
-            type="text"
-            placeholder='Insira o Valor de Aquisição:'
-            value={valorAtivo}
-            onChange={(event) => setValorAtivo(event.target.value)}
-          />
-        </div>
-        
-
-        
-        <div className="field" >
-          <label className="form-label">Tamanho:</label>
-          
-          <input
-            class="input is-small"
-            type="text"
-            placeholder='Insira as Dimensões do Ativo:'
-            value={tamanhoAtivo}
-            onChange={(event) => setTamanhoAtivo(event.target.value)}
-          />
-        </div>
         </form>
-        </div>
 
-        <div class="column is-half">
-        <form onSubmit={handleSubmit}>
-      
-        <div className="field" >
-          <label className="form-label">Capacidade:</label>
-          
-          <input
-            class="input is-small"
-            type="text"
-            placeholder='Insira a Capacidade do Ativo:'
-            value={capacidadeAtivo}
-            onChange={(event) => setCapacidadeAtivo(event.target.value)}
-          />
-        </div>
-        {/* <div className="field" >
-          <label className="form-label">Quantidade:</label>
-          
-          <input
-            class="input is-small"
-            type="text"
-            placeholder='Insira a Quantidade:'
-            value={numeroAtivo}
-            onChange={(event) => setNumAtivo(event.target.value)}
-          />
-        </div> */}
-        <div className="field" >
-          <label className="form-label">Condições de Uso:</label>
-          
-          <input
-            class="input is-small"
-            type="text"
-            placeholder='Condições de Uso:'
-            value={usoAtivo}
-            onChange={(event) => setUsoAtivo(event.target.value)}
-          />
-        </div>
-        
-        
-        
-        <div class="field">
-          <label class="label">Fornecedor:</label>
-        <div class="select is-small"> 
-            <select class="is-hovered">
-            <option></option>
-            <option></option>
-            </select>
-        </div>
-        </div>
-        <div className="field" >
-          <label className="form-label">Data de Fabricação:</label>
-          
-          <input
-            class="input is-small"
-            type="text"
-            placeholder='Insira a Data de Fabricação:'
-            value={fabricacaoAtivo}
-            onChange={(event) => setFabricacaoAtivo(event.target.value)}
-          />
-        </div>
-        <div className="field" >
-          <label className="form-label">Data de Validade:</label>
-          
-          <input
-            class="input is-small"
-            type="text"
-            placeholder='Insira a Data de Validade:'
-            value={validadeAtivo}
-            onChange={(event) => setValidadeAtivo(event.target.value)}
-          />
-        </div>
-        </form>
-        </div>
-      
-      </div>
-      </div>
-      
-      
-      
+            <h1>Endereço</h1>
+            <form>
+            <div class="field column">
+          <label class="form-label">Rua</label>
+            <input
+              class="input is-small"
+              type="text"
+              placeholder='Digite um Número:'
+              // value={dadosAtivo.numeroAtivo}
+              
+            />
+          </div>
+          <div class="field column">
+          <label class="form-label">Número</label>
+            <input
+              class="input is-small"
+              type="text"
+              placeholder='Digite um Número:'
+              // value={dadosAtivo.numeroAtivo}
+              
+            />
+          </div>
+          <div class="field column">
+          <label class="form-label">Complemento</label>
+            <input
+              class="input is-small"
+              type="text"
+              placeholder='Digite um Número:'
+              // value={dadosAtivo.numeroAtivo}
+              
+            />
+          </div>
+          <div class="field column">
+          <label class="form-label">Bairro</label>
+            <input
+              class="input is-small"
+              type="text"
+              placeholder='Digite um Número:'
+              // value={dadosAtivo.numeroAtivo}
+              
+            />
+          </div>
+          <div class="field column">
+          <label class="form-label">Cidade</label>
+            <input
+              class="input is-small"
+              type="text"
+              placeholder='Digite um Número:'
+              // value={dadosAtivo.numeroAtivo}
+              
+            />
+          </div>
+          <div class="field column">
+          <label class="form-label">UF</label>
+            <input
+              class="input is-small"
+              type="text"
+              placeholder='Digite um Número:'
+              // value={dadosAtivo.numeroAtivo}
+              
+            />
+          </div>
+            </form>
+  
 
-      <h1>Documentos</h1>
-      <div className="columns m-3">
+            <div class="field is-grouped is-grouped-centered">
 
-      
-      <div class="column is-half has-text-centered"><img src={docadd} alt="docadd"  style={{width: '100px', height: '100px'}} />.
-      <div>
-      <input className='image-button' type='file' id='doc' name="doc" accept="doc/*"/>
-      </div>
-      </div>
-      
-
-     
-      <div class='column is-half'>
-      <form className='documentos-ativo'onSubmit={handleSubmit}>
-      <div className="field" >
-          <label className="form-label">Chave NFe:</label>
-          
-          <input
-            class="input is-small"
-            type="text"
-            placeholder='Insira a Chave NFe:'
-            value={nfeAtivo}
-            onChange={(event) => setNfeAtivo(event.target.value)}
-          />
-        </div>
-
-        <div className="field" >
-          <label className="form-label">Url do Ativo:</label>
-          
-          <input
-            class="input is-small"
-            type="text"
-            placeholder='Insira a Url do Ativo:'
-            value={urlAtivo}
-            onChange={(event) => setUrlAtivo(event.target.value)}
-          />
-        </div>
-        <div className="field" >
-          <label className="form-label">Observações:</label>
-          
-          <input
-            class="input is-small"
-            type="text"
-            placeholder='Escreva aqui as Observações:'
-            value={comentarioAtivo}
-            onChange={(event) => setComentarioAtivo(event.target.value)}
-          />
-        </div>
-        </form>
-      </div>
-      
     </div>
-   
     <div class="field is-grouped is-grouped-centered">
       <p class="control">
         <button class="button is-primary" type="submit" formMethod='POST'>
@@ -362,10 +179,6 @@ function CadastroDestinatarios ({setTela}) {
       </p>
     
     </div>
-
-
-
-    
   
   </div>
   </body>
