@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Filtro from '../../assets/img/filtro.svg';
+import './ativos.css';
 import axios from 'axios';
 
 const Ativos = ({ setTela }) => {
@@ -25,7 +26,7 @@ const Ativos = ({ setTela }) => {
         <body>
             <div class='page-full' style={{ backgroundColor: 'transparent', borderTopLeftRadius: '10px', borderTopRightRadius: '10px' }}>
                 <button class="button is-primary m-5 ml-6 is-rounded is-size-4" style={{ backgroundColor: '#367E90', color: '#fff' }} onClick={() => setTela('CadastroAtivos')}>Cadastrar Ativo</button>
-                <div class='page-full' style={{ backgroundColor: '#459EB5', borderTopLeftRadius: '10px', borderTopRightRadius: '10px' }}>
+                <div class='page-full' style={{ borderTopLeftRadius: '10px', borderTopRightRadius: '10px' }}>
                     <div class='field'>
                         <div class="columns filtro mx-0" style={{ borderTopLeftRadius: '10px', borderTopRightRadius: '10px' }}>
                             <div class="column is-one-fifth" style={{ display: 'flex', alignItems: 'center' }}>
@@ -61,16 +62,16 @@ const Ativos = ({ setTela }) => {
                     <div class='p-0'>
                         {/*aqui eu percorro o array de objetos e crio um card para cada objeto*/}
                         {assets.map((asset) => (
-                            <div key={asset.ati_id} onClick={() => handleClick(asset.ati_id)} className='asset' class=' asset is-flex is-justify-content-center'>
-                                <a class='SemHover column is-one-third mr-2 dado-ativo is-flex is-justify-content-center is-align-items-center has-text-weight-medium' href='##'>
+                            <div key={asset.ati_id} onClick={() => handleClick(asset.ati_id)} className='asset' class='asset is-flex is-justify-content-center'>
+                                <div class='SemHover column is-one-third mr-2 dado-ativo is-flex is-justify-content-center is-align-items-center has-text-weight-medium'>
                                     <p>{asset.ati_id}</p>
-                                </a>
-                                <a class='SemHover column is-one-third mr-2 dado-ativo is-flex is-justify-content-center is-align-items-center has-text-weight-medium' href='##'>
+                                </div>
+                                <div class='SemHover column is-one-third mr-2 dado-ativo is-flex is-justify-content-center is-align-items-center has-text-weight-medium'>
                                     <p> {asset.ati_titulo}</p>
-                                </a>
-                                <a class='SemHover column is-one-third mr-2 dado-ativo is-flex is-justify-content-center is-align-items-center has-text-weight-medium' href='##'>
+                                </div>
+                                <div class='SemHover column is-one-third mr-2 dado-ativo is-flex is-justify-content-center is-align-items-center has-text-weight-medium'>
                                     <p> {asset.ati_status}</p>
-                                </a>
+                                </div>
                             </div>
                         ))}
                     </div>

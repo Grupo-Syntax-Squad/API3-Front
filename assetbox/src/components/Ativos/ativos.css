@@ -62,7 +62,9 @@
   .SemHover:hover{
    background-color: transparent;
   }
-  
+  .asset{
+   background-color: #fff !important;
+  }
   .asset:hover{
    background-color:var(--cinza);
   }

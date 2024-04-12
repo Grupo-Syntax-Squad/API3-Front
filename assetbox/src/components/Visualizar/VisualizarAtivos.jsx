@@ -31,29 +31,8 @@ class ViewDestinatario {
 }
 
 function VisualizarAtivos({ setTela }) {
-  const [dadosAtivo, setDadosAtivo] = useState({
-    numeroAtivo: '',
-    tipoAtivo: '',
-    localizacaoAtivo: '',
-    statusAtivo: '',
-    destinatarioAtivo: '',
-    tituloAtivo: '',
-    complementoAtivo: '',
-    marcaAtivo: '',
-    modeloAtivo: '',
-    serieAtivo: '',
-    valorAtivo: '',
-    tamanhoAtivo: '',
-    capacidadeAtivo: '',
-    qtdadeAtivo: '',
-    usoAtivo: '',
-    fornecedorAtivo: '',
-    fabricacaoAtivo: '',
-    validadeAtivo: '',
-    urlAtivo: '',
-    nfeAtivo: '',
-    comentarioAtivo: ''
-  })
+  const [dadosAtivo, setDadosAtivo] = useState({})
+  const [imageUrl, setImageUrl] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
@@ -63,6 +42,7 @@ function VisualizarAtivos({ setTela }) {
         const response = await axios.get(`http://localhost:8000/ativo/${Number(id)}`);
         const dados = response.data;
         setDadosAtivo(dados);
+        setImageUrl(`http://localhost:8000/imagem/${dados.ati_imagem_id}`);
       } catch (error) {
         console.error(`Erro ao buscar dados do ativo ${id}:`, error);
       }
@@ -82,15 +62,12 @@ function VisualizarAtivos({ setTela }) {
     <body>
       <div class='page-full'>
         <div class='field'>
-          <h2>Ativo: </h2>
+          <h2>{dadosAtivo.ati_titulo}</h2>
         </div>
         <h1 className='has-text-weight-light'>Dados</h1>
         <div class="columns m-3">
 
-          <div class="column is-half has-text-centered"> <img src={imgadd} alt="imgadd" style={{ width: '100px', height: '100px' }} />
-            <div>
-              <input className='image-button' type='file' id='img' name="img" accept="image/*" />
-            </div>
+          <div class="column is-half has-text-centered"> <img src={imageUrl} alt="Ativo" style={{ width: '100%', height: '100%' }} />
           </div>
 
           <div class="column is-half">
