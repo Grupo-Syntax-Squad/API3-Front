@@ -34,23 +34,23 @@ const Ativos = ({ setTela }) => {
         <body>
             <div class='page-full' style={{ backgroundColor: 'transparent', borderTopLeftRadius: '10px', borderTopRightRadius: '10px' }}>
                 <button class="button is-primary m-5 ml-6 is-rounded is-size-4" style={{ backgroundColor: '#367E90', color: '#fff' }} onClick={() => setTela('CadastroAtivos')}>Cadastrar Ativo</button>
-                <div class='page-full' style={{ backgroundColor: '#fff', borderTopLeftRadius: '10px', borderTopRightRadius: '10px' }}>
+                <div class='page-full' style={{ backgroundColor: '#459EB5', borderTopLeftRadius: '10px', borderTopRightRadius: '10px' }}>
                     <div class='field'>
                         <div class="columns filtro mx-0" style={{ borderTopLeftRadius: '10px', borderTopRightRadius: '10px' }}>
                             <div class="column is-one-fifth" style={{ display: 'flex', alignItems: 'center' }}>
-                                <img src={Filtro} class="mx-1" alt='filter'></img><label className='filtros mx-1 has-text-weight-medium mr-3'>ID</label>
+                                <img src={Filtro} class="mx-1" alt='filter'></img><label className='filtros mx-1 has-text-white has-text-weight-medium mr-3'>ID</label>
                                 <input class="input is-small is-flex-grow-1 is-rounded" type="text" placeholder='Digite um ID:'/>
                             </div>
                             <div class="column is-two-fifths is-flex is-align-items-center">
-                                <label className='filtros mx-1 has-text-weight-medium mr-3' >Titulo</label>
+                                <label className='filtros mx-1 has-text-white has-text-weight-medium mr-3' >Titulo</label>
                                 <input class="input is-small is-flex-grow-3 is-rounded" type="text" placeholder='Digite um Nome:'/>
                             </div>
                             <div class="column is-one-fifth is-flex is-align-items-center">
-                                <label className='filtros mx-1 has-text-weight-medium mr-3'>Status</label>
+                                <label className='filtros mx-1 has-text-white has-text-weight-medium mr-3'>Status</label>
                                 <input class="input is-small is-flex-grow-2 is-rounded" type="text" placeholder='Digite um Status:'/>
                             </div>
                             <div class="column is-one-fifth">
-                                <button class="button is-primary m-2 is-rounded" style={{ backgroundColor: '#459EB5', color: '#fff' }}>Aplicar Filtros</button>
+                                <button class="button is-primary m-2 is-rounded" style={{ backgroundColor: '#53bfdb', color: '#fff' }}>Aplicar Filtros</button>
                             </div>
                         </div>
                     </div>
