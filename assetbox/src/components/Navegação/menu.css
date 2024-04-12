@@ -16,7 +16,7 @@
   color: var(--branco);
 }
 
-.navbar-item:hover{
+a.navbar-item:hover{
   background-color: #367E90;
 }
 

@@ -81,6 +81,7 @@ function VisualizarAtivos ({setTela}) {
       <div class='field'>
       <h2>Ativo: </h2>
       </div>
+      <h1 className='has-text-weight-light'>Dados</h1>
       <div class="columns m-3">
 
       <div class="column is-half has-text-centered"> <img src={imgadd} alt="imgadd"  style={{width: '100px', height: '100px'}}/> 
@@ -90,258 +91,231 @@ function VisualizarAtivos ({setTela}) {
       </div>
 
       <div class="column is-half">
-      <form >
-      <div className='top-one'>
-        
-        <div class="field">
-          <label class="label">Número:</label>
-          <input
-            class="input is-small"
-            type="text"
-            placeholder='Digite um Número:'
-            value={dadosAtivo.numeroAtivo}
-            
-          />
-        </div>
-        <div class="field">
-          <label class="label">Tipo:</label>
-        <div class="select is-small"> 
-            <select class="is-hovered">
-            <option></option>
-            <option></option>
-            </select>
-        </div>
-        </div>
-        
-        <div class="field">
-          <label class="label">Localização:</label>
-        <div class="select is-small"> 
-            <select class="is-hovered">
-            <option></option>
-            <option></option>
-            </select>
-        </div>
-        </div>
-        <div class="field">
-          <label class="label">Status:</label>
-        <div class="select is-small"> 
-            <select class="is-hovered">
-            <option></option>
-            <option></option>
-            </select>
-        </div>
-        </div>
-
-        
-        <div className="field" >
-          <label className="form-label">Destinatário:</label>
-          <input
-            class="input is-small"
-            type="text"
-            placeholder='Insira o Destinatário:'
-            value={dadosAtivo.destinatarioAtivo}
-            
+      <form>
+        <div className='columns'>
+          
+          <div class="field column ">
+            <label class="form-label">Número</label>
+            <input
+              class="input is-small"
+              type="text"
+              placeholder='Digite um Número:'
+              value={dadosAtivo.numeroAtivo}
+              
             />
-        </div>
-        
+          </div>
+          <div class="field column">
+            <label class="form-label">Tipo</label><br />
+          <div class="select is-small"> 
+              <select class="is-hovered">
+              <option></option>
+              <option></option>
+              </select>
+          </div>
+          </div>
+          </div>
+          
+          <div className='columns'>
+            <div class="field column">
+              <label class="form-label">Localização</label><br />
+            <div class="select is-small">
+                <select class="is-hovered">
+                <option></option>
+                <option></option>
+                </select>
+            </div>
+            </div>
+            <div class="field column">
+              <label class="formn-label">Status</label><br />
+            <div class="select is-small">
+                <select class="is-hovered">
+                <option></option>
+                <option></option>
+                </select>
+            </div>
+            </div>
+          </div>
 
-        
-        <div className="field" >
-          <label className="form-label">Titulo:</label>
           
-          <input
-            class="input is-small"
-            type="text"
-            placeholder='Insira o Título:'
-            value={dadosAtivo.tituloAtivo}
-            
-          />
-        
-        <div className="field" >
-          <label className="form-label">Complemento:</label>
-          
-          <input
-            class="input is-small"
-            type="text"
-            placeholder='Insira um Complemento:'
-            rows="4"
-            value={dadosAtivo.complementoAtivo}
-            
-          />
-        </div>
-        </div>
-        
-      </div> 
-      </form>
-      </div>
-      </div>
+          <div className="field" >
+            <label className="form-label">Destinatário</label>
+            <input
+              class="input is-small"
+              type="text"
+              placeholder='Insira o Destinatário:'
+              value={dadosAtivo.destinatarioAtivo}
+              
+              />
+          </div>
 
-      <h1>Características</h1>
+          
+          <div className="field" >
+            <label className="form-label">Titulo</label>
+            <input
+              class="input is-small"
+              type="text"
+              placeholder='Insira o Título:'
+              value={dadosAtivo.tituloAtivo}
+            />
+          </div>
 
-      <div class="mid-page" > 
-     
-      <div class="columns m-3">
-      
-
-      <div class="column is-half">
-      <form >
-      <div className="field" >
-          <label className="form-label">Marca:</label>
-          
-          <input
-            class="input is-small"
-            type="text"
-            placeholder='Digite a Marca:'
-            value={dadosAtivo.marcaAtivo}
-            
-          />
-        </div>
-        <div className="field" >
-          <label className="form-label">Modelo:</label>
-          
-          <input
-            class="input is-small"
-            type="text"
-            placeholder='Digite o Modelo:'
-            value={dadosAtivo.modeloAtivo}
-            
-          />
-        </div>
-        <div className="field" >
-          <label className="form-label">Nº de Série:</label>
-          
-          <input
-            class="input is-small"
-            type="text"
-            placeholder='Insira o Número de Série:'
-            value={dadosAtivo.serieAtivo}
-            
-          />
-        </div>
-
-        <div className="field" >
-          <label className="form-label">Valor de Aquisição:</label>
-          
-          <input
-            class="input is-small"
-            type="text"
-            placeholder='Insira o Valor de Aquisição:'
-            value={dadosAtivo.valorAtivo}
-            
-          />
-        </div>
-        
-
-        
-        <div className="field" >
-          <label className="form-label">Tamanho:</label>
-          
-          <input
-            class="input is-small"
-            type="text"
-            placeholder='Insira as Dimensões do Ativo:'
-            value={dadosAtivo.tamanhoAtivo}
-            
-          />
-        </div>
+            <div className="field" >
+              <label className="form-label">Complemento</label>
+              
+              <input
+                class="input is-small"
+                type="text"
+                placeholder='Insira um Complemento:'
+                rows="4"
+                value={dadosAtivo.complementoAtivo}
+                
+              />
+            </div>
         </form>
         </div>
+        </div>
 
-        <div class="column is-half">
-        <form >
+        <h1 className='has-text-weight-light'>Características</h1>
+
+        <div class="mid-page" > 
       
-        <div className="field" >
-          <label className="form-label">Capacidade:</label>
-          
-          <input
-            class="input is-small"
-            type="text"
-            placeholder='Insira a Capacidade do Ativo:'
-            value={dadosAtivo.capacidadeAtivo}
-            
-          />
-        </div>
-        {/* <div className="field" >
-          <label className="form-label">Quantidade:</label>
-          
-          <input
-            class="input is-small"
-            type="text"
-            placeholder='Insira a Quantidade:'
-            value={numeroAtivo}
-            onChange={(event) => setNumAtivo(event.target.value)}
-          />
-        </div> */}
-        <div className="field" >
-          <label className="form-label">Condições de Uso:</label>
-          
-          <input
-            class="input is-small"
-            type="text"
-            placeholder='Condições de Uso:'
-            value={dadosAtivo.usoAtivo}
-            
-          />
-        </div>
+        <div class="columns m-3">
         
-        
-        
-        <div class="field">
-          <label class="label">Fornecedor:</label>
-        <div class="select is-small"> 
-            <select class="is-hovered">
-            <option></option>
-            <option></option>
-            </select>
-        </div>
-        </div>
-        <div className="field" >
-          <label className="form-label">Data de Fabricação:</label>
+
+        <div class="column">
+        <div className='columns'>
+          <div className="field column" >
+              <label className="form-label">Marca</label>
           
-          <input
-            class="input is-small"
-            type="text"
-            placeholder='Insira a Data de Fabricação:'
-            value={dadosAtivo.fabricacaoAtivo}
-            
-          />
-        </div>
-        <div className="field" >
-          <label className="form-label">Data de Validade:</label>
+              <input
+                class="input is-small"
+                type="text"
+                placeholder='Digite a Marca:'
+                value={dadosAtivo.marcaAtivo}
           
-          <input
-            class="input is-small"
-            type="text"
-            placeholder='Insira a Data de Validade:'
-            value={dadosAtivo.validadeAtivo}
+              />
+            </div>
+            <div className="field column" >
+              <label className="form-label">Modelo</label>
+          
+              <input
+                class="input is-small"
+                type="text"
+                placeholder='Digite o Modelo:'
+                value={dadosAtivo.modeloAtivo}
+          
+              />
+            </div>
+            <div className="field column" >
+              <label className="form-label">Nº de Série</label>
+          
+              <input
+                class="input is-small"
+                type="text"
+                placeholder='Insira o Número de Série:'
+                value={dadosAtivo.serieAtivo}
+          
+              />
+            </div>
+          <div className="field column" >
+            <label className="form-label">Valor de Aquisição</label>
             
-          />
+            <input
+              class="input is-small"
+              type="text"
+              placeholder='Insira o Valor de Aquisição:'
+              value={dadosAtivo.valorAtivo}
+              
+            />
+          </div>
         </div>
-        </form>
+
+          <div className='columns'>
+            <div className="field column" >
+              <label className="form-label">Tamanho</label>
+              
+              <input
+                class="input is-small"
+                type="text"
+                placeholder='Insira as Dimensões do Ativo:'
+                value={dadosAtivo.tamanhoAtivo}
+                
+              />
+            </div>
+          
+        
+          <div className="field column" >
+            <label className="form-label">Capacidade</label>
+            
+            <input
+              class="input is-small"
+              type="text"
+              placeholder='Insira a Capacidade do Ativo:'
+              value={dadosAtivo.capacidadeAtivo}
+              
+              />
+          </div>
+          <div className="field column" >
+            <label className="form-label">Quantidade</label>
+            
+            <input
+              class="input is-small"
+              type="text"
+              placeholder='Insira a Quantidade:'
+              // value={numeroAtivo}
+              // onChange={(event) => setNumAtivo(event.target.value)}
+              />
+          </div>
+          
+          <div class="field column">
+            <label class="form-label">Fornecedor</label><br />
+          <div class="select is-small"> 
+              <select class="is-hovered">
+              <option></option>
+              <option></option>
+              </select>
+          </div>
+          </div>
         </div>
+
+          <div className='columns'>
+            <div className="field column" >
+              <label className="form-label">Data de Fabricação</label>
+            
+              <input
+                class="input is-small"
+                type="text"
+                placeholder='Insira a Data de Fabricação:'
+                value={dadosAtivo.fabricacaoAtivo}
+            
+              />
+            </div>
+            <div className="field column " >
+              <label className="form-label">Data de Expiração</label>
+            
+              <input
+                class="input is-small"
+                type="text"
+                placeholder='Insira a Data de Validade:'
+                value={dadosAtivo.validadeAtivo}
+              />
+            </div>
+          </div>
       
       </div>
       </div>
+
       
       
       
 
-      <h1>Documentos</h1>
       <div className="columns m-3">
 
-      
-      <div class="column is-half has-text-centered"><img src={docadd} alt="docadd"  style={{width: '100px', height: '100px'}} />.
-      <div>
-      <input className='image-button' type='file' id='doc' name="doc" accept="doc/*"/>
-      </div>
-      </div>
-      
-
-     
+         
       <div class='column is-half'>
       <form className='documentos-ativo'>
       <div className="field" >
-          <label className="form-label">Chave NFe:</label>
+          <label className="form-label">Chave NFe</label>
           
           <input
             class="input is-small"
@@ -353,7 +327,7 @@ function VisualizarAtivos ({setTela}) {
         </div>
 
         <div className="field" >
-          <label className="form-label">Url do Ativo:</label>
+          <label className="form-label">Url do Ativo</label>
           
           <input
             class="input is-small"
@@ -364,7 +338,7 @@ function VisualizarAtivos ({setTela}) {
           />
         </div>
         <div className="field" >
-          <label className="form-label">Observações:</label>
+          <label className="form-label">Observações</label>
           
           <input
             class="input is-small"
@@ -374,6 +348,15 @@ function VisualizarAtivos ({setTela}) {
           />
         </div>
         </form>
+      </div>
+
+      <div className='container'>
+        <h1>Documentos</h1>
+        <div class="container column is-half has-text-centered"><img src={docadd} alt="docadd"  style={{width: '100px', height: '100px'}} />
+          <div>
+            <input className='image-button' type='file' id='doc' name="doc" accept="doc/*"/>
+          </div>
+        </div>
       </div>
       
     </div>
@@ -396,6 +379,8 @@ function VisualizarAtivos ({setTela}) {
 
     
   
+  </div>
+
   </div>
   </body>
   
