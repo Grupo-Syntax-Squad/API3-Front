@@ -2,32 +2,23 @@ import React, { useEffect, useState } from 'react';
 import Filtro from '../../assets/img/filtro.svg';
 import axios from 'axios';
 
-//essa é a função que irá buscar os ativos na API ela está comentada pois não temos uma API para buscar os ativos
-// function Ativos() {
-//     const [assets, setAssets] = useState([]);
-
-// useEffect(() => {
-//     //   getAssets().then(setAssets);
-// }, []);
-
-
-//criei um array de objetos para simular a resposta da API
 const Ativos = ({ setTela }) => {
     const [assets, setAssets] = useState([]);
 
     useEffect(() => {
         axios.get('http://localhost:8000/ativos')
-          .then(response => {
-            setAssets(response.data);
-          })
-          .catch(error => {
-            console.error('There was an error!', error);
-          });
-      }, []);
+            .then(response => {
+                setAssets(response.data);
+            })
+            .catch(error => {
+                console.error('There was an error!', error);
+            });
+    }, []);
 
-      const handleClick = (id) => {
-    setTela(`Ativo${id}`);
-  };
+    const handleClick = (id) => {
+        localStorage.setItem('id', id)
+        setTela(`VisualizarAtivo`);
+    };
 
 
     return (
@@ -39,15 +30,15 @@ const Ativos = ({ setTela }) => {
                         <div class="columns filtro mx-0" style={{ borderTopLeftRadius: '10px', borderTopRightRadius: '10px' }}>
                             <div class="column is-one-fifth" style={{ display: 'flex', alignItems: 'center' }}>
                                 <img src={Filtro} class="mx-1" alt='filter'></img><label className='filtros mx-1 has-text-white has-text-weight-medium mr-3'>ID</label>
-                                <input class="input is-small is-flex-grow-1 is-rounded" type="text" placeholder='Digite um ID:'/>
+                                <input class="input is-small is-flex-grow-1 is-rounded" type="text" placeholder='Digite um ID:' />
                             </div>
                             <div class="column is-two-fifths is-flex is-align-items-center">
                                 <label className='filtros mx-1 has-text-white has-text-weight-medium mr-3' >Titulo</label>
-                                <input class="input is-small is-flex-grow-3 is-rounded" type="text" placeholder='Digite um Nome:'/>
+                                <input class="input is-small is-flex-grow-3 is-rounded" type="text" placeholder='Digite um Nome:' />
                             </div>
                             <div class="column is-one-fifth is-flex is-align-items-center">
                                 <label className='filtros mx-1 has-text-white has-text-weight-medium mr-3'>Status</label>
-                                <input class="input is-small is-flex-grow-2 is-rounded" type="text" placeholder='Digite um Status:'/>
+                                <input class="input is-small is-flex-grow-2 is-rounded" type="text" placeholder='Digite um Status:' />
                             </div>
                             <div class="column is-one-fifth">
                                 <button class="button is-primary m-2 is-rounded" style={{ backgroundColor: '#53bfdb', color: '#fff' }}>Aplicar Filtros</button>
@@ -70,7 +61,7 @@ const Ativos = ({ setTela }) => {
                     <div class='p-0'>
                         {/*aqui eu percorro o array de objetos e crio um card para cada objeto*/}
                         {assets.map((asset) => (
-                            <div key={asset.ati_id} onClick={() => handleClick(asset.id)} className='asset' class=' asset is-flex is-justify-content-center'>
+                            <div key={asset.ati_id} onClick={() => handleClick(asset.ati_id)} className='asset' class=' asset is-flex is-justify-content-center'>
                                 <a class='SemHover column is-one-third mr-2 dado-ativo is-flex is-justify-content-center is-align-items-center has-text-weight-medium' href='##'>
                                     <p>{asset.ati_id}</p>
                                 </a>

@@ -1,9 +1,8 @@
 import { useState } from "react";
 import Menu from "./Navegação/Menu";
 import Ativos from "./Ativos/Ativos";
-import Destinatarios from "./Destinatario/Destinatarios";
-import VisualizarAtivos from "./Visualizar/VisualizarAtivos";
-import VisualizarDestinatarios from "./Visualizar/VisualizarDestinatarios";
+import VisualizarAtivos from "./Visualizar/Visualizar";
+import CadastroAtivos from "./Cadastro/Cadastro";
 
 export default function Roteador(){
     const [tela, setTela] = useState('Ativos')
@@ -13,7 +12,7 @@ export default function Roteador(){
         console.log(valor);
         
     }
-    const botoes = ['Destinatários', 'Ativos', 'Manutenções', 'Dashboard', 'Configurações'];
+    const botoes = ['Usuários', 'Ativos', 'Manutenções', 'Dashboard', 'Configurações'];
     const construirView = () => {
         if (tela === 'Ativos') {
             return (
@@ -27,23 +26,24 @@ export default function Roteador(){
             return (
                 <>
                     <Menu seletorView={selecionarView} botoes={botoes} />
+                    <CadastroAtivos setTela={setTela} />
+                </>
+            )
+        }
+
+        else if (tela === 'VisualizarAtivo') {
+            return (
+                <>
+                    <Menu seletorView={selecionarView} botoes={botoes} />
                     <VisualizarAtivos setTela={setTela} />
                 </>
             )
         }
-        else if (tela === 'CadastroDestinatarios') {
+        else if (tela === 'Usuários') {
             return (
                 <>
                     <Menu seletorView={selecionarView} botoes={botoes} />
-                    <VisualizarDestinatarios setTela={setTela} />
-                </>
-            )
-        }
-        else if (tela === 'Destinatários') {
-            return (
-                <>
-                    <Menu seletorView={selecionarView} botoes={botoes} />
-                    <Destinatarios setTela={setTela} />
+                    {/* <FormularioCadastroCliente tema="#5eb4fc" azul="#5eb4fc" seletorView={selecionarView} /> */}
                 </>
             )
         }
