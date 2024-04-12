@@ -6,18 +6,27 @@ import VisualizarAtivos from "./Visualizar/VisualizarAtivos";
 import VisualizarDestinatarios from "./Visualizar/VisualizarDestinatarios";
 import CadastroAtivos from "./Cadastro/CadastroAtivos";
 import CadastroDestinatarios from "./Cadastro/CadastroDestinatarios";
+import Home from "./home";
 
 export default function Roteador(){
-    const [tela, setTela] = useState('Ativos')
+    const [tela, setTela] = useState('Home')
     const selecionarView = (valor, e) => {
         e.preventDefault()
         setTela(valor)
         console.log(valor);
         
     }
-    const botoes = ['Destinatarios', 'Ativos', 'Manutenções', 'Dashboard', 'Configurações'];
+    const botoes = ['Home', 'Destinatarios', 'Ativos', 'Manutenções', 'Dashboard', 'Configurações'];
     const construirView = () => {
-        if (tela === 'Ativos') {
+        if (tela === 'Home') {
+            return (
+                <>
+                    <Menu seletorView={selecionarView} botoes={botoes} />
+                    <Home setTela={setTela}/>
+                </>
+            )
+        }
+        else if (tela === 'Ativos') {
             return (
                 <>
                     <Menu seletorView={selecionarView} botoes={botoes} />

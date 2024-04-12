@@ -24,7 +24,7 @@ a:hover{
   background-color: #367E90;
 }
 
-a.active{
+a:active{
   background-color: #367E90;
 }
 

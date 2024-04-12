@@ -17,17 +17,17 @@ function Menu(props) {
 
   return (
     <div>
-      <nav className={`navbar  m-0 custom-background ${isActive ? 'is-active' : ''}`} role="navigation" aria-label="main navigation">
-            <img src={LogoIcon} class='navbar-brand pl-6 pr-0' alt="AssetBox" />
+      <nav className={`navbar  m-0 custom-background `} role="navigation" aria-label="main navigation">
+            <img src={LogoIcon} class='navbar-brand pl-6 pr-0' alt="AssetBox"onClick={(e) => props.seletorView('Home', e)} />
             <p className="navbar-brand navbar-item mr-2 is-size-3 p-0 has-text-weight-bold empresa" href="##">AssetBox</p>
-            <a role="button" className={`navbar-burger ${isActive ? 'is-active' : ''}`} onClick={toggleMenu} aria-label="menu" aria-expanded={isActive ? 'true' : 'false'} href='##'>
+            <a role="button" className={`navbar-burger `} onClick={toggleMenu} aria-label="menu" aria-expanded={isActive ? 'true' : 'false'} href='##'>
               <span aria-hidden="true"></span>
               <span aria-hidden="true"></span>
               <span aria-hidden="true"></span>
               <span aria-hidden="true"></span>
             </a>
           <div className='container'>
-            <div className={`navbar-menu ${isActive ? 'is-active' : ''}is-flex is-justify-content-center`} id="navMenu">
+            <div className={`navbar-menu is-flex is-justify-content-center`} id="navMenu">
             {/* <div className="navbar-start is-left mr-1 is-flex ml-auto"> */}
               {/* <a className="navbar-item pr-6 pl-6 is-size-5 has-text-weight-bold my-0 mx-1" href='##'>
                 <img src={UserIcon} class='mr-3' alt="Usuários" />
