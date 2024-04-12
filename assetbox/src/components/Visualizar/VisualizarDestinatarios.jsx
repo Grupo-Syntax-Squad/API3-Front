@@ -207,7 +207,7 @@ function VisualizarDestinatarios ({setTela}) {
         </button>
       </p>
       <p class="control">
-        <button class="button is-light" onClick={() => setTela('Ativos')}>
+        <button class="button is-light" onClick={() => setTela('Destinatários')}>
           Voltar
           </button>
       </p>

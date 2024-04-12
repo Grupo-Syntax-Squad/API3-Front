@@ -2,17 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Filtro from '../../assets/img/filtro.svg';
 import axios from 'axios';
 
-//essa é a função que irá buscar os ativos na API ela está comentada pois não temos uma API para buscar os ativos
-// function Ativos() {
-//     const [assets, setAssets] = useState([]);
-
-// useEffect(() => {
-//     //   getAssets().then(setAssets);
-// }, []);
-
-
-//criei um array de objetos para simular a resposta da API
-const Ativos = ({ setTela }) => {
+const Destinatarios = ({ setTela }) => {
     const [assets, setAssets] = useState([]);
 
     useEffect(() => {
@@ -33,7 +23,7 @@ const Ativos = ({ setTela }) => {
     return (
         <body>
             <div class='page-full' style={{ backgroundColor: 'transparent', borderTopLeftRadius: '10px', borderTopRightRadius: '10px' }}>
-                <button class="button is-primary m-5 ml-6 is-rounded is-size-4" style={{ backgroundColor: '#367E90', color: '#fff' }} onClick={() => setTela('CadastroAtivos')}>Cadastrar Ativo</button>
+                <button class="button is-primary m-5 ml-6 is-rounded is-size-4" style={{ backgroundColor: '#367E90', color: '#fff' }} onClick={() => setTela('CadastroDestinatarios')}>Cadastrar Destinatário</button>
                 <div class='page-full' style={{ backgroundColor: '#459EB5', borderTopLeftRadius: '10px', borderTopRightRadius: '10px' }}>
                     <div class='field'>
                         <div class="columns filtro mx-0" style={{ borderTopLeftRadius: '10px', borderTopRightRadius: '10px' }}>
@@ -57,13 +47,7 @@ const Ativos = ({ setTela }) => {
                     <div class="columns indice m-0 is-flex is-justify-content-center" >
                         <div class="column is-one-third ml-2 is-flex is-justify-content-center is-align-items-center">
                             <label className='has-text-white is-size-4
-                            has-text-weight-medium'>Número</label>
-                        </div>
-                        <div class="column is-one-third ml-2 mr-2 is-flex is-justify-content-center is-align-items-center">
-                            <label className='has-text-white is-size-4 has-text-weight-medium'>Título</label>
-                        </div>
-                        <div class="column is-one-third mr-2 is-flex is-justify-content-center is-align-items-center">
-                            <label className='has-text-white is-size-4 has-text-weight-medium'>Status</label>
+                            has-text-weight-medium'>Destinatários</label>
                         </div>
                     </div>
 
@@ -88,5 +72,5 @@ const Ativos = ({ setTela }) => {
         </body >
     );
 }
-export default Ativos;
+export default Destinatarios;
 

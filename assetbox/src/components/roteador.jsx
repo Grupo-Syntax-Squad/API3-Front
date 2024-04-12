@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Menu from "./Navegação/Menu";
 import Ativos from "./Ativos/Ativos";
+import Destinatarios from "./Destinatario/Destinatarios";
 import VisualizarAtivos from "./Visualizar/VisualizarAtivos";
 import VisualizarDestinatarios from "./Visualizar/VisualizarDestinatarios";
 
@@ -30,11 +31,19 @@ export default function Roteador(){
                 </>
             )
         }
-        else if (tela === 'Destinatários') {
+        else if (tela === 'CadastroDestinatarios') {
             return (
                 <>
                     <Menu seletorView={selecionarView} botoes={botoes} />
                     <VisualizarDestinatarios setTela={setTela} />
+                </>
+            )
+        }
+        else if (tela === 'Destinatários') {
+            return (
+                <>
+                    <Menu seletorView={selecionarView} botoes={botoes} />
+                    <Destinatarios setTela={setTela} />
                 </>
             )
         }
