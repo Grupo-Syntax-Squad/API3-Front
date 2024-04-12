@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Filtro from '../../assets/img/filtro.svg';
-import "./ativos.css";
+import axios from 'axios';
 
 //essa é a função que irá buscar os ativos na API ela está comentada pois não temos uma API para buscar os ativos
 // function Ativos() {
@@ -13,20 +13,22 @@ import "./ativos.css";
 
 //criei um array de objetos para simular a resposta da API
 const Ativos = ({ setTela }) => {
-    const assets = [
-        { id: 1, description: 'Ativo 1', status: 'Ativo' },
-        { id: 2, description: 'Ativo 2', status: 'Inativo' },
-        { id: 3, description: 'Ativo 3', status: 'Ativo' },
-        { id: 4, description: 'Ativo 4', status: 'Ativo' },
-        { id: 5, description: 'Ativo 5', status: 'Ativo' },
-        { id: 6, description: 'Ativo 6', status: 'Ativo' },
-        { id: 7, description: 'Ativo 7', status: 'Ativo' },
-        { id: 8, description: 'Ativo 8', status: 'Ativo' },
-        { id: 9, description: 'Ativo 9', status: 'Ativo' },
-        { id: 10, description: 'Ativo 10', status: 'Ativo' },
-        { id: 11, description: 'Ativo 11', status: 'Ativo' },
-        { id: 12, description: 'Ativo 12', status: 'Ativo' },
-    ];
+    const [assets, setAssets] = useState([]);
+
+    useEffect(() => {
+        axios.get('http://localhost:8000/ativos')
+          .then(response => {
+            setAssets(response.data);
+          })
+          .catch(error => {
+            console.error('There was an error!', error);
+          });
+      }, []);
+
+      const handleClick = (id) => {
+    setTela(`Ativo${id}`);
+  };
+
 
     return (
         <body>
@@ -67,15 +69,15 @@ const Ativos = ({ setTela }) => {
                     <div class='p-0'>
                         {/*aqui eu percorro o array de objetos e crio um card para cada objeto*/}
                         {assets.map((asset) => (
-                            <div key={asset.id} className='asset' class=' asset is-flex is-justify-content-center'>
+                            <div key={asset.ati_id} onClick={() => handleClick(asset.id)} className='asset' class=' asset is-flex is-justify-content-center'>
                                 <a class='SemHover column is-one-third mr-2 dado-ativo is-flex is-justify-content-center is-align-items-center has-text-weight-medium' href='##'>
-                                    <p>{asset.id}</p>
+                                    <p>{asset.ati_id}</p>
                                 </a>
                                 <a class='SemHover column is-one-third mr-2 dado-ativo is-flex is-justify-content-center is-align-items-center has-text-weight-medium' href='##'>
-                                    <p> {asset.description}</p>
+                                    <p> {asset.ati_titulo}</p>
                                 </a>
                                 <a class='SemHover column is-one-third mr-2 dado-ativo is-flex is-justify-content-center is-align-items-center has-text-weight-medium' href='##'>
-                                    <p> {asset.status}</p>
+                                    <p> {asset.ati_status}</p>
                                 </a>
                             </div>
                         ))}

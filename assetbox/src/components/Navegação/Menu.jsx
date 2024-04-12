@@ -34,7 +34,7 @@ function Menu(props) {
                 <img src={UserIcon} class='mr-3' alt="Usuários" />
                 Usuários
               </a> */}
-              <a className="navbar-item pr-6 pl-6 is-size-5 active has-text-weight-bold my-0 mx-1" href='##'>
+              <a className="navbar-item pr-6 pl-6 is-size-5 active has-text-weight-bold my-0 mx-1" href='##' onClick={(e) => props.seletorView('Ativos', e)}>
                 <img src={AssetsIcon} class='mr-3' alt="Ativos" />
                 Ativos
               </a>
