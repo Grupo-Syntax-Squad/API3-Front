@@ -4,7 +4,7 @@ import imgadd from "./imgadd.png"
 import docadd from "./docadd.png"
 import axios from 'axios';
 
-class ViewAtivo {
+class ViewDestinatario {
   constructor(numero, tipo, localizacao, status, destinatario, titulo, complemento, marca, capacidade, modelo, condicoes, n_serie,
     fornecedor, aquisicao, fabricacao, tamanho, validade, nfe, url, observacoes) {
     this.numero = numero;

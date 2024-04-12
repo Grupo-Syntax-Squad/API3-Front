@@ -16,7 +16,7 @@ const Destinatarios = ({ setTela }) => {
       }, []);
 
       const handleClick = (id) => {
-    setTela(`Ativo${id}`);
+    setTela(`Destinatario${id}`);
   };
 
 

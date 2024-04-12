@@ -1,8 +1,11 @@
 import { useState } from "react";
 import Menu from "./Navegação/Menu";
 import Ativos from "./Ativos/Ativos";
-import VisualizarAtivos from "./Visualizar/Visualizar";
-import CadastroAtivos from "./Cadastro/Cadastro";
+import Destinatarios from './Destinatario/Destinatarios'
+import VisualizarAtivos from "./Visualizar/VisualizarAtivos";
+import VisualizarDestinatarios from "./Visualizar/VisualizarDestinatarios";
+import CadastroAtivos from "./Cadastro/CadastroAtivos";
+import CadastroDestinatarios from "./Cadastro/CadastroDestinatarios";
 
 export default function Roteador(){
     const [tela, setTela] = useState('Ativos')
@@ -12,7 +15,7 @@ export default function Roteador(){
         console.log(valor);
         
     }
-    const botoes = ['Usuários', 'Ativos', 'Manutenções', 'Dashboard', 'Configurações'];
+    const botoes = ['Destinatarios', 'Ativos', 'Manutenções', 'Dashboard', 'Configurações'];
     const construirView = () => {
         if (tela === 'Ativos') {
             return (
@@ -29,6 +32,13 @@ export default function Roteador(){
                     <CadastroAtivos setTela={setTela} />
                 </>
             )
+        }else if (tela === 'CadastroDestinatarios') {
+            return (
+                <>
+                    <Menu seletorView={selecionarView} botoes={botoes} />
+                    <CadastroDestinatarios setTela={setTela} />
+                </>
+            )
         }
 
         else if (tela === 'VisualizarAtivo') {
@@ -39,11 +49,19 @@ export default function Roteador(){
                 </>
             )
         }
-        else if (tela === 'Usuários') {
+        else if (tela === 'VisualizarDestinatarios') {
             return (
                 <>
                     <Menu seletorView={selecionarView} botoes={botoes} />
-                    {/* <FormularioCadastroCliente tema="#5eb4fc" azul="#5eb4fc" seletorView={selecionarView} /> */}
+                    <VisualizarDestinatarios setTela={setTela} />
+                </>
+            )
+        }
+        else if (tela === 'Destinatarios') {
+            return (
+                <>
+                    <Menu seletorView={selecionarView} botoes={botoes} />
+                    <Destinatarios setTela={setTela}/>
                 </>
             )
         }
