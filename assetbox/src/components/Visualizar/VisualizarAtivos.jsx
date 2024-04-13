@@ -259,7 +259,7 @@ function VisualizarAtivos({ setTela }) {
                   <input
                     class="input is-small"
                     type="text"
-                    value={dadosAtivo.ati_ano_fabricacao}
+                    value={dadosAtivo.ati_data_fabricacao}
                     disabled
                   />
                 </div>
