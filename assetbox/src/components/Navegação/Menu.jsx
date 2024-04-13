@@ -14,7 +14,7 @@ function Menu(props) {
     <div>
       <nav className={`navbar  m-0 custom-background `} role="navigation" aria-label="main navigation">
             <img src={LogoIcon} class='navbar-brand pl-6 pr-0' alt="AssetBox" onClick={(e) => props.seletorView('Home', e)} />
-            <p className="navbar-brand navbar-item mr-2 is-size-3 p-0 has-text-weight-bold empresa" href="##"  onClick={(e) => props.seletorView('Home', e)}>AssetBox</p>
+            <p className="navbar-brand has-text-white navbar-item mr-2 is-size-3 p-0 has-text-weight-bold empresa" href="##"  onClick={(e) => props.seletorView('Home', e)}>AssetBox</p>
             {/* <a role="button" className={`navbar-burger `} onClick={toggleMenu} aria-label="menu" aria-expanded={isActive ? 'true' : 'false'} href='##'>
               <span aria-hidden="true"></span>
               <span aria-hidden="true"></span>
@@ -28,13 +28,13 @@ function Menu(props) {
                 <img src={UserIcon} class='mr-3' alt="Usuários" />
                 Usuários
               </a> */}
-              <a className={`navbar-item pr-6 pr-8 pl-6 is-size-5 has-text-weight-bold my-0`} href='##' onClick={(e) => props.seletorView('Ativos', e)}>
-                <img src={AssetsIcon} class='mr-3' alt="Ativos" />
-                Ativos
+              <a className={`nav-item is-flex pr-6 pr-8 pl-6 is-size-5 has-text-weight-bold my-0`} href='##' onClick={(e) => props.seletorView('Ativos', e)}>
+                <img src={AssetsIcon} class='mr-2' alt="Ativos" />
+                <p class='navbar-item has-text-white'> Ativos </p>
               </a>
-              <a className="navbar-item pr-6 pl-6 is-size-5 has-text-weight-bold my-0 " href='##' onClick={(e) => props.seletorView('Destinatarios', e)}>
+              <a className="nav-item is-flex pr-6 pl-6 is-size-5 has-text-weight-bold my-0 " href='##' onClick={(e) => props.seletorView('Destinatarios', e)}>
                 <img src={UserIcon} class='mr-3' alt="Destinatários" />
-                Destinatários
+                <p class='navbar-item has-text-white'>Destinatários</p>
               </a>
               {/* <a className="navbar-item pr-6 pl-6 is-size-5 has-text-weight-bold my-0 mx-1" href='##'>
                 <img src={MainteinIcon} class='mr-3' alt="Manutenções" />

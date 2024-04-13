@@ -26,7 +26,8 @@ const Ativos = ({ setTela }) => {
         <body>
             <div class='page-full' style={{ backgroundColor: 'transparent', borderTopLeftRadius: '10px', borderTopRightRadius: '10px' }}>
                 <button class="button is-primary m-5 ml-6 is-rounded is-size-4" style={{ backgroundColor: '#367E90', color: '#fff' }} onClick={() => setTela('CadastroAtivos')}>Cadastrar Ativo</button>
-                <div class='page-full' style={{ borderTopLeftRadius: '10px', borderTopRightRadius: '10px' }}>
+                <div class='page-full' style={{ 
+                    backgroundColor: '#459EB5', borderTopLeftRadius: '10px', borderTopRightRadius: '10px' }}>
                     <div class='field'>
                         {/* <div class="columns filtro mx-0" style={{ borderTopLeftRadius: '10px', borderTopRightRadius: '10px' }}>
                             <div class="column is-one-fifth" style={{ display: 'flex', alignItems: 'center' }}>
@@ -46,7 +47,7 @@ const Ativos = ({ setTela }) => {
                             </div>
                         </div> */}
                     </div>
-                    <div class="columns indice m-0 is-flex is-justify-content-center" >
+                    <div class="columns indice m-0 is-flex is-justify-content-center border-radius-top" >
                         <div class="column is-one-third ml-2 is-flex is-justify-content-center is-align-items-center">
                             <label className='has-text-white is-size-4
                             has-text-weight-medium'>Número</label>
@@ -61,6 +62,13 @@ const Ativos = ({ setTela }) => {
 
                       
                     <div class='p-0'>
+                    {assets.length === 0 && (
+                    <div className='asset is-flex is-justify-content-center'>
+                        <div className='SemHover column is-one-third mr-2 dado-ativo is-flex is-justify-content-center is-align-items-center has-text-weight-medium'>
+                            <p className='has-text-black'>Nenhum Ativo Cadastrado</p>
+                        </div>
+                    </div>
+                )}
                         {/*aqui eu percorro o array de objetos e crio um card para cada objeto*/}
                         {assets.map((asset) => (
                             <div key={asset.ati_id} onClick={() => handleClick(asset.ati_id)} className='asset' class='asset is-flex is-justify-content-center'>

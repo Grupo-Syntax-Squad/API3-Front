@@ -12,41 +12,20 @@
   color: var(--branco);
 }
 
-.navbar-item {
+a.nav-item {
   color: var(--branco);
-  background-color: #459EB5;
-}
-
-.navbar-item.is-active {
-  background-color: blue; 
-  color: var(--branco); 
-}
-
-a.navbar-item:hover{
-  background-color: #367E90;
 }
 
 a:hover{
   background-color: #367E90;
 }
 
-a:active{
-  background-color: #367E90;
-}
+
 .navbar-menu {
   background-color: #459EB5 !important;
 }
 
 @media screen and (max-width: 1024px) {
-  .navbar-item {
-    font-size: 0.8rem;
-    margin: 0 0.2rem;
-    background-color: #459EB5 !important;
-  }
-
-  .navbar-item:hover{
-    background-color: var(--verdeEscuro) !important;
-  }
   .empresa {
     display: none;
   }

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Filtro from '../../assets/img/filtro.svg';
+import './destinatarios.css';
 import axios from 'axios';
 
 const Destinatarios = ({ setTela }) => {
@@ -44,14 +45,22 @@ const Destinatarios = ({ setTela }) => {
                             </div>
                         </div> */}
                     </div>
-                    <div class="columns indice m-0 is-flex is-justify-content-center" >
-                        <div class="column is-one-third ml-2 is-flex is-justify-content-center is-align-items-center">
+                    <div class="columns indice m-0 is-flex is-justify-content-center border-radius-top" >
+                        <div class="column is-one-third ml-2 is-flex is-justify-content-center is-align-items-center ">
                             <label className='has-text-white is-size-4
                             has-text-weight-medium'>Destinatários</label>
                         </div>
                     </div>
 
                     <div class='p-0'>
+                        
+                    {destinatarios.length === 0 && (
+                    <div className='asset is-flex is-justify-content-center'>
+                        <div className='SemHover column is-one-third mr-2 dado-ativo is-flex is-justify-content-center is-align-items-center has-text-weight-medium'>
+                            <p className='has-text-black'>Nenhum Destinatário Cadastrado</p>
+                        </div>
+                    </div>
+                    )}
                         {/*aqui eu percorro o array de objetos e crio um card para cada objeto*/}
                         {destinatarios.map((des) => (
                             <div key={des.ati_id} onClick={() => handleClick(des.id)} className='des' class=' des is-flex is-justify-content-center'>
