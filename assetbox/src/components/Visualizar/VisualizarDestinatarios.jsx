@@ -4,65 +4,43 @@ import imgadd from "./imgadd.png"
 import docadd from "./docadd.png"
 import axios from 'axios';
 
-class ViewAtivo {
-  constructor(numero, tipo, localizacao, status, destinatario, titulo, complemento, marca, capacidade, modelo, condicoes, n_serie,
-              fornecedor, aquisicao, fabricacao, tamanho, validade, nfe, url, observacoes) {
-      this.numero = numero;
-      this.tipo = tipo;
-      this.localizacao = localizacao;
-      this.status = status;
-      this.destinatario = destinatario;
-      this.titulo = titulo;
-      this.complemento = complemento;
-      this.marca = marca;
-      this.capacidade = capacidade;
-      this.modelo = modelo;
-      this.condicoes = condicoes;
-      this.n_serie = n_serie;
-      this.fornecedor = fornecedor;
-      this.aquisicao = aquisicao;
-      this.fabricacao = fabricacao;
-      this.tamanho = tamanho;
-      this.validade = validade;
-      this.nfe = nfe;
-      this.url = url;
-      this.observacoes = observacoes;
+class ViewDestinatario {
+  constructor(nome, telefone, email, senha, rua, numero, complemento, bairro, cidade, uf) {
+    this.nome = nome;
+    this.telefone = telefone;
+    this.email = email;
+    this.senha = senha;
+    this.rua = rua;
+    this.numero = numero;
+    this.complemento = complemento;
+    this.bairro = bairro;
+    this.cidade = cidade;
+    this.uf = uf;
   }
 }
 
 function VisualizarDestinatarios ({setTela}) {
-  const [dadosAtivo, setDadosAtivo] = useState({
-    numeroAtivo : '',
-    tipoAtivo :'',
-    localizacaoAtivo : '',
-    statusAtivo : '',
-    destinatarioAtivo : '',
-    tituloAtivo : '',
-    complementoAtivo : '',
-    marcaAtivo : '',
-    modeloAtivo : '',
-    serieAtivo : '',
-    valorAtivo : '',
-    tamanhoAtivo : '',
-    capacidadeAtivo : '',
-    qtdadeAtivo : '',
-    usoAtivo : '',
-    fornecedorAtivo : '',
-    fabricacaoAtivo : '',
-    validadeAtivo : '',
-    urlAtivo : '',
-    nfeAtivo : '',
-    comentarioAtivo : ''
+  const [dadosDestinatario, setDadosDestinatario] = useState({
+    nome: '',
+    telefone: '',
+    email: '',
+    senha: '',
+    rua: '',
+    numero: '',
+    complemento: '',
+    bairro: '',
+    cidade: '',
+    uf: '',
   })
 
   useEffect((id) => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://localhost8080/ativo/${id}`);
+        const response = await axios.get(`http://localhost8080/destinatario/${id}`);
         const dados = response.data; 
-        setDadosAtivo(dados);
+        setDadosDestinatario(dados);
       } catch (error) {
-        console.error(`Erro ao buscar dados do ativo ${id}:`, error);
+        console.error(`Erro ao buscar dados do destinatário ${id}:`, error);
       }
     };
     fetchData();
@@ -70,7 +48,7 @@ function VisualizarDestinatarios ({setTela}) {
 
 
   function handleDelete(id) {
-    axios.delete(`http://localhost:8080/ativos/${id}`).then((resposta) => {
+    axios.delete(`http://localhost:8080/destinatarios/${id}`).then((resposta) => {
         console.log(resposta.data);
     }); 
 };
@@ -81,121 +59,128 @@ function VisualizarDestinatarios ({setTela}) {
       <div class='field'>
       <h2>Destinatário: </h2>
       </div>
-      <h1 className='has-text-weight-light'>Dados</h1>
-      <div class="columns m-3">
+      <h1 className='has-text-weight-light is-size-4'>Dados</h1>
 
-      <div class="column is-half">
       <form>
-        <div className='columns'>
           
           <div class="field column ">
-            <label class="form-label">Nome</label>
+            <label class="form-label is-size-5">Nome</label>
             <input
               class="input is-small"
               type="text"
               placeholder='Digite um Número:'
-              // value={dadosAtivo.numeroAtivo}
+              value={dadosDestinatario.nome}
               
             />
           </div>
           <div class="field column">
-          <label class="form-label">Telefone</label>
+          <label class="form-label is-size-5">Telefone</label>
             <input
               class="input is-small"
               type="text"
               placeholder='Digite um Número:'
-              // value={dadosAtivo.numeroAtivo}
+              value={dadosDestinatario.telefone}
               
             />
           </div>
           <div class="field column">
-          <label class="form-label">E-mail</label>
+          <label class="form-label is-size-5">E-mail</label>
             <input
               class="input is-small"
               type="text"
               placeholder='Digite um Número:'
-              // value={dadosAtivo.numeroAtivo}
+              value={dadosDestinatario.email}
               
             />
           </div>
           <div class="field column">
-          <label class="form-label">Senha</label>
+          <label class="form-label is-size-5">Senha</label>
             <input
               class="input is-small"
               type="text"
               placeholder='Digite um Número:'
-              // value={dadosAtivo.numeroAtivo}
+              value={dadosDestinatario.senha}
               
             />
           </div>
-          </div>
-        
-        </form>
-        </div>
-        </div>
-            <h1>Endereço</h1>
-            <form>
+            <h1 className='has-text-weight-light is-size-4'>Endereço</h1>
+            
             <div class="field column">
-          <label class="form-label">Rua</label>
+          <label class="form-label is-size-5">Rua</label>
             <input
               class="input is-small"
               type="text"
               placeholder='Digite um Número:'
-              // value={dadosAtivo.numeroAtivo}
+              value={dadosDestinatario.rua}
               
             />
           </div>
           <div class="field column">
-          <label class="form-label">Número</label>
+          <label class="form-label is-size-5">Número</label>
             <input
               class="input is-small"
               type="text"
               placeholder='Digite um Número:'
-              // value={dadosAtivo.numeroAtivo}
+              value={dadosDestinatario.numero}
               
             />
           </div>
           <div class="field column">
-          <label class="form-label">Complemento</label>
+          <label class="form-label is-size-5">Complemento</label>
             <input
               class="input is-small"
               type="text"
               placeholder='Digite um Número:'
-              // value={dadosAtivo.numeroAtivo}
+              value={dadosDestinatario.complemento}
               
             />
           </div>
           <div class="field column">
-          <label class="form-label">Bairro</label>
+          <label class="form-label is-size-5">Bairro</label>
             <input
               class="input is-small"
               type="text"
               placeholder='Digite um Número:'
-              // value={dadosAtivo.numeroAtivo}
+              value={dadosDestinatario.bairro}
               
             />
           </div>
           <div class="field column">
-          <label class="form-label">Cidade</label>
-            <input
-              class="input is-small"
-              type="text"
-              placeholder='Digite um Número:'
-              // value={dadosAtivo.numeroAtivo}
-              
-            />
+            <label class="form-label is-size-5">Cidade</label>
+              <input
+                class="input is-small"
+                type="text"
+                placeholder='Digite um Número:'
+                value={dadosDestinatario.cidade}
+                
+              />
           </div>
           <div class="field column">
-          <label class="form-label">UF</label>
-            <input
-              class="input is-small"
-              type="text"
-              placeholder='Digite um Número:'
-              // value={dadosAtivo.numeroAtivo}
-              
-            />
+            <label class="form-label is-size-5">UF</label>
+              <input
+                class="input is-small"
+                type="text"
+                placeholder='Digite um Número:'
+                value={dadosDestinatario.uf}
+                
+              />
           </div>
             </form>
+            <div class="field is-grouped is-grouped-centered">
+    </div>
+    <div class="field is-grouped is-grouped-centered">
+      <p class="control">
+        <button class="button is-primary" type="submit" formMethod='POST'>
+          Cadastrar
+        </button>
+      </p>
+      <p class="control">
+        <button class="button is-light" onClick={() => setTela('Destinatarios')}>
+          Cancelar
+          </button>
+      </p>
+
+    </div>
    
 
 

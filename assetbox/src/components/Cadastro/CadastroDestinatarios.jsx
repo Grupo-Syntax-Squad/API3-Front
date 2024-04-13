@@ -1,48 +1,36 @@
 import React, { useState } from 'react';
 import "./cadastro.css";
-import imgadd from "./imgadd.png"
-import docadd from "./docadd.png"
 
 function CadastroDestinatarios ({setTela}) {
   // Definindo estados para armazenar os dados do ativo
-  const [numeroAtivo, setNumAtivo] = useState('');
-  const [tipoAtivo, setTipoAtivo] = useState('');
-  const [localizacaoAtivo, setLocalizacaoAtivo] = useState('');
-  const [statusAtivo, setStatusAtivo] = useState('');
-  const [destinatarioAtivo, setDestinatarioAtivo] = useState('');
-  const [tituloAtivo, setTituloAtivo] = useState('');
-  const [complementoAtivo, setComplementoAtivo] = useState('');
-  const [marcaAtivo, setMarcaAtivo] = useState('');
-  const [modeloAtivo, setModeloAtivo] = useState('');
-  const [serieAtivo, setSerieAtivo] = useState('');
-  const [valorAtivo, setValorAtivo] = useState('');
-  const [tamanhoAtivo, setTamanhoAtivo] = useState('');
-  const [capacidadeAtivo, setCapacidadeAtivo] = useState('');
-  const [qtdadeAtivo, setQuantidadeAtivo] = useState('');
-  const [usoAtivo, setUsoAtivo] = useState('');
-  const [fornecedorAtivo, setFornecedorAtivo] = useState('');
-  const [fabricacaoAtivo, setFabricacaoAtivo] = useState('');
-  const [validadeAtivo, setValidadeAtivo] = useState('');
-  const [nfeAtivo, setNfeAtivo] = useState('');
-  const [urlAtivo, setUrlAtivo] = useState('');
-  const [comentarioAtivo, setComentarioAtivo] = useState('');
-
-
+  const [nomeDestinatario, setNomeDestinatario] = useState('');
+  const [telefoneDestinatario, setTelefoneDestinatario] = useState('');
+  const [emailDestinatario, setEmailDestinatario] = useState('');
+  const [senhaDestinatario, setSenhaDestinatario] = useState('');
+  const [ruaDestinatario, setRuaDestinatario] = useState('');
+  const [numeroDestinatario, setNumeroDestinatario] = useState('');
+  const [complementoDestinatario, setComplementoDestinatario] = useState('');
+  const [bairroDestinatario, setBairroDestinatario] = useState('');
+  const [cidadeDestinatario, setCidadeDestinatario] = useState('');
+  const [ufDestinatario, setUfDestinatario] = useState('');
 
 
   // Função para lidar com o envio do formulário
   const handleSubmit = (event) => {
     event.preventDefault();
     // Aqui você pode enviar os dados do ativo para o backend ou fazer outras operações
-    console.log("Dados do ativo:", { numeroAtivo, tipoAtivo, localizacaoAtivo, statusAtivo, destinatarioAtivo, tituloAtivo, complementoAtivo });
+    console.log("Dados do ativo:", { nomeDestinatario, telefoneDestinatario, emailDestinatario, senhaDestinatario, ruaDestinatario, numeroDestinatario, complementoDestinatario, bairroDestinatario, cidadeDestinatario, ufDestinatario });
     // Limpar os campos do formulário após o envio
-    setNumAtivo('');
-    setTipoAtivo('');
-    setLocalizacaoAtivo('');
-    setStatusAtivo('');
-    setDestinatarioAtivo('');
-    setTituloAtivo('');
-    setComplementoAtivo('');
+    setNomeDestinatario('');
+    setTelefoneDestinatario('');
+    setEmailDestinatario('');
+    setSenhaDestinatario('');
+    setRuaDestinatario('');
+    setNumeroDestinatario('');
+    setComplementoDestinatario('');
+    setBairroDestinatario('');
+    setCidadeDestinatario('');
+    setUfDestinatario('');
   };
 
   return (
@@ -51,120 +39,123 @@ function CadastroDestinatarios ({setTela}) {
       <div class='field'>
       <h2>Destinatário: </h2>
       </div>
-      <h1 className='has-text-weight-light'>Dados</h1>
+      <h1 className='has-text-weight-light is-size-4'>Dados</h1>
 
       <form>
           
           <div class="field column ">
-            <label class="form-label">Nome</label>
+            <label class="form-label is-size-5">Nome</label>
             <input
               class="input is-small"
               type="text"
               placeholder='Digite um Número:'
-              // value={dadosAtivo.numeroAtivo}
+              value={nomeDestinatario}
+              onChange={(event) => setNomeDestinatario(event.target.value)}
+            />
+          </div>
+          <div class="field column">
+          <label class="form-label is-size-5">Telefone</label>
+            <input
+              class="input is-small"
+              type="text"
+              placeholder='Digite um Número:'
+              value={telefoneDestinatario}
+              onChange={(event) => setTelefoneDestinatario(event.target.value)}
               
             />
           </div>
           <div class="field column">
-          <label class="form-label">Telefone</label>
+          <label class="form-label is-size-5">E-mail</label>
             <input
               class="input is-small"
               type="text"
               placeholder='Digite um Número:'
-              // value={dadosAtivo.numeroAtivo}
+              value={emailDestinatario}
+              onChange={(event) => setEmailDestinatario(event.target.value)}
               
             />
           </div>
           <div class="field column">
-          <label class="form-label">E-mail</label>
+          <label class="form-label is-size-5">Senha</label>
             <input
               class="input is-small"
               type="text"
               placeholder='Digite um Número:'
-              // value={dadosAtivo.numeroAtivo}
+              value={senhaDestinatario}
+              onChange={(event) => setSenhaDestinatario(event.target.value)}
               
             />
           </div>
-          <div class="field column">
-          <label class="form-label">Senha</label>
-            <input
-              class="input is-small"
-              type="text"
-              placeholder='Digite um Número:'
-              // value={dadosAtivo.numeroAtivo}
-              
-            />
-          </div>
-        
-        </form>
-
-            <h1>Endereço</h1>
-            <form>
+            <h1 className='has-text-weight-light is-size-4'>Endereço</h1>
+            
             <div class="field column">
-          <label class="form-label">Rua</label>
+          <label class="form-label is-size-5">Rua</label>
             <input
               class="input is-small"
               type="text"
               placeholder='Digite um Número:'
-              // value={dadosAtivo.numeroAtivo}
+              value={ruaDestinatario}
+              onChange={(event) => setRuaDestinatario(event.target.value)}
               
             />
           </div>
           <div class="field column">
-          <label class="form-label">Número</label>
+          <label class="form-label is-size-5">Número</label>
             <input
               class="input is-small"
               type="text"
               placeholder='Digite um Número:'
-              // value={dadosAtivo.numeroAtivo}
+              value={numeroDestinatario}
+              onChange={(event) => setNumeroDestinatario(event.target.value)}
               
             />
           </div>
           <div class="field column">
-          <label class="form-label">Complemento</label>
+          <label class="form-label is-size-5">Complemento</label>
             <input
               class="input is-small"
               type="text"
               placeholder='Digite um Número:'
-              // value={dadosAtivo.numeroAtivo}
+              value={complementoDestinatario}
+              onChange={(event) => setComplementoDestinatario(event.target.value)}
               
             />
           </div>
           <div class="field column">
-          <label class="form-label">Bairro</label>
+          <label class="form-label is-size-5">Bairro</label>
             <input
               class="input is-small"
               type="text"
               placeholder='Digite um Número:'
-              // value={dadosAtivo.numeroAtivo}
+              value={bairroDestinatario}
+              onChange={(event) => setBairroDestinatario(event.target.value)}
               
             />
           </div>
           <div class="field column">
-          <label class="form-label">Cidade</label>
-            <input
-              class="input is-small"
-              type="text"
-              placeholder='Digite um Número:'
-              // value={dadosAtivo.numeroAtivo}
-              
-            />
+            <label class="form-label is-size-5">Cidade</label>
+              <input
+                class="input is-small"
+                type="text"
+                placeholder='Digite um Número:'
+                value={cidadeDestinatario}
+                onChange={(event) => setCidadeDestinatario(event.target.value)}
+                
+              />
           </div>
           <div class="field column">
-          <label class="form-label">UF</label>
-            <input
-              class="input is-small"
-              type="text"
-              placeholder='Digite um Número:'
-              // value={dadosAtivo.numeroAtivo}
-              
-            />
+            <label class="form-label is-size-5">UF</label>
+              <input
+                class="input is-small"
+                type="text"
+                placeholder='Digite um Número:'
+                value={ufDestinatario}
+                onChange={(event) => setUfDestinatario(event.target.value)}
+                
+              />
           </div>
             </form>
-  
-
             <div class="field is-grouped is-grouped-centered">
-
     </div>
     <div class="field is-grouped is-grouped-centered">
       <p class="control">
@@ -173,7 +164,7 @@ function CadastroDestinatarios ({setTela}) {
         </button>
       </p>
       <p class="control">
-        <button class="button is-light" onClick={() => setTela('Ativos')}>
+        <button class="button is-light" onClick={() => setTela('Destinatarios')}>
           Cancelar
           </button>
       </p>

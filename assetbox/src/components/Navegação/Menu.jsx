@@ -9,11 +9,7 @@ import './menu.css';
 
 
 function Menu(props) {
-  const [isActive, setIsActive] = useState(false);
-  
-  const toggleMenu = () => {
-    setIsActive(!isActive);
-  };
+
   return (
     <div>
       <nav className={`navbar  m-0 custom-background `} role="navigation" aria-label="main navigation">
@@ -36,7 +32,7 @@ function Menu(props) {
                 <img src={AssetsIcon} class='mr-3' alt="Ativos" />
                 Ativos
               </a>
-              <a className="navbar-item pr-6 pl-6 is-size-5 active has-text-weight-bold my-0 " href='##' onClick={(e) => props.seletorView('Destinatarios', e)}>
+              <a className="navbar-item pr-6 pl-6 is-size-5 has-text-weight-bold my-0 " href='##' onClick={(e) => props.seletorView('Destinatarios', e)}>
                 <img src={UserIcon} class='mr-3' alt="Destinatários" />
                 Destinatários
               </a>

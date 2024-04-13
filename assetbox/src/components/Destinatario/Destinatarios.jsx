@@ -3,12 +3,12 @@ import Filtro from '../../assets/img/filtro.svg';
 import axios from 'axios';
 
 const Destinatarios = ({ setTela }) => {
-    const [assets, setAssets] = useState([]);
+    const [destinatarios, setdestinatarios] = useState([]);
 
     useEffect(() => {
-        axios.get('http://localhost:8000/ativos')
+        axios.get('http://localhost:8000/destinatarios')
           .then(response => {
-            setAssets(response.data);
+            setdestinatarios(response.data);
           })
           .catch(error => {
             console.error('There was an error!', error);
@@ -53,16 +53,10 @@ const Destinatarios = ({ setTela }) => {
 
                     <div class='p-0'>
                         {/*aqui eu percorro o array de objetos e crio um card para cada objeto*/}
-                        {assets.map((asset) => (
-                            <div key={asset.ati_id} onClick={() => handleClick(asset.id)} className='asset' class=' asset is-flex is-justify-content-center'>
+                        {destinatarios.map((des) => (
+                            <div key={des.ati_id} onClick={() => handleClick(des.id)} className='des' class=' des is-flex is-justify-content-center'>
                                 <a class='SemHover column is-one-third mr-2 dado-ativo is-flex is-justify-content-center is-align-items-center has-text-weight-medium' href='##'>
-                                    <p>{asset.ati_id}</p>
-                                </a>
-                                <a class='SemHover column is-one-third mr-2 dado-ativo is-flex is-justify-content-center is-align-items-center has-text-weight-medium' href='##'>
-                                    <p> {asset.ati_titulo}</p>
-                                </a>
-                                <a class='SemHover column is-one-third mr-2 dado-ativo is-flex is-justify-content-center is-align-items-center has-text-weight-medium' href='##'>
-                                    <p> {asset.ati_status}</p>
+                                    <p className='has-text-black'>{des.des.nome}</p>
                                 </a>
                             </div>
                         ))}

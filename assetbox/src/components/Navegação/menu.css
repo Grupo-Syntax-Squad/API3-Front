@@ -17,10 +17,10 @@
   background-color: #459EB5;
 }
 
-/* .navbar-item.is-active {
+.navbar-item.is-active {
   background-color: blue; 
   color: var(--branco); 
-} */
+}
 
 a.navbar-item:hover{
   background-color: #367E90;
