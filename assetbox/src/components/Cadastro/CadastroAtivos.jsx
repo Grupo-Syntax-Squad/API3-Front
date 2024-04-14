@@ -29,6 +29,7 @@ function CadastroAtivos({ setTela }) {
 
   const [localizacoes, setLocalizacoes] = useState([]);
   const [tipos, setTipos] = useState([]);
+  const [destinatarios, setDestinatarios] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -37,6 +38,9 @@ function CadastroAtivos({ setTela }) {
 
       response = await axios.get('http://localhost:8000/tipos');
       setTipos(response.data);
+
+      response = await axios.get('http://localhost:8000/destinatarios');
+      setDestinatarios(response.data);
     };
 
     fetchData();
@@ -154,14 +158,17 @@ function CadastroAtivos({ setTela }) {
                 </div>
 
                 <div className="field" >
-                  <label className="form-label">Destinatário:</label>
-                  <input
-                    class="input is-small"
-                    type="text"
-                    placeholder='Insira o Destinatário:'
-                    value={ati_destinatario_id}
-                    onChange={(event) => setDestinatarioAtivo(event.target.value)}
-                  />
+                  <label className="label">Destinatário:</label>
+                  {destinatarios && destinatarios.length > 0 ? (
+                    <div class="select is-small">
+                      <select class="is-hovered" onChange={e => setDestinatarioAtivo(destinatarios.find(destinatario => destinatario.des_nome === e.target.value))}>
+                        <option value="" disabled selected>Selecione um destinatário</option>
+                        {destinatarios.map((destinatario) => <option key={destinatario.des_nome} value={destinatario.des_nome}>{destinatario.des_nome}</option>)}
+                      </select>
+                    </div>
+                  ) : (
+                    <p>Nenhum destinatário disponível</p>
+                  )}
                 </div>
 
                 <div className="field" >
