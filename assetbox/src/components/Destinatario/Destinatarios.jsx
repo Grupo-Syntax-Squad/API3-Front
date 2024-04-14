@@ -8,17 +8,17 @@ const Destinatarios = ({ setTela }) => {
 
     useEffect(() => {
         axios.get('http://localhost:8000/destinatarios')
-          .then(response => {
-            setdestinatarios(response.data);
-          })
-          .catch(error => {
-            console.error('There was an error!', error);
-          });
-      }, []);
+            .then(response => {
+                setdestinatarios(response.data);
+            })
+            .catch(error => {
+                console.error('There was an error!', error);
+            });
+    }, []);
 
-      const handleClick = (id) => {
-    setTela(`Destinatario${id}`);
-  };
+    const handleClick = (id) => {
+        setTela(`Destinatario${id}`);
+    };
 
 
     return (
@@ -53,22 +53,26 @@ const Destinatarios = ({ setTela }) => {
                     </div>
 
                     <div class='p-0'>
-                        
-                    {destinatarios.length === 0 && (
-                    <div className='asset is-flex is-justify-content-center'>
-                        <div className='SemHover column is-one-third mr-2 dado-ativo is-flex is-justify-content-center is-align-items-center has-text-weight-medium'>
-                            <p className='has-text-black'>Nenhum Destinatário Cadastrado</p>
-                        </div>
-                    </div>
-                    )}
-                        {/*aqui eu percorro o array de objetos e crio um card para cada objeto*/}
-                        {destinatarios.map((des) => (
-                            <div key={des.ati_id} onClick={() => handleClick(des.id)} className='des' class=' des is-flex is-justify-content-center'>
-                                <a class='SemHover column is-one-third mr-2 dado-ativo is-flex is-justify-content-center is-align-items-center has-text-weight-medium' href='##'>
-                                    <p className='has-text-black'>{des.des.nome}</p>
-                                </a>
+
+                        {destinatarios.length === 0 && (
+                            <div className='asset is-flex is-justify-content-center'>
+                                <div className='SemHover column is-one-third mr-2 dado-ativo is-flex is-justify-content-center is-align-items-center has-text-weight-medium'>
+                                    <p className='has-text-black'>Nenhum Destinatário Cadastrado</p>
+                                </div>
                             </div>
-                        ))}
+                        )}
+                        {/*aqui eu percorro o array de objetos e crio um card para cada objeto*/}
+                        {destinatarios && destinatarios.length > 0 ? (
+                            destinatarios.map((destinatario) => {
+                                <div key={destinatario.ati_id} onClick={() => handleClick(destinatario.id)} className='des' class=' des is-flex is-justify-content-center'>
+                                    <a class='SemHover column is-one-third mr-2 dado-ativo is-flex is-justify-content-center is-align-items-center has-text-weight-medium' href='##'>
+                                        <p className='has-text-black'>{destinatario.des.nome}</p>
+                                    </a>
+                                </div>
+                            })
+                        ) : (
+                            <p></p>
+                        )}
                     </div>
                 </div>
             </div>

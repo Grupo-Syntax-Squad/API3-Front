@@ -96,7 +96,7 @@ function CadastroAtivos({ setTela }) {
 
           <div class="column is-half has-text-centered"> <img src={imgadd} alt="imgadd" style={{ width: '100px', height: '100px' }} />
             <div>
-              <input className='image-button' type='file' id='img' name="img" accept="image/*" onChange={handleImageChange}/>
+              <input className='image-button' type='file' id='img' name="img" accept="image/*" onChange={handleImageChange} />
             </div>
           </div>
 
@@ -117,20 +117,28 @@ function CadastroAtivos({ setTela }) {
                 <div class="field">
                   <label class="label">Tipo:</label>
                   <div class="select is-small">
-                    <select class="is-hovered" onChange={e => setTipoAtivo(tipos.find(tipo => tipo.tip_titulo === e.target.value))}>
-                      <option value="" disabled selected>Selecione um tipo</option>
-                      {tipos.map((tipo) => <option key={tipo.tip_titulo} value={tipo.tip_titulo}>{tipo.tip_titulo}</option>)}
-                    </select>
+                    {tipos && tipos.length > 0 ? (
+                      <select class="is-hovered" onChange={e => setTipoAtivo(tipos.find(tipo => tipo.tip_titulo === e.target.value))}>
+                        <option value="" disabled selected>Selecione um tipo</option>
+                        {tipos.map((tipo) => <option key={tipo.tip_titulo} value={tipo.tip_titulo}>{tipo.tip_titulo}</option>)}
+                      </select>
+                    ) : (
+                      <p>Nenhum tipo disponível</p>
+                    )}
                   </div>
                 </div>
 
                 <div class="field">
                   <label class="label">Localização:</label>
                   <div class="select is-small">
-                    <select class="is-hovered" onChange={e => setLocalizacaoAtivo(localizacoes.find(localizacao => localizacao.loc_titulo === e.target.value))}>
-                      <option value="" disabled selected>Selecione uma localização</option>
-                      {localizacoes.map((localizacao) => <option key={localizacao.loc_titulo} value={localizacao.loc_titulo}>{localizacao.loc_titulo}</option>)}
-                    </select>
+                    {localizacoes && localizacoes.length > 0 ? (
+                      <select class="is-hovered" onChange={e => setLocalizacaoAtivo(localizacoes.find(localizacao => localizacao.loc_titulo === e.target.value))}>
+                        <option value="" disabled selected>Selecione uma localização</option>
+                        {localizacoes.map((localizacao) => <option key={localizacao.loc_titulo} value={localizacao.loc_titulo}>{localizacao.loc_titulo}</option>)}
+                      </select>
+                    ) : (
+                      <p>Nenhuma localização disponível</p>
+                    )}
                   </div>
                 </div>
                 <div class="field">
