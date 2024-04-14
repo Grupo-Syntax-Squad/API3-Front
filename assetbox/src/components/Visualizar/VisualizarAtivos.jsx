@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import "./visualizar.css";
-import imgadd from "./imgadd.png"
 import docadd from "./docadd.png"
 import axios from 'axios';
 
@@ -52,16 +51,19 @@ function VisualizarAtivos({ setTela }) {
 
 
   function handleDelete(id) {
-    axios.delete(`http://localhost:8000/ativo/${id}`)
-      .then((resposta) => {
-        console.log(resposta.data);
-        console.log("Ativo deletado com sucesso!");
-        window.location.reload(); // Recarrega a página
-      })
-      .catch((error) => {
-        console.error("Erro ao deletar ativo:", error);
-      });
-  };
+    const confirmDelete = window.confirm('Você realmente quer deletar este ativo?');
+    if (confirmDelete) {
+      axios.delete(`http://localhost:8000/ativo/${id}`)
+        .then((resposta) => {
+          console.log(resposta.data);
+          console.log("Ativo deletado com sucesso!");
+          window.location.reload(); // Recarrega a página
+        })
+        .catch((error) => {
+          console.error("Erro ao deletar ativo:", error);
+        });
+  }
+  }
 
   console.log(dadosAtivo);
   return (
@@ -332,9 +334,6 @@ function VisualizarAtivos({ setTela }) {
             <div className='container'>
               <h1>Documentos</h1>
               <div class="container column is-half has-text-centered"><img src={docadd} alt="docadd" style={{ width: '100px', height: '100px' }} />
-                <div>
-                  <input className='image-button' type='file' id='doc' name="doc" accept="doc/*" />
-                </div>
               </div>
             </div>
 

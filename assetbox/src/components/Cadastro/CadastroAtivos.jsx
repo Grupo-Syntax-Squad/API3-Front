@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import "./cadastro.css";
 import imgadd from "./imgadd.png"
 import docadd from "./docadd.png"
+import adicionar from "./adicionar.svg"
 import axios from 'axios';
 
 function CadastroAtivos({ setTela }) {
@@ -109,6 +110,7 @@ function CadastroAtivos({ setTela }) {
                   <input
                     class="input is-small"
                     type="text"
+                    title="Digite um número de ordem para o ativo"
                     placeholder='Digite um Número:'
                     value={ati_numero}
                     onChange={(event) => setNumAtivo(event.target.value)}
@@ -126,6 +128,7 @@ function CadastroAtivos({ setTela }) {
                       <p>Nenhum tipo disponível</p>
                     )}
                   </div>
+                  <img src={adicionar} style={{marginLeft: '10px', width : '15%'}} title="Cadastrar novo tipo"/>
                 </div>
 
                 <div class="field">
@@ -140,6 +143,7 @@ function CadastroAtivos({ setTela }) {
                       <p>Nenhuma localização disponível</p>
                     )}
                   </div>
+                  <img src={adicionar} style={{marginLeft: '10px', width : '15%'}} title="Cadastrar nova localização"/>
                 </div>
                 <div class="field">
                   <label class="label">Status:</label>
@@ -151,6 +155,7 @@ function CadastroAtivos({ setTela }) {
                       <option value="3">Desativado</option>
                     </select>
                   </div>
+                  <img src={adicionar} style={{marginLeft: '10px', width : '15%'}} title="cadastrar novo status"/>
                 </div>
 
                 <div className="field" >
@@ -158,10 +163,12 @@ function CadastroAtivos({ setTela }) {
                   <input
                     class="input is-small"
                     type="text"
+                    title="Digite o nome do destinatário que receberá o ativo ou que está sob posse dele"
                     placeholder='Insira o Destinatário:'
                     value={ati_destinatario_id}
                     onChange={(event) => setDestinatarioAtivo(event.target.value)}
                   />
+                    {/* <img src={adicionar} className='is-flex'style={{marginLeft: '10px', width : '5%'}} title="cadastrar destinatário"/> */}
                 </div>
 
                 <div className="field" >
@@ -170,6 +177,7 @@ function CadastroAtivos({ setTela }) {
                   <input
                     class="input is-small"
                     type="text"
+                    title="Digite um nome para o ativo"
                     placeholder='Insira o Título:'
                     value={ati_titulo}
                     onChange={(event) => setTituloAtivo(event.target.value)}
@@ -182,6 +190,7 @@ function CadastroAtivos({ setTela }) {
                       class="input is-small"
                       type="text"
                       placeholder='Insira um Complemento:'
+                      title="Digite um complemento para o ativo, por exemplo: cor, estado de preservação, etc."
                       rows="4"
                       value={ati_complemento}
                       onChange={(event) => setComplementoAtivo(event.target.value)}
@@ -209,6 +218,7 @@ function CadastroAtivos({ setTela }) {
                   <input
                     class="input is-small"
                     type="text"
+                    title="Digite a marca do ativo, ex: Dell, HP, SAMSUNG, etc."
                     placeholder='Digite a Marca:'
                     value={ati_marca}
                     onChange={(event) => setMarcaAtivo(event.target.value)}
@@ -220,6 +230,7 @@ function CadastroAtivos({ setTela }) {
                   <input
                     class="input is-small"
                     type="text"
+                    title="Digite o modelo do ativo, ex: Inspiron 15, Galaxy S20, etc."
                     placeholder='Digite o Modelo:'
                     value={ati_modelo}
                     onChange={(event) => setModeloAtivo(event.target.value)}
@@ -231,6 +242,7 @@ function CadastroAtivos({ setTela }) {
                   <input
                     class="input is-small"
                     type="text"
+                    title="Digite o número de série do ativo"
                     placeholder='Insira o Número de Série:'
                     value={ati_numero_serie}
                     onChange={(event) => setSerieAtivo(event.target.value)}
@@ -243,6 +255,7 @@ function CadastroAtivos({ setTela }) {
                   <input
                     class="input is-small"
                     type="text"
+                    title="Digite o preço do ativo"
                     placeholder='Insira o Valor de Aquisição:'
                     value={ati_preco_aquisicao}
                     onChange={(event) => setValorAtivo(event.target.value)}
@@ -257,6 +270,7 @@ function CadastroAtivos({ setTela }) {
                   <input
                     class="input is-small"
                     type="text"
+                    title="Digite o tamanho do ativo (largura,comprimento,altura) ex: 10x10x10cm"
                     placeholder='Insira as Dimensões do Ativo:'
                     value={ati_tamanho}
                     onChange={(event) => setTamanhoAtivo(event.target.value)}
@@ -274,6 +288,7 @@ function CadastroAtivos({ setTela }) {
                   <input
                     class="input is-small"
                     type="text"
+                    title="Digite a capacidade do ativo, ex: 500GB, 1TB, 50kg, etc."
                     placeholder='Insira a Capacidade do Ativo:'
                     value={ati_capacidade}
                     onChange={(event) => setCapacidadeAtivo(event.target.value)}
@@ -296,6 +311,7 @@ function CadastroAtivos({ setTela }) {
                   <input
                     class="input is-small"
                     type="text"
+                    title="Digite as condições de uso do ativo, ex: Novo, Usado, Quebrado, etc."
                     placeholder='Condições de Uso:'
                     value={ati_condicoes_uso}
                     onChange={(event) => setUsoAtivo(event.target.value)}
@@ -319,6 +335,7 @@ function CadastroAtivos({ setTela }) {
                   <input
                     class="input is-small"
                     type="text"
+                    title="digite o ano de fabricação do ativo"
                     placeholder='Insira a Data de Fabricação:'
                     value={ati_data_fabricacao}
                     onChange={(event) => setFabricacaoAtivo(event.target.value)}
@@ -329,7 +346,8 @@ function CadastroAtivos({ setTela }) {
 
                   <input
                     class="input is-small"
-                    type="text"
+                    type="date"
+                    title="Selecione a data de validade do ativo"
                     placeholder='Insira a Data de Validade:'
                     value={ati_data_validade}
                     onChange={(event) => setValidadeAtivo(event.target.value)}
@@ -361,6 +379,7 @@ function CadastroAtivos({ setTela }) {
                 <input
                   class="input is-small"
                   type="text"
+                  title="Digite o número da nota fiscal do ativo"
                   placeholder='Insira a Chave NFe:'
                   value={ati_chave_nf_e}
                   onChange={(event) => setNfeAtivo(event.target.value)}
@@ -373,6 +392,7 @@ function CadastroAtivos({ setTela }) {
                 <input
                   class="input is-small"
                   type="text"
+                  title="Escanei o código de barras do ativo ou digite manualmente"
                   placeholder='Insira a Url do Ativo:'
                   value={ati_url}
                   onChange={(event) => setUrlAtivo(event.target.value)}
@@ -384,6 +404,7 @@ function CadastroAtivos({ setTela }) {
                 <input
                   class="input is-small"
                   type="text"
+                  title="Digite observações adicionais do ativo"
                   placeholder='Escreva aqui as Observações:'
                   value={ati_observacao}
                   onChange={(event) => setComentarioAtivo(event.target.value)}
