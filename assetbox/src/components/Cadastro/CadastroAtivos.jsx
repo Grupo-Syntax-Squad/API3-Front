@@ -10,7 +10,7 @@ function CadastroAtivos({ setTela }) {
   const [ati_tipo_id, setTipoAtivo] = useState({});
   const [ati_status, setStatusAtivo] = useState('');
   const [ati_complemento, setComplementoAtivo] = useState('');
-  const [ati_destinatario_id, setDestinatarioAtivo] = useState('');
+  const [ati_destinatario_id, setDestinatarioAtivo] = useState({});
   const [ati_marca, setMarcaAtivo] = useState('');
   const [ati_modelo, setModeloAtivo] = useState('');
   const [ati_numero_serie, setSerieAtivo] = useState('');
@@ -79,15 +79,39 @@ function CadastroAtivos({ setTela }) {
       ati_observacao,
       ati_titulo,
       ati_numero,
+      ati_destinatario_id,
+      ati_complemento,
       ati_imagem_id: imagem.ima_id
     };
-
+    console.log(ativoData);
+    
     try {
       const response = await axios.post('http://localhost:8000/cadastrar/ativo', ativoData);
       console.log(response.data);
     } catch (error) {
       console.error(error);
     };
+
+    // Limpar campos
+    setLocalizacaoAtivo({});
+    setTipoAtivo({});
+    setDestinatarioAtivo({});
+    setStatusAtivo('');
+    setMarcaAtivo('');
+    setModeloAtivo('');
+    setSerieAtivo('');
+    setUsoAtivo('');
+    setValorAtivo('');
+    setTamanhoAtivo('');
+    setCapacidadeAtivo('');
+    setFabricacaoAtivo('');
+    setValidadeAtivo('');
+    setNfeAtivo('');
+    setUrlAtivo('');
+    setComentarioAtivo('');
+    setTituloAtivo('');
+    setNumAtivo('');
+    setImagemSelecionada(null);
   };
 
   return (
@@ -325,7 +349,7 @@ function CadastroAtivos({ setTela }) {
 
                   <input
                     class="input is-small"
-                    type="text"
+                    type="date"
                     placeholder='Insira a Data de Fabricação:'
                     value={ati_data_fabricacao}
                     onChange={(event) => setFabricacaoAtivo(event.target.value)}
@@ -336,7 +360,7 @@ function CadastroAtivos({ setTela }) {
 
                   <input
                     class="input is-small"
-                    type="text"
+                    type="date"
                     placeholder='Insira a Data de Validade:'
                     value={ati_data_validade}
                     onChange={(event) => setValidadeAtivo(event.target.value)}
