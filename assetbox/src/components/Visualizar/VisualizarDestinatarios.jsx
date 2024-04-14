@@ -36,8 +36,8 @@ function VisualizarDestinatarios({ setTela }) {
     fetchData();
   }, []);
   
-  function exibirPopUp() {
-    var popup = document.getElementById('popup');
+  function exibirPopUpDelecao() {
+    var popup = document.getElementById('popupdelecao');
     if (popup.style.display === 'none') {
         popup.style.display = 'block';
     } else {
@@ -45,20 +45,25 @@ function VisualizarDestinatarios({ setTela }) {
     }
 }
 
+function exibirPopUpConfirmacao() {
+  var popup = document.getElementById('popupconfirmacao');
+  if (popup.style.display === 'none') {
+      popup.style.display = 'block';
+  } else {
+      popup.style.display = 'none';
+  }
+}
+
 
   function handleDelete() {
-    const confirmDelete = window.confirm('Você realmente quer deletar este destinatário?');
-    if (confirmDelete) {
     axios.delete(`http://localhost:8000/deletar/destinatario/${id}`).then((resposta) => {
       console.log(resposta.data);
-      console.log("Destinatário deletado com sucesso!");
-      window.location.reload();
+      exibirPopUpDelecao();
+      exibirPopUpConfirmacao();
     })
     .catch((error) => {
-      console.error("Erro ao deletar ativo:", error);
+      console.error("Erro ao deletar destinatário:", error);
     });
-    setTela('Destinatarios');
-  };
 }
 
   return (
@@ -188,7 +193,7 @@ function VisualizarDestinatarios({ setTela }) {
         </div>
         <div class="field is-grouped is-grouped-centered">
           <p class="control">
-            <button class="button is-danger" type="submit" formMethod='POST' onClick={exibirPopUp}>
+            <button class="button is-danger" type="submit" formMethod='POST' onClick={exibirPopUpDelecao}>
               Deletar
             </button>
           </p>
@@ -198,16 +203,22 @@ function VisualizarDestinatarios({ setTela }) {
             </button>
           </p>
         </div>
-      <div id='popup' style={{display: 'none', height: '200px', backgroundColor: '#FFFFFF', position: 'fixed', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', textAlign: 'center', width: '50%', alignContent: 'center', justifyContent: 'center', borderRadius: '10px'}}>
+      <div id='popupdelecao' style={{display: 'none', height: '200px', backgroundColor: '#FFFFFF', position: 'fixed', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', textAlign: 'center', width: '50%', alignContent: 'center', justifyContent: 'center', borderRadius: '10px'}}>
     <p className='is-size-4-desktop is-size-6-mobile has-text-weight-bold' style={{color: '#3A7D8E'}}>Tem certeza de que quer deletar este Destinatário?</p>
     <div className='is-flex  is-justify-content-space-evenly'>  
       <button className='has-text-white is-size-4 p-3 mt-3 ' style={{backgroundColor:'#C21D1D', borderRadius: '40px'}} onClick={() => handleDelete()}>
         <p className='is-size-4-desktop is-size-6-mobile' onClick={handleDelete}>Deletar</p>
         </button>
-        <button className='has-text-white is-size-4 p-3 mt-3' style={{ backgroundColor:'#959292', borderRadius: '40px',}} onClick={exibirPopUp}>
+        <button className='has-text-white is-size-4 p-3 mt-3' style={{ backgroundColor:'#959292', borderRadius: '40px',}} onClick={exibirPopUpDelecao}>
         <p className='is-size-4-desktop is-size-6-mobile'>Cancelar</p>
         </button>
     </div>
+    </div>
+    <div id='popupconfirmacao' style={{display: 'none', height: '200px', backgroundColor: '#367E90', position: 'fixed', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', textAlign: 'center', width: '40%', alignContent: 'center', justifyContent: 'center', borderRadius: '10px'}}>
+    <p className='has-text-white is-size-3-desktop is-size-4-mobile'>Destinatário deletado com sucesso!</p>
+    <button className='has-text-white is-size-4 p-3 mt-3' style={{marginLeft: '60%', backgroundColor:'#459EB5', borderRadius: '100%'}}>
+      <p className='is-size-4' onClick={() => setTela('Destinatarios')}>OK</p>
+      </button>
     </div>
       </div>
     </body>

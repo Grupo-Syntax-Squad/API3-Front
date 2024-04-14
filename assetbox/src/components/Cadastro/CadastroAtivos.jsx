@@ -471,6 +471,7 @@ function CadastroAtivos({ setTela }) {
       <p className='is-size-4' onClick={() => setTela('Ativos')}>OK</p>
       </button>
     </div>
+    
         </div>
       </div>
     </body>
