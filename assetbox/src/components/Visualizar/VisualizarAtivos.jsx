@@ -32,10 +32,10 @@ class ViewDestinatario {
 function VisualizarAtivos({ setTela }) {
   const [dadosAtivo, setDadosAtivo] = useState({})
   const [imageUrl, setImageUrl] = useState('');
+  const id = localStorage.getItem('id');
 
   useEffect(() => {
     const fetchData = async () => {
-      const id = localStorage.getItem('id')
       console.log(id);
       try {
         const response = await axios.get(`http://localhost:8000/ativo/${Number(id)}`);
@@ -57,7 +57,7 @@ function VisualizarAtivos({ setTela }) {
         .then((resposta) => {
           console.log(resposta.data);
           console.log("Ativo deletado com sucesso!");
-          window.location.reload(); // Recarrega a página
+          window.location.reload(); 
         })
         .catch((error) => {
           console.error("Erro ao deletar ativo:", error);
@@ -226,7 +226,6 @@ function VisualizarAtivos({ setTela }) {
                   />
                 </div>
 
-
                 <div className="field column" >
                   <label className="form-label">Capacidade</label>
 
@@ -266,7 +265,7 @@ function VisualizarAtivos({ setTela }) {
 
                   <input
                     class="input is-small"
-                    type="text"
+                    type="date"
                     value={dadosAtivo.ati_data_fabricacao}
                     disabled
                   />
@@ -285,10 +284,6 @@ function VisualizarAtivos({ setTela }) {
 
             </div>
           </div>
-
-
-
-
 
           <div className="columns m-3">
 
@@ -341,11 +336,9 @@ function VisualizarAtivos({ setTela }) {
 
           <div class="field is-grouped is-grouped-centered">
             <p class="control">
-            {dadosAtivo.ati_id && (
-             <button class="button is-danger" type="submit" onClick={() => handleDelete(dadosAtivo.ati_id)}>
+              <button class="button is-danger" type="submit" onClick={handleDelete}>
                 Deletar
               </button>
-            )}
 
             </p>
             <p class="control">
@@ -353,22 +346,10 @@ function VisualizarAtivos({ setTela }) {
                 Voltar
               </button>
             </p>
-
           </div>
-
-
-
-
-
         </div>
-
       </div>
     </body>
-
-
-
-
-
   );
 }
 

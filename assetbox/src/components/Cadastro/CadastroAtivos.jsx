@@ -11,7 +11,7 @@ function CadastroAtivos({ setTela }) {
   const [ati_tipo_id, setTipoAtivo] = useState({});
   const [ati_status, setStatusAtivo] = useState('');
   const [ati_complemento, setComplementoAtivo] = useState('');
-  const [ati_destinatario_id, setDestinatarioAtivo] = useState('');
+  const [ati_destinatario_id, setDestinatarioAtivo] = useState({});
   const [ati_marca, setMarcaAtivo] = useState('');
   const [ati_modelo, setModeloAtivo] = useState('');
   const [ati_numero_serie, setSerieAtivo] = useState('');
@@ -30,6 +30,7 @@ function CadastroAtivos({ setTela }) {
 
   const [localizacoes, setLocalizacoes] = useState([]);
   const [tipos, setTipos] = useState([]);
+  const [destinatarios, setDestinatarios] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -38,6 +39,9 @@ function CadastroAtivos({ setTela }) {
 
       response = await axios.get('http://localhost:8000/tipos');
       setTipos(response.data);
+
+      response = await axios.get('http://localhost:8000/destinatarios');
+      setDestinatarios(response.data);
     };
 
     fetchData();
@@ -76,15 +80,39 @@ function CadastroAtivos({ setTela }) {
       ati_observacao,
       ati_titulo,
       ati_numero,
+      ati_destinatario_id,
+      ati_complemento,
       ati_imagem_id: imagem.ima_id
     };
-
+    console.log(ativoData);
+    
     try {
       const response = await axios.post('http://localhost:8000/cadastrar/ativo', ativoData);
       console.log(response.data);
     } catch (error) {
       console.error(error);
     };
+
+    // Limpar campos
+    setLocalizacaoAtivo({});
+    setTipoAtivo({});
+    setDestinatarioAtivo({});
+    setStatusAtivo('');
+    setMarcaAtivo('');
+    setModeloAtivo('');
+    setSerieAtivo('');
+    setUsoAtivo('');
+    setValorAtivo('');
+    setTamanhoAtivo('');
+    setCapacidadeAtivo('');
+    setFabricacaoAtivo('');
+    setValidadeAtivo('');
+    setNfeAtivo('');
+    setUrlAtivo('');
+    setComentarioAtivo('');
+    setTituloAtivo('');
+    setNumAtivo('');
+    setImagemSelecionada(null);
   };
 
   return (
@@ -159,16 +187,17 @@ function CadastroAtivos({ setTela }) {
                 </div>
 
                 <div className="field" >
-                  <label className="form-label">Destinatário:</label>
-                  <input
-                    class="input is-small"
-                    type="text"
-                    title="Digite o nome do destinatário que receberá o ativo ou que está sob posse dele"
-                    placeholder='Insira o Destinatário:'
-                    value={ati_destinatario_id}
-                    onChange={(event) => setDestinatarioAtivo(event.target.value)}
-                  />
-                    {/* <img src={adicionar} className='is-flex'style={{marginLeft: '10px', width : '5%'}} title="cadastrar destinatário"/> */}
+                  <label className="label">Destinatário:</label>
+                  {destinatarios && destinatarios.length > 0 ? (
+                    <div class="select is-small">
+                      <select class="is-hovered" onChange={e => setDestinatarioAtivo(destinatarios.find(destinatario => destinatario.des_nome === e.target.value))}>
+                        <option value="" disabled selected>Selecione um destinatário</option>
+                        {destinatarios.map((destinatario) => <option key={destinatario.des_nome} value={destinatario.des_nome}>{destinatario.des_nome}</option>)}
+                      </select>
+                    </div>
+                  ) : (
+                    <p>Nenhum destinatário disponível</p>
+                  )}
                 </div>
 
                 <div className="field" >
@@ -347,7 +376,6 @@ function CadastroAtivos({ setTela }) {
                   <input
                     class="input is-small"
                     type="date"
-                    title="Selecione a data de validade do ativo"
                     placeholder='Insira a Data de Validade:'
                     value={ati_data_validade}
                     onChange={(event) => setValidadeAtivo(event.target.value)}
