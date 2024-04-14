@@ -145,7 +145,7 @@ function CadastroAtivos({ setTela }) {
               <div className='top-one'>
 
                 <div class="field">
-                  <label class="label">Número:</label>
+                  <label class="label has-text-black">Número:</label>
                   <input
                     class="input is-small"
                     type="text"
@@ -156,7 +156,7 @@ function CadastroAtivos({ setTela }) {
                   />
                 </div>
                 <div class="field">
-                  <label class="label">Tipo:</label>
+                  <label class="label has-text-black">Tipo:</label>
                   <div class="select is-small">
                     {tipos && tipos.length > 0 ? (
                       <select class="is-hovered" onChange={e => setTipoAtivo(tipos.find(tipo => tipo.tip_titulo === e.target.value))}>
@@ -171,7 +171,7 @@ function CadastroAtivos({ setTela }) {
                 </div>
 
                 <div class="field">
-                  <label class="label">Localização:</label>
+                  <label class="label has-text-black">Localização:</label>
                   <div class="select is-small">
                     {localizacoes && localizacoes.length > 0 ? (
                       <select class="is-hovered" onChange={e => setLocalizacaoAtivo(localizacoes.find(localizacao => localizacao.loc_titulo === e.target.value))}>
@@ -185,7 +185,7 @@ function CadastroAtivos({ setTela }) {
                   <img src={adicionar} style={{marginLeft: '10px', width : '15%'}} title="Cadastrar nova localização"/>
                 </div>
                 <div class="field">
-                  <label class="label">Status:</label>
+                  <label class="label has-text-black">Status:</label>
                   <div class="select is-small">
                     <select class="is-hovered" onChange={e => setStatusAtivo(e.target.value)}>
                       <option value="0" selected>Em operação</option>
@@ -198,7 +198,7 @@ function CadastroAtivos({ setTela }) {
                 </div>
 
                 <div className="field" >
-                  <label className="label">Destinatário:</label>
+                  <label className="label has-text-black">Destinatário:</label>
                   {destinatarios && destinatarios.length > 0 ? (
                     <div class="select is-small">
                       <select class="is-hovered" onChange={e => setDestinatarioAtivo(destinatarios.find(destinatario => destinatario.des_nome === e.target.value))}>
@@ -212,7 +212,7 @@ function CadastroAtivos({ setTela }) {
                 </div>
 
                 <div className="field" >
-                  <label className="form-label">Titulo:</label>
+                  <label className="form-label has-text-black ">Titulo:</label>
 
                   <input
                     class="input is-small"
@@ -224,7 +224,7 @@ function CadastroAtivos({ setTela }) {
                   />
 
                   <div className="field" >
-                    <label className="form-label">Complemento:</label>
+                    <label className="form-label has-text-black">Complemento:</label>
 
                     <input
                       class="input is-small"
@@ -253,7 +253,7 @@ function CadastroAtivos({ setTela }) {
             <div class="column is-half">
               <form onSubmit={handleSubmit}>
                 <div className="field" >
-                  <label className="form-label">Marca:</label>
+                  <label className="form-label has-text-black">Marca:</label>
 
                   <input
                     class="input is-small"
@@ -265,7 +265,7 @@ function CadastroAtivos({ setTela }) {
                   />
                 </div>
                 <div className="field" >
-                  <label className="form-label">Modelo:</label>
+                  <label className="form-label has-text-black">Modelo:</label>
 
                   <input
                     class="input is-small"
@@ -277,7 +277,7 @@ function CadastroAtivos({ setTela }) {
                   />
                 </div>
                 <div className="field" >
-                  <label className="form-label">Nº de Série:</label>
+                  <label className="form-label has-text-black">Nº de Série:</label>
 
                   <input
                     class="input is-small"
@@ -290,7 +290,7 @@ function CadastroAtivos({ setTela }) {
                 </div>
 
                 <div className="field" >
-                  <label className="form-label">Valor de Aquisição:</label>
+                  <label className="form-label has-text-black">Valor de Aquisição:</label>
 
                   <input
                     class="input is-small"
@@ -305,7 +305,7 @@ function CadastroAtivos({ setTela }) {
 
 
                 <div className="field" >
-                  <label className="form-label">Tamanho:</label>
+                  <label className="form-label has-text-black">Tamanho:</label>
 
                   <input
                     class="input is-small"
@@ -323,7 +323,7 @@ function CadastroAtivos({ setTela }) {
               <form onSubmit={handleSubmit}>
 
                 <div className="field" >
-                  <label className="form-label">Capacidade:</label>
+                  <label className="form-label has-text-black">Capacidade:</label>
 
                   <input
                     class="input is-small"
@@ -335,7 +335,7 @@ function CadastroAtivos({ setTela }) {
                   />
                 </div>
                 {/* <div className="field" >
-          <label className="form-label">Quantidade:</label>
+          <label className="form-label has-text-black">Quantidade:</label>
           
           <input
             class="input is-small"
@@ -346,7 +346,7 @@ function CadastroAtivos({ setTela }) {
           />
         </div> */}
                 <div className="field" >
-                  <label className="form-label">Condições de Uso:</label>
+                  <label className="form-label has-text-black">Condições de Uso:</label>
 
                   <input
                     class="input is-small"
@@ -361,7 +361,7 @@ function CadastroAtivos({ setTela }) {
 
 
                 <div class="field">
-                  <label class="label">Fornecedor:</label>
+                  <label class="label has-text-black">Fornecedor:</label>
                   <div class="select is-small">
                     <select class="is-hovered">
                       <option></option>
@@ -370,7 +370,7 @@ function CadastroAtivos({ setTela }) {
                   </div>
                 </div>
                 <div className="field" >
-                  <label className="form-label">Data de Fabricação:</label>
+                  <label className="form-label has-text-black">Data de Fabricação:</label>
 
                   <input
                     class="input is-small"
@@ -382,7 +382,7 @@ function CadastroAtivos({ setTela }) {
                   />
                 </div>
                 <div className="field" >
-                  <label className="form-label">Data de Validade:</label>
+                  <label className="form-label has-text-black">Data de Validade:</label>
 
                   <input
                     class="input is-small"
@@ -413,7 +413,7 @@ function CadastroAtivos({ setTela }) {
           <div class='column is-half'>
             <form className='documentos-ativo' onSubmit={handleSubmit}>
               <div className="field" >
-                <label className="form-label">Chave NFe:</label>
+                <label className="form-label has-text-black">Chave NFe:</label>
 
                 <input
                   class="input is-small"
@@ -426,7 +426,7 @@ function CadastroAtivos({ setTela }) {
               </div>
 
               <div className="field" >
-                <label className="form-label">Url do Ativo:</label>
+                <label className="form-label has-text-black">Url do Ativo:</label>
 
                 <input
                   class="input is-small"
@@ -438,7 +438,7 @@ function CadastroAtivos({ setTela }) {
                 />
               </div>
               <div className="field" >
-                <label className="form-label">Observações:</label>
+                <label className="form-label has-text-black">Observações:</label>
 
                 <input
                   class="input is-small"

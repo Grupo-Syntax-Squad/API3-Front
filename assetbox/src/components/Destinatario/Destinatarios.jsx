@@ -62,13 +62,13 @@ const Destinatarios = ({ setTela }) => {
                                 </div>
                             </div>
                         ) : (
-                            <div className='asset is-flex is-justify-content-center'>
+                            <div className='asset flex-wrap is-justify-content-center'>
 
                                 {destinatarios.map((destinatario) => {
                                     return (
-                                        <div className='SemHover column is-one-third mr-2 dado-ativo is-flex is-justify-content-center is-align-items-center has-text-weight-medium'>
+                                        <div className='SemHover p-2 is-one-third mr-2 dado-ativo is-flex is-align-items-center has-text-weight-medium'>
                                             <div onClick={() => handleClick(destinatario.des_id)} className='des' class=' des is-flex is-justify-content-center'>
-                                                <a class='SemHover column is-one-third mr-2 dado-ativo is-flex is-justify-content-center is-align-items-center has-text-weight-medium' href='##'>
+                                                <a class='SemHover is-one-third mr-2 dado-ativo is-flex is-justify-content-center is-align-items-center has-text-weight-medium' href='##'>
                                                     <p className='has-text-black'>{destinatario.des_nome}</p>
                                                 </a>
                                             </div>
