@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import "./visualizar.css";
 import imgadd from "./imgadd.png"
 import docadd from "./docadd.png"
@@ -19,26 +19,18 @@ class ViewDestinatario {
   }
 }
 
-function VisualizarDestinatarios ({setTela}) {
-  const [dadosDestinatario, setDadosDestinatario] = useState({
-    nome: '',
-    telefone: '',
-    email: '',
-    senha: '',
-    rua: '',
-    numero: '',
-    complemento: '',
-    bairro: '',
-    cidade: '',
-    uf: '',
-  })
+function VisualizarDestinatarios({ setTela }) {
+  const [dadosDestinatario, setDadosDestinatario] = useState({})
+  const [dadosEndereco, setDadosEndereco] = useState({})
+  const id = localStorage.getItem('id');
 
-  useEffect((id) => {
+  useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://localhost8080/destinatario/${id}`);
-        const dados = response.data; 
+        const response = await axios.get(`http://localhost:8000/destinatario/${id}`);
+        const dados = response.data;
         setDadosDestinatario(dados);
+        setDadosEndereco(dados.des_endereco_id);
       } catch (error) {
         console.error(`Erro ao buscar dados do destinatário ${id}:`, error);
       }
@@ -47,167 +39,152 @@ function VisualizarDestinatarios ({setTela}) {
   }, []);
 
 
-  function handleDelete(id) {
-    axios.delete(`http://localhost:8080/destinatarios/${id}`).then((resposta) => {
-        console.log(resposta.data);
-    }); 
-};
+  function handleDelete() {
+    axios.delete(`http://localhost:8000/deletar/destinatario/${id}`).then((resposta) => {
+      console.log(resposta.data);
+    });
+    setTela('Destinatarios');
+  };
 
   return (
-  <body>
-    <div class='page-full'>
-      <div class='field'>
-      <h2>Destinatário: </h2>
-      </div>
-      <h1 className='has-text-weight-light is-size-4'>Dados</h1>
+    <body>
+      <div class='page-full'>
+        <div class='field'>
+          <h2>Destinatário: </h2>
+        </div>
+        <h1 className='has-text-weight-light is-size-4'>Dados</h1>
 
-      <form>
-          
+        <form>
+
           <div class="field column ">
             <label class="form-label is-size-5">Nome</label>
             <input
               class="input is-small"
               type="text"
               placeholder='Digite um Número:'
-              value={dadosDestinatario.nome}
-              
+              value={dadosDestinatario.des_nome}
+              disabled
             />
           </div>
           <div class="field column">
-          <label class="form-label is-size-5">Telefone</label>
+            <label class="form-label is-size-5">Telefone</label>
             <input
               class="input is-small"
               type="text"
               placeholder='Digite um Número:'
-              value={dadosDestinatario.telefone}
-              
+              value={dadosDestinatario.des_telefone}
+              disabled
             />
           </div>
           <div class="field column">
-          <label class="form-label is-size-5">E-mail</label>
+            <label class="form-label is-size-5">E-mail</label>
             <input
               class="input is-small"
               type="text"
               placeholder='Digite um Número:'
-              value={dadosDestinatario.email}
-              
+              value={dadosDestinatario.des_email}
+              disabled
             />
           </div>
           <div class="field column">
-          <label class="form-label is-size-5">Senha</label>
+            <label class="form-label is-size-5">Senha</label>
             <input
               class="input is-small"
               type="text"
               placeholder='Digite um Número:'
-              value={dadosDestinatario.senha}
-              
+              value={dadosDestinatario.des_senha}
+              disabled
             />
           </div>
-            <h1 className='has-text-weight-light is-size-4'>Endereço</h1>
-            
-            <div class="field column">
-          <label class="form-label is-size-5">Rua</label>
+          <h1 className='has-text-weight-light is-size-4'>Endereço</h1>
+
+          <div class="field column">
+            <label class="form-label is-size-5">Rua</label>
             <input
               class="input is-small"
               type="text"
               placeholder='Digite um Número:'
-              value={dadosDestinatario.rua}
-              
+              value={dadosEndereco.end_rua}
+              disabled
             />
           </div>
           <div class="field column">
-          <label class="form-label is-size-5">Número</label>
+            <label class="form-label is-size-5">Número</label>
             <input
               class="input is-small"
               type="text"
               placeholder='Digite um Número:'
-              value={dadosDestinatario.numero}
-              
+              value={dadosEndereco.end_numero}
+              disabled
             />
           </div>
           <div class="field column">
-          <label class="form-label is-size-5">Complemento</label>
+            <label class="form-label is-size-5">Complemento</label>
             <input
               class="input is-small"
               type="text"
               placeholder='Digite um Número:'
-              value={dadosDestinatario.complemento}
-              
+              value={dadosEndereco.end_complemento}
+              disabled
             />
           </div>
           <div class="field column">
-          <label class="form-label is-size-5">Bairro</label>
+            <label class="form-label is-size-5">Bairro</label>
             <input
               class="input is-small"
               type="text"
               placeholder='Digite um Número:'
-              value={dadosDestinatario.bairro}
-              
+              value={dadosEndereco.end_bairro}
+              disabled
             />
           </div>
           <div class="field column">
             <label class="form-label is-size-5">Cidade</label>
-              <input
-                class="input is-small"
-                type="text"
-                placeholder='Digite um Número:'
-                value={dadosDestinatario.cidade}
-                
-              />
+            <input
+              class="input is-small"
+              type="text"
+              placeholder='Digite um Número:'
+              value={dadosEndereco.end_cidade}
+              disabled
+            />
           </div>
           <div class="field column">
             <label class="form-label is-size-5">UF</label>
-              <input
-                class="input is-small"
-                type="text"
-                placeholder='Digite um Número:'
-                value={dadosDestinatario.uf}
-                
-              />
+            <input
+              class="input is-small"
+              type="text"
+              placeholder='Digite um Número:'
+              value={dadosEndereco.end_uf}
+              disabled
+            />
           </div>
-            </form>
-            <div class="field is-grouped is-grouped-centered">
-    </div>
-    <div class="field is-grouped is-grouped-centered">
-      <p class="control">
-        <button class="button is-primary" type="submit" formMethod='POST'>
-          Cadastrar
-        </button>
-      </p>
-      <p class="control">
-        <button class="button is-light" onClick={() => setTela('Destinatarios')}>
-          Cancelar
-          </button>
-      </p>
-
-    </div>
-   
-
-
-
-            <div class="field is-grouped is-grouped-centered">
-      <p class="control">
-        <button class="button is-danger" type="submit" formMethod='POST' onClick={(id) => handleDelete(`http://localhost8080/ativo/deletar/${id}`)}>
-          Deletar
-        </button>
-      </p>
-      <p class="control">
-        <button class="button is-light" onClick={() => setTela('Destinatários')}>
-          Voltar
-          </button>
-      </p>
-    
-    </div>
-  
-  </div>
-
-
-  </body>
-  
-
-  
-
-
+          <div class="field column">
+            <label class="form-label is-size-5">CEP</label>
+            <input
+              class="input is-small"
+              type="text"
+              placeholder='Digite um Número:'
+              value={dadosEndereco.end_cep}
+              disabled
+            />
+          </div>
+        </form>
+        <div class="field is-grouped is-grouped-centered">
+        </div>
+        <div class="field is-grouped is-grouped-centered">
+          <p class="control">
+            <button class="button is-danger" type="submit" formMethod='POST' onClick={handleDelete}>
+              Deletar
+            </button>
+          </p>
+          <p class="control">
+            <button class="button is-light" onClick={() => setTela('Destinatarios')}>
+              Voltar
+            </button>
+          </p>
+        </div>
+      </div>
+    </body>
   );
 }
 
