@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import "./visualizar.css";
-import imgadd from "./imgadd.png"
-import docadd from "./docadd.png"
 import axios from 'axios';
 
 class ViewDestinatario {
@@ -40,11 +38,19 @@ function VisualizarDestinatarios({ setTela }) {
 
 
   function handleDelete() {
+    const confirmDelete = window.confirm('Você realmente quer deletar este destinatário?');
+    if (confirmDelete) {
     axios.delete(`http://localhost:8000/deletar/destinatario/${id}`).then((resposta) => {
       console.log(resposta.data);
+      console.log("Destinatário deletado com sucesso!");
+      window.location.reload();
+    })
+    .catch((error) => {
+      console.error("Erro ao deletar ativo:", error);
     });
     setTela('Destinatarios');
   };
+}
 
   return (
     <body>
