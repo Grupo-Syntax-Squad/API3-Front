@@ -35,6 +35,15 @@ function VisualizarDestinatarios({ setTela }) {
     };
     fetchData();
   }, []);
+  
+  function exibirPopUp() {
+    var popup = document.getElementById('popup');
+    if (popup.style.display === 'none') {
+        popup.style.display = 'block';
+    } else {
+        popup.style.display = 'none';
+    }
+}
 
 
   function handleDelete() {
@@ -179,7 +188,7 @@ function VisualizarDestinatarios({ setTela }) {
         </div>
         <div class="field is-grouped is-grouped-centered">
           <p class="control">
-            <button class="button is-danger" type="submit" formMethod='POST' onClick={handleDelete}>
+            <button class="button is-danger" type="submit" formMethod='POST' onClick={exibirPopUp}>
               Deletar
             </button>
           </p>
@@ -189,6 +198,17 @@ function VisualizarDestinatarios({ setTela }) {
             </button>
           </p>
         </div>
+      <div id='popup' style={{display: 'none', height: '200px', backgroundColor: '#FFFFFF', position: 'fixed', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', textAlign: 'center', width: '50%', alignContent: 'center', justifyContent: 'center', borderRadius: '10px'}}>
+    <p className='is-size-4-desktop is-size-6-mobile has-text-weight-bold' style={{color: '#3A7D8E'}}>Tem certeza de que quer deletar este Destinatário?</p>
+    <div className='is-flex  is-justify-content-space-evenly'>  
+      <button className='has-text-white is-size-4 p-3 mt-3 ' style={{backgroundColor:'#C21D1D', borderRadius: '40px'}} onClick={() => handleDelete()}>
+        <p className='is-size-4-desktop is-size-6-mobile' onClick={handleDelete}>Deletar</p>
+        </button>
+        <button className='has-text-white is-size-4 p-3 mt-3' style={{ backgroundColor:'#959292', borderRadius: '40px',}} onClick={exibirPopUp}>
+        <p className='is-size-4-desktop is-size-6-mobile'>Cancelar</p>
+        </button>
+    </div>
+    </div>
       </div>
     </body>
   );

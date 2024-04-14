@@ -18,6 +18,15 @@ function CadastroDestinatarios({ setTela }) {
   const [end_uf, setUfDestinatario] = useState('');
   const [end_cep, setCEPDestinatario] = useState('');
 
+  function exibirPopUp() {
+    var popup = document.getElementById('popup');
+    if (popup.style.display === 'none') {
+        popup.style.display = 'block';
+    } else {
+        popup.style.display = 'none';
+    }
+}
+
 
   // Função para lidar com o envio do formulário
   const handleSubmit = async (event) => {
@@ -66,6 +75,7 @@ function CadastroDestinatarios({ setTela }) {
     setCidadeDestinatario('');
     setUfDestinatario('');
     setCEPDestinatario('');
+    exibirPopUp()
   };
 
   return (
@@ -214,7 +224,12 @@ function CadastroDestinatarios({ setTela }) {
               Cancelar
             </button>
           </p>
-
+<div id='popup' style={{display: 'none', height: '200px', backgroundColor: '#367E90', position: 'fixed', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', textAlign: 'center', width: '30%', alignContent: 'center', justifyContent: 'center', borderRadius: '10px'}}>
+    <p className='has-text-white is-size-3-desktop is-size-4-mobile'>Destinatário Cadastrado com sucesso!</p>
+    <button className='has-text-white is-size-4 p-3 mt-3' style={{marginLeft: '60%', backgroundColor:'#459EB5', borderRadius: '100%'}} onClick={() => exibirPopUp()}>
+      <p className='is-size-4' onClick={() => setTela('Destinatarios')}>OK</p>
+      </button>
+    </div>
         </div>
 
       </div>
