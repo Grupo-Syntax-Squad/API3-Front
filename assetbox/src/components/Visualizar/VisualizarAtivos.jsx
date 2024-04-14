@@ -52,9 +52,15 @@ function VisualizarAtivos({ setTela }) {
 
 
   function handleDelete(id) {
-    axios.delete(`http://localhost:8080/ativos/${id}`).then((resposta) => {
-      console.log(resposta.data);
-    });
+    axios.delete(`http://localhost:8000/ativo/${id}`)
+      .then((resposta) => {
+        console.log(resposta.data);
+        console.log("Ativo deletado com sucesso!");
+        window.location.reload(); // Recarrega a página
+      })
+      .catch((error) => {
+        console.error("Erro ao deletar ativo:", error);
+      });
   };
 
   console.log(dadosAtivo);
@@ -336,9 +342,12 @@ function VisualizarAtivos({ setTela }) {
 
           <div class="field is-grouped is-grouped-centered">
             <p class="control">
-              <button class="button is-danger" type="submit" formMethod='POST' onClick={(id) => handleDelete(`http://localhost8080/ativo/deletar/${id}`)}>
+            {dadosAtivo.ati_id && (
+             <button class="button is-danger" type="submit" onClick={() => handleDelete(dadosAtivo.ati_id)}>
                 Deletar
               </button>
+            )}
+
             </p>
             <p class="control">
               <button class="button is-light" onClick={() => setTela('Ativos')}>
