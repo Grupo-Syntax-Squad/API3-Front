@@ -7,8 +7,8 @@ import axios from 'axios';
 
 function CadastroAtivos({ setTela }) {
   // Definindo estados para armazenar os dados do ativo
-  const [ati_localizacao_id, setLocalizacaoAtivo] = useState({});
-  const [ati_tipo_id, setTipoAtivo] = useState({});
+  const [ati_localizacao, setLocalizacaoAtivo] = useState();
+  const [ati_tipo, setTipoAtivo] = useState('');
   const [ati_status, setStatusAtivo] = useState('');
   const [ati_complemento, setComplementoAtivo] = useState('');
   const [ati_destinatario_id, setDestinatarioAtivo] = useState({});
@@ -26,7 +26,7 @@ function CadastroAtivos({ setTela }) {
   const [ati_observacao, setComentarioAtivo] = useState('');
   const [ati_titulo, setTituloAtivo] = useState('');
   const [ati_numero, setNumAtivo] = useState('');
-  const [imagemSelecionada, setImagemSelecionada] = useState(null);
+  // const [imagemSelecionada, setImagemSelecionada] = useState(null);
 
   const [localizacoes, setLocalizacoes] = useState([]);
   const [tipos, setTipos] = useState([]);
@@ -56,30 +56,30 @@ function CadastroAtivos({ setTela }) {
     }
 }
 
-  const handleImageChange = (event) => {
-    setImagemSelecionada(event.target.files[0]);
-  };
+  // const handleImageChange = (event) => {
+  //   setImagemSelecionada(event.target.files[0]);
+  // };
 
   // Função para lidar com o envio do formulário
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     //Enviando imagem
-    const formData = new FormData();
-    formData.append('file', imagemSelecionada);
-    const response = await axios.post('http://localhost:8000/imagem', formData);
-    const imagem = response.data;
+    // const formData = new FormData();
+    // formData.append('file', imagemSelecionada);
+    // const response = await axios.post('http://localhost:8000/imagem', formData);
+    // const imagem = response.data;
 
     // Enviando ativo
     const ativoData = {
-      ati_localizacao_id,
-      ati_tipo_id,
+      ati_localizacao,
+      ati_tipo,
       ati_status,
       ati_marca,
       ati_modelo,
       ati_numero_serie,
       ati_condicoes_uso,
-      ati_preco_aquisicao: ati_preco_aquisicao,
+      ati_preco_aquisicao,
       ati_tamanho,
       ati_capacidade,
       ati_data_fabricacao,
@@ -91,20 +91,18 @@ function CadastroAtivos({ setTela }) {
       ati_numero,
       ati_destinatario_id,
       ati_complemento,
-      ati_imagem_id: imagem.ima_id
+      // ati_imagem_id: imagem.ima_id
     };
     console.log(ativoData);
     
-    try {
+
       const response = await axios.post('http://localhost:8000/cadastrar/ativo', ativoData);
       console.log(response.data);
-    } catch (error) {
-      console.error(error);
-    };
+      exibirPopUp();
 
     // Limpar campos
-    setLocalizacaoAtivo({});
-    setTipoAtivo({});
+    setLocalizacaoAtivo('');
+    setTipoAtivo('');
     setDestinatarioAtivo({});
     setStatusAtivo('');
     setMarcaAtivo('');
@@ -121,9 +119,9 @@ function CadastroAtivos({ setTela }) {
     setComentarioAtivo('');
     setTituloAtivo('');
     setNumAtivo('');
-    setImagemSelecionada(null);
+    // setImagemSelecionada(null);
+ 
 
-    exibirPopUp()
   };
 
   return (
@@ -136,7 +134,7 @@ function CadastroAtivos({ setTela }) {
 
           <div class="column is-half has-text-centered"> <img src={imgadd} alt="imgadd" style={{ width: '100px', height: '100px' }} />
             <div>
-              <input className='image-button' type='file' id='img' name="img" accept="image/*" onChange={handleImageChange} />
+              {/* <input className='image-button' type='file' id='img' name="img" accept="image/*" onChange={handleImageChange} /> */}
             </div>
           </div>
 
@@ -157,7 +155,15 @@ function CadastroAtivos({ setTela }) {
                 </div>
                 <div class="field">
                   <label class="label has-text-black">Tipo:</label>
-                  <div class="select is-small">
+                  <input
+                    class="input is-small"
+                    type="text"
+                    title="Digite o número de série do ativo"
+                    placeholder='Insira o Tipo:'
+                    value={ati_tipo}
+                    onChange={(event) => setTipoAtivo(event.target.value)}
+                  />
+                  {/* <div class="select is-small">
                     {tipos && tipos.length > 0 ? (
                       <select class="is-hovered" onChange={e => setTipoAtivo(tipos.find(tipo => tipo.tip_titulo === e.target.value))}>
                         <option value="" disabled selected>Selecione um tipo</option>
@@ -167,12 +173,20 @@ function CadastroAtivos({ setTela }) {
                       <p>Nenhum tipo disponível</p>
                     )}
                   </div>
-                  <img src={adicionar} style={{marginLeft: '10px', width : '15%'}} title="Cadastrar novo tipo"/>
+                  <img src={adicionar} style={{marginLeft: '10px', width : '15%'}} title="Cadastrar novo tipo"/> */}
                 </div>
 
                 <div class="field">
                   <label class="label has-text-black">Localização:</label>
-                  <div class="select is-small">
+                  <input
+                    class="input is-small"
+                    type="text"
+                    title="Digite a localização"
+                    placeholder='Insira a Localização:'
+                    value={ati_localizacao}
+                    onChange={(event) => setLocalizacaoAtivo(event.target.value)}
+                  />
+                  {/* <div class="select is-small">
                     {localizacoes && localizacoes.length > 0 ? (
                       <select class="is-hovered" onChange={e => setLocalizacaoAtivo(localizacoes.find(localizacao => localizacao.loc_titulo === e.target.value))}>
                         <option value="" disabled selected>Selecione uma localização</option>
@@ -182,19 +196,19 @@ function CadastroAtivos({ setTela }) {
                       <p>Nenhuma localização disponível</p>
                     )}
                   </div>
-                  <img src={adicionar} style={{marginLeft: '10px', width : '15%'}} title="Cadastrar nova localização"/>
+                  <img src={adicionar} style={{marginLeft: '10px', width : '15%'}} title="Cadastrar nova localização"/> */}
                 </div>
                 <div class="field">
                   <label class="label has-text-black">Status:</label>
                   <div class="select is-small">
                     <select class="is-hovered" onChange={e => setStatusAtivo(e.target.value)}>
-                      <option value="0" selected>Em operação</option>
-                      <option value="1">Ocioso</option>
-                      <option value="2">Em manutenção</option>
-                      <option value="3">Desativado</option>
+                      <option value="1" selected>Em operação</option>
+                      <option value="2">Ocioso</option>
+                      <option value="3">Em manutenção</option>
+                      <option value="4">Desativado</option>
                     </select>
                   </div>
-                  <img src={adicionar} style={{marginLeft: '10px', width : '15%'}} title="cadastrar novo status"/>
+                  {/* <img src={adicionar} style={{marginLeft: '10px', width : '15%'}} title="cadastrar novo status"/> */}
                 </div>
 
                 <div className="field" >
@@ -278,7 +292,6 @@ function CadastroAtivos({ setTela }) {
                 </div>
                 <div className="field" >
                   <label className="form-label has-text-black">Nº de Série:</label>
-
                   <input
                     class="input is-small"
                     type="text"
@@ -362,21 +375,21 @@ function CadastroAtivos({ setTela }) {
 
                 <div class="field">
                   <label class="label has-text-black">Fornecedor:</label>
-                  <div class="select is-small">
+                  {/* <div class="select is-small">
                     <select class="is-hovered">
                       <option></option>
                       <option></option>
                     </select>
-                  </div>
+                  </div> */}
                 </div>
                 <div className="field" >
-                  <label className="form-label has-text-black">Data de Fabricação:</label>
+                  <label className="form-label has-text-black">Ano de Fabricação:</label>
 
                   <input
                     class="input is-small"
                     type="text"
                     title="digite o ano de fabricação do ativo"
-                    placeholder='Insira a Data de Fabricação:'
+                    placeholder='Insira o ano de Fabricação:'
                     value={ati_data_fabricacao}
                     onChange={(event) => setFabricacaoAtivo(event.target.value)}
                   />
