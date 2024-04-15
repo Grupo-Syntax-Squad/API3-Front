@@ -29,7 +29,7 @@ const Ativos = ({ setTela }) => {
                 <div class='page-full' style={{ 
                     backgroundColor: '#459EB5', borderTopLeftRadius: '10px', borderTopRightRadius: '10px' }}>
                     <div class='field'>
-                        {/* <div class="columns filtro mx-0" style={{ borderTopLeftRadius: '10px', borderTopRightRadius: '10px' }}>
+                        <div class="columns filtro mx-0" style={{ borderTopLeftRadius: '10px', borderTopRightRadius: '10px' }}>
                             <div class="column is-one-fifth" style={{ display: 'flex', alignItems: 'center' }}>
                                 <img src={Filtro} class="mx-1" alt='filter'></img><label className='filtros mx-1 has-text-white has-text-weight-medium mr-3'>ID</label>
                                 <input class="input is-small is-flex-grow-1 is-rounded" type="text" placeholder='Digite um ID:' />
@@ -45,7 +45,7 @@ const Ativos = ({ setTela }) => {
                             <div class="column is-one-fifth">
                                 <button class="button is-primary m-2 is-rounded" style={{ backgroundColor: '#53bfdb', color: '#fff' }}>Aplicar Filtros</button>
                             </div>
-                        </div> */}
+                        </div>
                     </div>
                     <div class="columns indice m-0 is-flex is-justify-content-center border-radius-top" >
                         <div class="column is-one-third ml-2 is-flex is-justify-content-center is-align-items-center">

@@ -6,6 +6,7 @@ import VisualizarAtivos from "./Visualizar/VisualizarAtivos";
 import VisualizarDestinatarios from "./Visualizar/VisualizarDestinatarios";
 import CadastroAtivos from "./Cadastro/CadastroAtivos";
 import CadastroDestinatarios from "./Cadastro/CadastroDestinatarios";
+import Login from "./Login/Login";
 import Home from "./home";
 
 export default function Roteador(){
@@ -31,6 +32,13 @@ export default function Roteador(){
                 <>
                     <Menu seletorView={selecionarView} botoes={botoes} />
                     <Ativos setTela={setTela}/>
+                </>
+            )
+        }
+        else if (tela === 'Login') {
+            return (
+                <>
+                    <Login setTela={setTela}/>
                 </>
             )
         }
