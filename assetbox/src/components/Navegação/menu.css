@@ -1,0 +1,42 @@
+:root{
+  --verde: #459EB5;
+  --verdeEscuro: #367E90;
+  --branco: #FFFFFF;
+}
+
+.custom-background {
+    background-color: var(--verde);
+  }
+
+.navbar-burger{
+  color: var(--branco);
+}
+
+a.nav-item {
+  color: var(--branco);
+}
+
+a:hover{
+  background-color: #367E90;
+}
+
+
+.navbar-menu {
+  background-color: #459EB5 !important;
+}
+
+@media screen and (max-width: 1024px) {
+  .empresa {
+    display: none;
+  }
+  .navbar-menu {
+    flex-direction: column;
+  }
+}
+
+ul{
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  padding-left: 0px;
+}
