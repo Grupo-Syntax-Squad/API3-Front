@@ -18,3 +18,18 @@ no diretorio baixado abra o CMD ou o terminal e digite os seguintes comandos.
 
 Após isso o projeto será iniciado .\
 ele será aberto no [http://localhost:3000](http://localhost:3000) onde você poderá acessar através do seu navegador.
+=======
+### Projeto: AssetBox
+
+### Como acessar a aplicação? 💻
+* Clone o repositório
+~~~~
+https://github.com/Grupo-Syntax-Squad/API3-Front.git
+~~~~
+* Acesse a pasta 'assetbox', instale as dependências e inicie o projeto
+~~~~
+cd .\assetbox\
+npm i
+npm start
+~~~~
+Clique no link ou digite no navegador http://localhost:3000 para acessar a aplicação!
