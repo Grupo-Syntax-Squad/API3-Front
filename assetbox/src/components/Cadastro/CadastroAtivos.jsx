@@ -23,13 +23,13 @@ function CadastroAtivos({ setTela }) {
   const [ati_observacao, setComentarioAtivo] = useState('');
   const [ati_url, setUrlAtivo] = useState('');
   const [ati_numero, setNumAtivo] = useState('');
-  const [ati_manutencoes_feitas, setManutencoesFeitasAtivo] = useState([]);
+  const [ati_manutencoes_feitas, setManutencoesFeitasAtivo] = useState('');
   const [ati_ultima_manutencao, setUltimaManutencaoAtivo] = useState('');
   const [ati_ano_fabricacao, setFabricacaoAtivo] = useState('');
   const [ati_titulo, setTituloAtivo] = useState('');
   const [ati_capacidade, setCapacidadeAtivo] = useState('');
   const [ati_tamanho, setTamanhoAtivo] = useState('');
-  const [ati_data_cadastro, setCadastroAtivo] = useState(new Date());
+  const [ati_data_cadastro, setCadastroAtivo] = useState('');
   const [ati_condicoes_uso, setUsoAtivo] = useState('');
   const [ati_data_validade, setValidadeAtivo] = useState('');
   const [imagemSelecionada, setImagemSelecionada] = useState(null);
@@ -69,12 +69,15 @@ function CadastroAtivos({ setTela }) {
   // Função para lidar com o envio do formulário
   const handleSubmit = async (event) => {
     event.preventDefault();
-
-    //Enviando imagem
-    const formData = new FormData();
-    formData.append('file', imagemSelecionada);
-    let response = await axios.post('http://localhost:8000/imagens', formData);
-    const ati_imagem_id = response.data;
+    let response;
+    const ati_imagem_id = null;
+    if (imagemSelecionada != null) {
+      //Enviando imagem
+      const formData = new FormData();
+      formData.append('file', imagemSelecionada);
+      response = await axios.post('http://localhost:8000/imagens', formData);
+      ati_imagem_id = response.data;
+    }
 
     const localizacaoData = {
       loc_titulo: ati_localizacao
@@ -90,6 +93,8 @@ function CadastroAtivos({ setTela }) {
     response = await axios.post('http://localhost:8000/tipos', tipoData);
     const ati_tipo_id = response.data;
 
+    setCadastroAtivo(new Date())
+    
     // Enviando ativo
     const ativoData = {
       ati_localizacao_id,
@@ -152,7 +157,7 @@ function CadastroAtivos({ setTela }) {
           <h2>Cadastro de Ativos</h2>
         </div>
         <div class="columns m-3">
-
+          
           <div class="column is-half has-text-centered"> <img src={imgadd} alt="imgadd" style={{ width: '100px', height: '100px' }} />
             <div>
               <input className='image-button' type='file' id='img' name="img" accept="image/*" onChange={handleImageChange} />
@@ -164,7 +169,7 @@ function CadastroAtivos({ setTela }) {
               <div className='top-one'>
 
                 <div class="field">
-                  <label class="label has-text-black">Número:</label>
+                  <label class="label has-text-black">Número: <span className='has-text-danger'>*</span></label>
                   <input
                     class="input is-small"
                     type="text"
@@ -175,7 +180,7 @@ function CadastroAtivos({ setTela }) {
                   />
                 </div>
                 <div class="field">
-                  <label class="label has-text-black">Tipo:</label>
+                  <label class="label has-text-black">Tipo: <span className='has-text-danger'>*</span></label>
                   <input
                     class="input is-small"
                     type="text"
@@ -220,7 +225,7 @@ function CadastroAtivos({ setTela }) {
                   <img src={adicionar} style={{marginLeft: '10px', width : '15%'}} title="Cadastrar nova localização"/> */}
                 </div>
                 <div class="field">
-                  <label class="label has-text-black">Status:</label>
+                  <label class="label has-text-black">Status: <span className='has-text-danger'>*</span></label>
                   <div class="select is-small">
                     <select class="is-hovered" onChange={e => setStatusAtivo(e.target.value)}>
                       <option value="0" selected>Em operação</option>
@@ -247,8 +252,7 @@ function CadastroAtivos({ setTela }) {
                 </div>
 
                 <div className="field" >
-                  <label className="form-label has-text-black ">Titulo:</label>
-
+                  <label className="form-label has-text-black ">Titulo: <span className='has-text-danger'>*</span></label>
                   <input
                     class="input is-small"
                     type="text"
@@ -260,7 +264,6 @@ function CadastroAtivos({ setTela }) {
 
                   <div className="field" >
                     <label className="form-label has-text-black">Complemento:</label>
-
                     <input
                       class="input is-small"
                       type="text"
@@ -312,7 +315,7 @@ function CadastroAtivos({ setTela }) {
                   />
                 </div>
                 <div className="field" >
-                  <label className="form-label has-text-black">Nº de Série:</label>
+                  <label className="form-label has-text-black">Nº de Série: <span className='has-text-danger'>*</span></label>
                   <input
                     class="input is-small"
                     type="text"
@@ -324,8 +327,7 @@ function CadastroAtivos({ setTela }) {
                 </div>
 
                 <div className="field" >
-                  <label className="form-label has-text-black">Valor de Aquisição:</label>
-
+                  <label className="form-label has-text-black">Valor de Aquisição: <span className='has-text-danger'>*</span></label>
                   <input
                     class="input is-small"
                     type="text"
@@ -379,21 +381,6 @@ function CadastroAtivos({ setTela }) {
             onChange={(event) => setNumAtivo(event.target.value)}
           />
         </div> */}
-                <div className="field" >
-                  <label className="form-label has-text-black">Condições de Uso:</label>
-
-                  <input
-                    class="input is-small"
-                    type="text"
-                    title="Digite as condições de uso do ativo, ex: Novo, Usado, Quebrado, etc."
-                    placeholder='Condições de Uso:'
-                    value={ati_condicoes_uso}
-                    onChange={(event) => setUsoAtivo(event.target.value)}
-                  />
-                </div>
-
-
-
                 <div class="field">
                   <label class="label has-text-black">Fornecedor:</label>
                   {/* <div class="select is-small">
@@ -416,8 +403,7 @@ function CadastroAtivos({ setTela }) {
                   />
                 </div>
                 <div className="field" >
-                  <label className="form-label has-text-black">Data de Validade:</label>
-
+                  <label className="form-label has-text-black">Data de Expiração:</label>
                   <input
                     class="input is-small"
                     type="date"
@@ -438,17 +424,10 @@ function CadastroAtivos({ setTela }) {
         <h1>Documentos</h1>
         <div className="columns m-3">
 
-          <div class="column is-half has-text-centered"><img src={docadd} alt="docadd" style={{ width: '100px', height: '100px' }} />.
-            <div>
-              <input className='image-button' type='file' id='doc' name="doc" accept="doc/*" />
-            </div>
-          </div>
-
           <div class='column is-half'>
             <form className='documentos-ativo' onSubmit={handleSubmit}>
               <div className="field" >
-                <label className="form-label has-text-black">Chave NFe:</label>
-
+                <label className="form-label has-text-black">Chave NFe: <span className='has-text-danger'>*</span></label>
                 <input
                   class="input is-small"
                   type="text"
