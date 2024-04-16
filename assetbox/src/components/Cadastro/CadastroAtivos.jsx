@@ -15,18 +15,24 @@ function CadastroAtivos({ setTela }) {
   const [ati_marca, setMarcaAtivo] = useState('');
   const [ati_modelo, setModeloAtivo] = useState('');
   const [ati_numero_serie, setSerieAtivo] = useState('');
-  const [ati_condicoes_uso, setUsoAtivo] = useState('');
+  const [ati_quantidade, setQuantidadeAtivo] = useState(1);
+  const [ati_data_expiracao, setExpiracaoAtivo] = useState('');
+  const [ati_previsao_manutencao, setPrevisaoManutencaoAtivo] = useState('');
   const [ati_preco_aquisicao, setValorAtivo] = useState('');
-  const [ati_tamanho, setTamanhoAtivo] = useState('');
-  const [ati_capacidade, setCapacidadeAtivo] = useState('');
-  const [ati_data_fabricacao, setFabricacaoAtivo] = useState('');
-  const [ati_data_validade, setValidadeAtivo] = useState('');
   const [ati_chave_nf_e, setNfeAtivo] = useState('');
-  const [ati_url, setUrlAtivo] = useState('');
   const [ati_observacao, setComentarioAtivo] = useState('');
-  const [ati_titulo, setTituloAtivo] = useState('');
+  const [ati_url, setUrlAtivo] = useState('');
   const [ati_numero, setNumAtivo] = useState('');
-  // const [imagemSelecionada, setImagemSelecionada] = useState(null);
+  const [ati_manutencoes_feitas, setManutencoesFeitasAtivo] = useState([]);
+  const [ati_ultima_manutencao, setUltimaManutencaoAtivo] = useState('');
+  const [ati_ano_fabricacao, setFabricacaoAtivo] = useState('');
+  const [ati_titulo, setTituloAtivo] = useState('');
+  const [ati_capacidade, setCapacidadeAtivo] = useState('');
+  const [ati_tamanho, setTamanhoAtivo] = useState('');
+  const [ati_data_cadastro, setCadastroAtivo] = useState(new Date());
+  const [ati_condicoes_uso, setUsoAtivo] = useState('');
+  const [ati_data_validade, setValidadeAtivo] = useState('');
+  const [imagemSelecionada, setImagemSelecionada] = useState(null);
 
   const [localizacoes, setLocalizacoes] = useState([]);
   const [tipos, setTipos] = useState([]);
@@ -50,55 +56,72 @@ function CadastroAtivos({ setTela }) {
   function exibirPopUp() {
     var popup = document.getElementById('popup');
     if (popup.style.display === 'none') {
-        popup.style.display = 'block';
+      popup.style.display = 'block';
     } else {
-        popup.style.display = 'none';
+      popup.style.display = 'none';
     }
-}
+  }
 
-  // const handleImageChange = (event) => {
-  //   setImagemSelecionada(event.target.files[0]);
-  // };
+  const handleImageChange = (event) => {
+    setImagemSelecionada(event.target.files[0]);
+  };
 
   // Função para lidar com o envio do formulário
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     //Enviando imagem
-    // const formData = new FormData();
-    // formData.append('file', imagemSelecionada);
-    // const response = await axios.post('http://localhost:8000/imagem', formData);
-    // const imagem = response.data;
+    const formData = new FormData();
+    formData.append('file', imagemSelecionada);
+    let response = await axios.post('http://localhost:8000/imagens', formData);
+    const ati_imagem_id = response.data;
+
+    const localizacaoData = {
+      loc_titulo: ati_localizacao
+    };
+
+    response = await axios.post('http://localhost:8000/localizacoes', localizacaoData);
+    const ati_localizacao_id = response.data;
+
+    const tipoData = {
+      tip_titulo: ati_tipo
+    };
+
+    response = await axios.post('http://localhost:8000/tipos', tipoData);
+    const ati_tipo_id = response.data;
 
     // Enviando ativo
     const ativoData = {
-      ati_localizacao,
-      ati_tipo,
+      ati_localizacao_id,
+      ati_tipo_id,
       ati_status,
+      ati_complemento,
+      ati_destinatario_id,
       ati_marca,
       ati_modelo,
       ati_numero_serie,
-      ati_condicoes_uso,
+      ati_quantidade,
+      ati_data_expiracao,
+      ati_previsao_manutencao,
       ati_preco_aquisicao,
-      ati_tamanho,
-      ati_capacidade,
-      ati_data_fabricacao,
-      ati_data_validade,
       ati_chave_nf_e,
       ati_url,
-      ati_observacao,
-      ati_titulo,
       ati_numero,
-      ati_destinatario_id,
-      ati_complemento,
-      // ati_imagem_id: imagem.ima_id
+      ati_manutencoes_feitas,
+      ati_ultima_manutencao,
+      ati_ano_fabricacao,
+      ati_titulo,
+      ati_capacidade,
+      ati_tamanho,
+      ati_data_cadastro,
+      ati_imagem_id,
+      ati_condicoes_uso
     };
     console.log(ativoData);
-    
 
-      const response = await axios.post('http://localhost:8000/cadastrar/ativo', ativoData);
-      console.log(response.data);
-      exibirPopUp();
+    response = await axios.post('http://localhost:8000/ativos', ativoData);
+    console.log(response.data);
+    exibirPopUp();
 
     // Limpar campos
     setLocalizacaoAtivo('');
@@ -119,9 +142,7 @@ function CadastroAtivos({ setTela }) {
     setComentarioAtivo('');
     setTituloAtivo('');
     setNumAtivo('');
-    // setImagemSelecionada(null);
- 
-
+    setImagemSelecionada(null);
   };
 
   return (
@@ -134,7 +155,7 @@ function CadastroAtivos({ setTela }) {
 
           <div class="column is-half has-text-centered"> <img src={imgadd} alt="imgadd" style={{ width: '100px', height: '100px' }} />
             <div>
-              {/* <input className='image-button' type='file' id='img' name="img" accept="image/*" onChange={handleImageChange} /> */}
+              <input className='image-button' type='file' id='img' name="img" accept="image/*" onChange={handleImageChange} />
             </div>
           </div>
 
@@ -202,10 +223,10 @@ function CadastroAtivos({ setTela }) {
                   <label class="label has-text-black">Status:</label>
                   <div class="select is-small">
                     <select class="is-hovered" onChange={e => setStatusAtivo(e.target.value)}>
-                      <option value="1" selected>Em operação</option>
-                      <option value="2">Ocioso</option>
-                      <option value="3">Em manutenção</option>
-                      <option value="4">Desativado</option>
+                      <option value="0" selected>Em operação</option>
+                      <option value="1">Ocioso</option>
+                      <option value="2">Em manutenção</option>
+                      <option value="3">Desativado</option>
                     </select>
                   </div>
                   {/* <img src={adicionar} style={{marginLeft: '10px', width : '15%'}} title="cadastrar novo status"/> */}
@@ -390,7 +411,7 @@ function CadastroAtivos({ setTela }) {
                     type="text"
                     title="digite o ano de fabricação do ativo"
                     placeholder='Insira o ano de Fabricação:'
-                    value={ati_data_fabricacao}
+                    value={ati_ano_fabricacao}
                     onChange={(event) => setFabricacaoAtivo(event.target.value)}
                   />
                 </div>
@@ -478,13 +499,13 @@ function CadastroAtivos({ setTela }) {
               Cancelar
             </button>
           </p>
-          <div id='popup' style={{display: 'none', height: '200px', backgroundColor: '#367E90', position: 'fixed', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', textAlign: 'center', width: '40%', alignContent: 'center', justifyContent: 'center', borderRadius: '10px'}}>
-    <p className='has-text-white is-size-3-desktop is-size-4-mobile'>Ativo Cadastrado com sucesso!</p>
-    <button className='has-text-white is-size-4 p-3 mt-3' style={{marginLeft: '60%', backgroundColor:'#459EB5', borderRadius: '100%'}} onClick={() => exibirPopUp()}>
-      <p className='is-size-4' onClick={() => setTela('Ativos')}>OK</p>
-      </button>
-    </div>
-    
+          <div id='popup' style={{ display: 'none', height: '200px', backgroundColor: '#367E90', position: 'fixed', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', textAlign: 'center', width: '40%', alignContent: 'center', justifyContent: 'center', borderRadius: '10px' }}>
+            <p className='has-text-white is-size-3-desktop is-size-4-mobile'>Ativo Cadastrado com sucesso!</p>
+            <button className='has-text-white is-size-4 p-3 mt-3' style={{ marginLeft: '60%', backgroundColor: '#459EB5', borderRadius: '100%' }} onClick={() => exibirPopUp()}>
+              <p className='is-size-4' onClick={() => setTela('Ativos')}>OK</p>
+            </button>
+          </div>
+
         </div>
       </div>
     </body>

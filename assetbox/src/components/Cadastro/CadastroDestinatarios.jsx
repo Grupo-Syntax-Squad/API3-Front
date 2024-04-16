@@ -5,8 +5,8 @@ import axios from 'axios';
 function CadastroDestinatarios({ setTela }) {
   // Destinatário
   const [des_nome, setNomeDestinatario] = useState('');
-  const [des_telefone, setTelefoneDestinatario] = useState('');
   const [des_email, setEmailDestinatario] = useState('');
+  const [des_telefone, setTelefoneDestinatario] = useState('');
   const [des_senha, setSenhaDestinatario] = useState('');
 
   // Endereço
@@ -35,30 +35,30 @@ function CadastroDestinatarios({ setTela }) {
     const dadosEndereco = {
       end_rua,
       end_numero,
-      end_complemento,
       end_bairro,
       end_cidade,
       end_uf,
+      end_complemento,
       end_cep
     };
     
     console.log("Endereço:");
     console.log(dadosEndereco);
 
-    // let response = await axios.post('http://localhost:8000/endereco', dadosEndereco);
-    // const des_endereco_id = response.data;
-    // console.log(des_endereco_id);
+    let response = await axios.post('http://localhost:8000/enderecos', dadosEndereco);
+    const des_endereco_id = response.data;
+    console.log("Endereço: ", des_endereco_id);
 
     // Cadastrando o destinatário
     const dadosDestinatario = {
       des_nome,
-      des_telefone,
       des_email,
+      des_telefone,
       des_senha,
-      des_endereco_id: dadosEndereco
+      des_endereco_id
     };
 
-    const response = await axios.post('http://localhost:8000/cadastrar/destinatario', dadosDestinatario);
+    response = await axios.post('http://localhost:8000/destinatarios', dadosDestinatario);
 
     console.log("Destinatário:");
     console.log(response.data);
