@@ -48,7 +48,7 @@ function VisualizarAtivos({ setTela }) {
 
 
   function handleDelete(id) {
-    axios.delete(`http://localhost:8000/ativo/${id}`)
+    axios.delete(`http://localhost:8000/ativos/${id}`)
       .then((resposta) => {
         console.log(resposta.data);
         window.location.reload()
@@ -257,12 +257,12 @@ function VisualizarAtivos({ setTela }) {
 
                 <div className='columns'>
                   <div className="field column" >
-                    <label className="form-label">Data de Fabricação</label>
+                    <label className="form-label">Ano de Fabricação</label>
 
                     <input
                       class="input is-small"
-                      type="date"
-                      value={dadosAtivo.ati_data_fabricacao}
+                      type="text"
+                      value={dadosAtivo.ati_ano_fabricacao}
                       disabled
                     />
                   </div>

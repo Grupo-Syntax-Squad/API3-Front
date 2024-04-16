@@ -29,7 +29,7 @@ function CadastroAtivos({ setTela }) {
   const [ati_titulo, setTituloAtivo] = useState('');
   const [ati_capacidade, setCapacidadeAtivo] = useState('');
   const [ati_tamanho, setTamanhoAtivo] = useState('');
-  const [ati_data_cadastro, setCadastroAtivo] = useState('');
+  const [ati_data_cadastro, setCadastroAtivo] = useState(new Date());
   const [ati_condicoes_uso, setUsoAtivo] = useState('');
   const [ati_data_validade, setValidadeAtivo] = useState('');
   const [imagemSelecionada, setImagemSelecionada] = useState(null);
@@ -69,6 +69,7 @@ function CadastroAtivos({ setTela }) {
   // Função para lidar com o envio do formulário
   const handleSubmit = async (event) => {
     event.preventDefault();
+
     let response;
     const ati_imagem_id = null;
     if (imagemSelecionada != null) {
@@ -93,7 +94,6 @@ function CadastroAtivos({ setTela }) {
     response = await axios.post('http://localhost:8000/tipos', tipoData);
     const ati_tipo_id = response.data;
 
-    setCadastroAtivo(new Date())
     
     // Enviando ativo
     const ativoData = {
@@ -120,7 +120,8 @@ function CadastroAtivos({ setTela }) {
       ati_tamanho,
       ati_data_cadastro,
       ati_imagem_id,
-      ati_condicoes_uso
+      ati_condicoes_uso,
+      ati_observacao
     };
     console.log(ativoData);
 
@@ -408,8 +409,8 @@ function CadastroAtivos({ setTela }) {
                     class="input is-small"
                     type="date"
                     placeholder='Insira a Data de Validade:'
-                    value={ati_data_validade}
-                    onChange={(event) => setValidadeAtivo(event.target.value)}
+                    value={ati_data_expiracao}
+                    onChange={(event) => setExpiracaoAtivo(event.target.value)}
                   />
                 </div>
               </form>

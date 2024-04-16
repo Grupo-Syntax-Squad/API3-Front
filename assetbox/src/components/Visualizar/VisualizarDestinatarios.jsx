@@ -25,7 +25,7 @@ function VisualizarDestinatarios({ setTela }) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://localhost:8000/destinatario/${id}`);
+        const response = await axios.get(`http://localhost:8000/destinatarios/${id}`);
         const dados = response.data;
         setDadosDestinatario(dados);
         setDadosEndereco(dados.des_endereco_id);
@@ -56,7 +56,7 @@ function exibirPopUpConfirmacao() {
 
 
   function handleDelete() {
-    axios.delete(`http://localhost:8000/deletar/destinatario/${id}`).then((resposta) => {
+    axios.delete(`http://localhost:8000/destinatarios/${id}`).then((resposta) => {
       console.log(resposta.data);
       exibirPopUpDelecao();
       exibirPopUpConfirmacao();
