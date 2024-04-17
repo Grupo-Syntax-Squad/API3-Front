@@ -244,7 +244,7 @@ function VisualizarAtivos({ setTela }) {
                     />
                   </div>
 
-                  <div class="field column">
+                  {/* <div class="field column">
                     <label class="form-label">Fornecedor</label><br />
                     <div class="select is-small">
                       <select class="is-hovered" value={dadosAtivo.ati_localizacao_id} disabled>
@@ -252,7 +252,7 @@ function VisualizarAtivos({ setTela }) {
                         <option></option>
                       </select>
                     </div>
-                  </div>
+                  </div> */}
                 </div>
 
                 <div className='columns'>

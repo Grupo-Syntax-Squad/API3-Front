@@ -54,7 +54,7 @@ function CadastroDestinatarios({ setTela }) {
       des_nome,
       des_email,
       des_telefone,
-      des_senha,
+      // des_senha,
       des_endereco_id
     };
 
@@ -120,7 +120,7 @@ function CadastroDestinatarios({ setTela }) {
 
             />
           </div>
-          <div class="field column">
+          {/* <div class="field column">
             <label class="form-label is-size-5">Senha</label>
             <input
               class="input is-small"
@@ -130,7 +130,7 @@ function CadastroDestinatarios({ setTela }) {
               onChange={(event) => setSenhaDestinatario(event.target.value)}
 
             />
-          </div>
+          </div> */}
           <h1 className='has-text-weight-light is-size-4'>Endereço</h1>
 
           <div class="field column">

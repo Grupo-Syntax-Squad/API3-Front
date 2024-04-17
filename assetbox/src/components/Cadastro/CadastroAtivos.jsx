@@ -71,7 +71,7 @@ function CadastroAtivos({ setTela }) {
     event.preventDefault();
 
     let response;
-    const ati_imagem_id = null;
+    let ati_imagem_id = null;
     if (imagemSelecionada != null) {
       //Enviando imagem
       const formData = new FormData();
@@ -382,15 +382,15 @@ function CadastroAtivos({ setTela }) {
             onChange={(event) => setNumAtivo(event.target.value)}
           />
         </div> */}
-                <div class="field">
+                {/* <div class="field">
                   <label class="label has-text-black">Fornecedor:</label>
-                  {/* <div class="select is-small">
+                  <div class="select is-small">
                     <select class="is-hovered">
                       <option></option>
                       <option></option>
                     </select>
-                  </div> */}
-                </div>
+                  </div>
+                </div> */}
                 <div className="field" >
                   <label className="form-label has-text-black">Ano de Fabricação:</label>
 
