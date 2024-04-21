@@ -45,7 +45,7 @@ export default function Roteador(){
         else if (tela === 'CadastroAtivos') {
             return (
                 <>
-                    <Menu seletorView={selecionarView} botoes={botoes} />
+                    <Menu  seletorView={selecionarView} botoes={botoes} />
                     <CadastroAtivos setTela={setTela} />
                 </>
             )

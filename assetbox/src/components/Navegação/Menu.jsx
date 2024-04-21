@@ -36,9 +36,9 @@ function Menu(props) {
                 <img src={UserIcon} class='mr-3' alt="Destinatários" />
                 <p class='navbar-item has-text-white'>Destinatários</p>
               </a>
-              <a className="navbar-item pr-6 pl-6 is-size-5 has-text-weight-bold my-0 mx-1" >
+              <a className="navbar-item pr-6 pl-6 is-size-5 has-text-weight-bold my-0 mx-1"  onClick={(e) => props.seletorView('Login', e)}>
                 <img src={MainteinIcon} class='mr-3' alt="Manutenções" />
-                Manutenções
+                <p class='navbar-item has-text-white'>Manutenção</p>
               </a>
               {/* <a className="navbar-item pr-6 pl-6 is-size-5 has-text-weight-bold my-0 mx-1" >
                 <img src={DashboardIcon} class='mr-3' alt="Dashboard" />
