@@ -5,9 +5,11 @@ import Destinatarios from './Destinatario/Destinatarios'
 import VisualizarAtivos from "./Visualizar/VisualizarAtivos";
 import VisualizarDestinatarios from "./Visualizar/VisualizarDestinatarios";
 import CadastroAtivos from "./Cadastro/CadastroAtivos";
+import CadastroManutenção from "./Cadastro/CadastroManutenção";
 import CadastroDestinatarios from "./Cadastro/CadastroDestinatarios";
 import Login from "./Login/Login";
 import Home from "./home";
+import Manutencao from "./manutenção/manutenção";
 
 export default function Roteador(){
     const [tela, setTela] = useState('Home')
@@ -86,7 +88,15 @@ export default function Roteador(){
             return (
                 <>
                     <Menu seletorView={selecionarView} botoes={botoes} />
-                    {/* <Produtos tema="#5eb4fc" red="#fc6464" green="#00ff00" /> */}
+                    { <Manutencao setTela={setTela}/> }
+                </>
+            )
+        }
+        else if (tela === 'CadastroManutenção') {
+            return (
+                <>
+                    <Menu  seletorView={selecionarView} botoes={botoes} />
+                    <CadastroManutenção setTela={setTela} />
                 </>
             )
         }
