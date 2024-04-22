@@ -7,6 +7,7 @@ const Ativos = ({ setTela }) => {
     const [assets, setAssets] = useState([]);
     const [filtroId, setFiltroId] = useState('');
     const [filtroTitulo, setFiltroTitulo] = useState('');
+    const [filtroStatus, setFiltroStatus] = useState('');
 
     useEffect(() => {
         axios.get('http://localhost:8000/ativos')
@@ -24,7 +25,7 @@ const Ativos = ({ setTela }) => {
     };
 
     const dadosFiltrados = assets.filter(asset => {
-    return (filtroId === '' || String(asset.ati_id).includes(filtroId)) && (filtroTitulo === '' || asset.ati_titulo.includes(filtroTitulo));
+    return (filtroId === '' || String(asset.ati_id).includes(filtroId)) && (filtroTitulo === '' || asset.ati_titulo.toLowerCase().includes(filtroTitulo.toLowerCase())) && (filtroStatus === '' || asset.ati_status.toLowerCase().includes(filtroStatus.toLowerCase()));
   });
 
 
@@ -46,7 +47,7 @@ const Ativos = ({ setTela }) => {
                             </div>
                             <div class="column is-one-fifth is-flex is-align-items-center">
                                 <label className='filtros mx-1 has-text-white has-text-weight-medium mr-3'>Status</label>
-                                <input class="input is-small is-flex-grow-2 is-rounded" type="text" placeholder='Digite um Status:' />
+                                <input class="input is-small is-flex-grow-2 is-rounded" type="text" placeholder='Digite um Status:' value={filtroStatus} onChange={e => setFiltroStatus(e.target.value)} />
                             </div>
                             <div class="column is-one-fifth">
                                 <button class="button is-primary m-2 is-rounded" style={{ backgroundColor: '#53bfdb', color: '#fff' }}>Aplicar Filtros</button>
