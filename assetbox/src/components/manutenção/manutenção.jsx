@@ -3,12 +3,12 @@ import Filtro from '../../assets/img/filtro.svg';
 import axios from 'axios';
 
 const Manutencao = ({ setTela }) => {
-    const [manutencoes, setAssets] = useState([]);
+    const [manutencoes, setMaintein] = useState([]);
 
     useEffect(() => {
-        axios.get('http://localhost:8000/manutenção')
+        axios.get('http://localhost:8000/manutencoes')
             .then(response => {
-                setAssets(response.data);
+                setMaintein(response.data);
             })
             .catch(error => {
                 console.error('There was an error!', error);

@@ -49,9 +49,6 @@ const Ativos = ({ setTela }) => {
                                 <label className='filtros mx-1 has-text-white has-text-weight-medium mr-3'>Status</label>
                                 <input class="input is-small is-flex-grow-2 is-rounded" type="text" placeholder='Digite um Status:' value={filtroStatus} onChange={e => setFiltroStatus(e.target.value)} />
                             </div>
-                            <div class="column is-one-fifth">
-                                <button class="button is-primary m-2 is-rounded" style={{ backgroundColor: '#53bfdb', color: '#fff' }}>Aplicar Filtros</button>
-                            </div>
                         </div>
                     </div>
                     <div class="columns indice m-0 is-flex is-justify-content-center border-radius-top" >
