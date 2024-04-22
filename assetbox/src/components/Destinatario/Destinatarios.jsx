@@ -47,7 +47,7 @@ const Destinatarios = ({ setTela }) => {
                         </div> */}
                     </div>
                     <div class="columns indice m-0 is-flex is-justify-content-center border-radius-top" >
-                        <div class="column is-one-third ml-2 is-flex is-justify-content-center is-align-items-center ">
+                        <div class="column is-one-third ml-2 is-flex is-justify-content-center is-align-items-center " >
                             <label className='has-text-white is-size-4
                             has-text-weight-medium'>Destinatários</label>
                         </div>
@@ -57,7 +57,7 @@ const Destinatarios = ({ setTela }) => {
 
                         {destinatarios.length === 0 ? (
                             <div className='asset is-flex is-justify-content-center'>
-                                <div className='SemHover column is-one-third mr-2 dado-ativo is-flex is-justify-content-center is-align-items-center has-text-weight-medium'>
+                                <div className='SemHover column is-one-third mr-2 dado-ativo is-flex is-justify-content-center is-align-items-center has-text-weight-medium' style={{ width: '200%' }}>
                                     <p className='has-text-black'>Nenhum Destinatário Cadastrado</p>
                                 </div>
                             </div>

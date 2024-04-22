@@ -25,7 +25,7 @@ function VisualizarDestinatarios({ setTela }) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://localhost:8000/destinatario/${id}`);
+        const response = await axios.get(`http://localhost:8000/destinatarios/${id}`);
         const dados = response.data;
         setDadosDestinatario(dados);
         setDadosEndereco(dados.des_endereco_id);
@@ -56,7 +56,7 @@ function exibirPopUpConfirmacao() {
 
 
   function handleDelete() {
-    axios.delete(`http://localhost:8000/deletar/destinatario/${id}`).then((resposta) => {
+    axios.delete(`http://localhost:8000/destinatarios/${id}`).then((resposta) => {
       console.log(resposta.data);
       exibirPopUpDelecao();
       exibirPopUpConfirmacao();
@@ -106,7 +106,7 @@ function exibirPopUpConfirmacao() {
               disabled
             />
           </div>
-          <div class="field column">
+          {/* <div class="field column">
             <label class="form-label is-size-5">Senha</label>
             <input
               class="input is-small"
@@ -115,7 +115,7 @@ function exibirPopUpConfirmacao() {
               value={dadosDestinatario.des_senha}
               disabled
             />
-          </div>
+          </div> */}
           <h1 className='has-text-weight-light is-size-4'>Endereço</h1>
 
           <div class="field column">

@@ -5,7 +5,7 @@ import docadd from "./docadd.png"
 import adicionar from "./adicionar.svg"
 import axios from 'axios';
 
-function CadastroAtivos({ setTela }) {
+function CadastroManutenção({ setTela }) {
   // Definindo estados para armazenar os dados do ativo
   const [ati_localizacao, setLocalizacaoAtivo] = useState();
   const [ati_tipo, setTipoAtivo] = useState('');
@@ -155,40 +155,58 @@ function CadastroAtivos({ setTela }) {
     <body>
       <div class='page-full'>
         <div class='field'>
-          <h2>Cadastro de Ativos</h2>
+          <h2>Cadastro de Manutenção</h2>
         </div>
         <div class="columns m-3">
-          
-          <div class="column is-half has-text-centered"> <img src={imgadd} alt="imgadd" style={{ width: '100px', height: '100px' }} />
-            <div>
-              <input className='image-button' type='file' id='img' name="img" accept="image/*" onChange={handleImageChange} />
-            </div>
-          </div>
 
           <div class="column is-half">
             <form onSubmit={handleSubmit}>
               <div className='top-one'>
 
+              <div class="field">
+                  <label class="label has-text-black">Status: <span className='has-text-danger'>*</span></label>
+                  <div class="select is-small">
+                    <select class="is-hovered" onChange={e => setStatusAtivo(e.target.value)}>
+                      <option value="0" selected>Em operação</option>
+                      <option value="1">Ocioso</option>
+                      <option value="2">Em manutenção</option>
+                      <option value="3">Desativado</option>
+                    </select>
+                  </div>
+                  {/* <img src={adicionar} style={{marginLeft: '10px', width : '15%'}} title="cadastrar novo status"/> */}
+                </div>
+
+                <div className="field" >
+                  <label className="form-label has-text-black">Data da manutenção:</label>
+                  <input
+                    class="input is-small"
+                    type="date"
+                    placeholder='Insira a Data da manutenção:'
+                    // value={man_data}
+                    onChange={(event) => setExpiracaoAtivo(event.target.value)}
+                  />
+                </div>
+
                 <div class="field">
-                  <label class="label has-text-black">Número: <span className='has-text-danger'>*</span></label>
+                  <label class="label has-text-black">horario: <span className='has-text-danger'>*</span></label>
                   <input
                     class="input is-small"
                     type="text"
-                    title="Digite um número de ordem para o ativo"
-                    placeholder='Digite um Número:'
-                    value={ati_numero}
-                    onChange={(event) => setNumAtivo(event.target.value)}
+                    title="Digite o horario que a manutenção ocorerá"
+                    placeholder='Digite o horario:'
+                    // value={man_hora}
+                    // onChange={(event) => setNumAtivo(event.target.value)}
                   />
                 </div>
                 <div class="field">
-                  <label class="label has-text-black">Tipo: <span className='has-text-danger'>*</span></label>
+                  <label class="label has-text-black">Atividade: <span className='has-text-danger'>*</span></label>
                   <input
                     class="input is-small"
                     type="text"
                     title="Digite o número de série do ativo"
-                    placeholder='Insira o Tipo:'
-                    value={ati_tipo}
-                    onChange={(event) => setTipoAtivo(event.target.value)}
+                    placeholder='Insira o a descrição da manutenção:'
+                    // value={man_desc}
+                    // onChange={(event) => setTipoAtivo(event.target.value)}
                   />
                   {/* <div class="select is-small">
                     {tipos && tipos.length > 0 ? (
@@ -201,6 +219,32 @@ function CadastroAtivos({ setTela }) {
                     )}
                   </div>
                   <img src={adicionar} style={{marginLeft: '10px', width : '15%'}} title="Cadastrar novo tipo"/> */}
+                </div>
+
+                <div class="field">
+                  <label class="label has-text-black">ativo: <span className='has-text-danger'>*</span></label>
+                  <div class="select is-small">
+                    <select class="is-hovered" onChange={e => setStatusAtivo(e.target.value)}>
+                      <option value="0" selected>ativo 1</option>
+                      <option value="1">ativo 2</option>
+                      <option value="2">ativo 3</option>
+                    </select>
+                  </div>
+                  {/* <img src={adicionar} style={{marginLeft: '10px', width : '15%'}} title="cadastrar novo status"/> */}
+                </div>      
+
+                <div className="field" >
+                  <label className="label has-text-black">Responsavel:</label>
+                  {destinatarios && destinatarios.length > 0 ? (
+                    <div class="select is-small">
+                      <select class="is-hovered" onChange={e => setDestinatarioAtivo(destinatarios.find(destinatario => destinatario.des_nome === e.target.value))}>
+                        <option value="" disabled selected>Selecione um destinatário</option>
+                        {destinatarios.map((destinatario) => <option key={destinatario.des_nome} value={destinatario.des_nome}>{destinatario.des_nome}</option>)}
+                      </select>
+                    </div>
+                  ) : (
+                    <p>Nenhum responsavel disponível</p>
+                  )}
                 </div>
 
                 <div class="field">
@@ -225,54 +269,19 @@ function CadastroAtivos({ setTela }) {
                   </div>
                   <img src={adicionar} style={{marginLeft: '10px', width : '15%'}} title="Cadastrar nova localização"/> */}
                 </div>
-                <div class="field">
-                  <label class="label has-text-black">Status: <span className='has-text-danger'>*</span></label>
-                  <div class="select is-small">
-                    <select class="is-hovered" onChange={e => setStatusAtivo(e.target.value)}>
-                      <option value="0" selected>Em operação</option>
-                      <option value="1">Ocioso</option>
-                      <option value="2">Em manutenção</option>
-                      <option value="3">Desativado</option>
-                    </select>
-                  </div>
-                  {/* <img src={adicionar} style={{marginLeft: '10px', width : '15%'}} title="cadastrar novo status"/> */}
-                </div>
 
                 <div className="field" >
-                  <label className="label has-text-black">Destinatário:</label>
-                  {destinatarios && destinatarios.length > 0 ? (
-                    <div class="select is-small">
-                      <select class="is-hovered" onChange={e => setDestinatarioAtivo(destinatarios.find(destinatario => destinatario.des_nome === e.target.value))}>
-                        <option value="" disabled selected>Selecione um destinatário</option>
-                        {destinatarios.map((destinatario) => <option key={destinatario.des_nome} value={destinatario.des_nome}>{destinatario.des_nome}</option>)}
-                      </select>
-                    </div>
-                  ) : (
-                    <p>Nenhum destinatário disponível</p>
-                  )}
-                </div>
-
-                <div className="field" >
-                  <label className="form-label has-text-black ">Titulo: <span className='has-text-danger'>*</span></label>
-                  <input
-                    class="input is-small"
-                    type="text"
-                    title="Digite um nome para o ativo"
-                    placeholder='Insira o Título:'
-                    value={ati_titulo}
-                    onChange={(event) => setTituloAtivo(event.target.value)}
-                  />
 
                   <div className="field" >
-                    <label className="form-label has-text-black">Complemento:</label>
+                    <label className="form-label has-text-black">Observações:</label>
                     <input
                       class="input is-small"
                       type="text"
                       placeholder='Insira um Complemento:'
-                      title="Digite um complemento para o ativo, por exemplo: cor, estado de preservação, etc."
+                      title="Digite um complemento para a manutenção, por exemplo: problemas que não serão corrigidos, estado de preservação, etc."
                       rows="4"
-                      value={ati_complemento}
-                      onChange={(event) => setComplementoAtivo(event.target.value)}
+                      // value={man_obs}
+                      // onChange={(event) => setComplementoAtivo(event.target.value)}
                     />
                   </div>
                 </div>
@@ -282,7 +291,7 @@ function CadastroAtivos({ setTela }) {
           </div>
         </div>
 
-        <h1>Características</h1>
+        <h1>Endereço</h1>
 
         <div class="mid-page" >
 
@@ -292,65 +301,65 @@ function CadastroAtivos({ setTela }) {
             <div class="column is-half">
               <form onSubmit={handleSubmit}>
                 <div className="field" >
-                  <label className="form-label has-text-black">Marca:</label>
+                  <label className="form-label has-text-black">CEP:</label>
 
                   <input
                     class="input is-small"
                     type="text"
-                    title="Digite a marca do ativo, ex: Dell, HP, SAMSUNG, etc."
-                    placeholder='Digite a Marca:'
-                    value={ati_marca}
-                    onChange={(event) => setMarcaAtivo(event.target.value)}
+                    title="Digite o cep de onde será realizada a manutenção"
+                    placeholder='Digite o cep:'
+                    // value={ati_marca}
+                    // onChange={(event) => setMarcaAtivo(event.target.value)}
                   />
                 </div>
                 <div className="field" >
-                  <label className="form-label has-text-black">Modelo:</label>
+                  <label className="form-label has-text-black">Rua:</label>
 
                   <input
                     class="input is-small"
                     type="text"
-                    title="Digite o modelo do ativo, ex: Inspiron 15, Galaxy S20, etc."
-                    placeholder='Digite o Modelo:'
-                    value={ati_modelo}
-                    onChange={(event) => setModeloAtivo(event.target.value)}
+                    title="Digite o nome da rua onde será realizada a manutenção"
+                    placeholder='Digite a rua:'
+                    // value={ati_modelo}
+                    // onChange={(event) => setModeloAtivo(event.target.value)}
                   />
                 </div>
                 <div className="field" >
-                  <label className="form-label has-text-black">Nº de Série: <span className='has-text-danger'>*</span></label>
+                  <label className="form-label has-text-black">Numero: <span className='has-text-danger'>*</span></label>
                   <input
                     class="input is-small"
                     type="text"
-                    title="Digite o número de série do ativo"
-                    placeholder='Insira o Número de Série:'
-                    value={ati_numero_serie}
-                    onChange={(event) => setSerieAtivo(event.target.value)}
+                    title="Digite o número da emrpesa que realizará a manutenção"
+                    placeholder='Insira o Número:'
+                    // value={ati_numero_serie}
+                    // onChange={(event) => setSerieAtivo(event.target.value)}
                   />
                 </div>
 
                 <div className="field" >
-                  <label className="form-label has-text-black">Valor de Aquisição: <span className='has-text-danger'>*</span></label>
+                  <label className="form-label has-text-black">Complemento: <span className='has-text-danger'>*</span></label>
                   <input
                     class="input is-small"
                     type="text"
-                    title="Digite o preço do ativo"
-                    placeholder='Insira o Valor de Aquisição:'
-                    value={ati_preco_aquisicao}
-                    onChange={(event) => setValorAtivo(event.target.value)}
+                    title="Digite um complemento. Por exemplo: fundos, bloco, etc."
+                    placeholder='Insira um complemento:'
+                    // value={ati_preco_aquisicao}
+                    // onChange={(event) => setValorAtivo(event.target.value)}
                   />
                 </div>
 
 
 
                 <div className="field" >
-                  <label className="form-label has-text-black">Tamanho:</label>
+                  <label className="form-label has-text-black">Bairro:</label>
 
                   <input
                     class="input is-small"
                     type="text"
-                    title="Digite o tamanho do ativo (largura,comprimento,altura) ex: 10x10x10cm"
-                    placeholder='Insira as Dimensões do Ativo:'
-                    value={ati_tamanho}
-                    onChange={(event) => setTamanhoAtivo(event.target.value)}
+                    title="Digite o bairro onde será realizada a manutenção"
+                    placeholder='Insira o Bairro:'
+                    // value={ati_tamanho}
+                    // onChange={(event) => setTamanhoAtivo(event.target.value)}
                   />
                 </div>
               </form>
@@ -360,15 +369,15 @@ function CadastroAtivos({ setTela }) {
               <form onSubmit={handleSubmit}>
 
                 <div className="field" >
-                  <label className="form-label has-text-black">Capacidade:</label>
+                  <label className="form-label has-text-black">Cidade:</label>
 
                   <input
                     class="input is-small"
                     type="text"
-                    title="Digite a capacidade do ativo, ex: 500GB, 1TB, 50kg, etc."
-                    placeholder='Insira a Capacidade do Ativo:'
-                    value={ati_capacidade}
-                    onChange={(event) => setCapacidadeAtivo(event.target.value)}
+                    title="Digite a cidade onde será realizada a manutenção"
+                    placeholder='Insira a cidade'
+                    // value={ati_capacidade}
+                    // onChange={(event) => setCapacidadeAtivo(event.target.value)}
                   />
                 </div>
                 {/* <div className="field" >
@@ -392,80 +401,21 @@ function CadastroAtivos({ setTela }) {
                   </div>
                 </div> */}
                 <div className="field" >
-                  <label className="form-label has-text-black">Ano de Fabricação:</label>
+                  <label className="form-label has-text-black">UF:</label>
 
                   <input
                     class="input is-small"
                     type="text"
-                    title="digite o ano de fabricação do ativo"
-                    placeholder='Insira o ano de Fabricação:'
-                    value={ati_ano_fabricacao}
-                    onChange={(event) => setFabricacaoAtivo(event.target.value)}
-                  />
-                </div>
-                <div className="field" >
-                  <label className="form-label has-text-black">Data de Expiração:</label>
-                  <input
-                    class="input is-small"
-                    type="date"
-                    placeholder='Insira a Data de Validade:'
-                    value={ati_data_expiracao}
-                    onChange={(event) => setExpiracaoAtivo(event.target.value)}
+                    title="diigite o estado em que será realizada a manutenção"
+                    placeholder='Insira a sigla do estado:'
+                    // value={ati_ano_fabricacao}
+                    // onChange={(event) => setFabricacaoAtivo(event.target.value)}
                   />
                 </div>
               </form>
             </div>
 
           </div>
-        </div>
-
-
-
-
-        <h1>Documentos</h1>
-        <div className="columns m-3">
-
-          <div class='column is-half'>
-            <form className='documentos-ativo' onSubmit={handleSubmit}>
-              <div className="field" >
-                <label className="form-label has-text-black">Chave NFe: <span className='has-text-danger'>*</span></label>
-                <input
-                  class="input is-small"
-                  type="text"
-                  title="Digite o número da nota fiscal do ativo"
-                  placeholder='Insira a Chave NFe:'
-                  value={ati_chave_nf_e}
-                  onChange={(event) => setNfeAtivo(event.target.value)}
-                />
-              </div>
-
-              <div className="field" >
-                <label className="form-label has-text-black">Url do Ativo:</label>
-
-                <input
-                  class="input is-small"
-                  type="text"
-                  title="Escanei o código de barras do ativo ou digite manualmente"
-                  placeholder='Insira a Url do Ativo:'
-                  value={ati_url}
-                  onChange={(event) => setUrlAtivo(event.target.value)}
-                />
-              </div>
-              <div className="field" >
-                <label className="form-label has-text-black">Observações:</label>
-
-                <input
-                  class="input is-small"
-                  type="text"
-                  title="Digite observações adicionais do ativo"
-                  placeholder='Escreva aqui as Observações:'
-                  value={ati_observacao}
-                  onChange={(event) => setComentarioAtivo(event.target.value)}
-                />
-              </div>
-            </form>
-          </div>
-
         </div>
 
         <div class="field is-grouped is-grouped-centered">
@@ -492,4 +442,4 @@ function CadastroAtivos({ setTela }) {
   );
 }
 
-export default CadastroAtivos;
+export default CadastroManutenção;

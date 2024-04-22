@@ -28,19 +28,19 @@ function Menu(props) {
                 <img src={UserIcon} class='mr-3' alt="Usuários" />
                 Usuários
               </a> */}
-              <a className={`nav-item is-flex pr-6 pr-8 pl-6 is-size-5 has-text-weight-bold my-0`} href='##' onClick={(e) => props.seletorView('Ativos', e)}>
+              <a className={`nav-item is-flex pr-6 pr-8 pl-6 is-size-5 has-text-weight-bold my-0`} onClick={(e) => props.seletorView('Ativos', e)}>
                 <img src={AssetsIcon} class='mr-2' alt="Ativos" />
                 <p class='navbar-item has-text-white'> Ativos </p>
               </a>
-              <a className="nav-item is-flex pr-6 pl-6 is-size-5 has-text-weight-bold my-0 " href='##' onClick={(e) => props.seletorView('Destinatarios', e)}>
+              <a className="nav-item is-flex pr-6 pl-6 is-size-5 has-text-weight-bold my-0 " onClick={(e) => props.seletorView('Destinatarios', e)}>
                 <img src={UserIcon} class='mr-3' alt="Destinatários" />
                 <p class='navbar-item has-text-white'>Destinatários</p>
               </a>
-              {/* <a className="navbar-item pr-6 pl-6 is-size-5 has-text-weight-bold my-0 mx-1" href='##'>
+              <a className="navbar-item pr-6 pl-6 is-size-5 has-text-weight-bold my-0 mx-1"  onClick={(e) => props.seletorView('Manutenções', e)}>
                 <img src={MainteinIcon} class='mr-3' alt="Manutenções" />
-                Manutenções
-              </a> */}
-              {/* <a className="navbar-item pr-6 pl-6 is-size-5 has-text-weight-bold my-0 mx-1" href='##'>
+                <p class='navbar-item has-text-white'>Manutenção</p>
+              </a>
+              {/* <a className="navbar-item pr-6 pl-6 is-size-5 has-text-weight-bold my-0 mx-1" >
                 <img src={DashboardIcon} class='mr-3' alt="Dashboard" />
                 Dashboard
               </a> */}
@@ -48,7 +48,7 @@ function Menu(props) {
                     </div>
             {/* <div className="navbar-end">
               <div className="navbar-item">
-                <a className="navbar-item" href="##"><img src={SettingsIcon} alt="" /></a>
+                <a className="navbar-item" ><img src={SettingsIcon} alt="" /></a>
               </div>
             </div> */}
           </div>
