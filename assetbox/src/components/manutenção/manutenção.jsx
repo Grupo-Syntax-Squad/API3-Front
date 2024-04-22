@@ -3,7 +3,7 @@ import Filtro from '../../assets/img/filtro.svg';
 import axios from 'axios';
 
 const Manutencao = ({ setTela }) => {
-    const [assets, setAssets] = useState([]);
+    const [manutencoes, setAssets] = useState([]);
 
     useEffect(() => {
         axios.get('http://localhost:8000/manutenção')
@@ -30,38 +30,42 @@ const Manutencao = ({ setTela }) => {
                     <div class='field'>
                         <div class="columns filtro mx-0" style={{ borderTopLeftRadius: '10px', borderTopRightRadius: '10px' }}>
                             <div class="column is-one-fifth" style={{ display: 'flex', alignItems: 'center' }}>
-                                <img src={Filtro} class="mx-1" alt='filter'></img><label className='filtros mx-1 has-text-white has-text-weight-medium mr-3'>ID</label>
-                                <input class="input is-small is-flex-grow-1 is-rounded" type="text" placeholder='Digite um ID:' />
+                                <img src={Filtro} class="mx-1" alt='filter'></img><label className='filtros mx-1 has-text-white has-text-weight-medium mr-3'>Data</label>
+                                <input class="input is-small is-flex-grow-1 is-rounded" type="date" placeholder='Digite uma data:' />
+                            </div>
+                            <div class="column is-one-fifth is-flex is-align-items-center">
+                                <label className='filtros mx-1 has-text-white has-text-weight-medium mr-3'>Horário</label>
+                                <input class="input is-small is-flex-grow-2 is-rounded" type="time" placeholder='Digite um horário:' />
                             </div>
                             <div class="column is-two-fifths is-flex is-align-items-center">
-                                <label className='filtros mx-1 has-text-white has-text-weight-medium mr-3' >Titulo</label>
-                                <input class="input is-small is-flex-grow-3 is-rounded" type="text" placeholder='Digite um Nome:' />
+                                <label className='filtros mx-1 has-text-white has-text-weight-medium mr-3' >Ativo</label>
+                                <input class="input is-small is-flex-grow-3 is-rounded" type="text" placeholder='Digite o titulo do ativo' />
                             </div>
                             <div class="column is-one-fifth is-flex is-align-items-center">
                                 <label className='filtros mx-1 has-text-white has-text-weight-medium mr-3'>Status</label>
                                 <input class="input is-small is-flex-grow-2 is-rounded" type="text" placeholder='Digite um Status:' />
                             </div>
-                            <div class="column is-one-fifth">
-                                <button class="button is-primary m-2 is-rounded" style={{ backgroundColor: '#53bfdb', color: '#fff' }}>Aplicar Filtros</button>
-                            </div>
+                            
                         </div>
                     </div>
                     <div class="columns indice m-0 is-flex is-justify-content-center border-radius-top" >
-                        <div class="column is-one-third ml-2 is-flex is-justify-content-center is-align-items-center">
-                            <label className='has-text-white is-size-4
-                            has-text-weight-medium'>Número</label>
+                        <div class="column is-one-fifth ml-2 is-flex is-justify-content-center is-align-items-center">
+                            <label className='has-text-white is-size-4 has-text-weight-medium'>Data</label>
                         </div>
-                        <div class="column is-one-third ml-2 mr-2 is-flex is-justify-content-center is-align-items-center">
-                            <label className='has-text-white is-size-4 has-text-weight-medium'>Título</label>
+                        <div class="column is-one-fifth ml-2 mr-2 is-flex is-justify-content-center is-align-items-center">
+                            <label className='has-text-white is-size-4 has-text-weight-medium'>Horário</label>
                         </div>
                         <div class="column is-one-third mr-2 is-flex is-justify-content-center is-align-items-center">
+                            <label className='has-text-white is-size-4 has-text-weight-medium'>Ativo</label>
+                        </div>
+                        <div class="column is-one-fifth mr-2 is-flex is-justify-content-center is-align-items-center">
                             <label className='has-text-white is-size-4 has-text-weight-medium'>Status</label>
                         </div>
                     </div>
 
                       
                     <div class='p-0'>
-                    {assets.length === 0 && (
+                    {manutencoes.length === 0 && (
                     <div className='asset is-flex is-justify-content-center'>
                         <div className='SemHover column is-one-third mr-2 dado-ativo is-flex is-justify-content-center is-align-items-center has-text-weight-medium' style={{ width: '100%' }}>
                             <p className='has-text-black'>Nenhuma manutenção Cadastrada</p>
@@ -69,16 +73,19 @@ const Manutencao = ({ setTela }) => {
                     </div>
                 )}
                         {/*aqui eu percorro o array de objetos e crio um card para cada objeto*/}
-                        {assets.map((asset) => (
-                            <div key={asset.ati_id} onClick={() => handleClick(asset.ati_id)} className='asset' class='asset is-flex is-justify-content-center'>
-                                <div class='SemHover column is-one-third mr-2 dado-ativo is-flex is-justify-content-center is-align-items-center has-text-weight-medium'>
-                                    <p className='has-text-black'>{asset.ati_id}</p>
+                        {manutencoes.map((manutencao) => (
+                            <div key={manutencao.man_id} onClick={() => handleClick(manutencao.man_id)} className='asset' class='asset is-flex is-justify-content-center'>
+                                <div class='SemHover column is-one-fifth mr-2 dado-ativo is-flex is-justify-content-center is-align-items-center has-text-weight-medium'>
+                                    <p className='has-text-black'>{manutencao.man_data}</p>
+                                </div>
+                                <div class='SemHover column is-one-fifth mr-2 dado-ativo is-flex is-justify-content-center is-align-items-center has-text-weight-medium'>
+                                    <p className='has-text-black'> {manutencao.man_horario}</p>
                                 </div>
                                 <div class='SemHover column is-one-third mr-2 dado-ativo is-flex is-justify-content-center is-align-items-center has-text-weight-medium'>
-                                    <p className='has-text-black'> {asset.ati_titulo}</p>
+                                    <p className='has-text-black'> {manutencao.man_ativo_id}</p>
                                 </div>
-                                <div class='SemHover column is-one-third mr-2 dado-ativo is-flex is-justify-content-center is-align-items-center has-text-weight-medium'>
-                                    <p className='has-text-black'> {asset.ati_status}</p>
+                                <div class='SemHover column is-one-fifth mr-2 dado-ativo is-flex is-justify-content-center is-align-items-center has-text-weight-medium'>
+                                    <p className='has-text-black'> {manutencao.man_status}</p>
                                 </div>
                             </div>
                         ))}
