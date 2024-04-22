@@ -5,6 +5,8 @@ import axios from 'axios';
 
 const Ativos = ({ setTela }) => {
     const [assets, setAssets] = useState([]);
+    const [filtroId, setFiltroId] = useState('');
+    const [filtroTitulo, setFiltroTitulo] = useState('');
 
     useEffect(() => {
         axios.get('http://localhost:8000/ativos')
@@ -21,6 +23,10 @@ const Ativos = ({ setTela }) => {
         setTela(`VisualizarAtivo`);
     };
 
+    const dadosFiltrados = assets.filter(asset => {
+    return (filtroId === '' || String(asset.ati_id).includes(filtroId)) && (filtroTitulo === '' || asset.ati_titulo.includes(filtroTitulo));
+  });
+
 
     return (
         <body>
@@ -32,11 +38,11 @@ const Ativos = ({ setTela }) => {
                         <div class="columns filtro mx-0" style={{ borderTopLeftRadius: '10px', borderTopRightRadius: '10px' }}>
                             <div class="column is-one-fifth" style={{ display: 'flex', alignItems: 'center' }}>
                                 <img src={Filtro} class="mx-1" alt='filter'></img><label className='filtros mx-1 has-text-white has-text-weight-medium mr-3'>ID</label>
-                                <input class="input is-small is-flex-grow-1 is-rounded" type="text" placeholder='Digite um ID:' />
+                                <input class="input is-small is-flex-grow-1 is-rounded" type="text" placeholder='Digite um ID:' value={filtroId} onChange={e => setFiltroId(e.target.value)} />
                             </div>
                             <div class="column is-two-fifths is-flex is-align-items-center">
                                 <label className='filtros mx-1 has-text-white has-text-weight-medium mr-3' >Titulo</label>
-                                <input class="input is-small is-flex-grow-3 is-rounded" type="text" placeholder='Digite um Nome:' />
+                                <input class="input is-small is-flex-grow-3 is-rounded" type="text" placeholder='Digite um titulo:' value={filtroTitulo} onChange={e => setFiltroTitulo(e.target.value)} />
                             </div>
                             <div class="column is-one-fifth is-flex is-align-items-center">
                                 <label className='filtros mx-1 has-text-white has-text-weight-medium mr-3'>Status</label>
@@ -70,7 +76,7 @@ const Ativos = ({ setTela }) => {
                     </div>
                 )}
                         {/*aqui eu percorro o array de objetos e crio um card para cada objeto*/}
-                        {assets.map((asset) => (
+                        {dadosFiltrados.map((asset) => (
                             <div key={asset.ati_id} onClick={() => handleClick(asset.ati_id)} className='asset' class='asset is-flex is-justify-content-center'>
                                 <div class='SemHover column is-one-third mr-2 dado-ativo is-flex is-justify-content-center is-align-items-center has-text-weight-medium'>
                                     <p className='has-text-black'>{asset.ati_id}</p>
