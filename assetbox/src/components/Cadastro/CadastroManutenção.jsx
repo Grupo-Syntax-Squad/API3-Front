@@ -7,36 +7,31 @@ import axios from 'axios';
 
 function CadastroManutenção({ setTela }) {
   // Definindo estados para armazenar os dados do ativo
-  const [ati_localizacao, setLocalizacaoAtivo] = useState();
-  const [ati_tipo, setTipoAtivo] = useState('');
-  const [ati_status, setStatusAtivo] = useState('');
-  const [ati_complemento, setComplementoAtivo] = useState('');
-  const [ati_destinatario_id, setDestinatarioAtivo] = useState({});
-  const [ati_marca, setMarcaAtivo] = useState('');
-  const [ati_modelo, setModeloAtivo] = useState('');
-  const [ati_numero_serie, setSerieAtivo] = useState('');
-  const [ati_quantidade, setQuantidadeAtivo] = useState(1);
-  const [ati_data_expiracao, setExpiracaoAtivo] = useState('');
-  const [ati_previsao_manutencao, setPrevisaoManutencaoAtivo] = useState('');
-  const [ati_preco_aquisicao, setValorAtivo] = useState('');
-  const [ati_chave_nf_e, setNfeAtivo] = useState('');
-  const [ati_observacao, setComentarioAtivo] = useState('');
-  const [ati_url, setUrlAtivo] = useState('');
-  const [ati_numero, setNumAtivo] = useState('');
-  const [ati_manutencoes_feitas, setManutencoesFeitasAtivo] = useState('');
-  const [ati_ultima_manutencao, setUltimaManutencaoAtivo] = useState('');
-  const [ati_ano_fabricacao, setFabricacaoAtivo] = useState('');
-  const [ati_titulo, setTituloAtivo] = useState('');
-  const [ati_capacidade, setCapacidadeAtivo] = useState('');
-  const [ati_tamanho, setTamanhoAtivo] = useState('');
-  const [ati_data_cadastro, setCadastroAtivo] = useState(new Date());
-  const [ati_condicoes_uso, setUsoAtivo] = useState('');
-  const [ati_data_validade, setValidadeAtivo] = useState('');
+  const [man_endereco_id, setManEnderecoId] = useState();
+  const [man_desc, setManDesc] = useState('');
+  const [man_data, setManData] = useState('');
+  const [man_hora, setManHora] = useState('');
+  const [man_localizacao, setManLocalizacao] = useState({});
+  const [man_status, setManStatus] = useState('');
+  const [man_id, setManId] = useState('');
+  const [man_ativo_id, setManAtivoId] = useState('');
+  const [man_responsavel, setManResponsavel] = useState('');
+  const [man_imagem_id, setManImagemId] = useState();
+  const [man_obs, setManObs] = useState('');
+  const [man_cep, setManCep] = useState('');
+  const [man_rua, setManRua] = useState('');
+  const [man_numero, setManNumero] = useState ('');
+  const [man_bairro, setManBairro] = useState('');
+  const [man_cidade, setManCidade] = useState('');
+  const [man_uf, setManUf] = useState('');
+  const [man_complemento, setManComplemento] = useState('');
+  const [man_quantidade, setManQuantidade] = useState(1);
+  
   const [imagemSelecionada, setImagemSelecionada] = useState(null);
 
   const [localizacoes, setLocalizacoes] = useState([]);
   const [tipos, setTipos] = useState([]);
-  const [destinatarios, setDestinatarios] = useState([]);
+  const [responsavel, setResponsavel] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -46,8 +41,8 @@ function CadastroManutenção({ setTela }) {
       response = await axios.get('http://localhost:8000/tipos');
       setTipos(response.data);
 
-      response = await axios.get('http://localhost:8000/destinatarios');
-      setDestinatarios(response.data);
+      response = await axios.get('http://localhost:8000/responsavel');
+      setManResponsavel(response.data);
     };
 
     fetchData();
@@ -71,83 +66,56 @@ function CadastroManutenção({ setTela }) {
     event.preventDefault();
 
     let response;
-    let ati_imagem_id = null;
+    let man_imagem_id = null;
     if (imagemSelecionada != null) {
       //Enviando imagem
       const formData = new FormData();
       formData.append('file', imagemSelecionada);
       response = await axios.post('http://localhost:8000/imagens', formData);
-      ati_imagem_id = response.data;
+      man_imagem_id = response.data;
     }
 
     const localizacaoData = {
-      loc_titulo: ati_localizacao
+      loc_titulo: man_localizacao
     };
 
     response = await axios.post('http://localhost:8000/localizacoes', localizacaoData);
-    const ati_localizacao_id = response.data;
+    const man_localizacao_id = response.data;
 
-    const tipoData = {
-      tip_titulo: ati_tipo
+    const descData = {
+      tip_titulo: man_desc
     };
 
-    response = await axios.post('http://localhost:8000/tipos', tipoData);
-    const ati_tipo_id = response.data;
+    response = await axios.post('http://localhost:8000/tipos', descData);
+    const man_desc = response.data;
 
     
     // Enviando ativo
     const ativoData = {
-      ati_localizacao_id,
-      ati_tipo_id,
-      ati_status,
-      ati_complemento,
-      ati_destinatario_id,
-      ati_marca,
-      ati_modelo,
-      ati_numero_serie,
-      ati_quantidade,
-      ati_data_expiracao,
-      ati_previsao_manutencao,
-      ati_preco_aquisicao,
-      ati_chave_nf_e,
-      ati_url,
-      ati_numero,
-      ati_manutencoes_feitas,
-      ati_ultima_manutencao,
-      ati_ano_fabricacao,
-      ati_titulo,
-      ati_capacidade,
-      ati_tamanho,
-      ati_data_cadastro,
-      ati_imagem_id,
-      ati_condicoes_uso,
-      ati_observacao
+      man_endereco_id,
+      man_desc,
+      man_data,
+      man_hora,
+      man_localizacao,
+      man_id,
+      man_ativo_id,
+      man_status
     };
     console.log(ativoData);
 
-    response = await axios.post('http://localhost:8000/ativos', ativoData);
+    response = await axios.post('http://localhost:8000/manutencao', ativoData);
     console.log(response.data);
     exibirPopUp();
 
     // Limpar campos
-    setLocalizacaoAtivo('');
-    setTipoAtivo('');
-    setDestinatarioAtivo({});
-    setStatusAtivo('');
-    setMarcaAtivo('');
-    setModeloAtivo('');
-    setSerieAtivo('');
-    setUsoAtivo('');
-    setValorAtivo('');
-    setTamanhoAtivo('');
-    setCapacidadeAtivo('');
-    setFabricacaoAtivo('');
-    setValidadeAtivo('');
-    setNfeAtivo('');
-    setUrlAtivo('');
-    setComentarioAtivo('');
-    setTituloAtivo('');
-    setNumAtivo('');
+    setManEnderecoId('');
+    setManDesc('');
+    setManData();
+    setManHora('');
+    setManLocalizacao('');
+    setManId('');
+    setManAtivoId('');
+    setManStatus('');
     setImagemSelecionada(null);
   };
 
@@ -166,11 +134,10 @@ function CadastroManutenção({ setTela }) {
               <div class="field">
                   <label class="label has-text-black">Status: <span className='has-text-danger'>*</span></label>
                   <div class="select is-small">
-                    <select class="is-hovered" onChange={e => setStatusAtivo(e.target.value)}>
-                      <option value="0" selected>Em operação</option>
-                      <option value="1">Ocioso</option>
-                      <option value="2">Em manutenção</option>
-                      <option value="3">Desativado</option>
+                    <select class="is-hovered" onChange={e => setManStatus(e.target.value)}>
+                      <option value="0" selected>Em espera</option>
+                      <option value="1">em andamento</option>
+                      <option value="2">concluida</option>
                     </select>
                   </div>
                   {/* <img src={adicionar} style={{marginLeft: '10px', width : '15%'}} title="cadastrar novo status"/> */}
@@ -182,8 +149,8 @@ function CadastroManutenção({ setTela }) {
                     class="input is-small"
                     type="date"
                     placeholder='Insira a Data da manutenção:'
-                    // value={man_data}
-                    onChange={(event) => setExpiracaoAtivo(event.target.value)}
+                    value={man_data}
+                    onChange={(event) => setManData(event.target.value)}
                   />
                 </div>
 
@@ -194,8 +161,8 @@ function CadastroManutenção({ setTela }) {
                     type="text"
                     title="Digite o horario que a manutenção ocorerá"
                     placeholder='Digite o horario:'
-                    // value={man_hora}
-                    // onChange={(event) => setNumAtivo(event.target.value)}
+                     value={man_hora}
+                     onChange={(event) => setManHora(event.target.value)}
                   />
                 </div>
                 <div class="field">
@@ -205,8 +172,8 @@ function CadastroManutenção({ setTela }) {
                     type="text"
                     title="Digite o número de série do ativo"
                     placeholder='Insira o a descrição da manutenção:'
-                    // value={man_desc}
-                    // onChange={(event) => setTipoAtivo(event.target.value)}
+                    value={man_desc}
+                    onChange={(event) => setManDesc(event.target.value)}
                   />
                   {/* <div class="select is-small">
                     {tipos && tipos.length > 0 ? (
@@ -224,7 +191,7 @@ function CadastroManutenção({ setTela }) {
                 <div class="field">
                   <label class="label has-text-black">ativo: <span className='has-text-danger'>*</span></label>
                   <div class="select is-small">
-                    <select class="is-hovered" onChange={e => setStatusAtivo(e.target.value)}>
+                    <select class="is-hovered" onChange={e => setManAtivoId(e.target.value)}>
                       <option value="0" selected>ativo 1</option>
                       <option value="1">ativo 2</option>
                       <option value="2">ativo 3</option>
@@ -235,11 +202,11 @@ function CadastroManutenção({ setTela }) {
 
                 <div className="field" >
                   <label className="label has-text-black">Responsavel:</label>
-                  {destinatarios && destinatarios.length > 0 ? (
+                  {responsavel && responsavel.length > 0 ? (
                     <div class="select is-small">
-                      <select class="is-hovered" onChange={e => setDestinatarioAtivo(destinatarios.find(destinatario => destinatario.des_nome === e.target.value))}>
+                      <select class="is-hovered" onChange={e => setManResponsavel(responsavel.find(responsavel => responsavel.des_nome === e.target.value))}>
                         <option value="" disabled selected>Selecione um destinatário</option>
-                        {destinatarios.map((destinatario) => <option key={destinatario.des_nome} value={destinatario.des_nome}>{destinatario.des_nome}</option>)}
+                        {responsavel.map((responsavel) => <option key={responsavel.des_nome} value={responsavel.des_nome}>{responsavel.des_nome}</option>)}
                       </select>
                     </div>
                   ) : (
@@ -254,8 +221,8 @@ function CadastroManutenção({ setTela }) {
                     type="text"
                     title="Digite a localização"
                     placeholder='Insira a Localização:'
-                    value={ati_localizacao}
-                    onChange={(event) => setLocalizacaoAtivo(event.target.value)}
+                    value={man_localizacao}
+                    onChange={(event) => setManLocalizacao(event.target.value)}
                   />
                   {/* <div class="select is-small">
                     {localizacoes && localizacoes.length > 0 ? (
@@ -280,8 +247,8 @@ function CadastroManutenção({ setTela }) {
                       placeholder='Insira um Complemento:'
                       title="Digite um complemento para a manutenção, por exemplo: problemas que não serão corrigidos, estado de preservação, etc."
                       rows="4"
-                      // value={man_obs}
-                      // onChange={(event) => setComplementoAtivo(event.target.value)}
+                      value={man_obs}
+                      onChange={(event) => setManObs(event.target.value)}
                     />
                   </div>
                 </div>
@@ -308,8 +275,8 @@ function CadastroManutenção({ setTela }) {
                     type="text"
                     title="Digite o cep de onde será realizada a manutenção"
                     placeholder='Digite o cep:'
-                    // value={ati_marca}
-                    // onChange={(event) => setMarcaAtivo(event.target.value)}
+                    value={man_cep}
+                    onChange={(event) => setManCep(event.target.value)}
                   />
                 </div>
                 <div className="field" >
@@ -320,8 +287,8 @@ function CadastroManutenção({ setTela }) {
                     type="text"
                     title="Digite o nome da rua onde será realizada a manutenção"
                     placeholder='Digite a rua:'
-                    // value={ati_modelo}
-                    // onChange={(event) => setModeloAtivo(event.target.value)}
+                    value={man_rua}
+                    onChange={(event) => setManRua(event.target.value)}
                   />
                 </div>
                 <div className="field" >
@@ -331,8 +298,8 @@ function CadastroManutenção({ setTela }) {
                     type="text"
                     title="Digite o número da emrpesa que realizará a manutenção"
                     placeholder='Insira o Número:'
-                    // value={ati_numero_serie}
-                    // onChange={(event) => setSerieAtivo(event.target.value)}
+                    value={man_numero}
+                    onChange={(event) => setManNumero(event.target.value)}
                   />
                 </div>
 
@@ -343,8 +310,8 @@ function CadastroManutenção({ setTela }) {
                     type="text"
                     title="Digite um complemento. Por exemplo: fundos, bloco, etc."
                     placeholder='Insira um complemento:'
-                    // value={ati_preco_aquisicao}
-                    // onChange={(event) => setValorAtivo(event.target.value)}
+                    value={man_complemento}
+                    onChange={(event) => setManComplemento(event.target.value)}
                   />
                 </div>
 
@@ -358,8 +325,8 @@ function CadastroManutenção({ setTela }) {
                     type="text"
                     title="Digite o bairro onde será realizada a manutenção"
                     placeholder='Insira o Bairro:'
-                    // value={ati_tamanho}
-                    // onChange={(event) => setTamanhoAtivo(event.target.value)}
+                    value={man_bairro}
+                    onChange={(event) => setManBairro(event.target.value)}
                   />
                 </div>
               </form>
@@ -376,8 +343,8 @@ function CadastroManutenção({ setTela }) {
                     type="text"
                     title="Digite a cidade onde será realizada a manutenção"
                     placeholder='Insira a cidade'
-                    // value={ati_capacidade}
-                    // onChange={(event) => setCapacidadeAtivo(event.target.value)}
+                    value={man_cidade}
+                    onChange={(event) => setManCidade(event.target.value)}
                   />
                 </div>
                 {/* <div className="field" >
@@ -408,8 +375,8 @@ function CadastroManutenção({ setTela }) {
                     type="text"
                     title="diigite o estado em que será realizada a manutenção"
                     placeholder='Insira a sigla do estado:'
-                    // value={ati_ano_fabricacao}
-                    // onChange={(event) => setFabricacaoAtivo(event.target.value)}
+                    value={man_uf}
+                    onChange={(event) => setManUf(event.target.value)}
                   />
                 </div>
               </form>
