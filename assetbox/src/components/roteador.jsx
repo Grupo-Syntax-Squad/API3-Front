@@ -8,8 +8,9 @@ import CadastroAtivos from "./Cadastro/CadastroAtivos";
 import CadastroManutenção from "./Cadastro/CadastroManutenção";
 import CadastroDestinatarios from "./Cadastro/CadastroDestinatarios";
 import Login from "./Login/Login";
+import Calendario from "./Manutenção/Calendario";
 import Home from "./home";
-import Manutencao from "./manutenção/manutenção";
+import Manutencao from "./Manutenção/manutenção";
 
 export default function Roteador(){
     const [tela, setTela] = useState('Home')
@@ -25,7 +26,8 @@ export default function Roteador(){
             return (
                 <>
                     <Menu seletorView={selecionarView} botoes={botoes} />
-                    <Home setTela={setTela}/>
+                    {/* <Home setTela={setTela}/> */}
+                    <Calendario setTela={setTela}/>
                 </>
             )
         }
