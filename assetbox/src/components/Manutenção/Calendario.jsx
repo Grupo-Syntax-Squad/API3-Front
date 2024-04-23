@@ -52,21 +52,22 @@ const Calendario = () => {
     };
 
     return (
-        <div className="calendar">
-            <div className="calendar-header">
-                <span className="month-picker" id="month-picker">{month_names[currMonth]}</span>
-                <div className="year-picker">
-                    <span className="year-change" id="prev-month" onClick={() => changeMonth(-1)}>
+    <div class="tela columns">   
+        <div class="calendar column is-half">
+            <div class="calendar-header">
+                <span class="month-picker" id="month-picker">{month_names[currMonth]}</span>
+                <div class="year-picker">
+                    <span class="year-change" id="prev-month" onClick={() => changeMonth(-1)}>
                         <pre>{'<'}</pre>
                     </span>
                     <span id="year">{currYear}</span>
-                    <span className="year-change" id="next-month" onClick={() => changeMonth(1)}>
+                    <span class="year-change" id="next-month" onClick={() => changeMonth(1)}>
                         <pre>{'>'}</pre>
                     </span>
                 </div>
             </div>
-            <div className="calendar-body">
-                <div className="calendar-week-day">
+            <div class="calendar-body">
+                <div class="calendar-week-day">
                     <div>Dom</div>
                     <div>Seg</div>
                     <div>Ter</div>
@@ -75,14 +76,20 @@ const Calendario = () => {
                     <div>Sex</div>
                     <div>Sab</div>
                 </div>
-                <div className="calendar-days">
+                <div class="calendar-days">
                     {calendarDays.map((day, index) => (
                         <div key={index} className="calendar-day">{day}</div>
                     ))}
                 </div>
             </div>
-            <div className="month-list"></div>
+            <div class="month-list"></div>
+            
         </div>
+        <div class="listas column">
+        <label class="textarea"> </label>
+      
+        </div>
+    </div>
     );
 };
 
