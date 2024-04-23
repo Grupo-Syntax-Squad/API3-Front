@@ -9,7 +9,7 @@ import CadastroManutenção from "./Cadastro/CadastroManutenção";
 import CadastroDestinatarios from "./Cadastro/CadastroDestinatarios";
 import Login from "./Login/Login";
 import Home from "./home";
-import Manutencao from "./manutenção/manutenção";
+import Manutencao from "./Manutenção/manutenção";
 
 export default function Roteador(){
     const [tela, setTela] = useState('Home')

@@ -16,7 +16,7 @@ a.nav-item {
   color: var(--branco);
 }
 
-a:hover{
+p:hover{
   background-color: #367E90;
 }
 
