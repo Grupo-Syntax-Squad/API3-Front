@@ -13,16 +13,23 @@ import Home from "./home";
 import Manutencao from "./Manutenção/manutenção";
 
 export default function Roteador(){
-    const [tela, setTela] = useState('Home')
+    const [tela, setTela] = useState('Login')
     const selecionarView = (valor, e) => {
         e.preventDefault()
         setTela(valor)
         console.log(valor);
-        
     }
     const botoes = ['Home', 'Destinatarios', 'Ativos', 'Manutenções', 'Dashboard', 'Configurações'];
+
     const construirView = () => {
-        if (tela === 'Home') {
+        
+        if (tela === 'Login') {
+            return(
+                <Login setTela={setTela}/>
+            )
+        }
+
+        else if (tela === 'Home') {
             return (
                 <>
                     <Menu seletorView={selecionarView} botoes={botoes} />
