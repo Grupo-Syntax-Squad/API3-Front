@@ -30,10 +30,8 @@ function CadastroAtivos({ setTela }) {
   const [ati_capacidade, setCapacidadeAtivo] = useState('');
   const [ati_tamanho, setTamanhoAtivo] = useState('');
   const [ati_data_cadastro, setCadastroAtivo] = useState(new Date());
-  const [ati_condicoes_uso, setUsoAtivo] = useState('');
   const [ati_data_validade, setValidadeAtivo] = useState('');
   const [imagemSelecionada, setImagemSelecionada] = useState(null);
-
   const [localizacoes, setLocalizacoes] = useState([]);
   const [tipos, setTipos] = useState([]);
   const [destinatarios, setDestinatarios] = useState([]);
@@ -120,7 +118,6 @@ function CadastroAtivos({ setTela }) {
       ati_tamanho,
       ati_data_cadastro,
       ati_imagem_id,
-      ati_condicoes_uso,
       ati_observacao
     };
     console.log(ativoData);
@@ -137,7 +134,6 @@ function CadastroAtivos({ setTela }) {
     setMarcaAtivo('');
     setModeloAtivo('');
     setSerieAtivo('');
-    setUsoAtivo('');
     setValorAtivo('');
     setTamanhoAtivo('');
     setCapacidadeAtivo('');
