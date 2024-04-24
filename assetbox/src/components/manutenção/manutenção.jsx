@@ -19,7 +19,7 @@ const Manutencao = ({ setTela }) => {
         localStorage.setItem('id', id)
         setTela(`VisualizarManutenção`);
     };
-
+    console.log(manutencoes);
 
     return (
         <body>
@@ -65,7 +65,7 @@ const Manutencao = ({ setTela }) => {
                     </div>
 
 
-                    {/* <div class='p-0'>
+                    <div class='p-0'>
                         {manutencoes.length === 0 && (
                             <div className='asset is-flex is-justify-content-center'>
                                 <div className='SemHover column is-one-third mr-2 dado-ativo is-flex is-justify-content-center is-align-items-center has-text-weight-medium' style={{ width: '100%' }}>
@@ -77,20 +77,20 @@ const Manutencao = ({ setTela }) => {
                         {manutencoes.map((manutencao) => (
                             <div key={manutencao.man_id} onClick={() => handleClick(manutencao.man_id)} className='asset' class='asset is-flex is-justify-content-center'>
                                 <div class='SemHover column is-one-fifth mr-2 dado-ativo is-flex is-justify-content-center is-align-items-center has-text-weight-medium'>
-                                    <p className='has-text-black'>{manutencao.man_data}</p>
+                                    <p className='has-text-black'>{new Date(manutencao.man_data).toDateString()}</p>
                                 </div>
                                 <div class='SemHover column is-one-fifth mr-2 dado-ativo is-flex is-justify-content-center is-align-items-center has-text-weight-medium'>
                                     <p className='has-text-black'> {manutencao.man_horario}</p>
                                 </div>
                                 <div class='SemHover column is-one-third mr-2 dado-ativo is-flex is-justify-content-center is-align-items-center has-text-weight-medium'>
-                                    <p className='has-text-black'> {manutencao.man_ativo_id}</p>
+                                    <p className='has-text-black'> {manutencao.man_id}</p>
                                 </div>
                                 <div class='SemHover column is-one-fifth mr-2 dado-ativo is-flex is-justify-content-center is-align-items-center has-text-weight-medium'>
                                     <p className='has-text-black'> {manutencao.man_status}</p>
                                 </div>
                             </div>
                         ))}
-                    </div> */}
+                    </div>
                 </div>
             </div>
         </body >
