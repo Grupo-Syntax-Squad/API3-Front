@@ -142,6 +142,7 @@ function CadastroManutenção({ setTela }) {
                   </div>
                   {/* <img src={adicionar} style={{marginLeft: '10px', width : '15%'}} title="cadastrar novo status"/> */}
                 </div>
+                </div>
 
                 <div className="field" >
                   <label className="form-label has-text-black">Data da manutenção:</label>
@@ -253,7 +254,7 @@ function CadastroManutenção({ setTela }) {
                   </div>
                 </div>
 
-              </div>
+              
             </form>
           </div>
         </div>
@@ -265,20 +266,66 @@ function CadastroManutenção({ setTela }) {
           <div class="columns m-3">
 
 
-            <div class="column is-half">
-              <form onSubmit={handleSubmit}>
+            <div class="column is-half" style={{width: '20%'}}>
+                <form onSubmit={handleSubmit}>
+                  <div>
+                  <div className="field" >
+                    <label className="form-label has-text-black">CEP:</label>
+
+                    <input
+                      class="input is-small"
+                      type="text"
+                      title="Digite o cep de onde será realizada a manutenção"
+                      placeholder='Digite o cep:'
+                      value={man_cep}
+                      onChange={(event) => setManCep(event.target.value)}
+                    />
+                  </div>
+
+                  <div className="field" >
+                    <label className="form-label has-text-black">Numero: <span className='has-text-danger'>*</span></label>
+                    <input
+                      class="input is-small"
+                      type="text"
+                      title="Digite o número da emrpesa que realizará a manutenção"
+                      placeholder='Insira o Número:'
+                      value={man_numero}
+                      onChange={(event) => setManNumero(event.target.value)}
+                    />
+                </div>
+
                 <div className="field" >
-                  <label className="form-label has-text-black">CEP:</label>
+                  <label className="form-label has-text-black">UF:</label>
 
                   <input
                     class="input is-small"
                     type="text"
-                    title="Digite o cep de onde será realizada a manutenção"
-                    placeholder='Digite o cep:'
-                    value={man_cep}
-                    onChange={(event) => setManCep(event.target.value)}
+                    title="diigite o estado em que será realizada a manutenção"
+                    placeholder='Insira a sigla do estado:'
+                    value={man_uf}
+                    onChange={(event) => setManUf(event.target.value)}
                   />
                 </div>
+                </div>
+              </form>
+            </div>
+
+            <div class="column is-half" style={{width: '80%'}}>
+              <form onSubmit={handleSubmit}>
+
+                <div className="field">
+                  <label className="form-label has-text-black">Cidade:</label>
+
+                  <input
+                    class="input is-small"
+                    type="text"
+                    title="Digite a cidade onde será realizada a manutenção"
+                    placeholder='Insira a cidade'
+                    value={man_cidade}
+                    onChange={(event) => setManCidade(event.target.value)}
+                  />
+                </div>
+
                 <div className="field" >
                   <label className="form-label has-text-black">Rua:</label>
 
@@ -291,31 +338,6 @@ function CadastroManutenção({ setTela }) {
                     onChange={(event) => setManRua(event.target.value)}
                   />
                 </div>
-                <div className="field" >
-                  <label className="form-label has-text-black">Numero: <span className='has-text-danger'>*</span></label>
-                  <input
-                    class="input is-small"
-                    type="text"
-                    title="Digite o número da emrpesa que realizará a manutenção"
-                    placeholder='Insira o Número:'
-                    value={man_numero}
-                    onChange={(event) => setManNumero(event.target.value)}
-                  />
-                </div>
-
-                <div className="field" >
-                  <label className="form-label has-text-black">Complemento: <span className='has-text-danger'>*</span></label>
-                  <input
-                    class="input is-small"
-                    type="text"
-                    title="Digite um complemento. Por exemplo: fundos, bloco, etc."
-                    placeholder='Insira um complemento:'
-                    value={man_complemento}
-                    onChange={(event) => setManComplemento(event.target.value)}
-                  />
-                </div>
-
-
 
                 <div className="field" >
                   <label className="form-label has-text-black">Bairro:</label>
@@ -329,35 +351,17 @@ function CadastroManutenção({ setTela }) {
                     onChange={(event) => setManBairro(event.target.value)}
                   />
                 </div>
-              </form>
-            </div>
-
-            <div class="column is-half">
-              <form onSubmit={handleSubmit}>
-
-                <div className="field" >
-                  <label className="form-label has-text-black">Cidade:</label>
-
+                {/* <div className="field" >
+                  <label className="form-label has-text-black">Quantidade:</label>
+                  
                   <input
                     class="input is-small"
                     type="text"
-                    title="Digite a cidade onde será realizada a manutenção"
-                    placeholder='Insira a cidade'
-                    value={man_cidade}
-                    onChange={(event) => setManCidade(event.target.value)}
+                    placeholder='Insira a Quantidade:'
+                    value={numeroAtivo}
+                    onChange={(event) => setNumAtivo(event.target.value)}
                   />
-                </div>
-                {/* <div className="field" >
-          <label className="form-label has-text-black">Quantidade:</label>
-          
-          <input
-            class="input is-small"
-            type="text"
-            placeholder='Insira a Quantidade:'
-            value={numeroAtivo}
-            onChange={(event) => setNumAtivo(event.target.value)}
-          />
-        </div> */}
+                </div> */}
                 {/* <div class="field">
                   <label class="label has-text-black">Fornecedor:</label>
                   <div class="select is-small">
@@ -367,22 +371,22 @@ function CadastroManutenção({ setTela }) {
                     </select>
                   </div>
                 </div> */}
-                <div className="field" >
-                  <label className="form-label has-text-black">UF:</label>
 
+              </form>
+            </div>
+                
+          </div>
+          <div className="field" style={{ marginInline: '20px', marginBottom: '20px'}}>
+                  <label className="form-label has-text-black" >Complemento: <span className='has-text-danger'>*</span></label>
                   <input
                     class="input is-small"
                     type="text"
-                    title="diigite o estado em que será realizada a manutenção"
-                    placeholder='Insira a sigla do estado:'
-                    value={man_uf}
-                    onChange={(event) => setManUf(event.target.value)}
+                    title="Digite um complemento. Por exemplo: fundos, bloco, etc."
+                    placeholder='Insira um complemento:'
+                    value={man_complemento}
+                    onChange={(event) => setManComplemento(event.target.value)}
                   />
                 </div>
-              </form>
-            </div>
-
-          </div>
         </div>
 
         <div class="field is-grouped is-grouped-centered">
