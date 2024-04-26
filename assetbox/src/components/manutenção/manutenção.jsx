@@ -17,7 +17,7 @@ const Manutencao = ({ setTela }) => {
 
     const handleClick = (id) => {
         localStorage.setItem('id', id)
-        setTela(`VisualizarManutenção`);
+        setTela(`VizualizarManutenção`);
     };
     console.log(manutencoes);
 
