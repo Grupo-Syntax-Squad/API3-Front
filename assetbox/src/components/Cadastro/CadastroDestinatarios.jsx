@@ -16,6 +16,35 @@ function CadastroDestinatarios({ setTela }) {
   const [end_uf, setUfDestinatario] = useState('');
   const [end_cep, setCEPDestinatario] = useState('');
   const [showPopup, setShowPopup] = useState(false); // Estado para controlar a exibição do pop-up
+  
+  const handleTelefone = (value) => {
+    // Remove tudo que não for dígito
+    const onlyNums = value.replace(/[^\d]/g, '');
+
+    if (onlyNums.length <= 10) {
+      // Formata para (xx) xxxx-xxxx
+      return onlyNums.replace(/(\d{2})(\d{4})(\d{4})/, '($1) $2-$3');
+    } else {
+      // Formata para (xx) xxxxx-xxxx
+      return onlyNums.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
+    }
+  };
+
+  const HandleEmail = (value) =>{
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(value);
+  }
+
+  const handleEmailChange = (event) => {
+    const email = event.target.value;
+    setEmailDestinatario(email);
+  };
+
+  const handleTelefoneChange = (event) => {
+    const telefone = event.target.value;
+    const telefoneFormatado = handleTelefone(telefone);
+    setTelefoneDestinatario(telefoneFormatado);
+  };
 
   const handleCepChange = async (event) => {
     const cep = event.target.value;
@@ -38,6 +67,19 @@ function CadastroDestinatarios({ setTela }) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
+    // Verifica se o e-mail está vazio
+    if (des_email.trim() === '') {
+      window.alert('O e-mail não pode estar vazio.');
+      return;
+    }
+
+    // Verifica se o e-mail é válido
+    if (!HandleEmail(des_email)) {
+      window.alert('E-mail inválido.');
+      return;
+    }
+
     const dadosEndereco = {
       end_rua,
       end_numero,
@@ -85,7 +127,7 @@ function CadastroDestinatarios({ setTela }) {
         <h1 className='has-text-weight-light is-size-4'>Dados</h1>
         <form onSubmit={handleSubmit}>
           <div className="field column">
-            <label className="form-label is-size-5">Nome</label>
+            <label className="form-label is-size-5">Nome<span className='obrigatorio'>*</span></label>
             <input
               className="input is-small"
               type="text"
@@ -95,28 +137,28 @@ function CadastroDestinatarios({ setTela }) {
             />
           </div>
           <div className="field column">
-            <label className="form-label is-size-5">Telefone</label>
+            <label className="form-label is-size-5">Telefone <span className='obrigatorio'>*</span></label>
             <input
               className="input is-small"
               type="text"
               placeholder='Digite o número de telefone:'
               value={des_telefone}
-              onChange={(event) => setTelefoneDestinatario(event.target.value)}
+              onChange={handleTelefoneChange}
             />
           </div>
           <div className="field column">
-            <label className="form-label is-size-5">E-mail</label>
+            <label className="form-label is-size-5">E-mail<span className='obrigatorio'>*</span></label>
             <input
               className="input is-small"
               type="text"
               placeholder='Digite o email:'
               value={des_email}
-              onChange={(event) => setEmailDestinatario(event.target.value)}
+              onChange={handleEmailChange}
             />
           </div>
           <h1 className='has-text-weight-light is-size-4'>Endereço</h1>
           <div className="field column">
-            <label className="form-label is-size-5">CEP</label>
+            <label className="form-label is-size-5">CEP<span className='obrigatorio'>*</span></label>
             <input
               className="input is-small"
               type="text"
@@ -126,7 +168,7 @@ function CadastroDestinatarios({ setTela }) {
             />
           </div>
           <div className="field column">
-            <label className="form-label is-size-5">Rua</label>
+            <label className="form-label is-size-5">Rua<span className='obrigatorio'>*</span></label>
             <input
               className="input is-small"
               type="text"
@@ -136,7 +178,7 @@ function CadastroDestinatarios({ setTela }) {
             />
           </div>
           <div className="field column">
-            <label className="form-label is-size-5">Número</label>
+            <label className="form-label is-size-5">Número<span className='obrigatorio'>*</span></label>
             <input
               className="input is-small"
               type="text"
@@ -156,7 +198,7 @@ function CadastroDestinatarios({ setTela }) {
             />
           </div>
           <div className="field column">
-            <label className="form-label is-size-5">Bairro</label>
+            <label className="form-label is-size-5">Bairro<span className='obrigatorio'>*</span></label>
             <input
               className="input is-small"
               type="text"
@@ -166,7 +208,7 @@ function CadastroDestinatarios({ setTela }) {
             />
           </div>
           <div className="field column">
-            <label className="form-label is-size-5">Cidade</label>
+            <label className="form-label is-size-5">Cidade<span className='obrigatorio'>*</span></label>
             <input
               className="input is-small"
               type="text"
@@ -176,7 +218,7 @@ function CadastroDestinatarios({ setTela }) {
             />
           </div>
           <div className="field column">
-            <label className="form-label is-size-5">UF</label>
+            <label className="form-label is-size-5">UF<span className='obrigatorio'>*</span></label>
             <input
               className="input is-small"
               type="text"

@@ -20,6 +20,10 @@ h1{
   font-size: larger;
   padding: 0.5%;
 }
+
+.obrigatorio{
+  color: red;
+}
 /* 
 
 .form-label {
