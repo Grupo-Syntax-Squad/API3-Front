@@ -35,7 +35,9 @@
     --color-txt: var(--light-text);
 } */
 
-
+.calendar-day:hover{
+    background-color: #459eb6;
+}
 .calendar {
     height: max-content;
     width: max-content;

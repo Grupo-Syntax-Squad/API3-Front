@@ -127,7 +127,7 @@ function CadastroDestinatarios({ setTela }) {
         <h1 className='has-text-weight-light is-size-4'>Dados</h1>
         <form onSubmit={handleSubmit}>
           <div className="field column">
-            <label className="form-label is-size-5">Nome<span className='obrigatorio'>*</span></label>
+            <label className="form-label is-size-5">Nome: <span className='has-text-danger'>*</span></label>
             <input
               className="input is-small"
               type="text"
@@ -137,7 +137,7 @@ function CadastroDestinatarios({ setTela }) {
             />
           </div>
           <div className="field column">
-            <label className="form-label is-size-5">Telefone <span className='obrigatorio'>*</span></label>
+            <label className="form-label is-size-5">Telefone: <span className='has-text-danger'>*</span></label>
             <input
               className="input is-small"
               type="text"
@@ -147,7 +147,7 @@ function CadastroDestinatarios({ setTela }) {
             />
           </div>
           <div className="field column">
-            <label className="form-label is-size-5">E-mail<span className='obrigatorio'>*</span></label>
+            <label className="form-label is-size-5">E-mail: <span className='has-text-danger'>*</span></label>
             <input
               className="input is-small"
               type="text"
@@ -158,7 +158,7 @@ function CadastroDestinatarios({ setTela }) {
           </div>
           <h1 className='has-text-weight-light is-size-4'>Endereço</h1>
           <div className="field column">
-            <label className="form-label is-size-5">CEP<span className='obrigatorio'>*</span></label>
+            <label className="form-label is-size-5">CEP: <span className='has-text-danger'>*</span></label>
             <input
               className="input is-small"
               type="text"
@@ -168,7 +168,7 @@ function CadastroDestinatarios({ setTela }) {
             />
           </div>
           <div className="field column">
-            <label className="form-label is-size-5">Rua<span className='obrigatorio'>*</span></label>
+            <label className="form-label is-size-5">Rua: <span className='has-text-danger'>*</span></label>
             <input
               className="input is-small"
               type="text"
@@ -178,7 +178,7 @@ function CadastroDestinatarios({ setTela }) {
             />
           </div>
           <div className="field column">
-            <label className="form-label is-size-5">Número<span className='obrigatorio'>*</span></label>
+            <label className="form-label is-size-5">Número: <span className='has-text-danger'>*</span></label>
             <input
               className="input is-small"
               type="text"
@@ -188,7 +188,7 @@ function CadastroDestinatarios({ setTela }) {
             />
           </div>
           <div className="field column">
-            <label className="form-label is-size-5">Complemento</label>
+            <label className="form-label is-size-5">Complemento: </label>
             <input
               className="input is-small"
               type="text"
@@ -198,7 +198,7 @@ function CadastroDestinatarios({ setTela }) {
             />
           </div>
           <div className="field column">
-            <label className="form-label is-size-5">Bairro<span className='obrigatorio'>*</span></label>
+            <label className="form-label is-size-5">Bairro: <span className='has-text-danger'>*</span></label>
             <input
               className="input is-small"
               type="text"
@@ -208,7 +208,7 @@ function CadastroDestinatarios({ setTela }) {
             />
           </div>
           <div className="field column">
-            <label className="form-label is-size-5">Cidade<span className='obrigatorio'>*</span></label>
+            <label className="form-label is-size-5">Cidade: <span className='has-text-danger'>*</span></label>
             <input
               className="input is-small"
               type="text"
@@ -218,7 +218,7 @@ function CadastroDestinatarios({ setTela }) {
             />
           </div>
           <div className="field column">
-            <label className="form-label is-size-5">UF<span className='obrigatorio'>*</span></label>
+            <label className="form-label is-size-5">UF: <span className='has-text-danger'>*</span></label>
             <input
               className="input is-small"
               type="text"
