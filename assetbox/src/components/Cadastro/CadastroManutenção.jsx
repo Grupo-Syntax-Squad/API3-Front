@@ -30,19 +30,11 @@ function CadastroManutenção({ setTela }) {
       "loc_titulo": ""
     }
   });
-  
+
   useEffect(() => {
     const fetchData = async () => {
       let response = await axios.get('http://localhost:8000/ativos');
       setAtivos(response.data)
-      // let response = await axios.get('http://localhost:8000/localizacoes');
-      // setLocalizacoes(response.data);
-
-      // response = await axios.get('http://localhost:8000/tipos');
-      // setTipos(response.data);
-
-      // response = await axios.get('http://localhost:8000/responsavel');
-      // setManResponsavel(response.data);
     };
 
     fetchData();
@@ -56,8 +48,6 @@ function CadastroManutenção({ setTela }) {
       popup.style.display = 'none';
     }
   }
-
-
 
   // Função para lidar com o envio do formulário
   const handleSubmit = async (event) => {
@@ -74,7 +64,6 @@ function CadastroManutenção({ setTela }) {
       end_complemento: man_complemento
     }
     response = await axios.post('http://localhost:8000/enderecos', EnderecoData)
-
     
     // Enviando ativo
     const ativoData = {
@@ -87,8 +76,6 @@ function CadastroManutenção({ setTela }) {
       man_status,
       man_responsavel
     };
-    console.log(ativoSelecionado)
-    console.log(ativoData);
     
     response = await axios.post('http://localhost:8000/manutencoes', ativoData);
     console.log(response.data);
@@ -97,7 +84,7 @@ function CadastroManutenção({ setTela }) {
     // Limpar campos
     setManEnderecoId('');
     setManAtividade('');
-    setManData();
+    setManData('');
     setManHora('');
     setManLocalizacao('');
     setManId('');
@@ -109,8 +96,26 @@ function CadastroManutenção({ setTela }) {
     setManAtivoId(e.target.value);
     let ativoSelecionado = ativos.find(ativo => ativo.ati_id == e.target.value);
     setAtivo(ativoSelecionado);
-    console.log(ativoSelecionado);
   }
+
+  // Função para lidar com a busca de CEP
+  const handleCepChange = async (event) => {
+    const cep = event.target.value;
+    setManCep(cep);
+
+    if (cep.length === 8) {
+      try {
+        const response = await axios.get(`https://viacep.com.br/ws/${cep}/json/`);
+        const data = response.data;
+        setManRua(data.logradouro);
+        setManBairro(data.bairro);
+        setManCidade(data.localidade);
+        setManUf(data.uf);
+      } catch (error) {
+        console.error('Erro ao buscar o CEP:', error);
+      }
+    }
+  };
 
   return (
     <body>
@@ -119,12 +124,10 @@ function CadastroManutenção({ setTela }) {
           <h2>Cadastro de Manutenção</h2>
         </div>
         <div class="columns m-3">
-
           <div class="column is-half">
             <form onSubmit={handleSubmit}>
               <div className='top-one'>
-
-              <div class="field">
+                <div class="field">
                   <label class="label has-text-black">Status: <span className='has-text-danger'>*</span></label>
                   <div class="select is-small">
                     <select class="is-hovered" onChange={e => setManStatus(e.target.value)}>
@@ -135,10 +138,7 @@ function CadastroManutenção({ setTela }) {
                       <option value="4">Concluída</option>
                     </select>
                   </div>
-                  {/* <img src={adicionar} style={{marginLeft: '10px', width : '15%'}} title="cadastrar novo status"/> */}
                 </div>
-                </div>
-
                 <div className="field" >
                   <label className="form-label has-text-black">Data da manutenção:</label>
                   <input
@@ -149,7 +149,6 @@ function CadastroManutenção({ setTela }) {
                     onChange={(event) => setManData(event.target.value)}
                   />
                 </div>
-
                 <div class="field">
                   <label class="label has-text-black">horario: <span className='has-text-danger'>*</span></label>
                   <input
@@ -171,32 +170,17 @@ function CadastroManutenção({ setTela }) {
                     value={man_atividade}
                     onChange={(event) => setManAtividade(event.target.value)}
                   />
-                  {/* <div class="select is-small">
-                    {tipos && tipos.length > 0 ? (
-                      <select class="is-hovered" onChange={e => setTipoAtivo(tipos.find(tipo => tipo.tip_titulo === e.target.value))}>
-                        <option value="" disabled selected>Selecione um tipo</option>
-                        {tipos.map((tipo) => <option key={tipo.tip_titulo} value={tipo.tip_titulo}>{tipo.tip_titulo}</option>)}
-                      </select>
-                    ) : (
-                      <p>Nenhum tipo disponível</p>
-                    )}
-                  </div>
-                  <img src={adicionar} style={{marginLeft: '10px', width : '15%'}} title="Cadastrar novo tipo"/> */}
                 </div>
-
                 <div class="field">
-
                   <label class="label has-text-black">ativo: <span className='has-text-danger'>*</span></label>
                   <div class="select is-small">
-
                     <select class="is-hovered" onChange={e => handlerAtivo(e)}>
                       {ativos.map((ativo) => (
                         <option value={ativo.ati_id}>{ativo.ati_id} {ativo.ati_titulo}</option>
                       ))}
                     </select>
                   </div>
-                  {/* <img src={adicionar} style={{marginLeft: '10px', width : '15%'}} title="cadastrar novo status"/> */}
-                </div>      
+                </div>
                 <div className="field" >
                   <label className="label has-text-black">Responsavel:</label>
                   <input
@@ -208,7 +192,6 @@ function CadastroManutenção({ setTela }) {
                     onChange={(event) => setManResponsavel(event.target.value)}
                   />
                 </div>
-
                 <div class="field">
                   <label class="label has-text-black">Localização:</label>
                   <input
@@ -219,63 +202,40 @@ function CadastroManutenção({ setTela }) {
                     value={ativoSelecionado.ati_localizacao_id.loc_titulo}
                     onChange={(event) => setManLocalizacao(event.target.value)}
                   />
-                  {/* <div class="select is-small">
-                    {localizacoes && localizacoes.length > 0 ? (
-                      <select class="is-hovered" onChange={e => setLocalizacaoAtivo(localizacoes.find(localizacao => localizacao.loc_titulo === e.target.value))}>
-                        <option value="" disabled selected>Selecione uma localização</option>
-                        {localizacoes.map((localizacao) => <option key={localizacao.loc_titulo} value={localizacao.loc_titulo}>{localizacao.loc_titulo}</option>)}
-                      </select>
-                    ) : (
-                      <p>Nenhuma localização disponível</p>
-                    )}
-                  </div>
-                  <img src={adicionar} style={{marginLeft: '10px', width : '15%'}} title="Cadastrar nova localização"/> */}
                 </div>
-
                 <div className="field" >
-
-                  <div className="field" >
-                    <label className="form-label has-text-black">Observações:</label>
-                    <input
-                      class="input is-small"
-                      type="text"
-                      placeholder='Insira um Complemento:'
-                      title="Digite um complemento para a manutenção, por exemplo: problemas que não serão corrigidos, estado de preservação, etc."
-                      rows="4"
-                      value={man_obs}
-                      onChange={(event) => setManObs(event.target.value)}
-                    />
-                  </div>
+                  <label className="label has-text-black">Observações:</label>
+                  <input
+                    class="input is-small"
+                    type="text"
+                    placeholder='Insira um Complemento:'
+                    title="Digite um complemento para a manutenção, por exemplo: problemas que não serão corrigidos, estado de preservação, etc."
+                    rows="4"
+                    value={man_obs}
+                    onChange={(event) => setManObs(event.target.value)}
+                  />
                 </div>
-
-              
+              </div>
             </form>
           </div>
         </div>
-
         <h1>Endereço</h1>
-
-        <div class="mid-page" >
-
+        <div class="mid-page">
           <div class="columns m-3">
-
-
             <div class="column is-half" style={{width: '20%'}}>
-                <form onSubmit={handleSubmit}>
-                  <div>
+              <form onSubmit={handleSubmit}>
+                <div>
                   <div className="field" >
                     <label className="form-label has-text-black">CEP:</label>
-
                     <input
                       class="input is-small"
                       type="text"
                       title="Digite o cep de onde será realizada a manutenção"
                       placeholder='Digite o cep:'
                       value={man_cep}
-                      onChange={(event) => setManCep(event.target.value)}
+                      onChange={handleCepChange}
                     />
                   </div>
-
                   <div className="field" >
                     <label className="form-label has-text-black">Numero: <span className='has-text-danger'>*</span></label>
                     <input
@@ -286,30 +246,25 @@ function CadastroManutenção({ setTela }) {
                       value={man_numero}
                       onChange={(event) => setManNumero(event.target.value)}
                     />
-                </div>
-
-                <div className="field" >
-                  <label className="form-label has-text-black">UF:</label>
-
-                  <input
-                    class="input is-small"
-                    type="text"
-                    title="diigite o estado em que será realizada a manutenção"
-                    placeholder='Insira a sigla do estado:'
-                    value={man_uf}
-                    onChange={(event) => setManUf(event.target.value)}
-                  />
-                </div>
+                  </div>
+                  <div className="field" >
+                    <label className="form-label has-text-black">UF:</label>
+                    <input
+                      class="input is-small"
+                      type="text"
+                      title="diigite o estado em que será realizada a manutenção"
+                      placeholder='Insira a sigla do estado:'
+                      value={man_uf}
+                      onChange={(event) => setManUf(event.target.value)}
+                    />
+                  </div>
                 </div>
               </form>
             </div>
-
             <div class="column is-half" style={{width: '80%'}}>
               <form onSubmit={handleSubmit}>
-
                 <div className="field">
                   <label className="form-label has-text-black">Cidade:</label>
-
                   <input
                     class="input is-small"
                     type="text"
@@ -319,10 +274,8 @@ function CadastroManutenção({ setTela }) {
                     onChange={(event) => setManCidade(event.target.value)}
                   />
                 </div>
-
                 <div className="field" >
                   <label className="form-label has-text-black">Rua:</label>
-
                   <input
                     class="input is-small"
                     type="text"
@@ -332,10 +285,8 @@ function CadastroManutenção({ setTela }) {
                     onChange={(event) => setManRua(event.target.value)}
                   />
                 </div>
-
                 <div className="field" >
                   <label className="form-label has-text-black">Bairro:</label>
-
                   <input
                     class="input is-small"
                     type="text"
@@ -345,32 +296,7 @@ function CadastroManutenção({ setTela }) {
                     onChange={(event) => setManBairro(event.target.value)}
                   />
                 </div>
-                {/* <div className="field" >
-                  <label className="form-label has-text-black">Quantidade:</label>
-                  
-                  <input
-                    class="input is-small"
-                    type="text"
-                    placeholder='Insira a Quantidade:'
-                    value={numeroAtivo}
-                    onChange={(event) => setNumAtivo(event.target.value)}
-                  />
-                </div> */}
-                {/* <div class="field">
-                  <label class="label has-text-black">Fornecedor:</label>
-                  <div class="select is-small">
-                    <select class="is-hovered">
-                      <option></option>
-                      <option></option>
-                    </select>
-                  </div>
-                </div> */}
-
-              </form>
-            </div>
-                
-          </div>
-          <div className="field" style={{ marginInline: '20px', marginBottom: '20px'}}>
+                <div className="field" style={{ marginInline: '20px', marginBottom: '20px'}}>
                   <label className="form-label has-text-black" >Complemento: <span className='has-text-danger'>*</span></label>
                   <input
                     class="input is-small"
@@ -381,8 +307,10 @@ function CadastroManutenção({ setTela }) {
                     onChange={(event) => setManComplemento(event.target.value)}
                   />
                 </div>
+              </form>
+            </div>
+          </div>
         </div>
-
         <div class="field is-grouped is-grouped-centered">
           <p class="control">
             <button class="button is-primary" type="submit" formMethod='POST' onClick={handleSubmit}>
@@ -400,7 +328,6 @@ function CadastroManutenção({ setTela }) {
               <p className='is-size-4' onClick={() => setTela('Manutenções')}>OK</p>
             </button>
           </div>
-
         </div>
       </div>
     </body>

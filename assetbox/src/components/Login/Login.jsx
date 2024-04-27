@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
+// import React, { useEffect, useState } from 'react';
+import React from 'react';
 import './login.css';
 import logo from '../../assets/img/Logo.svg';
-import axios from 'axios';
+// import axios from 'axios';
 
 const Login = ({ setTela }) => {
-    const [assets, setAssets] = useState([]);
+
     return (
         <body class='fundo  is-flex is-align-items-center is-justify-content-center '>
             <div class='is-flex is-justify-content-center'>
@@ -25,7 +26,7 @@ const Login = ({ setTela }) => {
                         <p className='mt-2 ml-6 is-size-4 has-text-weight-medium'>Senha</p>
                         <input class="input-cinza mb-6 is-medium is-flex-grow-4 is-rounded" type="text" placeholder='Digite sua Senha:' style={{ width: '100%' }} />
                     </div>
-                    <button class='button is-flex m-auto' style={{ backgroundColor: '#D9D9D9', color: '#6a6a6a' }}>Entrar</button>
+                    <button class='button is-flex m-auto' style={{ backgroundColor: '#D9D9D9', color: '#6a6a6a' }} onClick={() => setTela('Home')}>Entrar</button>
                 </div>
             </div>
 

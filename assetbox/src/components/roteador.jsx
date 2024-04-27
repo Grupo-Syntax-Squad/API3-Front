@@ -8,21 +8,30 @@ import CadastroAtivos from "./Cadastro/CadastroAtivos";
 import CadastroManutenção from "./Cadastro/CadastroManutenção";
 import CadastroDestinatarios from "./Cadastro/CadastroDestinatarios";
 import Login from "./Login/Login";
+import Calendario from "./Manutenção/Calendario";
 import Home from "./home";
-import Manutencao from "./manutenção/manutenção";
+import Manutencao from "./Manutenção/Manutenção";
 import VisualizarManutencao from "./Visualizar/VisualizarManutenção";
 
+
 export default function Roteador(){
-    const [tela, setTela] = useState('Home')
+    const [tela, setTela] = useState('Login')
     const selecionarView = (valor, e) => {
         e.preventDefault()
         setTela(valor)
         console.log(valor);
-        
     }
     const botoes = ['Home', 'Destinatarios', 'Ativos', 'Manutenções', 'Dashboard', 'Configurações'];
+
     const construirView = () => {
-        if (tela === 'Home') {
+        
+        if (tela === 'Login') {
+            return(
+                <Login setTela={setTela}/>
+            )
+        }
+
+        else if (tela === 'Home') {
             return (
                 <>
                     <Menu seletorView={selecionarView} botoes={botoes} />
@@ -101,6 +110,13 @@ export default function Roteador(){
                 </>
             )
         }
+
+        else if (tela === 'VisualizarAgendamento'){
+            return (
+                <>
+                    <Menu seletorView={selecionarView} botoes={botoes} />
+                    <Calendario setTela={setTela}/>
+
         else if (tela === 'VizualizarManutenção') {
             return (
                 <>
