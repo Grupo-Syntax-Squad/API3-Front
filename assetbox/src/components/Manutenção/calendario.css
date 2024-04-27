@@ -35,15 +35,21 @@
     --color-txt: var(--light-text);
 } */
 
+.tela-content{
+    border-radius: 10px;
+    margin-top: 20px;
+    margin-right: 30px;
+    overflow: auto;
+    padding-bottom: 72%;
+}
 .calendar-day:hover{
     background-color: #459eb6;
 }
 .calendar {
     height: max-content;
     width: max-content;
-    background-color: var(--bg-main);
     border-radius: 30px;
-    padding: 20px;
+    padding: px;
     position: relative;
     overflow: hidden;
 }
@@ -299,10 +305,13 @@
 }
 
 .tela{
-    
-    background-color: #D9D9D9;
+    align-items: stretch;
+    border-radius: 20px;
+    justify-content: space-around;
+    background-color: #D9D9D9; 
     margin: 5% 10% 5% 10%;
     padding-bottom: 0.5%;
+
   }
 
 pre{

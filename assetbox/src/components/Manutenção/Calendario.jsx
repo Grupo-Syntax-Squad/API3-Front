@@ -18,6 +18,7 @@ const Calendario = () => {
     const [calendarDays, setCalendarDays] = useState([]);
     const [manutencoes, setManutencoes] = useState([]);
     const [selectedDate, setSelectedDate] = useState(null);
+    const [selectedManutencoes, setSelectedManutencoes] = useState([]);
 
     useEffect(() => {
         generateCalendar(currMonth, currYear);
@@ -32,6 +33,20 @@ const Calendario = () => {
                 console.error('Houve um erro ao buscar as manutenções!', error);
             });
     }, []);
+
+    useEffect(() => {
+        if (selectedDate !== null) {
+            const filteredManutencoes = manutencoes.filter(manut => {
+                const manutDate = new Date(manut.man_data);
+                return (
+                    manutDate.getDate() === selectedDate &&
+                    manutDate.getMonth() === currMonth &&
+                    manutDate.getFullYear() === currYear
+                );
+            });
+            setSelectedManutencoes(filteredManutencoes);
+        }
+    }, [selectedDate, manutencoes, currMonth, currYear]);
 
     const generateCalendar = (month, year) => {
         const days_of_month = [31, getFebDays(year), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
@@ -68,28 +83,56 @@ const Calendario = () => {
         setSelectedDate(day);
     };
 
-    const filteredManutencoes = manutencoes.filter(manut => {
-        const manutDate = new Date(manut.date); // Assuming your API returns the manutencao date
-        return manutDate.getDate() === selectedDate && manutDate.getMonth() === currMonth && manutDate.getFullYear() === currYear;
-    });
+    // Função para formatar a data e hora da manutenção
+    const formatDateTime = (dateTimeStr) => {
+        const dateTime = new Date(dateTimeStr);
+        const dateStr = `${dateTime.getDate()}/${dateTime.getMonth() + 1}/${dateTime.getFullYear()}`;
+        const timeStr = `${String(dateTime.getHours()).padStart(2, '0')}:${String(dateTime.getMinutes()).padStart(2, '0')}`;
+        return { dateStr, timeStr };
+    };
+
+    const formatDate = (dateString) => {
+        const date = new Date(dateString);
+        const formattedDate = date.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric' });
+        return formattedDate;
+    };
+
+    // Função para agrupar manutenções por hora
+    const groupManutencoesByHour = () => {
+        const groupedManutencoes = {};
+
+        // Agrupar manutenções por hora
+        selectedManutencoes.forEach(manut => {
+            const { dateStr, timeStr } = formatDateTime(manut.man_data);
+            if (!groupedManutencoes[timeStr]) {
+                groupedManutencoes[timeStr] = [];
+            }
+            groupedManutencoes[timeStr].push({
+                ...manut,
+                dateStr, // Adicionando data formatada ao objeto da manutenção
+            });
+        });
+
+        return groupedManutencoes;
+    };
 
     return (
-        <div class="tela columns">
-            <div class="calendar column is-half">
-                <div class="calendar-header">
-                    <span class="month-picker" id="month-picker">{month_names[currMonth]}</span>
-                    <div class="year-picker">
-                        <span class="year-change" id="prev-month" onClick={() => changeMonth(-1)}>
+        <div className="tela columns">
+            <div className="calendar column is-half">
+                <div className="calendar-header">
+                    <span className="month-picker" id="month-picker">{month_names[currMonth]}</span>
+                    <div className="year-picker">
+                        <span className="year-change" id="prev-month" onClick={() => changeMonth(-1)}>
                             <pre>{'<'}</pre>
                         </span>
                         <span id="year">{currYear}</span>
-                        <span class="year-change" id="next-month" onClick={() => changeMonth(1)}>
+                        <span className="year-change" id="next-month" onClick={() => changeMonth(1)}>
                             <pre>{'>'}</pre>
                         </span>
                     </div>
                 </div>
-                <div class="calendar-body">
-                    <div class="calendar-week-day">
+                <div className="calendar-body">
+                    <div className="calendar-week-day">
                         <div>Dom</div>
                         <div>Seg</div>
                         <div>Ter</div>
@@ -98,7 +141,7 @@ const Calendario = () => {
                         <div>Sex</div>
                         <div>Sab</div>
                     </div>
-                    <div class="calendar-days">
+                    <div className="calendar-days">
                         {calendarDays.map((day, index) => (
                             <div key={index} className={`calendar-day ${day !== null ? 'active' : ''}`} onClick={() => handleDayClick(day)}>
                                 {day}
@@ -106,20 +149,31 @@ const Calendario = () => {
                         ))}
                     </div>
                 </div>
-                <div class="month-list"></div>
+                <div className="month-list"></div>
             </div>
-            <div class="listas column">
-                <label class="textarea"> </label>
-                {selectedDate && (
-                    <div>
-                        <h3>Manutenções em {selectedDate}/{currMonth + 1}/{currYear}:</h3>
-                        <ul>
-                            {filteredManutencoes.map((manut, index) => (
-                                <li key={index}>{manut.descricao} - {manut.horario}</li> // Assuming your manutencao object has descricao and horario properties
+            <div className="listas column">
+                <label className="textarea tela-content">
+                    {selectedDate && (
+                        <div>
+                            <h3 className='has-text-black'>Manutenções em {selectedDate}/{currMonth + 1}/{currYear}:</h3><br/>
+                            {Object.entries(groupManutencoesByHour()).map(([hour, manutencoes]) => (
+                                <div key={hour}>
+                                    <ul>
+                                        {manutencoes.map((manut, index) => (
+                                            <li key={index}>
+                                                <strong>Descrição:</strong> {manut.man_atividade}<br />
+                                                <strong>Data da Manutenção:</strong> {formatDate(manut.man_data)}<br/>
+                                                <strong>Horário:</strong> {manut.man_horario}<br />
+                                                <strong>Status:</strong> {manut.man_status}<br />
+                                                <strong>Responsável:</strong> {manut.man_responsavel}<br />
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
                             ))}
-                        </ul>
-                    </div>
-                )}
+                        </div>
+                    )}
+                </label>
             </div>
         </div>
     );

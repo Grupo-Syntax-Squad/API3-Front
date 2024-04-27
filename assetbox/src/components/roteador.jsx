@@ -33,8 +33,7 @@ export default function Roteador(){
             return (
                 <>
                     <Menu seletorView={selecionarView} botoes={botoes} />
-                    {/* <Home setTela={setTela}/> */}
-                    <Calendario setTela={setTela}/>
+                    <Home setTela={setTela}/>
                 </>
             )
         }
@@ -106,6 +105,14 @@ export default function Roteador(){
                 <>
                     <Menu  seletorView={selecionarView} botoes={botoes} />
                     <CadastroManutenção setTela={setTela} />
+                </>
+            )
+        }
+        else if (tela === 'VisualizarAgendamento'){
+            return (
+                <>
+                    <Menu seletorView={selecionarView} botoes={botoes} />
+                    <Calendario setTela={setTela}/>
                 </>
             )
         }
