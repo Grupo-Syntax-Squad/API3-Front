@@ -10,7 +10,9 @@ import CadastroDestinatarios from "./Cadastro/CadastroDestinatarios";
 import Login from "./Login/Login";
 import Calendario from "./Manutenção/Calendario";
 import Home from "./home";
-import Manutencao from "./Manutenção/manutenção";
+import Manutencao from "./Manutenção/Manutenção";
+import VisualizarManutencao from "./Visualizar/VisualizarManutenção";
+
 
 export default function Roteador(){
     const [tela, setTela] = useState('Login')
@@ -108,11 +110,18 @@ export default function Roteador(){
                 </>
             )
         }
+
         else if (tela === 'VisualizarAgendamento'){
             return (
                 <>
                     <Menu seletorView={selecionarView} botoes={botoes} />
                     <Calendario setTela={setTela}/>
+
+        else if (tela === 'VizualizarManutenção') {
+            return (
+                <>
+                    <Menu  seletorView={selecionarView} botoes={botoes} />
+                    <VisualizarManutencao setTela={setTela} />
                 </>
             )
         }
