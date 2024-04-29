@@ -27,7 +27,6 @@ function VisualizarManutencao({ setTela }) {
 
     fetchData();
   }, []);
-
   function exibirPopUpDelecao() {
     var popup = document.getElementById('popupdelecao');
     if (popup.style.display === 'none') {

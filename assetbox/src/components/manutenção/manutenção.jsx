@@ -81,6 +81,7 @@ const Manutencao = ({ setTela }) => {
                         )}
                         {dadosFiltrados.map((manutencao) => (
                             <div key={manutencao.man_id} onClick={() => handleClick(manutencao.man_id)} className='asset is-flex is-justify-content-center'>
+                                
                                 <div className='SemHover column is-one-fifth mr-2 dado-ativo is-flex is-justify-content-center is-align-items-center has-text-weight-medium'>
                                     <p className='has-text-black'>{new Date(manutencao.man_data).toLocaleDateString()}</p>
                                 </div>

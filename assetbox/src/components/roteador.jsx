@@ -119,7 +119,7 @@ export default function Roteador(){
                 </>
                 )}
 
-        else if (tela === 'VizualizarManutenção') {
+        else if (tela === 'VisualizarManutenção') {
             return (
                 <>
                     <Menu  seletorView={selecionarView} botoes={botoes} />
