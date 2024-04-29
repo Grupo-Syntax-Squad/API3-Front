@@ -32,6 +32,7 @@ function CadastroAtivos({ setTela }) {
   const [ati_data_cadastro, setCadastroAtivo] = useState(new Date());
   const [ati_data_validade, setValidadeAtivo] = useState('');
   const [imagemSelecionada, setImagemSelecionada] = useState(null);
+  const [documentoSelecionado, setDocumentoSelecionado] = useState(null);
   const [localizacoes, setLocalizacoes] = useState([]);
   const [tipos, setTipos] = useState([]);
   const [destinatarios, setDestinatarios] = useState([]);
@@ -64,6 +65,10 @@ function CadastroAtivos({ setTela }) {
     setImagemSelecionada(event.target.files[0]);
   };
 
+  const handleDocumentoChange = (event) => {
+    setDocumentoSelecionado(event.target.files[0]);
+  }
+
   // Função para lidar com o envio do formulário
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -76,6 +81,15 @@ function CadastroAtivos({ setTela }) {
       formData.append('file', imagemSelecionada);
       response = await axios.post('http://localhost:8000/imagens', formData);
       ati_imagem_id = response.data;
+    }
+
+    let ati_documento_id = null;
+    if (documentoSelecionado != null){
+      //Enviando Documento
+      const formData = new FormData();
+      formData.append('file', documentoSelecionado);
+      response = await axios.post('http://localhost:8000/documentos', formData);
+      ati_documento_id = response.data
     }
 
     const localizacaoData = {
@@ -92,7 +106,7 @@ function CadastroAtivos({ setTela }) {
     response = await axios.post('http://localhost:8000/tipos', tipoData);
     const ati_tipo_id = response.data;
 
-    
+
     // Enviando ativo
     const ativoData = {
       ati_localizacao_id,
@@ -118,6 +132,7 @@ function CadastroAtivos({ setTela }) {
       ati_tamanho,
       ati_data_cadastro,
       ati_imagem_id,
+      ati_documento_id,
       ati_observacao
     };
     console.log(ativoData);
@@ -145,6 +160,7 @@ function CadastroAtivos({ setTela }) {
     setTituloAtivo('');
     setNumAtivo('');
     setImagemSelecionada(null);
+    setDocumentoSelecionado(null)
   };
 
   return (
@@ -154,7 +170,7 @@ function CadastroAtivos({ setTela }) {
           <h2>Cadastro de Ativos</h2>
         </div>
         <div class="columns m-3">
-          
+
           <div class="column is-half has-text-centered"> <img src={imgadd} alt="imgadd" style={{ width: '100px', height: '100px' }} />
             <div>
               <input className='image-button' type='file' id='img' name="img" accept="image/*" onChange={handleImageChange} />
@@ -420,6 +436,11 @@ function CadastroAtivos({ setTela }) {
 
         <h1>Documentos</h1>
         <div className="columns m-3">
+          <div class="column is-half has-text-centered"><img src={docadd} alt="docadd" style={{ width: '100px', height: '100px' }} />.
+            <div>
+              <input className='image-button' type='file' id='doc' name="doc" accept="doc/*" onChange={handleDocumentoChange}/>
+            </div>
+          </div>
 
           <div class='column is-half'>
             <form className='documentos-ativo' onSubmit={handleSubmit}>
