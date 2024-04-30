@@ -15,8 +15,9 @@ const Login = ({ setTela }) => {
                 email: email,
                 senha: senha
             }).then(response => {
-                localStorage.getItem("token", response.data);
-                setTela("Home")
+                localStorage.setItem("token", response.data);
+                console.log("login", localStorage.getItem("token"), "data", new Date())
+                window.location.replace("http://localhost:3000")
             })
         } catch (e) {
             alert("Login falhou!")

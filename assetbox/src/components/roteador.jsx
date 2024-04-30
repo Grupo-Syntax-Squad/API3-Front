@@ -15,7 +15,7 @@ import VisualizarManutencao from "./Visualizar/VisualizarManutenção";
 import axios from "axios";
 
 export default function Roteador() {
-    const [tela, setTela] = useState('Login');
+    const [tela, setTela] = useState('Home');
     const [verificacaoToken, setVerificacaoToken] = useState("");
 
     useEffect(() => {
@@ -24,12 +24,17 @@ export default function Roteador() {
 
     const verificarToken = async () => {
         let token = localStorage.getItem("token");
-
+        console.log(token);
         if (token === null || token === "") setVerificacaoToken(false);
         else {
-            let response = await axios.post("http://localhost:8000/autenticacao/verificarToken", token);
-            if (response.data) setVerificacaoToken(true);
-            else {
+            try {
+                let response = await axios.post("http://localhost:8000/autenticacao/verificarToken", token);
+                if (response.data) setVerificacaoToken(true);
+                else {
+                    localStorage.setItem("token", null);
+                    setVerificacaoToken(false);
+                }
+            } catch (e) {
                 localStorage.setItem("token", null);
                 setVerificacaoToken(false);
             }
@@ -60,7 +65,7 @@ export default function Roteador() {
                         <Home setTela={setTela} />
                     </>
                 )
-            } else return <p>É necessário realizar o login para continuar para a página desejada!</p>
+            } else return <Login setTela={setTela} />
         }
 
         else if (tela === 'Ativos') {
