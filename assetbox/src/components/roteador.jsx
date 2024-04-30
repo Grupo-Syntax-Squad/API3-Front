@@ -1,18 +1,19 @@
 import { useEffect, useState } from "react";
 import Menu from "./Navegação/Menu";
 import Ativos from "./Ativos/Ativos";
-import Destinatarios from './Destinatario/Destinatarios'
+import Destinatarios from './Usuarios/Usuarios'
 import VisualizarAtivos from "./Visualizar/VisualizarAtivos";
 import VisualizarDestinatarios from "./Visualizar/VisualizarDestinatarios";
 import CadastroAtivos from "./Cadastro/CadastroAtivos";
 import CadastroManutenção from "./Cadastro/CadastroManutenção";
-import CadastroDestinatarios from "./Cadastro/CadastroDestinatarios";
+import CadastroDestinatarios from "./Cadastro/CadastroDestinatario";
 import Login from "./Login/Login";
 import Calendario from "./Manutenção/Calendario";
 import Home from "./home";
 import Manutencao from "./Manutenção/manutenção";
 import VisualizarManutencao from "./Visualizar/VisualizarManutenção";
 import axios from "axios";
+import CadastroAdministrador from "./Cadastro/CadastroAdmin";
 
 export default function Roteador() {
     const [tela, setTela] = useState('Login');
@@ -103,6 +104,17 @@ export default function Roteador() {
                     </>
                 )
             } else return <p>É necessário realizar o login para continuar para a página desejada!</p>
+        }
+
+        else if (tela === 'CadastroAdministrador'){
+            if (verificacaoToken) {
+                return(
+                    <>
+                        <Menu seletorView={selecionarView} botoes={botoes}/>
+                        <CadastroAdministrador setTela={setTela} />
+                    </>
+                )
+            }
         }
 
         else if (tela === 'VisualizarAtivo') {
