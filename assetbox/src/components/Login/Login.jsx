@@ -9,13 +9,16 @@ const Login = ({ setTela }) => {
 
     const handleSubmit = async () => {
         try {
-            let response = await axios.post("http://localhost:8000/autenticacao/login", {
+
+            await axios.post("http://localhost:8000/autenticacao/login", {
                 email: email,
                 senha: senha
-            });
-            localStorage.setItem("token", response.data);
-            setTela("Home")
-        } catch(e) {
+            }).then(response => {
+                localStorage.setItem("token", response.data);
+                console.log("login", localStorage.getItem("token"), "data", new Date())
+                window.location.replace("http://localhost:3000")
+            })
+        } catch (e) {
             alert("Login falhou!")
             localStorage.setItem("token", null)
         }
@@ -28,7 +31,7 @@ const Login = ({ setTela }) => {
             </div>
             <div class='page-full is-flex is-justify-content-center' style={{
                 backgroundColor: 'rgba(217, 217, 217, 0.2)', width: '50%', height: '50%',
-                }}>
+            }}>
                 <div class='field-login is-justify-content-center m-auto'>
                     <div class='is-flex justify-content-center'>
                         <h3 class=' is-flex is-size-3 has-text-weight-bold m-auto'>Login</h3>
@@ -39,7 +42,7 @@ const Login = ({ setTela }) => {
                     </div>
                     <div>
                         <p className='mt-2 ml-6 is-size-4 has-text-weight-medium entra'>Senha</p>
-                        <input class="input-cinza mb-6 is-medium is-flex-grow-4 is-rounded" type="text" placeholder='Digite sua Senha:' style={{ width: '100%' }} onChange={(e) => setSenha(e.target.value)}/>
+                        <input class="input-cinza mb-6 is-medium is-flex-grow-4 is-rounded" type="text" placeholder='Digite sua Senha:' style={{ width: '100%' }} onChange={(e) => setSenha(e.target.value)} />
                     </div>
                     <button class='button is-flex m-auto' style={{ backgroundColor: '#D9D9D9', color: '#6a6a6a' }} onClick={() => handleSubmit()}>Entrar</button>
                 </div>
