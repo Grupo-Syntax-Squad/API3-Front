@@ -63,7 +63,7 @@ function VisualizarManutencao({ setTela }) {
       <body>
         <div class='page-full'>
           <div class='field'>
-            <h2>{dadosManutencao.man_titulo}</h2>
+            <h2>{dadosManutencao.man_atividade}</h2>
           </div>
           <h1 className='has-text-weight-light'>Dados</h1>
           <div class="columns m-3">
@@ -73,7 +73,7 @@ function VisualizarManutencao({ setTela }) {
                 <div className='columns'>
 
                   <div class="field column ">
-                    <label class="form-label">atividade</label>
+                    <label class="form-label">Atividade</label>
                     <input
                       class="input is-small"
                       type="text"
@@ -96,8 +96,8 @@ function VisualizarManutencao({ setTela }) {
                   <div class="field column">
                     <label class="form-label">Localização</label><br />
                     <div class="select is-small">
-                      <select class="is-hovered" value={dadosManutencao.ati_localizacao_id} disabled>
-                        <option>{dadosManutencao.ati_localizacao_id?.loc_titulo}</option>
+                      <select class="is-hovered" value={dadosManutencao.man_ativo_id.ati_localizacao_id} disabled>
+                        <option>{dadosManutencao.man_ativo_id.ati_localizacao_id?.loc_titulo}</option>
                         <option></option>
                       </select>
                     </div>
@@ -122,7 +122,7 @@ function VisualizarManutencao({ setTela }) {
                   <input
                     class="input is-small"
                     type="text"
-                    value={dadosManutencao.ati_titulo}
+                    value={dadosManutencao.man_ativo_id.ati_titulo}
                     disabled
                   />
                 </div>
@@ -134,7 +134,7 @@ function VisualizarManutencao({ setTela }) {
                     class="input is-small"
                     type="text"
                     rows="4"
-                    value={dadosManutencao.man_complemento}
+                    value={dadosManutencao.man_ativo_id.ati_complemento}
                     disabled
                   />
                 </div>
@@ -152,7 +152,7 @@ function VisualizarManutencao({ setTela }) {
               <div class="column">
                 <div className='columns'>
                   <div className="field column" >
-                    <label className="form-label">horario</label>
+                    <label className="form-label">Horário</label>
 
                     <input
                       class="input is-small"
@@ -162,33 +162,33 @@ function VisualizarManutencao({ setTela }) {
                     />
                   </div>
                   <div className="field column" >
-                    <label className="form-label">data</label>
+                    <label className="form-label">Data</label>
 
                     <input
                       class="input is-small"
                       type="text"
-                      value={dadosManutencao.man_data}
+                      value={new Date(dadosManutencao.man_data).toDateString()}
                       disabled
                     />
                   </div>
                   <div className="field column" >
-                    <label className="form-label"> ativo id</label>
+                    <label className="form-label">ID do ativo</label>
 
                     <input
                       class="input is-small"
                       type="text"
-                      value={dadosManutencao.man_ativo_id}
+                      value={dadosManutencao.man_ativo_id.ati_id}
                       disabled
 
                     />
                   </div>
                   <div className="field column" >
-                    <label className="form-label"> cidade</label>
+                    <label className="form-label">Cidade</label>
 
                     <input
                       class="input is-small"
                       type="text"
-                      value={dadosManutencao.man_cidade}
+                      value={dadosManutencao.man_endereco_id.end_cidade}
                       disabled
 
                     />
@@ -197,35 +197,35 @@ function VisualizarManutencao({ setTela }) {
 
                 <div className='columns'>
                   <div className="field column" >
-                    <label className="form-label">cep</label>
+                    <label className="form-label">CEP</label>
 
                     <input
                       class="input is-small"
                       type="text"
-                      value={dadosManutencao.man_cep}
+                      value={dadosManutencao.man_endereco_id.end_cep}
                       disabled
 
                     />
                   </div>
 
                   <div className="field column" >
-                    <label className="form-label">estado</label>
+                    <label className="form-label">Estado</label>
 
                     <input
                       class="input is-small"
                       type="text"
-                      value={dadosManutencao.man_uf}
+                      value={dadosManutencao.man_endereco_id.end_uf}
                       disabled
 
                     />
                   </div>
                   <div className="field column" >
-                    <label className="form-label">rua</label>
+                    <label className="form-label">Rua</label>
 
                     <input
                       class="input is-small"
                       type="text"
-                      value={dadosManutencao.man_rua}
+                      value={dadosManutencao.man_endereco_id.end_rua}
                       disabled
                     />
                   </div>
@@ -234,12 +234,12 @@ function VisualizarManutencao({ setTela }) {
 
                 <div className='columns'>
                   <div className="field column" >
-                    <label className="form-label">bairro</label>
+                    <label className="form-label">Bairro</label>
 
                     <input
                       class="input is-small"
                       type="text"
-                      value={dadosManutencao.man_bairro}
+                      value={dadosManutencao.man_endereco_id.end_bairro}
                       disabled
                     />
                   </div>
