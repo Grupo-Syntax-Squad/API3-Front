@@ -37,7 +37,7 @@ const Login = ({ setTela }) => {
                         <h3 class=' is-flex is-size-3 has-text-weight-bold m-auto'>Login</h3>
                     </div>
                     <div>
-                        <p className='mt-6 ml-6 is-size-4 has-text-weight-medium entra'>Nome</p>
+                        <p className='mt-6 ml-6 is-size-4 has-text-weight-medium entra'>E-mail</p>
                         <input class="input-cinza mb-6 is-medium is-flex-grow-4 is-rounded" type="text" placeholder='Digite seu Nome:' style={{ width: '100%' }} onChange={(e) => setEmail(e.target.value)} />
                     </div>
                     <div>

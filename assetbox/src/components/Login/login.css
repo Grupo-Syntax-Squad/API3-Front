@@ -20,7 +20,7 @@ h3, p{
 }
 
 .entra{
-    background-color: transparent;
+    background-color: transparent !important;
 }
 
 .input-cinza{
