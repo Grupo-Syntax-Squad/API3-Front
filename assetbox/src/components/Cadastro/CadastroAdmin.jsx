@@ -6,6 +6,7 @@ function CadastroAdministrador({ setTela }) {
     const [adm_nome, setNomeAdministrador] = useState('');
     const [adm_email, setEmailAdministrador] = useState('');
     const [adm_telefone, setTelefoneAdministrador] = useState('');
+    const [adm_senha, setSenhaAdministrador] = useState('');
     const [showPopup, setShowPopup] = useState(false); // Estado para controlar a exibição do pop-up
 
     const handleTelefone = (value) => {
@@ -57,6 +58,7 @@ function CadastroAdministrador({ setTela }) {
         const dadosAdministrador = {
             adm_nome: adm_nome,
             adm_email: adm_email,
+            adm_senha: adm_senha,
             adm_telefone: adm_telefone
         };
 
@@ -65,10 +67,10 @@ function CadastroAdministrador({ setTela }) {
         console.log("Administrador:", response.data);
 
         setShowPopup(true); // Exibe o pop-up após o cadastro
-
         setNomeAdministrador('');
         setTelefoneAdministrador('');
         setEmailAdministrador('');
+        setSenhaAdministrador('');
     };
 
     return (
@@ -115,6 +117,16 @@ function CadastroAdministrador({ setTela }) {
                                     onChange={handleEmailChange}
                                 />
                             </div>
+                            <div className="field column">
+                                <label className="form-label is-size-5">Senha: <span className='has-text-danger'>*</span></label>
+                                <input
+                                    className="input is-small"
+                                    type="text"
+                                    placeholder='Crie uma senha:'
+                                    value={adm_senha}
+                                    onChange={(event) => setSenhaAdministrador(event.target.value)}
+                                />
+                            </div>
                         </div>
                     </div>
                     <div className="field is-grouped is-grouped-centered">
@@ -124,7 +136,7 @@ function CadastroAdministrador({ setTela }) {
                             </button>
                         </p>
                         <p className="control">
-                            <button className="button is-light" onClick={() => setTela('Destinatarios')}>
+                            <button className="button is-light" onClick={() => setTela('Usuarios')}>
                                 Cancelar
                             </button>
                         </p>

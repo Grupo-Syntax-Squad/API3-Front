@@ -155,10 +155,6 @@ function CadastroDestinatarios({ setTela }) {
                   onChange={handleTelefoneChange}
                 />
               </div>
-              <div class="field column">
-                <label class="form-label is-size-5">Selecione o Tipo de Usuário: <span className='has-text-danger mr-3'>*</span></label>
-                {/* <img src={adicionar} style={{marginLeft: '10px', width : '15%'}} title="cadastrar novo status"/> */}
-              </div>
               <div className="field column">
                 <label className="form-label is-size-5">E-mail: <span className='has-text-danger'>*</span></label>
                 <input

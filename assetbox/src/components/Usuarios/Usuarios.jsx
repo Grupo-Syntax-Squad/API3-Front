@@ -3,7 +3,7 @@ import Filtro from '../../assets/img/filtro.svg';
 import './usuarios.css';
 import axios from 'axios';
 
-const Destinatarios = ({ setTela }) => {
+const Usuarios = ({ setTela }) => {
     const [destinatarios, setdestinatarios] = useState([]);
     const[administradores, setAdministradores] = useState([])
     const [filtroNome, setNomes] = useState('')
@@ -101,5 +101,5 @@ const Destinatarios = ({ setTela }) => {
         </body >
     );
 }
-export default Destinatarios;
+export default Usuarios;
 

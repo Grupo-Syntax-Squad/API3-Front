@@ -267,17 +267,17 @@ function VisualizarManutencao({ setTela }) {
             <p className='is-size-4-desktop is-size-6-mobile has-text-weight-bold' style={{ color: '#3A7D8E' }}>Tem certeza de que quer deletar este Ativo?</p>
             <div className='is-flex  is-justify-content-space-evenly'>
               <button className='has-text-white is-size-4 p-3 mt-3 ' style={{ backgroundColor: '#C21D1D', borderRadius: '40px' }} onClick={() => handleDelete(id)}>
-                <p className='is-size-4-desktop is-size-6-mobile' onClick={handleDelete}>Deletar</p>
+                <p className='is-size-4-desktop is-size-6-mobile' onClick={handleDelete}>Cancelar Manutenção</p>
               </button>
               <button className='has-text-white is-size-4 p-3 mt-3' style={{ backgroundColor: '#959292', borderRadius: '40px', }} onClick={exibirPopUpDelecao}>
-                <p className='is-size-4-desktop is-size-6-mobile'>Cancelar</p>
+                <p className='is-size-4-desktop is-size-6-mobile'>Voltar</p>
               </button>
             </div>
           </div>
           <div id='popupconfirmacao' style={{ display: 'none', height: '200px', backgroundColor: '#367E90', position: 'fixed', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', textAlign: 'center', width: '40%', alignContent: 'center', justifyContent: 'center', borderRadius: '10px' }}>
-            <p className='has-text-white is-size-3-desktop is-size-4-mobile'>Ativo deletado com sucesso!</p>
+            <p className='has-text-white is-size-3-desktop is-size-4-mobile'>manutenção cancelada com sucesso!</p>
             <button className='has-text-white is-size-4 p-3 mt-3' style={{ marginLeft: '60%', backgroundColor: '#459EB5', borderRadius: '100%' }}>
-              <p className='is-size-4' onClick={() => setTela('Ativos')}>OK</p>
+              <p className='is-size-4' onClick={() => setTela('Manutenção')}>OK</p>
             </button>
           </div>
         </div>
