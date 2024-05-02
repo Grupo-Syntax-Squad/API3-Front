@@ -127,7 +127,7 @@ function CadastroDestinatarios({ setTela }) {
 
         <form onSubmit={handleSubmit} className="m-6" >
           <div className='field py-3'>
-            <h2>Destinatário: </h2>
+            <h2 class="titulo-cadastro">Cadastro de destinatário</h2>
           </div>
           <div className='columns'>
 

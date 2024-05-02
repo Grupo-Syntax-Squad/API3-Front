@@ -31,10 +31,10 @@ const Ativos = ({ setTela }) => {
 
     return (
         <body>
-            <div class='page-full' style={{ backgroundColor: 'transparent', borderTopLeftRadius: '10px', borderTopRightRadius: '10px' }}>
+            <div class='page-full' style={{ backgroundColor: 'transparent' }}>
                 <button class="button is-primary m-5 ml-6 is-rounded is-size-4" style={{ backgroundColor: '#367E90', color: '#fff' }} onClick={() => setTela('CadastroAtivos')}>Cadastrar Ativo</button>
                 <div class='page-full' style={{ 
-                    backgroundColor: '#459EB5', borderTopLeftRadius: '10px', borderTopRightRadius: '10px' }}>
+                    backgroundColor: '#459EB5' }}>
                     <div class='field'>
                         <div class="columns filtro mx-0" style={{ borderTopLeftRadius: '10px', borderTopRightRadius: '10px' }}>
                             <div class="column is-one-fifth" style={{ display: 'flex', alignItems: 'center' }}>
@@ -45,7 +45,7 @@ const Ativos = ({ setTela }) => {
                                 <label className='filtros mx-1 has-text-white has-text-weight-medium mr-3' >Titulo</label>
                                 <input class="input is-small is-flex-grow-3 is-rounded" type="text" placeholder='Digite um titulo:' value={filtroTitulo} onChange={e => setFiltroTitulo(e.target.value)} />
                             </div>
-                            <div class="column is-one-fifth is-flex is-align-items-center">
+                            <div class="column is-one-third is-flex is-align-items-center">
                                 <label className='filtros mx-1 has-text-white has-text-weight-medium mr-3'>Status</label>
                                 <input class="input is-small is-flex-grow-2 is-rounded" type="text" placeholder='Digite um Status:' value={filtroStatus} onChange={e => setFiltroStatus(e.target.value)} />
                             </div>
@@ -64,7 +64,6 @@ const Ativos = ({ setTela }) => {
                         </div>
                     </div>
 
-                      
                     <div class='p-0'>
                     {assets.length === 0 && (
                     <div className='asset is-flex is-justify-content-center'>

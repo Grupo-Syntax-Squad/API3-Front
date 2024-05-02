@@ -79,7 +79,7 @@ function CadastroAdministrador({ setTela }) {
 
                 <form onSubmit={handleSubmit} className="m-6" >
                     <div className='field py-3'>
-                        <h2>Administrador: </h2>
+                        <h2 class="titulo-cadastro">Cadastro de administrador</h2>
                     </div>
                     <div className='columns'>
 

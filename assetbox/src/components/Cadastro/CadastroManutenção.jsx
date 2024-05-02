@@ -121,7 +121,7 @@ function CadastroManutenção({ setTela }) {
     <body>
       <div class='page-full'>
         <div class='field'>
-          <h2>Cadastro de Manutenção</h2>
+          <h2 class="titulo-cadastro">Cadastro de manutenção</h2>
         </div>
         <div class="columns m-3">
           <div class="column is-half">

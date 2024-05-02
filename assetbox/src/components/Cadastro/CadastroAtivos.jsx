@@ -167,7 +167,7 @@ function CadastroAtivos({ setTela }) {
     <body>
       <div class='page-full'>
         <div class='field'>
-          <h2>Cadastro de Ativos</h2>
+          <h2 class="titulo-cadastro">Cadastro de ativos</h2>
         </div>
         <div class="columns m-3">
 
