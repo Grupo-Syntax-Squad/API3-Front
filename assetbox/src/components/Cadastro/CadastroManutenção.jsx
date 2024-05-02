@@ -7,7 +7,7 @@ function CadastroManutenção({ setTela }) {
   const [man_endereco_id, setManEnderecoId] = useState();
   const [man_atividade, setManAtividade] = useState('');
   const [man_data, setManData] = useState('');
-  const [man_horario, setManHora] = useState('');
+  const [man_horario, setManHora] = useState('0');
   const [man_localizacao, setManLocalizacao] = useState('');
   const [man_status, setManStatus] = useState('');
   const [man_id, setManId] = useState('');
@@ -89,7 +89,6 @@ function CadastroManutenção({ setTela }) {
     setManLocalizacao('');
     setManId('');
     setManAtivoId('');
-    setManStatus('');
   };
 
   const handlerAtivo = (e) => {

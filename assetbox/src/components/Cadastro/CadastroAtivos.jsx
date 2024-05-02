@@ -9,9 +9,9 @@ function CadastroAtivos({ setTela }) {
   // Definindo estados para armazenar os dados do ativo
   const [ati_localizacao, setLocalizacaoAtivo] = useState();
   const [ati_tipo, setTipoAtivo] = useState('');
-  const [ati_status, setStatusAtivo] = useState('');
+  const [ati_status, setStatusAtivo] = useState('0');
   const [ati_complemento, setComplementoAtivo] = useState('');
-  const [ati_destinatario_id, setDestinatarioAtivo] = useState({});
+  const [ati_destinatario_id, setDestinatarioAtivo] = useState(null);
   const [ati_marca, setMarcaAtivo] = useState('');
   const [ati_modelo, setModeloAtivo] = useState('');
   const [ati_numero_serie, setSerieAtivo] = useState('');
@@ -144,8 +144,8 @@ function CadastroAtivos({ setTela }) {
     // Limpar campos
     setLocalizacaoAtivo('');
     setTipoAtivo('');
-    setDestinatarioAtivo({});
-    setStatusAtivo('');
+    setDestinatarioAtivo(null);
+    setStatusAtivo('0');
     setMarcaAtivo('');
     setModeloAtivo('');
     setSerieAtivo('');
@@ -241,6 +241,7 @@ function CadastroAtivos({ setTela }) {
                   <label class="label has-text-black">Status: <span className='has-text-danger'>*</span></label>
                   <div class="select is-small">
                     <select class="is-hovered" onChange={e => setStatusAtivo(e.target.value)}>
+                    <option value="" disabled selected>Selecione um status</option>
                       <option value="0" selected>Em operação</option>
                       <option value="1">Ocioso</option>
                       <option value="2">Em manutenção</option>
@@ -255,7 +256,7 @@ function CadastroAtivos({ setTela }) {
                   {destinatarios && destinatarios.length > 0 ? (
                     <div class="select is-small">
                       <select class="is-hovered" onChange={e => setDestinatarioAtivo(destinatarios.find(destinatario => destinatario.des_nome === e.target.value))}>
-                        <option value="" disabled selected>Selecione um destinatário</option>
+                        <option value={null} selected>Selecione um destinatário</option>
                         {destinatarios.map((destinatario) => <option key={destinatario.des_nome} value={destinatario.des_nome}>{destinatario.des_nome}</option>)}
                       </select>
                     </div>
