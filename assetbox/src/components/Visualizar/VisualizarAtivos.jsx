@@ -320,6 +320,15 @@ function VisualizarAtivos({ setTela }) {
                   </div>
                 </form>
               </div>
+              
+              <div className='container'>
+                <h1 className='has-text-weight-light'>Manutenção</h1>
+                <div class="container column is-half has-text-centered">
+                <button class="button is-info" onClick={() => setTela('VisualizarHistManut')}>
+                  Histórico de Manutenções </button>
+
+                </div>
+              </div> 
 
               {/* <div className='container'>
                 <h1>Documentos</h1>

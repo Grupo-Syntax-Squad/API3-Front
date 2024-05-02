@@ -14,6 +14,7 @@ import VisualizarManutencao from "./Visualizar/VisualizarManutenção";
 import axios from "axios";
 import CadastroAdministrador from "./Cadastro/CadastroAdmin";
 import Usuarios from "./Usuarios/Usuarios";
+import Historico from "./manutenção/Historico";
 
 export default function Roteador() {
     const [tela, setTela] = useState('Home');
@@ -183,6 +184,17 @@ export default function Roteador() {
                     <>
                         <Menu seletorView={selecionarView} botoes={botoes} />
                         <Calendario setTela={setTela} />
+                    </>
+                )
+            } else return <p>É necessário realizar o login para continuar para a página desejada!</p>
+        }
+
+        else if (tela === 'VisualizarHistManut') {
+            if (verificacaoToken) {
+                return (
+                    <>
+                        <Menu seletorView={selecionarView} botoes={botoes} />
+                        <Historico setTela={setTela} />
                     </>
                 )
             } else return <p>É necessário realizar o login para continuar para a página desejada!</p>
