@@ -42,8 +42,8 @@ const Manutencao = ({ setTela }) => {
                                 <input className="input is-small is-flex-grow-2 is-rounded" type="time" placeholder='Digite um horário:' value={filtroHorario} onChange={(e) => setFiltroHorario(e.target.value)} />
                             </div>
                             <div className="column is-two-fifths is-flex is-align-items-center">
-                                <label className='filtros mx-1 has-text-white has-text-weight-medium mr-3' >Ativo</label>
-                                <input className="input is-small is-flex-grow-3 is-rounded" type="text" placeholder='Digite o título do ativo' value={filtroAtivo} onChange={(e) => setFiltroAtivo(e.target.value)} />
+                                <label className='filtros mx-1 has-text-white has-text-weight-medium mr-3' >ID</label>
+                                <input className="input is-small is-flex-grow-3 is-rounded" type="text" placeholder='Digite o ID da manutenção' value={filtroAtivo} onChange={(e) => setFiltroAtivo(e.target.value)} />
                             </div>
                             <div className="column is-one-fifth is-flex is-align-items-center">
                                 <label className='filtros mx-1 has-text-white has-text-weight-medium mr-3'>Status</label>
@@ -59,7 +59,7 @@ const Manutencao = ({ setTela }) => {
                             <label className='has-text-white is-size-4 has-text-weight-medium'>Horário</label>
                         </div>
                         <div className="column is-one-third mr-2 is-flex is-justify-content-center is-align-items-center">
-                            <label className='has-text-white is-size-4 has-text-weight-medium'>Ativo</label>
+                            <label className='has-text-white is-size-4 has-text-weight-medium'>ID da manutenção</label>
                         </div>
                         <div className="column is-one-fifth mr-2 is-flex is-justify-content-center is-align-items-center">
                             <label className='has-text-white is-size-4 has-text-weight-medium'>Status</label>

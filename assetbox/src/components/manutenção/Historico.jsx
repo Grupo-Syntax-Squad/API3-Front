@@ -49,13 +49,14 @@ const Historico = ({ setTela, ativoId }) => {
                         <h2>Manutenções</h2>
                         {manutencoes.map((manut, index) => (
                             // Verifica se o ID do ativo dentro de man_ativo_id é igual ao ID do ativo atual
-                            manut.his_ativo_id && manut.his_ativo_id.ati_id === ativo.ati_id && (
+                            manut.his_ativo_id && manut.his_ativo_id.ati_id === ativo.ati_id && (manut.man_status === "AGUARDANDO_MANUTENCAO" || manut.man_status === "CONCLUIDA") && (
                                 <div key={index}>
-                                    <strong>Data da manutenção:</strong>{manut.man_data}<br/>
-                                    <strong>Horario da manutenção:</strong>{manut.man_horario}<br/>
+                                    <strong>ID:</strong>{manut.his_manutencao_id}<br/>
+                                    <strong>Data de atualização:</strong>{new Date(manut.his_data).toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' })}<br/>
+                                    <strong>Data da manutenção:</strong>{new Date(manut.man_data).toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' })}<br/>
                                     <strong>Descrição da Manutenção:</strong> {manut.man_atividade}<br />
                                     <strong>Status:</strong> {manut.man_status}<br />
-                                    <strong>Responsável:</strong> {manut.man_responsavel}<br />
+                                    <strong>Responsável:</strong>{manut.man_responsavel}<br />
                                     <br></br>
                                 </div>
                             )
