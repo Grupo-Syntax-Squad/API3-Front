@@ -9,7 +9,7 @@ import CadastroLocalizacao from './CadastroLocalizacao';
 
 function CadastroAtivos({ setTela }) {
   // Definindo estados para armazenar os dados do ativo
-  const [ati_localizacao, setLocalizacaoAtivo] = useState();
+  const [ati_localizacao, setLocalizacaoAtivo] = useState('');
   const [ati_tipo, setTipoAtivo] = useState('');
   const [ati_status, setStatusAtivo] = useState('0');
   const [ati_complemento, setComplementoAtivo] = useState('');
@@ -100,20 +100,8 @@ function CadastroAtivos({ setTela }) {
       ati_documento_id = response.data
     }
 
-    const localizacaoData = {
-      loc_titulo: ati_localizacao
-    };
-
-    response = await axios.post('http://localhost:8000/localizacoes', localizacaoData);
-    const ati_localizacao_id = response.data;
-
-    const tipoData = {
-      tip_titulo: ati_tipo
-    };
-
-    response = await axios.post('http://localhost:8000/tipos', tipoData);
-    const ati_tipo_id = response.data;
-
+    let ati_localizacao_id = localizacoes.find(localizacao => ati_localizacao == localizacao.loc_id);
+    let ati_tipo_id = tipos.find(tipo => ati_tipo == tipo.tip_id);
 
     // Enviando ativo
     const ativoData = {
@@ -212,9 +200,9 @@ function CadastroAtivos({ setTela }) {
                   /> */}
                   <div class="select is-small">
                     {tipos && tipos.length > 0 ? (
-                      <select class="is-hovered" onChange={e => setTipoAtivo(tipos.find(tipo => tipo.tip_titulo === e.target.value))}>
+                      <select class="is-hovered" onChange={e => setTipoAtivo(e.target.value)}>
                         <option value="" disabled selected>Selecione um tipo</option>
-                        {tipos.map((tipo) => <option key={tipo.tip_titulo} value={tipo.tip_titulo}>{tipo.tip_titulo}</option>)}
+                        {tipos.map((tipo) => <option key={tipo.tip_titulo} value={tipo.tip_id}>{tipo.tip_titulo}</option>)}
                       </select>
                     ) : (
                       <p>Nenhum tipo disponível</p>
@@ -235,9 +223,10 @@ function CadastroAtivos({ setTela }) {
                   /> */}
                   <div class="select is-small">
                     {localizacoes && localizacoes.length > 0 ? (
-                      <select class="is-hovered" onChange={e => setLocalizacaoAtivo(localizacoes.find(localizacao => localizacao.loc_titulo === e.target.value))}>
+                      <select class="is-hovered" onChange={e => setLocalizacaoAtivo(e.target.value)}>
                         <option value="" disabled selected>Selecione uma localização</option>
-                        {localizacoes.map((localizacao) => <option key={localizacao.loc_titulo} value={localizacao.loc_titulo}>{localizacao.loc_titulo}</option>)}
+
+                        {localizacoes.map((localizacao) => <option key={localizacao.loc_titulo} value={localizacao.loc_id}>{localizacao.loc_titulo}</option>)}
                       </select>
                     ) : (
                       <p>Nenhuma localização disponível</p>

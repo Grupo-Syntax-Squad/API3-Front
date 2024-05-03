@@ -62,9 +62,9 @@ const CadastroLocalizacao = ({handleLocalizacaoClick, setLocalizacoes}) => {
         <form style={estilo.form} onSubmit={event => handleSubmit(event)}>
             <h1 style={estilo.h1}>Cadastrar tipo</h1>
             
-            <label htmlFor="tipo" style={estilo.label}>Tipo:</label>
+            <label htmlFor="localizacao" style={estilo.label}>Tipo:</label>
             
-            <input type="text" name="tipo" onChange={e => setLocalizacao(e.target.value)} className="input is-small" placeholder="Digite o tipo" />
+            <input type="text" name="localizacao" onChange={e => setLocalizacao(e.target.value)} className="input is-small" placeholder="Digite o localização" />
             
             <div style={estilo.buttons}>
                 {/* Botão de cadastrar */}

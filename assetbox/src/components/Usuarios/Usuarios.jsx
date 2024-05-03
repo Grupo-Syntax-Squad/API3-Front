@@ -70,7 +70,7 @@ const Usuarios = ({ setTela }) => {
                             <div className='asset flex-wrap is-justify-content-center'>
 
                                 {dadosFiltrados2.map((administrador) => {
-                                    if (administrador.adm_id === "1") {
+                                    if (administrador.adm_id == "1") {
                                         return "";
                                     } else {
                                         return (
