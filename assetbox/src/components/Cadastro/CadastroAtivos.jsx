@@ -169,17 +169,17 @@ function CadastroAtivos({ setTela }) {
         <div class='field'>
           <h2 class="titulo-cadastro">Cadastro de ativos</h2>
         </div>
-        <div class="columns m-3">
 
+        <div class="columns m-3">
           <div class="column is-half has-text-centered"> <img src={imgadd} alt="imgadd" style={{ width: '100px', height: '100px' }} />
             <div>
               <input className='image-button' type='file' id='img' name="img" accept="image/*" onChange={handleImageChange} />
             </div>
           </div>
 
-          <div class="column is-half">
-            <form onSubmit={handleSubmit}>
-              <div className='top-one'>
+          <div class="mid-page">
+            <div class="columns m-3">
+              <form onSubmit={handleSubmit}>
 
                 <div class="field">
                   <label class="label has-text-black">Número: <span className='has-text-danger'>*</span></label>
@@ -289,9 +289,8 @@ function CadastroAtivos({ setTela }) {
                     />
                   </div>
                 </div>
-
-              </div>
-            </form>
+              </form>
+            </div>
           </div>
         </div>
 
