@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import AssetsIcon from '../../assets/img/Asset.svg'
 import LogoIcon from '../../assets/img/AssetBoxLogo.svg'
-import DashboardIcon from '../../assets/img/Graph.svg'
+// import DashboardIcon from '../../assets/img/Graph.svg'
 import MainteinIcon from '../../assets/img/Maintein.svg'
 import SettingsIcon from '../../assets/img/Settings.svg'
 import UserIcon from '../../assets/img/User.svg'
-import Notify from '../../assets/img/Notifications.svg'
+// import Notify from '../../assets/img/Notifications.svg'
 import './menu.css';
 
 
@@ -63,11 +63,11 @@ function Menu(props) {
               </a> */}
 
           </div>
-          <div className="navbar-end">
+          {/* <div className="navbar-end">
             <div className="navbar-item">
               <p className="navbar-item" ><img src={Notify} alt="configurações" /></p>
             </div>
-          </div>
+          </div> */}
           <div className="navbar-end">
             <div className="navbar-item">
               <p className="navbar-item" onClick={handleSettingsClick} ><img src={SettingsIcon} alt="configurações" /></p>

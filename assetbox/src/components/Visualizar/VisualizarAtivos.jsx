@@ -60,7 +60,7 @@ function VisualizarAtivos({ setTela }) {
   if (carregando) {
     <div>Carregando...</div>
   } else {
-    return(
+    return (
       <body>
         <div class='page-full'>
           <div class='field'>
@@ -127,6 +127,12 @@ function VisualizarAtivos({ setTela }) {
                     value={dadosAtivo.ati_destinatario_id.des_nome}
                     disabled
                   />
+                  <div class="select is-small">
+                    <select className="is-hovered" style={{display : 'none'}} value={dadosAtivo.ati_destinatario_id.des_nome} disabled>
+                      <option value={dadosAtivo.ati_destinatario_id.des_nome}></option>
+                    </select>
+                  </div>
+
                 </div>
 
 
@@ -370,8 +376,8 @@ function VisualizarAtivos({ setTela }) {
               <p className='is-size-4' onClick={() => setTela('Ativos')}>OK</p>
             </button>
           </div>
-        </div>
-      </body>
+        </div >
+      </body >
     );
   }
 }
