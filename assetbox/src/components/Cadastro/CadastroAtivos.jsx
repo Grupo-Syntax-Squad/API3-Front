@@ -4,6 +4,8 @@ import imgadd from "./imgadd.png"
 import docadd from "./docadd.png"
 import adicionar from "./adicionar.svg"
 import axios from 'axios';
+import CadastroTipo from './CadastroTipo';
+import CadastroLocalizacao from './CadastroLocalizacao';
 
 function CadastroAtivos({ setTela }) {
   // Definindo estados para armazenar os dados do ativo
@@ -36,6 +38,12 @@ function CadastroAtivos({ setTela }) {
   const [localizacoes, setLocalizacoes] = useState([]);
   const [tipos, setTipos] = useState([]);
   const [destinatarios, setDestinatarios] = useState([]);
+
+  const [mostrarTipo, setMostrarTipo] = useState(false);
+  const handleTipoClick = () => mostrarTipo ? setMostrarTipo(false) : setMostrarTipo(true);
+
+  const [mostrarLocalizacao, setMostrarLocalizacao] = useState(false);
+  const handleLocalizacaoClick = () => mostrarLocalizacao ? setMostrarLocalizacao(false) : setMostrarLocalizacao(true);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -194,15 +202,15 @@ function CadastroAtivos({ setTela }) {
                 </div>
                 <div class="field">
                   <label class="label has-text-black">Tipo: <span className='has-text-danger'>*</span></label>
-                  <input
+                  {/* <input
                     class="input is-small"
                     type="text"
                     title="Digite o número de série do ativo"
                     placeholder='Insira o Tipo:'
                     value={ati_tipo}
                     onChange={(event) => setTipoAtivo(event.target.value)}
-                  />
-                  {/* <div class="select is-small">
+                  /> */}
+                  <div class="select is-small">
                     {tipos && tipos.length > 0 ? (
                       <select class="is-hovered" onChange={e => setTipoAtivo(tipos.find(tipo => tipo.tip_titulo === e.target.value))}>
                         <option value="" disabled selected>Selecione um tipo</option>
@@ -212,20 +220,20 @@ function CadastroAtivos({ setTela }) {
                       <p>Nenhum tipo disponível</p>
                     )}
                   </div>
-                  <img src={adicionar} style={{marginLeft: '10px', width : '15%'}} title="Cadastrar novo tipo"/> */}
+                  <img src={adicionar} style={{marginLeft: '10px', width : '15%'}} title="Cadastrar novo tipo" onClick={handleTipoClick}/>
                 </div>
 
                 <div class="field">
                   <label class="label has-text-black">Localização:</label>
-                  <input
+                  {/* <input
                     class="input is-small"
                     type="text"
                     title="Digite a localização"
                     placeholder='Insira a Localização:'
                     value={ati_localizacao}
                     onChange={(event) => setLocalizacaoAtivo(event.target.value)}
-                  />
-                  {/* <div class="select is-small">
+                  /> */}
+                  <div class="select is-small">
                     {localizacoes && localizacoes.length > 0 ? (
                       <select class="is-hovered" onChange={e => setLocalizacaoAtivo(localizacoes.find(localizacao => localizacao.loc_titulo === e.target.value))}>
                         <option value="" disabled selected>Selecione uma localização</option>
@@ -235,7 +243,7 @@ function CadastroAtivos({ setTela }) {
                       <p>Nenhuma localização disponível</p>
                     )}
                   </div>
-                  <img src={adicionar} style={{marginLeft: '10px', width : '15%'}} title="Cadastrar nova localização"/> */}
+                  <img src={adicionar} style={{marginLeft: '10px', width : '15%'}} title="Cadastrar nova localização" onClick={handleLocalizacaoClick}/>
                 </div>
                 <div class="field">
                   <label class="label has-text-black">Status: <span className='has-text-danger'>*</span></label>
@@ -431,9 +439,6 @@ function CadastroAtivos({ setTela }) {
           </div>
         </div>
 
-
-
-
         <h1>Documentos</h1>
         <div className="columns m-3">
           <div class="column is-half has-text-centered"><img src={docadd} alt="docadd" style={{ width: '100px', height: '100px' }} />.
@@ -505,6 +510,8 @@ function CadastroAtivos({ setTela }) {
 
         </div>
       </div>
+      {mostrarTipo && <CadastroTipo handleTipoClick={handleTipoClick} setTipos={setTipos}/>}
+      {mostrarLocalizacao && <CadastroLocalizacao handleLocalizacaoClick={handleLocalizacaoClick} setLocalizacoes={setLocalizacoes}/>}
     </body>
   );
 }

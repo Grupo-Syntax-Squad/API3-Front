@@ -7,6 +7,7 @@ function CadastroAdministrador({ setTela }) {
     const [adm_email, setEmailAdministrador] = useState('');
     const [adm_telefone, setTelefoneAdministrador] = useState('');
     const [adm_senha, setSenhaAdministrador] = useState('');
+    const [adm_cpf, setCPFAdministrador] = useState('');
     const [showPopup, setShowPopup] = useState(false); // Estado para controlar a exibição do pop-up
 
     const handleTelefone = (value) => {
@@ -59,7 +60,8 @@ function CadastroAdministrador({ setTela }) {
             adm_nome: adm_nome,
             adm_email: adm_email,
             adm_senha: adm_senha,
-            adm_telefone: adm_telefone
+            adm_telefone: adm_telefone,
+            adm_cpf: adm_cpf
         };
 
         let response = await axios.post('http://localhost:8000/autenticacao/registrar', dadosAdministrador);
@@ -71,6 +73,7 @@ function CadastroAdministrador({ setTela }) {
         setTelefoneAdministrador('');
         setEmailAdministrador('');
         setSenhaAdministrador('');
+        setCPFAdministrador('');
     };
 
     return (
@@ -95,6 +98,7 @@ function CadastroAdministrador({ setTela }) {
                                     onChange={(event) => setNomeAdministrador(event.target.value)}
                                 />
                             </div>
+
                             <div className="field column is-two-thirds">
                                 <label className="form-label is-size-5">Telefone: <span className='has-text-danger'>*</span></label>
                                 <input
@@ -105,6 +109,7 @@ function CadastroAdministrador({ setTela }) {
                                     onChange={handleTelefoneChange}
                                 />
                             </div>
+
                             <div className="field column is-two-thirds">
                                 <label className="form-label is-size-5">E-mail: <span className='has-text-danger'>*</span></label>
                                 <input
@@ -115,6 +120,7 @@ function CadastroAdministrador({ setTela }) {
                                     onChange={handleEmailChange}
                                 />
                             </div>
+
                             <div className="field column is-two-thirds">
                                 <label className="form-label is-size-5">Senha: <span className='has-text-danger'>*</span></label>
                                 <input
@@ -123,6 +129,17 @@ function CadastroAdministrador({ setTela }) {
                                     placeholder='Crie uma senha:'
                                     value={adm_senha}
                                     onChange={(event) => setSenhaAdministrador(event.target.value)}
+                                />
+                            </div>
+
+                            <div className="field column is-two-thirds">
+                                <label className="form-label is-size-5">CPF: <span className='has-text-danger'>*</span></label>
+                                <input
+                                    className="input is-small"
+                                    type="text"
+                                    placeholder='Digite o CPF:'
+                                    value={adm_cpf}
+                                    onChange={(event) => setCPFAdministrador(event.target.value)}
                                 />
                             </div>
                         </div>

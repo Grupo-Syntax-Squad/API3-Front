@@ -5,7 +5,7 @@ import axios from 'axios';
 
 const Usuarios = ({ setTela }) => {
     const [destinatarios, setdestinatarios] = useState([]);
-    const[administradores, setAdministradores] = useState([])
+    const [administradores, setAdministradores] = useState([])
     const [filtroNome, setNomes] = useState('')
 
     useEffect(() => {
@@ -60,7 +60,7 @@ const Usuarios = ({ setTela }) => {
 
                     <div class='p-0'>
 
-                        {destinatarios.length === 0 && administradores.length === 0 ?  (
+                        {destinatarios.length === 0 && administradores.length === 0 ? (
                             <div className='asset is-flex is-justify-content-center'>
                                 <div className='SemHover column is-one-third mr-2 dado-ativo is-flex is-justify-content-center is-align-items-center has-text-weight-medium' style={{ width: '200%' }}>
                                     <p className='has-text-black'>Nenhum Usuário Cadastrado</p>
@@ -70,15 +70,19 @@ const Usuarios = ({ setTela }) => {
                             <div className='asset flex-wrap is-justify-content-center'>
 
                                 {dadosFiltrados2.map((administrador) => {
-                                    return (
-                                        <div className='SemHover p-2 is-one-third mr-2 dado-ativo is-flex is-align-items-center ml-6 has-text-weight-medium'>
-                                            <div onClick={() => handleClick(administrador.adm_id)} className='des' class=' des is-flex is-justify-content-center'>
-                                                <a class='SemHover is-one-third mr-2 dado-ativo is-flex is-justify-content-center is-align-items-center has-text-weight-medium' href='##'>
-                                                    <p className='has-text-black'>{administrador.adm_nome} | Administrador</p>
-                                                </a>
+                                    if (administrador.adm_id === "1") {
+                                        return "";
+                                    } else {
+                                        return (
+                                            <div className='SemHover p-2 is-one-third mr-2 dado-ativo is-flex is-align-items-center ml-6 has-text-weight-medium'>
+                                                <div onClick={() => handleClick(administrador.adm_id)} className='des' class=' des is-flex is-justify-content-center'>
+                                                    <a class='SemHover is-one-third mr-2 dado-ativo is-flex is-justify-content-center is-align-items-center has-text-weight-medium' href='##'>
+                                                        <p className='has-text-black'>{administrador.adm_nome} | Administrador</p>
+                                                    </a>
+                                                </div>
                                             </div>
-                                        </div>
-                                    );
+                                        );
+                                    }
                                 })}
 
                                 {dadosFiltrados.map((destinatario) => {

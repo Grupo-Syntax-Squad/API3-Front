@@ -17,6 +17,7 @@ function CadastroDestinatarios({ setTela }) {
   const [end_cep, setCEPDestinatario] = useState('');
   const [des_tip, setTipoDestinatario] = useState('');
   const [showPopup, setShowPopup] = useState(false); // Estado para controlar a exibição do pop-up
+  const [des_cpf, setCPFDestinatario] = useState('');
 
   const handleTelefone = (value) => {
     // Remove tudo que não for dígito
@@ -99,7 +100,8 @@ function CadastroDestinatarios({ setTela }) {
       des_email,
       des_telefone,
       des_endereco_id,
-      des_tip
+      des_tip,
+      des_cpf
     };
 
     response = await axios.post('http://localhost:8000/destinatarios', dadosDestinatario);
@@ -119,6 +121,7 @@ function CadastroDestinatarios({ setTela }) {
     setCidadeDestinatario('');
     setUfDestinatario('');
     setTipoDestinatario('');
+    setCPFDestinatario('');
   };
 
   return (
@@ -144,6 +147,7 @@ function CadastroDestinatarios({ setTela }) {
                   onChange={(event) => setNomeDestinatario(event.target.value)}
                 />
               </div>
+
               <div className="field column">
                 <label className="form-label is-size-5">Telefone: <span className='has-text-danger'>*</span></label>
                 <input
@@ -154,6 +158,7 @@ function CadastroDestinatarios({ setTela }) {
                   onChange={handleTelefoneChange}
                 />
               </div>
+
               <div className="field column">
                 <label className="form-label is-size-5">E-mail: <span className='has-text-danger'>*</span></label>
                 <input
@@ -162,6 +167,17 @@ function CadastroDestinatarios({ setTela }) {
                   placeholder='Digite o email:'
                   value={des_email}
                   onChange={handleEmailChange}
+                />
+              </div>
+
+              <div className="field column">
+                <label className="form-label is-size-5">CPF: <span className='has-text-danger'>*</span></label>
+                <input
+                  className="input is-small"
+                  type="text"
+                  placeholder='Digite o CPF:'
+                  value={des_cpf}
+                  onChange={e => setCPFDestinatario(e.target.value)}
                 />
               </div>
             </div>
