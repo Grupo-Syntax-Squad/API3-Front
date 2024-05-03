@@ -4,7 +4,6 @@ import axios from 'axios';
 
 const Manutencao = ({ setTela }) => {
     const [manutencoes, setMaintein] = useState([]);
-    const [filtroData, setFiltroData] = useState('');
     const [filtroHorario, setFiltroHorario] = useState('');
     const [filtroAtivo, setFiltroAtivo] = useState('');
     const [filtroStatus, setFiltroStatus] = useState('');
@@ -25,8 +24,7 @@ const Manutencao = ({ setTela }) => {
     };
 
     const dadosFiltrados = manutencoes.filter(manut => {
-        return (filtroData === '' || String(manut.man_data).includes(filtroData)) &&
-            (filtroHorario === '' || String(manut.man_horario).includes(filtroHorario)) &&
+        return (filtroHorario === '' || String(manut.man_horario).includes(filtroHorario)) &&
             (filtroAtivo === '' || String(manut.man_id).includes(filtroAtivo)) &&
             (filtroStatus === '' || manut.man_status.toLowerCase().includes(filtroStatus.toLowerCase()));
     });
@@ -39,12 +37,8 @@ const Manutencao = ({ setTela }) => {
                 <div className='page-full' style={{ backgroundColor: '#459EB5', borderTopLeftRadius: '10px', borderTopRightRadius: '10px' }}>
                     <div className='field'>
                         <div className="columns filtro mx-0" style={{ borderTopLeftRadius: '10px', borderTopRightRadius: '10px' }}>
-                            <div className="column is-one-fifth" style={{ display: 'flex', alignItems: 'center' }}>
-                                <img src={Filtro} className="mx-1" alt='filter'></img><label className='filtros mx-1 has-text-white has-text-weight-medium mr-3'>Data</label>
-                                <input className="input is-small is-flex-grow-1 is-rounded" type="date" placeholder='Digite uma data:' value={filtroData} onChange={(e) => setFiltroData(e.target.value)} />
-                            </div>
-                            <div className="column is-one-fifth is-flex is-align-items-center">
-                                <label className='filtros mx-1 has-text-white has-text-weight-medium mr-3'>Horário</label>
+                            <div className="column is-two-fifths is-flex is-align-items-center" style={{ display: 'flex', alignItems: 'center' }}>
+                                <img src={Filtro} className="mx-1" alt='filter'></img><label className='filtros mx-1 has-text-white has-text-weight-medium mr-3'>Horário</label>
                                 <input className="input is-small is-flex-grow-2 is-rounded" type="time" placeholder='Digite um horário:' value={filtroHorario} onChange={(e) => setFiltroHorario(e.target.value)} />
                             </div>
                             <div className="column is-two-fifths is-flex is-align-items-center">

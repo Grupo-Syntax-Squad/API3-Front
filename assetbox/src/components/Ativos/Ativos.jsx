@@ -21,6 +21,7 @@ const Ativos = ({ setTela }) => {
 
     const handleClick = (id) => {
         localStorage.setItem('id', id)
+        console.log(id);
         setTela(`VisualizarAtivo`);
     };
 
