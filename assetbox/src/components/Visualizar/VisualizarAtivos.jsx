@@ -124,14 +124,14 @@ function VisualizarAtivos({ setTela }) {
                   <input
                     class="input is-small"
                     type="text"
-                    value={dadosAtivo.ati_destinatario_id.des_nome}
+                    value={dadosAtivo.ati_destinatario_id !== null && dadosAtivo.ati_destinatario_id.des_nome !== null ? dadosAtivo.ati_destinatario_id.des_nome : 'ativo sem destinatário'}
                     disabled
                   />
-                  <div class="select is-small">
-                    <select className="is-hovered" style={{display : 'none'}} value={dadosAtivo.ati_destinatario_id.des_nome} disabled>
+                  {/* <div class="select is-small">
+                    <select className="is-hovered" style={{ display: 'none' }} value={dadosAtivo.ati_destinatario_id.des_nome} disabled>
                       <option value={dadosAtivo.ati_destinatario_id.des_nome}></option>
                     </select>
-                  </div>
+                  </div> */}
 
                 </div>
 
@@ -326,15 +326,15 @@ function VisualizarAtivos({ setTela }) {
                   </div>
                 </form>
               </div>
-              
+
               <div className='container'>
                 <h1 className='has-text-weight-light'>Manutenção</h1>
                 <div class="container column is-half has-text-centered">
-                <button class="button is-info" onClick={() => setTela('VisualizarHistManut')}>
-                  Histórico de Manutenções </button>
+                  <button class="button is-info" onClick={() => setTela('VisualizarHistManut')}>
+                    Histórico de Manutenções </button>
 
                 </div>
-              </div> 
+              </div>
 
               {/* <div className='container'>
                 <h1>Documentos</h1>
