@@ -16,7 +16,7 @@ function CadastroManutenção({ setTela }) {
   const [man_obs, setManObs] = useState('');
   const [man_cep, setManCep] = useState('');
   const [man_rua, setManRua] = useState('');
-  const [man_numero, setManNumero] = useState ('');
+  const [man_numero, setManNumero] = useState('');
   const [man_bairro, setManBairro] = useState('');
   const [man_cidade, setManCidade] = useState('');
   const [man_uf, setManUf] = useState('');
@@ -54,29 +54,30 @@ function CadastroManutenção({ setTela }) {
     event.preventDefault();
 
     let response;
-    const EnderecoData ={
-      end_rua : man_rua,
-      end_bairro : man_bairro,
-      end_cidade : man_cidade,
-      end_uf : man_uf ,
+    const EnderecoData = {
+      end_rua: man_rua,
+      end_bairro: man_bairro,
+      end_cidade: man_cidade,
+      end_uf: man_uf,
       end_numero: man_numero,
       end_cep: man_cep,
       end_complemento: man_complemento
     }
     response = await axios.post('http://localhost:8000/enderecos', EnderecoData)
     
+    const dataHoraServidor = new Date(`${man_data}T${man_horario}:00`).toISOString();
     // Enviando ativo
     const ativoData = {
-      man_endereco_id : response.data ,
+      man_endereco_id: response.data,
       man_atividade,
-      man_data,
-      man_horario,
-      man_localizacao : ativoSelecionado.ati_localizacao_id,
+      man_data: dataHoraServidor,
+      man_horario : man_horario === '' ? '00:00:00' : man_horario + ':00',
+      man_localizacao: ativoSelecionado.ati_localizacao_id,
       man_ativo_id: ativoSelecionado,
       man_status,
       man_responsavel
     };
-    
+
     response = await axios.post('http://localhost:8000/manutencoes', ativoData);
     console.log(response.data);
     exibirPopUp();
@@ -152,11 +153,11 @@ function CadastroManutenção({ setTela }) {
                   <label class="label has-text-black">horario: <span className='has-text-danger'>*</span></label>
                   <input
                     class="input is-small"
-                    type="text"
+                    type="time"
                     title="Digite o horario que a manutenção ocorerá"
                     placeholder='Digite o horario:'
-                     value={man_horario}
-                     onChange={(event) => setManHora(event.target.value)}
+                    value={man_horario}
+                    onChange={(event) => setManHora(event.target.value)}
                   />
                 </div>
                 <div class="field">
@@ -171,9 +172,10 @@ function CadastroManutenção({ setTela }) {
                   />
                 </div>
                 <div class="field">
-                  <label class="label has-text-black">ativo: <span className='has-text-danger'>*</span></label>
+                  <label class="label has-text-black">Ativo: <span className='has-text-danger'>*</span></label>
                   <div class="select is-small">
                     <select class="is-hovered" onChange={e => handlerAtivo(e)}>
+                      <option value={null}>Selecione um ativo</option>
                       {ativos.map((ativo) => (
                         <option value={ativo.ati_id}>{ativo.ati_id} {ativo.ati_titulo}</option>
                       ))}
@@ -221,7 +223,7 @@ function CadastroManutenção({ setTela }) {
         <h1>Endereço</h1>
         <div class="mid-page">
           <div class="columns m-3">
-            <div class="column is-half" style={{width: '20%'}}>
+            <div class="column is-half" style={{ width: '20%' }}>
               <form onSubmit={handleSubmit}>
                 <div>
                   <div className="field" >
@@ -260,7 +262,7 @@ function CadastroManutenção({ setTela }) {
                 </div>
               </form>
             </div>
-            <div class="column is-half" style={{width: '80%'}}>
+            <div class="column is-half" style={{ width: '80%' }}>
               <form onSubmit={handleSubmit}>
                 <div className="field">
                   <label className="form-label has-text-black">Cidade:</label>
@@ -295,7 +297,7 @@ function CadastroManutenção({ setTela }) {
                     onChange={(event) => setManBairro(event.target.value)}
                   />
                 </div>
-                <div className="field" style={{ marginInline: '20px', marginBottom: '20px'}}>
+                <div className="field" style={{ marginInline: '20px', marginBottom: '20px' }}>
                   <label className="form-label has-text-black" >Complemento: <span className='has-text-danger'>*</span></label>
                   <input
                     class="input is-small"
