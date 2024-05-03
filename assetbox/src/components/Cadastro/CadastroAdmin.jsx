@@ -76,18 +76,16 @@ function CadastroAdministrador({ setTela }) {
     return (
         <body>
             <div className='page-full'>
-
+                <div className='field'>
+                    <h2 class="titulo-cadastro">Cadastro de administrador</h2>
+                </div>
                 <form onSubmit={handleSubmit} className="m-6" >
-                    <div className='field py-3'>
-                        <h2 class="titulo-cadastro">Cadastro de administrador</h2>
-                    </div>
-                    <div className='columns'>
 
-                        <div className="column is-half m-3">
+                        <div className="column is-flex is-flex-direction-column m-3 is-justify-content-center is-align-items-center">
 
                             <h1 className='has-text-weight-light is-size-4'>Dados</h1>
 
-                            <div className="field column">
+                            <div className="field column is-two-thirds">
                                 <label className="form-label is-size-5">Nome: <span className='has-text-danger'>*</span></label>
                                 <input
                                     className="input is-small"
@@ -97,7 +95,7 @@ function CadastroAdministrador({ setTela }) {
                                     onChange={(event) => setNomeAdministrador(event.target.value)}
                                 />
                             </div>
-                            <div className="field column">
+                            <div className="field column is-two-thirds">
                                 <label className="form-label is-size-5">Telefone: <span className='has-text-danger'>*</span></label>
                                 <input
                                     className="input is-small"
@@ -107,7 +105,7 @@ function CadastroAdministrador({ setTela }) {
                                     onChange={handleTelefoneChange}
                                 />
                             </div>
-                            <div className="field column">
+                            <div className="field column is-two-thirds">
                                 <label className="form-label is-size-5">E-mail: <span className='has-text-danger'>*</span></label>
                                 <input
                                     className="input is-small"
@@ -117,7 +115,7 @@ function CadastroAdministrador({ setTela }) {
                                     onChange={handleEmailChange}
                                 />
                             </div>
-                            <div className="field column">
+                            <div className="field column is-two-thirds">
                                 <label className="form-label is-size-5">Senha: <span className='has-text-danger'>*</span></label>
                                 <input
                                     className="input is-small"
@@ -128,7 +126,7 @@ function CadastroAdministrador({ setTela }) {
                                 />
                             </div>
                         </div>
-                    </div>
+                
                     <div className="field is-grouped is-grouped-centered">
                         <p className="control">
                             <button className="button is-primary" type="submit">
