@@ -1,0 +1,25 @@
+
+
+.tela-content{
+    border-radius: 10px;
+    margin-top: 20px;
+    margin-right: 30px;
+    overflow: auto;
+    padding-bottom: 45%;
+}
+
+
+.tela{
+    align-items: stretch;
+    border-radius: 20px;
+    justify-content: space-around;
+    background-color: #D9D9D9; 
+    margin: 5% 10% 5% 10%;
+    padding-bottom: 0.5%;
+
+  }
+
+pre{
+    background-color: var(--shadow);
+    padding: 0;
+}
