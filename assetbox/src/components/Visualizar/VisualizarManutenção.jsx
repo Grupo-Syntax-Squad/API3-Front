@@ -4,12 +4,27 @@ import docadd from "./docadd.png"
 import axios from 'axios';
 
 function VisualizarManutencao({ setTela }) {
-
   const [dadosManutencao, setDadosManutencao] = useState({})
   const [carregando, setCarregando] = useState(true);
 
-
   const id = localStorage.getItem('id');
+
+  const todos_status = ["AGUARDANDO_MANUTENCAO", "EM_MANUTENCAO", "ADIADA", "CANCELADA", "CONCLUIDA"];
+  const [status, setStatus] = useState("");
+
+  const [edit, setEdit] = useState(false);
+  const handleEdit = () => edit ? setEdit(false) : setEdit(true);
+  const handleAtualizarStatus = () => {
+    try {
+      dadosManutencao.man_status = status;
+      const response = axios.put(`http://localhost:8000/manutencoes/${Number(id)}`, dadosManutencao);
+      console.log(response.status, response.data);
+      handleEdit();
+    } catch (error) {
+      window.alert("Ocorreu um erro ao tentar atualizar o status da manutenção!");
+      console.log(error)
+    }
+  }
 
   useEffect(() => {
     const fetchData = async () => {
@@ -20,6 +35,7 @@ function VisualizarManutencao({ setTela }) {
         console.log(dados)
         setCarregando(false);
         setDadosManutencao(dados);
+        setStatus(String(todos_status.indexOf(dados.man_status)));
       } catch (error) {
         console.error(`Erro ao buscar dados da manutenção ${id}:`, error);
       }
@@ -85,8 +101,22 @@ function VisualizarManutencao({ setTela }) {
                   <div class="field column">
                     <label class="form-label">Status</label><br />
                     <div class="select is-small">
-                      <select class="is-hovered" value={dadosManutencao.man_id} disabled>
-                        <option value={dadosManutencao.man_status}>{dadosManutencao.man_status}</option>
+                      <select class="is-hovered" disabled={!edit} on onChange={e => setStatus(e.target.value)}>
+                        {
+                          dadosManutencao.man_status === "AGUARDANDO_MANUTENCAO" ? <option value="0" selected>Aguardando Manutenção</option> : <option value="0">Aguardando Manutenção</option>
+                        }
+                        {
+                          dadosManutencao.man_status === "EM_MANUTENCAO" ? <option value="1" selected>Em Manutenção</option> : <option value="1">Em Manutenção</option>
+                        }
+                        {
+                          dadosManutencao.man_status === "ADIADA" ? <option value="2" selected>Adiada</option> : <option value="2">Adiada</option>
+                        }
+                        {
+                          dadosManutencao.man_status === "CANCELADA" ? <option value="3" selected>Cancelada</option> : <option value="3">Cancelada</option>
+                        }
+                        {
+                          dadosManutencao.man_status === "CONCLUIDA" ? <option value="4" selected>Concluída</option> : <option value="4">Concluída</option>
+                        }
                       </select>
                     </div>
                   </div>
@@ -249,17 +279,39 @@ function VisualizarManutencao({ setTela }) {
             </div>
 
             <div class="field is-grouped is-grouped-centered">
-              <p class="control">
-                <button class="button is-danger" type="submit" onClick={exibirPopUpDelecao}>
-                  Deletar
-                </button>
-
-              </p>
-              <p class="control">
-                <button class="button is-light" onClick={() => setTela('Ativos')}>
-                  Voltar
-                </button>
-              </p>
+              {!edit &&
+                <>
+                  <p class="control">
+                    <button class="button is-danger" type="submit" onClick={exibirPopUpDelecao}>
+                      Deletar
+                    </button>
+                  </p>
+                  <p class="control">
+                    <button class="button is-light" onClick={handleEdit}>
+                      Atualizar status
+                    </button>
+                  </p>
+                  <p class="control">
+                    <button class="button is-light" onClick={() => setTela('Ativos')}>
+                      Voltar
+                    </button>
+                  </p>
+                </>
+              }
+              {edit &&
+                <>
+                  <p class="control">
+                    <button class="button is-light" onClick={handleAtualizarStatus}>
+                      Confirmar atualização
+                    </button>
+                  </p>
+                  <p class="control">
+                    <button class="button is-danger" type="submit" onClick={handleEdit}>
+                      Cancelar
+                    </button>
+                  </p>
+                </>
+              }
             </div>
 
           </div>

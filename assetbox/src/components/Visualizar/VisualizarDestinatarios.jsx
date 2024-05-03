@@ -106,6 +106,16 @@ function exibirPopUpConfirmacao() {
               disabled
             />
           </div>
+          <div class="field column">
+            <label class="form-label is-size-5">CPF</label>
+            <input
+              class="input is-small"
+              type="text"
+              placeholder='Digite um Número:'
+              value={dadosDestinatario.des_cpf}
+              disabled
+            />
+          </div>
           {/* <div class="field column">
             <label class="form-label is-size-5">Senha</label>
             <input

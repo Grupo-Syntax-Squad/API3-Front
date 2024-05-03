@@ -9,7 +9,7 @@ function CadastroManutenção({ setTela }) {
   const [man_data, setManData] = useState('');
   const [man_horario, setManHora] = useState('0');
   const [man_localizacao, setManLocalizacao] = useState('');
-  const [man_status, setManStatus] = useState('');
+  const [man_status, setManStatus] = useState('0');
   const [man_id, setManId] = useState('');
   const [man_ativo_id, setManAtivoId] = useState('');
   const [man_responsavel, setManResponsavel] = useState('');
