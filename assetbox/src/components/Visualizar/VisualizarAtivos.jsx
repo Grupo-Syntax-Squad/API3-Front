@@ -7,6 +7,7 @@ function VisualizarAtivos({ setTela }) {
   const [imageUrl, setImageUrl] = useState(null);
   const [carregando, setCarregando] = useState(true);
   const id = localStorage.getItem('id');
+  const [ativoId, setAtivoId] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -45,6 +46,10 @@ function VisualizarAtivos({ setTela }) {
     }
   }
 
+  const handleHistoricoClick = () => {
+    setAtivoId(id);
+    setTela('VisualizarHistManut');
+  };
 
   function handleDelete(id) {
     axios.delete(`http://localhost:8000/ativos/${id}`)
@@ -330,9 +335,9 @@ function VisualizarAtivos({ setTela }) {
               <div className='container'>
                 <h1 className='has-text-weight-light'>Manutenção</h1>
                 <div class="container column is-half has-text-centered">
-                  <button class="button is-info" onClick={() => setTela('VisualizarHistManut')}>
-                    Histórico de Manutenções </button>
-
+                  <button class="button is-info" onClick={handleHistoricoClick}>
+                    Histórico de Manutenções
+                  </button>
                 </div>
               </div>
 

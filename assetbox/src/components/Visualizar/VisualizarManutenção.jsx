@@ -256,8 +256,14 @@ function VisualizarManutencao({ setTela }) {
 
               </p>
               <p class="control">
-                <button class="button is-light" onClick={() => setTela('Ativos')}>
+                <button class="button is-light" onClick={() => setTela('Manutenção')}>
                   Voltar
+                </button>
+              </p>
+
+              <p class="control">
+                <button class="button is-light" onClick={() => setTela('EditarManutencao')}>
+                  Editar Manutenção
                 </button>
               </p>
             </div>
