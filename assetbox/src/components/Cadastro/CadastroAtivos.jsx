@@ -178,7 +178,7 @@ function CadastroAtivos({ setTela }) {
               <form onSubmit={handleSubmit}>
 
                 <div class="field">
-                  <label class="label has-text-black">Número: <span className='has-text-danger'>*</span></label>
+                  <label class="label has-text-black">Código do Ativo: <span className='has-text-danger'>*</span></label>
                   <input
                     class="input is-small"
                     type="text"
