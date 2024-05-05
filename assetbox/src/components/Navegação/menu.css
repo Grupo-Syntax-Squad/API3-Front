@@ -16,10 +16,9 @@ a.nav-item {
   color: var(--branco);
 }
 
-a:hover{
+p:hover{
   background-color: #367E90;
 }
-
 
 .navbar-menu {
   background-color: #459EB5 !important;
@@ -31,6 +30,8 @@ a:hover{
   }
   .navbar-menu {
     flex-direction: column;
+    background-color: transparent;
+    
   }
 }
 

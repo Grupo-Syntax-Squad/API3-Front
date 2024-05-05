@@ -5,6 +5,7 @@
   background-color: #D9D9D9;
   margin: 1% 10% 1% 10%;
   padding-bottom: 0.5%;
+  border-radius: 1rem;
 }
 
 h2{
@@ -20,106 +21,23 @@ h1{
   font-size: larger;
   padding: 0.5%;
 }
-/* 
 
-.form-label {
-  margin-bottom: 0.5rem;
-  font-weight: bold;
+.obrigatorio{
+  color: red;
 }
 
-
-.form-input {
-  width: 100%;
-  padding: 0.5rem;
-  margin-bottom: 1rem;
-  border-radius: 0.3rem;
-  border: 1px solid #dbdbdb;
+.titulo-cadastro{
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
 }
 
-.back-button{
-  display: flex;
-  text-align: center;
-  padding: 0.5%;
-  justify-content: space-evenly;
-  flex-direction: row;
-  align-items: stretch;
+@media screen {
+  .is-two-thirds{
+    width: 22rem;
+  }
 }
-.submit-button {
-  padding: 0.5rem 1rem;
-  background-color: #459eb6;
-  color: #fff;
-  border: none;
-  border-radius: 0.3rem;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.cancel-button {
-  padding: 0.5rem 1rem;
-  background-color: #949494;
-  color: #fff;
-  border: none;
-  border-radius: 0.3rem;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-
-.top-page{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    align-items: stretch;
-    margin: 1% 0 0 0;
-}
-
-.mid-page{
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  align-items: stretch;
-}
-
-.back-page{
-  display: flex;
-  flex-direction: row-reverse;
-  justify-content: space-evenly;
-  align-items: stretch;
-}
-
 
 .top-one{
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  align-content: space-between;
-  justify-content: flex-start;
-  align-items: baseline;
-  gap: 2%;
-}
-
-.mid-two{
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  align-content: space-between;
-  justify-content: flex-start;
-  align-items: baseline;
-  gap: 2%;
-}
-
-.back-tree{
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  align-content: space-between;
-  justify-content: flex-start;
-  align-items: baseline;
-  gap: 2%;
-}
- */
-
- .top-one{
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;

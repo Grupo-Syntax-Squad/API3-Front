@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import "./visualizar.css";
-import docadd from "./docadd.png"
 import axios from 'axios';
 
 function VisualizarAtivos({ setTela }) {
@@ -8,6 +7,7 @@ function VisualizarAtivos({ setTela }) {
   const [imageUrl, setImageUrl] = useState(null);
   const [carregando, setCarregando] = useState(true);
   const id = localStorage.getItem('id');
+  const [ativoId, setAtivoId] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -46,6 +46,10 @@ function VisualizarAtivos({ setTela }) {
     }
   }
 
+  const handleHistoricoClick = () => {
+    setAtivoId(id);
+    setTela('VisualizarHistManut');
+  };
 
   function handleDelete(id) {
     axios.delete(`http://localhost:8000/ativos/${id}`)
@@ -125,9 +129,15 @@ function VisualizarAtivos({ setTela }) {
                   <input
                     class="input is-small"
                     type="text"
-                    value={dadosAtivo.ati_destinatario_id.des_nome}
+                    value={dadosAtivo.ati_destinatario_id !== null && dadosAtivo.ati_destinatario_id.des_nome !== null ? dadosAtivo.ati_destinatario_id.des_nome : 'ativo sem destinatário'}
                     disabled
                   />
+                  {/* <div class="select is-small">
+                    <select className="is-hovered" style={{ display: 'none' }} value={dadosAtivo.ati_destinatario_id.des_nome} disabled>
+                      <option value={dadosAtivo.ati_destinatario_id.des_nome}></option>
+                    </select>
+                  </div> */}
+
                 </div>
 
 
@@ -322,6 +332,15 @@ function VisualizarAtivos({ setTela }) {
                 </form>
               </div>
 
+              <div className='container'>
+                <h1 className='has-text-weight-light'>Manutenção</h1>
+                <div class="container column is-half has-text-centered">
+                  <button class="button is-info" onClick={handleHistoricoClick}>
+                    Histórico de Manutenções
+                  </button>
+                </div>
+              </div>
+
               {/* <div className='container'>
                 <h1>Documentos</h1>
                 <div class="container column is-half has-text-centered"><img src={docadd} alt="docadd" style={{ width: '100px', height: '100px' }} />
@@ -333,7 +352,7 @@ function VisualizarAtivos({ setTela }) {
             <div class="field is-grouped is-grouped-centered">
               <p class="control">
                 <button class="button is-danger" type="submit" onClick={exibirPopUpDelecao}>
-                  Deletar
+                  Desativar Ativo
                 </button>
 
               </p>
@@ -346,10 +365,10 @@ function VisualizarAtivos({ setTela }) {
 
           </div>
           <div id='popupdelecao' style={{ display: 'none', height: '200px', backgroundColor: '#FFFFFF', position: 'fixed', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', textAlign: 'center', width: '50%', alignContent: 'center', justifyContent: 'center', borderRadius: '10px' }}>
-            <p className='is-size-4-desktop is-size-6-mobile has-text-weight-bold' style={{ color: '#3A7D8E' }}>Tem certeza de que quer deletar este Ativo?</p>
+            <p className='is-size-4-desktop is-size-6-mobile has-text-weight-bold' style={{ color: '#3A7D8E' }}>Tem certeza de que quer desativar este Ativo?</p>
             <div className='is-flex  is-justify-content-space-evenly'>
               <button className='has-text-white is-size-4 p-3 mt-3 ' style={{ backgroundColor: '#C21D1D', borderRadius: '40px' }} onClick={() => handleDelete(id)}>
-                <p className='is-size-4-desktop is-size-6-mobile' onClick={handleDelete}>Deletar</p>
+                <p className='is-size-4-desktop is-size-6-mobile' onClick={handleDelete}>Desativar Ativo</p>
               </button>
               <button className='has-text-white is-size-4 p-3 mt-3' style={{ backgroundColor: '#959292', borderRadius: '40px', }} onClick={exibirPopUpDelecao}>
                 <p className='is-size-4-desktop is-size-6-mobile'>Cancelar</p>
@@ -357,13 +376,13 @@ function VisualizarAtivos({ setTela }) {
             </div>
           </div>
           <div id='popupconfirmacao' style={{ display: 'none', height: '200px', backgroundColor: '#367E90', position: 'fixed', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', textAlign: 'center', width: '40%', alignContent: 'center', justifyContent: 'center', borderRadius: '10px' }}>
-            <p className='has-text-white is-size-3-desktop is-size-4-mobile'>Ativo deletado com sucesso!</p>
+            <p className='has-text-white is-size-3-desktop is-size-4-mobile'>Ativo desativado com sucesso!</p>
             <button className='has-text-white is-size-4 p-3 mt-3' style={{ marginLeft: '60%', backgroundColor: '#459EB5', borderRadius: '100%' }}>
               <p className='is-size-4' onClick={() => setTela('Ativos')}>OK</p>
             </button>
           </div>
-        </div>
-      </body>
+        </div >
+      </body >
     );
   }
 }

@@ -4,14 +4,16 @@ import imgadd from "./imgadd.png"
 import docadd from "./docadd.png"
 import adicionar from "./adicionar.svg"
 import axios from 'axios';
+import CadastroTipo from './CadastroTipo';
+import CadastroLocalizacao from './CadastroLocalizacao';
 
 function CadastroAtivos({ setTela }) {
   // Definindo estados para armazenar os dados do ativo
-  const [ati_localizacao, setLocalizacaoAtivo] = useState();
+  const [ati_localizacao, setLocalizacaoAtivo] = useState('');
   const [ati_tipo, setTipoAtivo] = useState('');
-  const [ati_status, setStatusAtivo] = useState('');
+  const [ati_status, setStatusAtivo] = useState('0');
   const [ati_complemento, setComplementoAtivo] = useState('');
-  const [ati_destinatario_id, setDestinatarioAtivo] = useState({});
+  const [ati_destinatario_id, setDestinatarioAtivo] = useState(null);
   const [ati_marca, setMarcaAtivo] = useState('');
   const [ati_modelo, setModeloAtivo] = useState('');
   const [ati_numero_serie, setSerieAtivo] = useState('');
@@ -30,13 +32,18 @@ function CadastroAtivos({ setTela }) {
   const [ati_capacidade, setCapacidadeAtivo] = useState('');
   const [ati_tamanho, setTamanhoAtivo] = useState('');
   const [ati_data_cadastro, setCadastroAtivo] = useState(new Date());
-  const [ati_condicoes_uso, setUsoAtivo] = useState('');
   const [ati_data_validade, setValidadeAtivo] = useState('');
   const [imagemSelecionada, setImagemSelecionada] = useState(null);
-
+  const [documentoSelecionado, setDocumentoSelecionado] = useState(null);
   const [localizacoes, setLocalizacoes] = useState([]);
   const [tipos, setTipos] = useState([]);
   const [destinatarios, setDestinatarios] = useState([]);
+
+  const [mostrarTipo, setMostrarTipo] = useState(false);
+  const handleTipoClick = () => mostrarTipo ? setMostrarTipo(false) : setMostrarTipo(true);
+
+  const [mostrarLocalizacao, setMostrarLocalizacao] = useState(false);
+  const handleLocalizacaoClick = () => mostrarLocalizacao ? setMostrarLocalizacao(false) : setMostrarLocalizacao(true);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -66,6 +73,10 @@ function CadastroAtivos({ setTela }) {
     setImagemSelecionada(event.target.files[0]);
   };
 
+  const handleDocumentoChange = (event) => {
+    setDocumentoSelecionado(event.target.files[0]);
+  }
+
   // Função para lidar com o envio do formulário
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -80,21 +91,18 @@ function CadastroAtivos({ setTela }) {
       ati_imagem_id = response.data;
     }
 
-    const localizacaoData = {
-      loc_titulo: ati_localizacao
-    };
+    let ati_documento_id = null;
+    if (documentoSelecionado != null){
+      //Enviando Documento
+      const formData = new FormData();
+      formData.append('file', documentoSelecionado);
+      response = await axios.post('http://localhost:8000/documentos', formData);
+      ati_documento_id = response.data
+    }
 
-    response = await axios.post('http://localhost:8000/localizacoes', localizacaoData);
-    const ati_localizacao_id = response.data;
+    let ati_localizacao_id = localizacoes.find(localizacao => ati_localizacao == localizacao.loc_id);
+    let ati_tipo_id = tipos.find(tipo => ati_tipo == tipo.tip_id);
 
-    const tipoData = {
-      tip_titulo: ati_tipo
-    };
-
-    response = await axios.post('http://localhost:8000/tipos', tipoData);
-    const ati_tipo_id = response.data;
-
-    
     // Enviando ativo
     const ativoData = {
       ati_localizacao_id,
@@ -120,7 +128,7 @@ function CadastroAtivos({ setTela }) {
       ati_tamanho,
       ati_data_cadastro,
       ati_imagem_id,
-      ati_condicoes_uso,
+      ati_documento_id,
       ati_observacao
     };
     console.log(ativoData);
@@ -132,12 +140,11 @@ function CadastroAtivos({ setTela }) {
     // Limpar campos
     setLocalizacaoAtivo('');
     setTipoAtivo('');
-    setDestinatarioAtivo({});
-    setStatusAtivo('');
+    setDestinatarioAtivo(null);
+    setStatusAtivo('0');
     setMarcaAtivo('');
     setModeloAtivo('');
     setSerieAtivo('');
-    setUsoAtivo('');
     setValorAtivo('');
     setTamanhoAtivo('');
     setCapacidadeAtivo('');
@@ -149,28 +156,29 @@ function CadastroAtivos({ setTela }) {
     setTituloAtivo('');
     setNumAtivo('');
     setImagemSelecionada(null);
+    setDocumentoSelecionado(null)
   };
 
   return (
     <body>
       <div class='page-full'>
         <div class='field'>
-          <h2>Cadastro de Ativos</h2>
+          <h2 class="titulo-cadastro">Cadastro de ativos</h2>
         </div>
+
         <div class="columns m-3">
-          
           <div class="column is-half has-text-centered"> <img src={imgadd} alt="imgadd" style={{ width: '100px', height: '100px' }} />
             <div>
               <input className='image-button' type='file' id='img' name="img" accept="image/*" onChange={handleImageChange} />
             </div>
           </div>
 
-          <div class="column is-half">
-            <form onSubmit={handleSubmit}>
-              <div className='top-one'>
+          <div class="mid-page">
+            <div class="columns m-3">
+              <form onSubmit={handleSubmit}>
 
                 <div class="field">
-                  <label class="label has-text-black">Número: <span className='has-text-danger'>*</span></label>
+                  <label class="label has-text-black">Código do Ativo: <span className='has-text-danger'>*</span></label>
                   <input
                     class="input is-small"
                     type="text"
@@ -182,53 +190,55 @@ function CadastroAtivos({ setTela }) {
                 </div>
                 <div class="field">
                   <label class="label has-text-black">Tipo: <span className='has-text-danger'>*</span></label>
-                  <input
+                  {/* <input
                     class="input is-small"
                     type="text"
                     title="Digite o número de série do ativo"
                     placeholder='Insira o Tipo:'
                     value={ati_tipo}
                     onChange={(event) => setTipoAtivo(event.target.value)}
-                  />
-                  {/* <div class="select is-small">
+                  /> */}
+                  <div class="select is-small">
                     {tipos && tipos.length > 0 ? (
-                      <select class="is-hovered" onChange={e => setTipoAtivo(tipos.find(tipo => tipo.tip_titulo === e.target.value))}>
+                      <select class="is-hovered" onChange={e => setTipoAtivo(e.target.value)}>
                         <option value="" disabled selected>Selecione um tipo</option>
-                        {tipos.map((tipo) => <option key={tipo.tip_titulo} value={tipo.tip_titulo}>{tipo.tip_titulo}</option>)}
+                        {tipos.map((tipo) => <option key={tipo.tip_titulo} value={tipo.tip_id}>{tipo.tip_titulo}</option>)}
                       </select>
                     ) : (
                       <p>Nenhum tipo disponível</p>
                     )}
                   </div>
-                  <img src={adicionar} style={{marginLeft: '10px', width : '15%'}} title="Cadastrar novo tipo"/> */}
+                  <img src={adicionar} style={{marginLeft: '10px', width : '15%'}} title="Cadastrar novo tipo" onClick={handleTipoClick}/>
                 </div>
 
                 <div class="field">
                   <label class="label has-text-black">Localização:</label>
-                  <input
+                  {/* <input
                     class="input is-small"
                     type="text"
                     title="Digite a localização"
                     placeholder='Insira a Localização:'
                     value={ati_localizacao}
                     onChange={(event) => setLocalizacaoAtivo(event.target.value)}
-                  />
-                  {/* <div class="select is-small">
+                  /> */}
+                  <div class="select is-small">
                     {localizacoes && localizacoes.length > 0 ? (
-                      <select class="is-hovered" onChange={e => setLocalizacaoAtivo(localizacoes.find(localizacao => localizacao.loc_titulo === e.target.value))}>
+                      <select class="is-hovered" onChange={e => setLocalizacaoAtivo(e.target.value)}>
                         <option value="" disabled selected>Selecione uma localização</option>
-                        {localizacoes.map((localizacao) => <option key={localizacao.loc_titulo} value={localizacao.loc_titulo}>{localizacao.loc_titulo}</option>)}
+
+                        {localizacoes.map((localizacao) => <option key={localizacao.loc_titulo} value={localizacao.loc_id}>{localizacao.loc_titulo}</option>)}
                       </select>
                     ) : (
                       <p>Nenhuma localização disponível</p>
                     )}
                   </div>
-                  <img src={adicionar} style={{marginLeft: '10px', width : '15%'}} title="Cadastrar nova localização"/> */}
+                  <img src={adicionar} style={{marginLeft: '10px', width : '15%'}} title="Cadastrar nova localização" onClick={handleLocalizacaoClick}/>
                 </div>
                 <div class="field">
                   <label class="label has-text-black">Status: <span className='has-text-danger'>*</span></label>
                   <div class="select is-small">
                     <select class="is-hovered" onChange={e => setStatusAtivo(e.target.value)}>
+                    <option value="" disabled selected>Selecione um status</option>
                       <option value="0" selected>Em operação</option>
                       <option value="1">Ocioso</option>
                       <option value="2">Em manutenção</option>
@@ -243,7 +253,7 @@ function CadastroAtivos({ setTela }) {
                   {destinatarios && destinatarios.length > 0 ? (
                     <div class="select is-small">
                       <select class="is-hovered" onChange={e => setDestinatarioAtivo(destinatarios.find(destinatario => destinatario.des_nome === e.target.value))}>
-                        <option value="" disabled selected>Selecione um destinatário</option>
+                        <option value={null} selected>Selecione um destinatário</option>
                         {destinatarios.map((destinatario) => <option key={destinatario.des_nome} value={destinatario.des_nome}>{destinatario.des_nome}</option>)}
                       </select>
                     </div>
@@ -276,9 +286,8 @@ function CadastroAtivos({ setTela }) {
                     />
                   </div>
                 </div>
-
-              </div>
-            </form>
+              </form>
+            </div>
           </div>
         </div>
 
@@ -419,11 +428,13 @@ function CadastroAtivos({ setTela }) {
           </div>
         </div>
 
-
-
-
         <h1>Documentos</h1>
         <div className="columns m-3">
+          <div class="column is-half has-text-centered"><img src={docadd} alt="docadd" style={{ width: '100px', height: '100px' }} />.
+            <div>
+              <input className='image-button' type='file' id='doc' name="doc" accept="doc/*" onChange={handleDocumentoChange}/>
+            </div>
+          </div>
 
           <div class='column is-half'>
             <form className='documentos-ativo' onSubmit={handleSubmit}>
@@ -488,6 +499,8 @@ function CadastroAtivos({ setTela }) {
 
         </div>
       </div>
+      {mostrarTipo && <CadastroTipo handleTipoClick={handleTipoClick} setTipos={setTipos}/>}
+      {mostrarLocalizacao && <CadastroLocalizacao handleLocalizacaoClick={handleLocalizacaoClick} setLocalizacoes={setLocalizacoes}/>}
     </body>
   );
 }
