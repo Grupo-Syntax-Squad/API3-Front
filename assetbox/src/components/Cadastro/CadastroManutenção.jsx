@@ -140,7 +140,7 @@ function CadastroManutenção({ setTela }) {
                   </div>
                 </div>
                 <div className="field" >
-                  <label className="form-label has-text-black">Data da manutenção:</label>
+                  <label className="form-label has-text-black">Data da manutenção:<span className='has-text-danger'>*</span></label>
                   <input
                     class="input is-small"
                     type="date"
@@ -175,7 +175,7 @@ function CadastroManutenção({ setTela }) {
                   <label class="label has-text-black">Ativo: <span className='has-text-danger'>*</span></label>
                   <div class="select is-small">
                     <select class="is-hovered" onChange={e => handlerAtivo(e)}>
-                      <option value={null}>Selecione um ativo</option>
+                      <option value={null}>Selecione um ativo </option>
                       {ativos.map((ativo) => (
                         <option value={ativo.ati_id}>{ativo.ati_id} {ativo.ati_titulo}</option>
                       ))}
@@ -183,7 +183,7 @@ function CadastroManutenção({ setTela }) {
                   </div>
                 </div>
                 <div className="field" >
-                  <label className="label has-text-black">Responsavel:</label>
+                  <label className="label has-text-black">Responsavel:<span className='has-text-danger'>*</span></label>
                   <input
                     class="input is-small"
                     type="text"
@@ -227,7 +227,7 @@ function CadastroManutenção({ setTela }) {
               <form onSubmit={handleSubmit}>
                 <div>
                   <div className="field" >
-                    <label className="form-label has-text-black">CEP:</label>
+                    <label className="form-label has-text-black">CEP:<span className='has-text-danger'>*</span></label>
                     <input
                       class="input is-small"
                       type="text"
@@ -249,7 +249,7 @@ function CadastroManutenção({ setTela }) {
                     />
                   </div>
                   <div className="field" >
-                    <label className="form-label has-text-black">UF:</label>
+                    <label className="form-label has-text-black">UF:<span className='has-text-danger'>*</span></label>
                     <input
                       class="input is-small"
                       type="text"
@@ -265,7 +265,7 @@ function CadastroManutenção({ setTela }) {
             <div class="column is-half" style={{ width: '80%' }}>
               <form onSubmit={handleSubmit}>
                 <div className="field">
-                  <label className="form-label has-text-black">Cidade:</label>
+                  <label className="form-label has-text-black">Cidade:<span className='has-text-danger'>*</span></label>
                   <input
                     class="input is-small"
                     type="text"
@@ -276,7 +276,7 @@ function CadastroManutenção({ setTela }) {
                   />
                 </div>
                 <div className="field" >
-                  <label className="form-label has-text-black">Rua:</label>
+                  <label className="form-label has-text-black">Rua:<span className='has-text-danger'>*</span></label>
                   <input
                     class="input is-small"
                     type="text"
@@ -287,7 +287,7 @@ function CadastroManutenção({ setTela }) {
                   />
                 </div>
                 <div className="field" >
-                  <label className="form-label has-text-black">Bairro:</label>
+                  <label className="form-label has-text-black">Bairro:<span className='has-text-danger'>*</span></label>
                   <input
                     class="input is-small"
                     type="text"
@@ -298,7 +298,7 @@ function CadastroManutenção({ setTela }) {
                   />
                 </div>
                 <div className="field" style={{ marginInline: '20px', marginBottom: '20px' }}>
-                  <label className="form-label has-text-black" >Complemento: <span className='has-text-danger'>*</span></label>
+                  <label className="form-label has-text-black" >Complemento:</label>
                   <input
                     class="input is-small"
                     type="text"
