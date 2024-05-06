@@ -116,6 +116,8 @@ const Calendario = () => {
         return groupedManutencoes;
     };
 
+    console.log(selectedDate);
+
     return (
         <div className="tela columns">
             <div className="calendar column is-half">
@@ -171,6 +173,7 @@ const Calendario = () => {
                                     </ul>
                                 </div>
                             ))}
+                            <button class="button is-primary m-2 is-rounded is-size-6" style={{ backgroundColor: '#367E90', color: '#fff' }}>Cadastrar Manuntenção</button>
                         </div>
                     )}
                 </label>
