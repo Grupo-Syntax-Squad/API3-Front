@@ -22,6 +22,22 @@ function VisualizarDestinatarios({ setTela }) {
   const [dadosEndereco, setDadosEndereco] = useState({})
   const id = localStorage.getItem('id');
 
+  const [edit, setEdit] = useState(false);
+  const handleEdit = () => edit ? setEdit(false) : setEdit(true);
+
+  const handleAtualizarStatus = () => {
+    /* try {
+      dadosManutencao.man_status = status;
+      const response = axios.put(`http://localhost:8000/manutencoes/${Number(id)}`, dadosManutencao);
+      console.log(response.status, response.data);
+      handleEdit();
+    } catch (error) {
+      window.alert("Ocorreu um erro ao tentar atualizar o status da manutenção!");
+      console.log(error)
+    } */
+  }
+
+  
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -83,7 +99,7 @@ function exibirPopUpConfirmacao() {
               type="text"
               placeholder='Digite um Número:'
               value={dadosDestinatario.des_nome}
-              disabled
+              disabled={!edit}
             />
           </div>
           <div class="field column">
@@ -93,7 +109,7 @@ function exibirPopUpConfirmacao() {
               type="text"
               placeholder='Digite um Número:'
               value={dadosDestinatario.des_telefone}
-              disabled
+              disabled={!edit}
             />
           </div>
           <div class="field column">
@@ -103,7 +119,7 @@ function exibirPopUpConfirmacao() {
               type="text"
               placeholder='Digite um Número:'
               value={dadosDestinatario.des_email}
-              disabled
+              disabled={!edit}
             />
           </div>
           <div class="field column">
@@ -113,7 +129,7 @@ function exibirPopUpConfirmacao() {
               type="text"
               placeholder='Digite um Número:'
               value={dadosDestinatario.des_cpf}
-              disabled
+              disabled={!edit}
             />
           </div>
           {/* <div class="field column">
@@ -135,7 +151,7 @@ function exibirPopUpConfirmacao() {
               type="text"
               placeholder='Digite um Número:'
               value={dadosEndereco.end_rua}
-              disabled
+              disabled={!edit}
             />
           </div>
           <div class="field column">
@@ -145,7 +161,7 @@ function exibirPopUpConfirmacao() {
               type="text"
               placeholder='Digite um Número:'
               value={dadosEndereco.end_numero}
-              disabled
+              disabled={!edit}
             />
           </div>
           <div class="field column">
@@ -155,7 +171,7 @@ function exibirPopUpConfirmacao() {
               type="text"
               placeholder='Digite um Número:'
               value={dadosEndereco.end_complemento}
-              disabled
+              disabled={!edit}
             />
           </div>
           <div class="field column">
@@ -165,7 +181,7 @@ function exibirPopUpConfirmacao() {
               type="text"
               placeholder='Digite um Número:'
               value={dadosEndereco.end_bairro}
-              disabled
+              disabled={!edit}
             />
           </div>
           <div class="field column">
@@ -175,7 +191,7 @@ function exibirPopUpConfirmacao() {
               type="text"
               placeholder='Digite um Número:'
               value={dadosEndereco.end_cidade}
-              disabled
+              disabled={!edit}
             />
           </div>
           <div class="field column">
@@ -185,7 +201,7 @@ function exibirPopUpConfirmacao() {
               type="text"
               placeholder='Digite um Número:'
               value={dadosEndereco.end_uf}
-              disabled
+              disabled={!edit}
             />
           </div>
           <div class="field column">
@@ -195,24 +211,45 @@ function exibirPopUpConfirmacao() {
               type="text"
               placeholder='Digite um Número:'
               value={dadosEndereco.end_cep}
-              disabled
+              disabled={!edit}
             />
           </div>
         </form>
         <div class="field is-grouped is-grouped-centered">
-        </div>
-        <div class="field is-grouped is-grouped-centered">
-          <p class="control">
-            <button class="button is-danger" type="submit" formMethod='POST' onClick={exibirPopUpDelecao}>
-              Deletar
-            </button>
-          </p>
-          <p class="control">
-            <button class="button is-light" onClick={() => setTela('Destinatarios')}>
-              Voltar
-            </button>
-          </p>
-        </div>
+              {!edit &&
+                <>
+                  <p class="control">
+                    <button class="button is-danger" type="submit" onClick={exibirPopUpDelecao}>
+                      Deletar
+                    </button>
+                  </p>
+                  <p class="control">
+                    <button class="button is-light" onClick={handleEdit}>
+                      Atualizar status
+                    </button>
+                  </p>
+                  <p class="control">
+                    <button class="button is-light" onClick={() => setTela('Ativos')}>
+                      Voltar
+                    </button>
+                  </p>
+                </>
+              }
+              {edit &&
+                <>
+                  <p class="control">
+                    <button class="button is-light" onClick={handleAtualizarStatus}>
+                      Confirmar atualização
+                    </button>
+                  </p>
+                  <p class="control">
+                    <button class="button is-danger" type="submit" onClick={handleEdit}>
+                      Cancelar
+                    </button>
+                  </p>
+                </>
+              }
+            </div>
       <div id='popupdelecao' style={{display: 'none', height: '200px', backgroundColor: '#FFFFFF', position: 'fixed', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', textAlign: 'center', width: '50%', alignContent: 'center', justifyContent: 'center', borderRadius: '10px'}}>
     <p className='is-size-4-desktop is-size-6-mobile has-text-weight-bold' style={{color: '#3A7D8E'}}>Tem certeza de que quer deletar este Destinatário?</p>
     <div className='is-flex  is-justify-content-space-evenly'>  
