@@ -7,7 +7,7 @@ import CadastroAtivos from "./Cadastro/CadastroAtivos";
 import CadastroManutenção from "./Cadastro/CadastroManutenção";
 import CadastroDestinatarios from "./Cadastro/CadastroDestinatario";
 import Login from "./Login/Login";
-import Calendario from "./manutenção/Calendario";
+import Calendario from "./Manutenção/Calendario";
 import Home from "./home";
 import Manutencao from "./manutenção/manutenção";
 import VisualizarManutencao from "./Visualizar/VisualizarManutenção";

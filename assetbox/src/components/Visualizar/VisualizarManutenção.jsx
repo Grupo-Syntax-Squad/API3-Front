@@ -94,7 +94,7 @@ function VisualizarManutencao({ setTela }) {
                       class="input is-small"
                       type="text"
                       value={dadosManutencao.man_atividade}
-                      disabled
+                      disabled={!edit}
 
                     />
                   </div>
@@ -126,7 +126,7 @@ function VisualizarManutencao({ setTela }) {
                   <div class="field column">
                     <label class="form-label">Localização</label><br />
                     <div class="select is-small">
-                      <select class="is-hovered" value={dadosManutencao.man_ativo_id.ati_localizacao_id} disabled>
+                      <select class="is-hovered" value={dadosManutencao.man_ativo_id.ati_localizacao_id} disabled={!edit}>
                         <option>{dadosManutencao.man_ativo_id.ati_localizacao_id?.loc_titulo}</option>
                         <option></option>
                       </select>
@@ -142,7 +142,7 @@ function VisualizarManutencao({ setTela }) {
                     class="input is-small"
                     type="text"
                     value={dadosManutencao.man_responsavel}
-                    disabled
+                    disabled={!edit}
                   />
                 </div>
 
@@ -153,7 +153,7 @@ function VisualizarManutencao({ setTela }) {
                     class="input is-small"
                     type="text"
                     value={dadosManutencao.man_ativo_id.ati_titulo}
-                    disabled
+                    disabled={!edit}
                   />
                 </div>
 
@@ -165,7 +165,7 @@ function VisualizarManutencao({ setTela }) {
                     type="text"
                     rows="4"
                     value={dadosManutencao.man_ativo_id.ati_complemento}
-                    disabled
+                    disabled={!edit}
                   />
                 </div>
               </form>
@@ -188,7 +188,7 @@ function VisualizarManutencao({ setTela }) {
                       class="input is-small"
                       type="text"
                       value={dadosManutencao.man_horario}
-                      disabled
+                      disabled={edit}
                     />
                   </div>
                   <div className="field column" >
@@ -198,7 +198,7 @@ function VisualizarManutencao({ setTela }) {
                       class="input is-small"
                       type="text"
                       value={new Date(dadosManutencao.man_data).toDateString()}
-                      disabled
+                      disabled={!edit}
                     />
                   </div>
                   <div className="field column" >
@@ -208,7 +208,7 @@ function VisualizarManutencao({ setTela }) {
                       class="input is-small"
                       type="text"
                       value={dadosManutencao.man_ativo_id.ati_id}
-                      disabled
+                      disabled={!edit}
 
                     />
                   </div>
@@ -219,7 +219,7 @@ function VisualizarManutencao({ setTela }) {
                       class="input is-small"
                       type="text"
                       value={dadosManutencao.man_endereco_id.end_cidade}
-                      disabled
+                      disabled={!edit}
 
                     />
                   </div>
@@ -233,7 +233,7 @@ function VisualizarManutencao({ setTela }) {
                       class="input is-small"
                       type="text"
                       value={dadosManutencao.man_endereco_id.end_cep}
-                      disabled
+                      disabled={!edit}
 
                     />
                   </div>
@@ -245,7 +245,7 @@ function VisualizarManutencao({ setTela }) {
                       class="input is-small"
                       type="text"
                       value={dadosManutencao.man_endereco_id.end_uf}
-                      disabled
+                      disabled={!edit}
 
                     />
                   </div>
@@ -256,7 +256,7 @@ function VisualizarManutencao({ setTela }) {
                       class="input is-small"
                       type="text"
                       value={dadosManutencao.man_endereco_id.end_rua}
-                      disabled
+                      disabled={!edit}
                     />
                   </div>
 
@@ -270,7 +270,7 @@ function VisualizarManutencao({ setTela }) {
                       class="input is-small"
                       type="text"
                       value={dadosManutencao.man_endereco_id.end_bairro}
-                      disabled
+                      disabled={!edit}
                     />
                   </div>
                 </div>
