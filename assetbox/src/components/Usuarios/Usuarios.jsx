@@ -29,6 +29,11 @@ const Usuarios = ({ setTela }) => {
         localStorage.setItem('id', id);
         setTela(`VisualizarDestinatarios`);
     };
+
+    const handleClickAdm = (id) => {
+        localStorage.setItem('id', id);
+        setTela(`VisualizarAdministradores`);
+    };
     const dadosFiltrados = destinatarios.filter(destinatario => {
         return (filtroNome === '' || destinatario.des_nome.toLowerCase().includes(filtroNome.toLowerCase()));
     });
@@ -75,7 +80,7 @@ const Usuarios = ({ setTela }) => {
                                     } else {
                                         return (
                                             <div className='SemHover p-2 is-one-third mr-2 dado-ativo is-flex is-align-items-center ml-6 has-text-weight-medium'>
-                                                <div onClick={() => handleClick(administrador.adm_id)} className='des' class=' des is-flex is-justify-content-center'>
+                                                <div onClick={() => handleClickAdm(administrador.adm_id)} className='des' class=' des is-flex is-justify-content-center'>
                                                     <a class='SemHover is-one-third mr-2 dado-ativo is-flex is-justify-content-center is-align-items-center has-text-weight-medium' href='##'>
                                                         <p className='has-text-black'>{administrador.adm_nome} | Administrador</p>
                                                     </a>

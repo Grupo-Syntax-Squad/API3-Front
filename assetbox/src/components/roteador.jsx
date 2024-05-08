@@ -7,15 +7,16 @@ import CadastroAtivos from "./Cadastro/CadastroAtivos";
 import CadastroManutenção from "./Cadastro/CadastroManutenção";
 import CadastroDestinatarios from "./Cadastro/CadastroDestinatario";
 import Login from "./Login/Login";
-import Calendario from "./Manutenção/Calendario";
+import Calendario from "./manutenção/Calendario";
 import Home from "./home";
-import Manutencao from "./Manutenção/manutenção";
+import Manutencao from "./manutenção/manutenção";
 import VisualizarManutencao from "./Visualizar/VisualizarManutenção";
 import axios from "axios";
 import CadastroAdministrador from "./Cadastro/CadastroAdmin";
 import Usuarios from "./Usuarios/Usuarios";
-import Historico from "./Manutenção/Historico";
+import Historico from "./manutenção/Historico";
 import EditarManutencao from "./Editar/editarManutecao";
+import VisualizarAdministradores from "./Visualizar/VisualizarAdministradores";
 
 export default function Roteador() {
     const [tela, setTela] = useState('Home');
@@ -141,6 +142,17 @@ export default function Roteador() {
                     <>
                         <Menu seletorView={selecionarView} botoes={botoes} />
                         <VisualizarDestinatarios setTela={setTela} />
+                    </>
+                )
+            } else return <p>É necessário realizar o login para continuar para a página desejada!</p>
+        }
+
+        else if (tela === 'VisualizarAdministradores') {
+            if (verificacaoToken) {
+                return (
+                    <>
+                        <Menu seletorView={selecionarView} botoes={botoes} />
+                        <VisualizarAdministradores setTela={setTela} />
                     </>
                 )
             } else return <p>É necessário realizar o login para continuar para a página desejada!</p>
