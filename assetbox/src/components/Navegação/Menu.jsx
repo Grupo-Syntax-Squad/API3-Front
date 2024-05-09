@@ -74,6 +74,7 @@ function Menu(props) {
               {showLogout && (
                 <div>
                   <button onClick={handleLogout}>Deslogar</button> {/* handleLogout is a function that logs the user out */}
+                  <button onClick={e => props.seletorView("MeusDados", e)}>Meus dados</button>
                 </div>
               )}
             </div>

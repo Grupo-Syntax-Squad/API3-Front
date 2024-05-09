@@ -7,7 +7,7 @@ import CadastroAtivos from "./Cadastro/CadastroAtivos";
 import CadastroManutenção from "./Cadastro/CadastroManutenção";
 import CadastroDestinatarios from "./Cadastro/CadastroDestinatario";
 import Login from "./Login/Login";
-import Calendario from "./Manutenção/Calendario";
+import Calendario from "./manutenção/Calendario";
 import Home from "./home";
 import Manutencao from "./manutenção/manutenção";
 import VisualizarManutencao from "./Visualizar/VisualizarManutenção";
@@ -17,6 +17,7 @@ import Usuarios from "./Usuarios/Usuarios";
 import Historico from "./manutenção/Historico";
 import EditarManutencao from "./Editar/editarManutecao";
 import VisualizarAdministradores from "./Visualizar/VisualizarAdministradores";
+import MeusDados from "./Visualizar/MeusDados";
 
 export default function Roteador() {
     const [tela, setTela] = useState('Home');
@@ -235,6 +236,17 @@ export default function Roteador() {
             } else return <p>É necessário realizar o login para continuar para a página desejada!</p>
         }
 
+        else if (tela === 'MeusDados') {
+            if (verificacaoToken) {
+                return (
+                    <>
+                        <Menu seletorView={selecionarView} botoes={botoes} />
+                        <MeusDados setTela={setTela} />
+                    </>
+                )
+            } else return <p>É necessário realizar o login para continuar para a página desejada!</p>
+        }
+        
         else if (tela === 'Dashboard') {
             return (<>
                 <Menu seletorView={selecionarView} botoes={botoes} />
