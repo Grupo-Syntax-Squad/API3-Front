@@ -43,17 +43,21 @@ export default function MeusDados({ setTela }) {
         // Pegando o Id do administrador
         let storageId = localStorage.getItem("idUser");
 
-        const dataPUT = {
-            adm_nome: nome,
-            adm_email: email,
-            adm_senha: senha,
-            adm_telefone: telefone,
-            adm_cpf: cpf
-        }
+        try {
+            const dataPUT = {
+                adm_nome: nome,
+                adm_email: email,
+                adm_senha: senha,
+                adm_telefone: telefone,
+                adm_cpf: cpf
+            }
 
-        const response = axios.put(`http://localhost:8000/administradores/${storageId}`, dataPUT);
-        console.log(response);
-        handleEdit();
+            const response = await axios.put(`http://localhost:8000/administradores/${storageId}`, dataPUT);
+            handleEdit();
+        } catch (error) {
+            if (error.response.status == 400) window.alert(error.response.data);
+            else window.alert("Ocorreu algum erro no sistema!");
+        }
     }
 
     const handleCancelarEditar = async (e) => {
