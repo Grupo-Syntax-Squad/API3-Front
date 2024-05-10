@@ -132,3 +132,7 @@ h1{
 .has-text-centered {
   align-self: center;
 }
+
+.custom-background {
+  background-color: var(--verde);
+}

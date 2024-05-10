@@ -16,8 +16,9 @@ a.nav-item {
   color: var(--branco);
 }
 
-p:hover{
+.navbar p:hover{
   background-color: #367E90;
+  transition: 200ms ease-in-out;
 }
 
 .navbar-menu {
@@ -40,4 +41,8 @@ ul{
   flex-direction: row;
   gap: 2rem;
   padding-left: 0px;
+}
+
+.shadow-menu{
+  box-shadow: 0px .5px 5px rgba(0, 0, 0, 0.534);
 }

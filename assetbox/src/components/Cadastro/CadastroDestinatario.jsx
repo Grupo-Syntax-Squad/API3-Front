@@ -277,10 +277,10 @@ function CadastroDestinatarios({ setTela }) {
           </div>
 
           {showPopup && (
-            <div id='popup' style={{ display: 'block', height: '200px', backgroundColor: '#367E90', position: 'fixed', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', textAlign: 'center', width: '40%', alignContent: 'center', justifyContent: 'center', borderRadius: '10px' }}>
-              <p className='has-text-white is-size-3-desktop is-size-4-mobile'>Destinatário Cadastrado com sucesso!</p>
+            <div className='shadow-pop-up' id='popup' style={{ display: 'block', height: '200px', backgroundColor: '#367E90', position: 'fixed', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', textAlign: 'center', width: '40%', alignContent: 'center', justifyContent: 'center', borderRadius: '10px'}}>
+              <p className='has-text-white is-size-3-desktop is-size-4-mobile has-text-weight-medium'>Destinatário Cadastrado com sucesso!</p>
               <button className='has-text-white is-size-4 p-3 mt-3' style={{ marginLeft: '60%', backgroundColor: '#459EB5', borderRadius: '100%' }} onClick={() => { setShowPopup(false); setCEPDestinatario(''); }}>
-                <p className='is-size-4'>OK</p>
+                <p className='is-size-4 has-text-weight-medium'>OK</p>
               </button>
             </div>
           )}
