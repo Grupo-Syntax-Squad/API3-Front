@@ -18,7 +18,6 @@ function VisualizarManutencao({ setTela }) {
     try {
       dadosManutencao.man_status = status;
       const response = axios.put(`http://localhost:8000/manutencoes/${Number(id)}`, dadosManutencao);
-      console.log(response.status, response.data);
       handleEdit();
     } catch (error) {
       window.alert("Ocorreu um erro ao tentar atualizar o status da manutenção!");
@@ -32,7 +31,6 @@ function VisualizarManutencao({ setTela }) {
       try {
         const response = await axios.get(`http://localhost:8000/manutencoes/${Number(id)}`);
         const dados = response.data;
-        console.log(dados)
         setCarregando(false);
         setDadosManutencao(dados);
         setStatus(String(todos_status.indexOf(dados.man_status)));
@@ -79,7 +77,7 @@ function VisualizarManutencao({ setTela }) {
       <body>
         <div class='page-full'>
           <div class='field'>
-            <h2>{dadosManutencao.man_atividade}</h2>
+            <h2>Manutenção do Ativo: {dadosManutencao.man_ativo_id.ati_titulo}</h2>
           </div>
           <h1 className='has-text-weight-light'>Dados</h1>
           <div class="columns m-3">
@@ -124,7 +122,7 @@ function VisualizarManutencao({ setTela }) {
 
                 <div className='columns'>
                   <div class="field column">
-                    <label class="form-label">Localização</label><br />
+                    <label class="form-label">Localização do ativo</label><br />
                     <div class="select is-small">
                       <select class="is-hovered" value={dadosManutencao.man_ativo_id.ati_localizacao_id} disabled={!edit}>
                         <option>{dadosManutencao.man_ativo_id.ati_localizacao_id?.loc_titulo}</option>
@@ -137,7 +135,7 @@ function VisualizarManutencao({ setTela }) {
 
 
                 <div className="field" >
-                  <label className="form-label">Responsavel</label>
+                  <label className="form-label">Responsável da manutenção</label>
                   <input
                     class="input is-small"
                     type="text"
@@ -148,7 +146,7 @@ function VisualizarManutencao({ setTela }) {
 
 
                 <div className="field" >
-                  <label className="form-label">Titulo</label>
+                  <label className="form-label">Titulo do ativo</label>
                   <input
                     class="input is-small"
                     type="text"
@@ -158,74 +156,61 @@ function VisualizarManutencao({ setTela }) {
                 </div>
 
                 <div className="field" >
-                  <label className="form-label">Complemento</label>
+                  <label className="form-label">Observações</label>
 
                   <input
                     class="input is-small"
                     type="text"
                     rows="4"
-                    value={dadosManutencao.man_ativo_id.ati_complemento}
+                    value={dadosManutencao.man_observacoes == null || dadosManutencao.man_observacoes == undefined ? "Sem observações" : dadosManutencao.man_observacoes}
                     disabled={!edit}
                   />
                 </div>
               </form>
             </div>
+            <div className='column is-half'>
+              <div className="field column" >
+                <label className="form-label">Horário</label>
+
+                <input
+                  class="input is-small"
+                  type="text"
+                  value={dadosManutencao.man_horario}
+                  disabled={!edit}
+                />
+              </div>
+              <div className="field column" >
+                <label className="form-label">Data</label>
+
+                <input
+                  class="input is-small"
+                  type="text"
+                  value={new Date(dadosManutencao.man_data).toDateString()}
+                  disabled={!edit}
+                />
+              </div>
+              <div className="field column" >
+                <label className="form-label">ID do ativo</label>
+
+                <input
+                  class="input is-small"
+                  type="text"
+                  value={dadosManutencao.man_ativo_id.ati_id}
+                  disabled={!edit}
+
+                />
+              </div>
+            </div>
           </div>
 
-          <h1 className='has-text-weight-light'>Características</h1>
+          <h1 className='has-text-weight-light'>Endereço da manutenção</h1>
 
           <div class="mid-page" >
 
             <div class="columns m-3">
-
-
               <div class="column">
                 <div className='columns'>
-                  <div className="field column" >
-                    <label className="form-label">Horário</label>
 
-                    <input
-                      class="input is-small"
-                      type="text"
-                      value={dadosManutencao.man_horario}
-                      disabled={edit}
-                    />
-                  </div>
-                  <div className="field column" >
-                    <label className="form-label">Data</label>
-
-                    <input
-                      class="input is-small"
-                      type="text"
-                      value={new Date(dadosManutencao.man_data).toDateString()}
-                      disabled={!edit}
-                    />
-                  </div>
-                  <div className="field column" >
-                    <label className="form-label">ID do ativo</label>
-
-                    <input
-                      class="input is-small"
-                      type="text"
-                      value={dadosManutencao.man_ativo_id.ati_id}
-                      disabled={!edit}
-
-                    />
-                  </div>
-                  <div className="field column" >
-                    <label className="form-label">Cidade</label>
-
-                    <input
-                      class="input is-small"
-                      type="text"
-                      value={dadosManutencao.man_endereco_id.end_cidade}
-                      disabled={!edit}
-
-                    />
-                  </div>
-                </div>
-
-                <div className='columns'>
                   <div className="field column" >
                     <label className="form-label">CEP</label>
 
@@ -239,17 +224,6 @@ function VisualizarManutencao({ setTela }) {
                   </div>
 
                   <div className="field column" >
-                    <label className="form-label">Estado</label>
-
-                    <input
-                      class="input is-small"
-                      type="text"
-                      value={dadosManutencao.man_endereco_id.end_uf}
-                      disabled={!edit}
-
-                    />
-                  </div>
-                  <div className="field column" >
                     <label className="form-label">Rua</label>
 
                     <input
@@ -260,9 +234,30 @@ function VisualizarManutencao({ setTela }) {
                     />
                   </div>
 
+                  <div className="field column" >
+                    <label className="form-label">Número</label>
+
+                    <input
+                      class="input is-small"
+                      type="text"
+                      value={dadosManutencao.man_endereco_id.end_numero}
+                      disabled={!edit}
+                    />
+                  </div>
                 </div>
 
                 <div className='columns'>
+                  <div className="field column" >
+                    <label className="form-label">Cidade</label>
+
+                    <input
+                      class="input is-small"
+                      type="text"
+                      value={dadosManutencao.man_endereco_id.end_cidade}
+                      disabled={!edit}
+
+                    />
+                  </div>
                   <div className="field column" >
                     <label className="form-label">Bairro</label>
 
@@ -273,8 +268,17 @@ function VisualizarManutencao({ setTela }) {
                       disabled={!edit}
                     />
                   </div>
-                </div>
+                  <div className="field column" >
+                    <label className="form-label">UF</label>
 
+                    <input
+                      class="input is-small"
+                      type="text"
+                      value={dadosManutencao.man_endereco_id.end_uf}
+                      disabled={!edit}
+                    />
+                  </div>
+                </div>
               </div>
             </div>
 
