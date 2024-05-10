@@ -17,6 +17,8 @@ function Menu(props) {
     setShowLogout(prevShowLogout => !prevShowLogout);
   };
 
+ 
+
   const handleLogout = () => {
     alert('Você está sendo deslogado, até a próxima!')
     setTimeout(() => {
@@ -64,17 +66,18 @@ function Menu(props) {
 
           </div>
           {<div className="navbar-end">
-            <div className="navbar-item">
+            <div className="navbar-item has-dropdown is-active">
               <p className="navbar-item" ><img src={Notify} alt="configurações" /></p>
             </div>
           </div>}
           <div className="navbar-end">
-            <div className="navbar-item">
+            <div className="navbar-item has-dropdown is-active">
               <p className="navbar-item" onClick={handleSettingsClick} ><img src={SettingsIcon} alt="configurações" /></p>
               {showLogout && (
-                <div>
-                  <button onClick={handleLogout}>Deslogar</button> {/* handleLogout is a function that logs the user out */}
-                  <button onClick={e => props.seletorView("MeusDados", e)}>Meus dados</button>
+                <div className='navbar-dropdown is-right'>
+                  <button className='navbar-item' onClick={e => props.seletorView("MeusDados", e)}>Meus Dados</button>
+                  <button className='navbar-item' onClick={handleLogout}>Deslogar</button> {/* handleLogout is a function that logs the user out */}
+                 
                 </div>
               )}
             </div>
