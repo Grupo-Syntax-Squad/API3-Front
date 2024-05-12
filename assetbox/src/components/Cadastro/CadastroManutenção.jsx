@@ -160,9 +160,9 @@ useEffect(() => {
                   </div>
                 </div>
                 <div className="field" >
-                  <label className="form-label has-text-black">Data da manutenção:</label>
+                  <label className="form-label has-text-black">Data da manutenção:<span className='has-text-danger'>*</span></label>
                   <input
-                    class="input is-small"
+                    class="input is-small mt-2"
                     type="date"
                     placeholder='Insira a Data da manutenção:'
                     value={selectedDate}
@@ -170,7 +170,7 @@ useEffect(() => {
                   />
                 </div>
                 <div class="field">
-                  <label class="label has-text-black">horario: <span className='has-text-danger'>*</span></label>
+                  <label class="label has-text-black">Horario da Manutenção: <span className='has-text-danger'>*</span></label>
                   <input
                     class="input is-small"
                     type="time"
@@ -181,7 +181,7 @@ useEffect(() => {
                   />
                 </div>
                 <div class="field">
-                  <label class="label has-text-black">Atividade: <span className='has-text-danger'>*</span></label>
+                  <label class="label has-text-black">Atividade:<span className='has-text-danger'>*</span></label>
                   <input
                     class="input is-small"
                     type="text"
@@ -203,7 +203,7 @@ useEffect(() => {
                   </div>
                 </div>
                 <div className="field" >
-                  <label className="label has-text-black">Responsavel:</label>
+                  <label className="label has-text-black">Responsavel:<span className='has-text-danger'>*</span></label>
                   <input
                     class="input is-small"
                     type="text"
@@ -247,7 +247,7 @@ useEffect(() => {
               <form onSubmit={handleSubmit}>
                 <div>
                   <div className="field" >
-                    <label className="form-label has-text-black">CEP:</label>
+                    <label className="form-label has-text-black">CEP:<span className='has-text-danger'>*</span></label>
                     <input
                       class="input is-small"
                       type="text"
@@ -258,7 +258,7 @@ useEffect(() => {
                     />
                   </div>
                   <div className="field" >
-                    <label className="form-label has-text-black">Numero: <span className='has-text-danger'>*</span></label>
+                    <label className="form-label has-text-black">Número:<span className='has-text-danger'>*</span></label>
                     <input
                       class="input is-small"
                       type="text"
@@ -269,7 +269,7 @@ useEffect(() => {
                     />
                   </div>
                   <div className="field" >
-                    <label className="form-label has-text-black">UF:</label>
+                    <label className="form-label has-text-black">UF:<span className='has-text-danger'>*</span></label>
                     <input
                       class="input is-small"
                       type="text"
@@ -285,7 +285,7 @@ useEffect(() => {
             <div class="column is-half" style={{ width: '80%' }}>
               <form onSubmit={handleSubmit}>
                 <div className="field">
-                  <label className="form-label has-text-black">Cidade:</label>
+                  <label className="form-label has-text-black">Cidade:<span className='has-text-danger'>*</span></label>
                   <input
                     class="input is-small"
                     type="text"
@@ -296,7 +296,7 @@ useEffect(() => {
                   />
                 </div>
                 <div className="field" >
-                  <label className="form-label has-text-black">Rua:</label>
+                  <label className="form-label has-text-black">Rua:<span className='has-text-danger'>*</span></label>
                   <input
                     class="input is-small"
                     type="text"
@@ -307,7 +307,7 @@ useEffect(() => {
                   />
                 </div>
                 <div className="field" >
-                  <label className="form-label has-text-black">Bairro:</label>
+                  <label className="form-label has-text-black">Bairro:<span className='has-text-danger'>*</span></label>
                   <input
                     class="input is-small"
                     type="text"
@@ -318,7 +318,7 @@ useEffect(() => {
                   />
                 </div>
                 <div className="field" style={{ marginInline: '20px', marginBottom: '20px' }}>
-                  <label className="form-label has-text-black" >Complemento: <span className='has-text-danger'>*</span></label>
+                  <label className="form-label has-text-black" >Complemento:</label>
                   <input
                     class="input is-small"
                     type="text"
