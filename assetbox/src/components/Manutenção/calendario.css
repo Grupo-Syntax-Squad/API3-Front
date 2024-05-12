@@ -69,6 +69,11 @@
     background-color: #459eb6;
 }
 
+.has-manutencoes {
+    background-color: red;
+    color: white; /* Para garantir que o texto seja legível */
+}
+
 .calendar-body {
     padding: 10px;
     background-color: white;

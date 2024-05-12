@@ -43,6 +43,14 @@ function CadastroAdministrador({ setTela }) {
     const handleSubmit = async (event) => {
         event.preventDefault();
 
+        const camposObrigatorios = [adm_nome, adm_email, adm_telefone, adm_senha, adm_cpf];
+        const camposVazios = camposObrigatorios.some(campo => !campo);
+
+        if (camposVazios) {
+            alert('Por favor, preencha todos os campos obrigatórios.');
+            return;
+        }
+
         // Verifica se o e-mail está vazio
         if (adm_email.trim() === '') {
             window.alert('O e-mail não pode estar vazio.');
@@ -84,66 +92,66 @@ function CadastroAdministrador({ setTela }) {
                 </div>
                 <form onSubmit={handleSubmit} className="m-6" >
 
-                        <div className="column is-flex is-flex-direction-column m-3 is-justify-content-center is-align-items-center">
+                    <div className="column is-flex is-flex-direction-column m-3 is-justify-content-center is-align-items-center">
 
-                            <h1 className='has-text-weight-light is-size-4'>Dados</h1>
+                        <h1 className='has-text-weight-light is-size-4'>Dados</h1>
 
-                            <div className="field column is-two-thirds">
-                                <label className="form-label is-size-5">Nome: <span className='has-text-danger'>*</span></label>
-                                <input
-                                    className="input is-small"
-                                    type="text"
-                                    placeholder='Digite o nome:'
-                                    value={adm_nome}
-                                    onChange={(event) => setNomeAdministrador(event.target.value)}
-                                />
-                            </div>
-
-                            <div className="field column is-two-thirds">
-                                <label className="form-label is-size-5">Telefone: <span className='has-text-danger'>*</span></label>
-                                <input
-                                    className="input is-small"
-                                    type="text"
-                                    placeholder='Digite o número de telefone:'
-                                    value={adm_telefone}
-                                    onChange={handleTelefoneChange}
-                                />
-                            </div>
-
-                            <div className="field column is-two-thirds">
-                                <label className="form-label is-size-5">E-mail: <span className='has-text-danger'>*</span></label>
-                                <input
-                                    className="input is-small"
-                                    type="text"
-                                    placeholder='Digite o email:'
-                                    value={adm_email}
-                                    onChange={handleEmailChange}
-                                />
-                            </div>
-
-                            <div className="field column is-two-thirds">
-                                <label className="form-label is-size-5">Senha: <span className='has-text-danger'>*</span></label>
-                                <input
-                                    className="input is-small"
-                                    type="text"
-                                    placeholder='Crie uma senha:'
-                                    value={adm_senha}
-                                    onChange={(event) => setSenhaAdministrador(event.target.value)}
-                                />
-                            </div>
-
-                            <div className="field column is-two-thirds">
-                                <label className="form-label is-size-5">CPF: <span className='has-text-danger'>*</span></label>
-                                <input
-                                    className="input is-small"
-                                    type="text"
-                                    placeholder='Digite o CPF:'
-                                    value={adm_cpf}
-                                    onChange={(event) => setCPFAdministrador(event.target.value)}
-                                />
-                            </div>
+                        <div className="field column is-two-thirds">
+                            <label className="form-label is-size-5">Nome: <span className='has-text-danger'>*</span></label>
+                            <input
+                                className="input is-small"
+                                type="text"
+                                placeholder='Digite o nome:'
+                                value={adm_nome}
+                                onChange={(event) => setNomeAdministrador(event.target.value)}
+                            />
                         </div>
-                
+
+                        <div className="field column is-two-thirds">
+                            <label className="form-label is-size-5">Telefone: <span className='has-text-danger'>*</span></label>
+                            <input
+                                className="input is-small"
+                                type="text"
+                                placeholder='Digite o número de telefone:'
+                                value={adm_telefone}
+                                onChange={handleTelefoneChange}
+                            />
+                        </div>
+
+                        <div className="field column is-two-thirds">
+                            <label className="form-label is-size-5">E-mail: <span className='has-text-danger'>*</span></label>
+                            <input
+                                className="input is-small"
+                                type="text"
+                                placeholder='Digite o email:'
+                                value={adm_email}
+                                onChange={handleEmailChange}
+                            />
+                        </div>
+
+                        <div className="field column is-two-thirds">
+                            <label className="form-label is-size-5">Senha: <span className='has-text-danger'>*</span></label>
+                            <input
+                                className="input is-small"
+                                type="text"
+                                placeholder='Crie uma senha:'
+                                value={adm_senha}
+                                onChange={(event) => setSenhaAdministrador(event.target.value)}
+                            />
+                        </div>
+
+                        <div className="field column is-two-thirds">
+                            <label className="form-label is-size-5">CPF: <span className='has-text-danger'>*</span></label>
+                            <input
+                                className="input is-small"
+                                type="text"
+                                placeholder='Digite o CPF:'
+                                value={adm_cpf}
+                                onChange={(event) => setCPFAdministrador(event.target.value)}
+                            />
+                        </div>
+                    </div>
+
                     <div className="field is-grouped is-grouped-centered">
                         <p className="control">
                             <button className="button is-primary" type="submit">

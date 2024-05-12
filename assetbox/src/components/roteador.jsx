@@ -22,6 +22,7 @@ import MeusDados from "./Visualizar/MeusDados";
 export default function Roteador() {
     const [tela, setTela] = useState('Home');
     const [verificacaoToken, setVerificacaoToken] = useState("");
+    const [selectedDate, setSelectedDate] = useState(null);
 
     useEffect(() => {
         verificarToken();
@@ -186,7 +187,7 @@ export default function Roteador() {
                 return (
                     <>
                         <Menu seletorView={selecionarView} botoes={botoes} />
-                        <CadastroManutenção setTela={setTela} />
+                        <CadastroManutenção setSelectedDate={setSelectedDate} setTela={setTela} />
                     </>
                 )
             } else return <p>É necessário realizar o login para continuar para a página desejada!</p>
@@ -197,7 +198,7 @@ export default function Roteador() {
                 return (
                     <>
                         <Menu seletorView={selecionarView} botoes={botoes} />
-                        <Calendario setTela={setTela} />
+                        <Calendario setSelectedDate={setSelectedDate} setTela={setTela} />
                     </>
                 )
             } else return <p>É necessário realizar o login para continuar para a página desejada!</p>

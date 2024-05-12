@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import "./cadastro.css";
 import axios from 'axios';
 
-function CadastroManutenção({ setTela }) {
+function CadastroManutenção({ selectedDate, setTela }) {
   // Definindo estados para armazenar os dados do ativo
   const [man_endereco_id, setManEnderecoId] = useState();
   const [man_atividade, setManAtividade] = useState('');
@@ -31,14 +31,26 @@ function CadastroManutenção({ setTela }) {
     }
   });
 
-  useEffect(() => {
-    const fetchData = async () => {
-      let response = await axios.get('http://localhost:8000/ativos');
-      setAtivos(response.data)
-    };
+  const getDataFromLocalStorage = () => {
+    const dataSelecionada = localStorage.getItem('dataSelecionada');
+    if (dataSelecionada) {
+        // Faça o que precisar com a data recuperada
+        console.log('Data selecionada:', dataSelecionada);
+        // Por exemplo, você pode definir o estado com a data recuperada
+        setManData(dataSelecionada);
+    }
+};
 
-    fetchData();
-  }, []);
+useEffect(() => {
+  const fetchData = async () => {
+    let response = await axios.get('http://localhost:8000/ativos');
+    setAtivos(response.data);
+    getDataFromLocalStorage(); // Chamando a função para recuperar os dados do localStorage
+  };
+
+  fetchData(); // Chamando a função fetchData
+
+}, []); 
 
   function exibirPopUp() {
     var popup = document.getElementById('popup');
@@ -52,6 +64,14 @@ function CadastroManutenção({ setTela }) {
   // Função para lidar com o envio do formulário
   const handleSubmit = async (event) => {
     event.preventDefault();
+
+    const camposObrigatorios = [man_status, man_data, man_cep, man_horario, man_ativo_id, man_responsavel, man_atividade];
+    const camposVazios = camposObrigatorios.some(campo => !campo);
+
+    if (camposVazios) {
+        alert('Por favor, preencha todos os campos obrigatórios.');
+        return;
+    }
 
     let response;
     const EnderecoData = {
@@ -70,7 +90,7 @@ function CadastroManutenção({ setTela }) {
     const ativoData = {
       man_endereco_id: response.data,
       man_atividade,
-      man_data: dataHoraServidor,
+      man_data: selectedDate,
       man_horario : man_horario === '' ? '00:00:00' : man_horario + ':00',
       man_localizacao: ativoSelecionado.ati_localizacao_id,
       man_ativo_id: ativoSelecionado,
@@ -145,7 +165,7 @@ function CadastroManutenção({ setTela }) {
                     class="input is-small"
                     type="date"
                     placeholder='Insira a Data da manutenção:'
-                    value={man_data}
+                    value={selectedDate}
                     onChange={(event) => setManData(event.target.value)}
                   />
                 </div>

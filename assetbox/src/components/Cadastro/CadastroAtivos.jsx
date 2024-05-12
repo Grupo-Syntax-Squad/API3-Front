@@ -81,6 +81,14 @@ function CadastroAtivos({ setTela }) {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
+    const camposObrigatorios = [ati_numero, ati_tipo, ati_status, ati_preco_aquisicao, ati_chave_nf_e, ati_titulo];
+    const camposVazios = camposObrigatorios.some(campo => !campo);
+
+    if (camposVazios) {
+      alert('Por favor, preencha todos os campos obrigatórios.');
+      return;
+    }
+
     let response;
     let ati_imagem_id = null;
     if (imagemSelecionada != null) {

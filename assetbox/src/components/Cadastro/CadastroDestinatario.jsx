@@ -70,6 +70,15 @@ function CadastroDestinatarios({ setTela }) {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
+
+    const camposObrigatorios = [des_nome, des_email, des_telefone, des_cpf, end_rua, end_numero, end_bairro, end_cidade, end_uf, end_cep];
+    const camposVazios = camposObrigatorios.some(campo => !campo);
+
+    if (camposVazios) {
+        alert('Por favor, preencha todos os campos obrigatórios.');
+        return;
+    }
+    
     // Verifica se o e-mail está vazio
     if (des_email.trim() === '') {
       window.alert('O e-mail não pode estar vazio.');
