@@ -42,7 +42,6 @@ const Calendario = ({ setTela }) => {
             const filteredManutencoes = manutencoes.filter(manut => {
                 const manutDate = new Date(manut.man_data);
                 console.log('Data da manutenção:', manutDate.getDate());
-                console.log('Data selecionada:', selectedDate);
                 return (
                     manutDate.getDate() === selectedDate &&
                     manutDate.getMonth() === currMonth &&

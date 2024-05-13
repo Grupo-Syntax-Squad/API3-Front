@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import "./cadastro.css";
 import axios from 'axios';
 
-function CadastroManutenção({ selectedDate, setTela }) {
+function CadastroManutenção({ setTela }) {
   // Definindo estados para armazenar os dados do ativo
   const [man_endereco_id, setManEnderecoId] = useState();
   const [man_atividade, setManAtividade] = useState('');
@@ -25,6 +25,7 @@ function CadastroManutenção({ selectedDate, setTela }) {
   const [localizacoes, setLocalizacoes] = useState([]);
   const [tipos, setTipos] = useState([]);
   const [ativos, setAtivos] = useState([]);
+  const [dataSelecionada, setData] = useState(new Date())
   const [ativoSelecionado, setAtivo] = useState({
     "ati_localizacao_id": {
       "loc_titulo": ""
@@ -90,7 +91,7 @@ useEffect(() => {
     const ativoData = {
       man_endereco_id: response.data,
       man_atividade,
-      man_data: selectedDate,
+      man_data: dataSelecionada,
       man_horario : man_horario === '' ? '00:00:00' : man_horario + ':00',
       man_localizacao: ativoSelecionado.ati_localizacao_id,
       man_ativo_id: ativoSelecionado,
@@ -165,7 +166,7 @@ useEffect(() => {
                     class="input is-small mt-2"
                     type="date"
                     placeholder='Insira a Data da manutenção:'
-                    value={selectedDate}
+                    value={dataSelecionada}
                     onChange={(event) => setManData(event.target.value)}
                   />
                 </div>
