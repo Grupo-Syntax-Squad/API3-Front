@@ -18,7 +18,12 @@ const Usuarios = ({ setTela }) => {
             });
         axios.get('http://localhost:8000/administradores')
             .then(response => {
-                setAdministradores(response.data);
+                const admins = [];
+                response.data.forEach(administrador => {
+                    if (administrador.status == "ATIVO") admins.push(administrador);
+                });
+                setAdministradores(admins);
+                
             })
             .catch(error => {
                 console.error('There was an error!', error);

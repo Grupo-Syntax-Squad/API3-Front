@@ -49,15 +49,15 @@ function exibirPopUpConfirmacao() {
 }
 
 
-  function handleDelete() {
-    axios.delete(`http://localhost:8000/administradores/${id}`).then((resposta) => {
-      console.log(resposta.data);
-      exibirPopUpDelecao();
-      exibirPopUpConfirmacao();
-    })
-    .catch((error) => {
-      console.error("Erro ao deletar administrador:", error);
-    });
+  async function handleDelete() {
+    try {
+      const response = await axios.delete(`http://localhost:8000/administradores/${id}`);
+      window.alert("Administrador deletado com sucesso!");
+      setTela("Usuarios");
+    } catch (error) {
+      if (error.response.status == 400) window.alert(error.response.data);
+      else window.alert("Ocorreu um erro ao tentar deletar o administrador.");
+    }
 }
 
   return (
