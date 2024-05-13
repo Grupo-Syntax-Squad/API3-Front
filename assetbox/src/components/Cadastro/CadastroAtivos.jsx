@@ -171,7 +171,7 @@ function CadastroAtivos({ setTela }) {
     <body>
       <div class='page-full'>
         <div class='field'>
-          <h2 class="titulo-cadastro">Cadastro de ativos</h2>
+          <h2 class="titulo-cadastro">Cadastro de Ativos</h2>
         </div>
 
         <div class="columns m-3">
@@ -498,8 +498,8 @@ function CadastroAtivos({ setTela }) {
               Cancelar
             </button>
           </p>
-          <div id='popup' style={{ display: 'none', height: '200px', backgroundColor: '#367E90', position: 'fixed', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', textAlign: 'center', width: '40%', alignContent: 'center', justifyContent: 'center', borderRadius: '10px' }}>
-            <p className='has-text-white is-size-3-desktop is-size-4-mobile'>Ativo Cadastrado com sucesso!</p>
+          <div id='popup' className='pop-up' style={{ display: 'none', height: '200px', backgroundColor: '#367E90', position: 'fixed', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', textAlign: 'center', width: '40%', alignContent: 'center', justifyContent: 'center', borderRadius: '10px' }}>
+            <p className='has-text-white is-size-3-desktop is-size-4-mobile pt-5 pb-5'>Ativo Cadastrado com sucesso!</p>
             <button className='has-text-white is-size-4 p-3 mt-3' style={{ marginLeft: '60%', backgroundColor: '#459EB5', borderRadius: '100%' }} onClick={() => exibirPopUp()}>
               <p className='is-size-4' onClick={() => setTela('Ativos')}>OK</p>
             </button>

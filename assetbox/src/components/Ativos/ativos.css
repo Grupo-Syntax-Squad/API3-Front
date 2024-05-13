@@ -14,9 +14,19 @@
    pointer-events: none;
 }
 
+.button-effect{
+   transition: box-shadow 0.3s ease, transform 0.3s ease
+}
+
+.button-effect:hover{
+   box-shadow: 0 0 0 0 rgb(23, 49, 61), inset 3px 3px 3px rgb(23, 53, 61);
+   transform: translate(3px, 3px)
+}
+
+
 h2{
    text-align: center;
-   background-color: #459eb6;
+   background-color: rgb(69, 158, 182);
    margin: auto;
    font-size: x-large;
    color: #fff;
@@ -66,8 +76,6 @@ h1{
 }
 .asset{
    background-color: #fff !important;
-   border-bottom-left-radius: 1rem;
-   border-bottom-right-radius: 1rem;
 }
 .asset:hover{
    background-color:var(--cinza);

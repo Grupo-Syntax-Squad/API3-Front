@@ -27,6 +27,8 @@ function Menu(props) {
     }, 3000);
   }
 
+  
+
   return (
     <div>
       <div className="navbar shadow-menu is-flex is-justify-content-space-between custom-background" role="navigation" aria-label="main navigation">

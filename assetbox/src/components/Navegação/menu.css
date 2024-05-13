@@ -19,6 +19,13 @@ a.nav-item {
 .navbar p:hover{
   background-color: #367E90;
   transition: 200ms ease-in-out;
+  cursor: pointer;
+}
+
+.navbar p::after{
+  background-color: #903636;
+  transition: 200ms ease-in-out;
+  cursor: pointer;
 }
 
 .navbar-menu {

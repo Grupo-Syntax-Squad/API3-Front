@@ -165,7 +165,7 @@ const Calendario = ({ setTela }) => {
                     </div>
                     <div className="calendar-days">
                         {calendarDays.map((day, index) => (
-                            <div key={index} className={`calendar-day ${day !== null ? 'active' : ''} ${hasManutencoes(day) ? 'has-manutencoes' : ''}`} onClick={() => handleDayClick(day)}>
+                            <div key={index} className={`calendar-day ${day !== null ? 'active' : ''} ${hasManutencoes(day) ? 'has-manutencoes': ''}`} onClick={() => handleDayClick(day)}>
                                 {day}
                             </div>
                         ))}
