@@ -5,6 +5,7 @@ import axios from 'axios';
 function VisualizarAtivos({ setTela }) {
   const [dadosAtivo, setDadosAtivo] = useState({})
   const [imageUrl, setImageUrl] = useState(null);
+  const [docUrl, setDocument] = useState(null)
   const [carregando, setCarregando] = useState(true);
   const id = localStorage.getItem('id');
   const [ativoId, setAtivoId] = useState(null);
@@ -38,6 +39,9 @@ function VisualizarAtivos({ setTela }) {
         setDadosAtivo(dados);
         if (dados.ati_imagem_id != null) {
           setImageUrl(`http://localhost:8000/imagens/${dados.ati_imagem_id.img_id}`);
+        }
+        if (dados.ati_documento_id != null){
+          setDocument(`http://localhost:8000/documentos/${dados.ati_documento_id.documento_id}`)
         }
         console.log(dados)
         setCarregando(false);
@@ -376,11 +380,14 @@ function VisualizarAtivos({ setTela }) {
                 </div>
               </div>
 
-              {/* <div className='container'>
-                <h1>Documentos</h1>
-                <div class="container column is-half has-text-centered"><img src={docadd} alt="docadd" style={{ width: '100px', height: '100px' }} />
+              <div className='container'>
+                <h1 className='has-text-weight-light'>Documentos</h1>
+                <div class="container column is-half has-text-centered">
+                  {docUrl == null ? <div>Ativo sem documento</div> : <button class="button is-info">
+                    Donwload do Documento
+                  </button>}
                 </div>
-              </div> */}
+              </div>
 
             </div>
 
