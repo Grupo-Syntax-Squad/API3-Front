@@ -1,11 +1,17 @@
 
 .fundo{
-    background-image: linear-gradient(261deg, rgba(10,10,10,0.3) 6%, rgba(217,217,217,0.29735644257703087) 20%, rgba(82,107,114,0.7399334733893557) 100%), url('../../assets/img/fundoLogin.svg');
+    background-image: linear-gradient(261deg, rgba(80, 80, 80, 0) 6%, rgba(100, 100, 100, 0.297) 20%, rgba(29, 51, 56, 0.74) 100%), url('../../assets/img/fundoLogin.svg');
     background-repeat: no-repeat;
     background-size: cover;
     height: 100vh;
     flex-direction: column;
     overflow: hidden;
+}
+
+.tela-login{
+    border-radius: 100px;
+    max-width: 40%;
+    box-shadow: 0px 10px 8px rgba(0, 0, 0, 0.144);
 }
 
 .page-full-login{

@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import './calendario.css';
 import axios from 'axios';
 
-const month_names = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
+const month_names = [
+    'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
 
 const isLeapYear = (year) => {
     return (year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0);
@@ -85,7 +86,7 @@ const Calendario = ({ setTela }) => {
     };
 
     const handleDayClick = (day) => {
-        localStorage.setItem('dataSelecionada', `${day}/${currMonth + 1}/${currYear}`);
+        localStorage.setItem('dataSelecionada', `${currYear}/${currMonth + 1}/${day}`);
         setSelectedDate(day);
     };
 
@@ -141,12 +142,12 @@ const Calendario = ({ setTela }) => {
         <div className="tela columns">
             <div className="calendar column is-half">
                 <div className="calendar-header">
-                    <span className="month-picker" id="month-picker">{month_names[currMonth]}</span>
+                    <span className="year-picker" id="year-picker">{currYear}</span>
                     <div className="year-picker">
                         <span className="year-change" id="prev-month" onClick={() => changeMonth(-1)}>
                             <pre>{'<'}</pre>
                         </span>
-                        <span id="year">{currYear}</span>
+                        <span id="year">{month_names[currMonth]}</span>
                         <span className="year-change" id="next-month" onClick={() => changeMonth(1)}>
                             <pre>{'>'}</pre>
                         </span>
