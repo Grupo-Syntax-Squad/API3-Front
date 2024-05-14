@@ -56,11 +56,20 @@ function CadastroDestinatarios({ setTela }) {
       try {
         const response = await axios.get(`https://viacep.com.br/ws/${cep}/json/`);
         const data = response.data;
-        setRuaDestinatario(data.logradouro);
-        setBairroDestinatario(data.bairro);
-        setCidadeDestinatario(data.localidade);
-        setUfDestinatario(data.uf);
-        setCEPDestinatario(data.cep);
+        if (data.erro) {
+          window.alert("CEP inválido!")
+          setRuaDestinatario("");
+          setBairroDestinatario("");
+          setCidadeDestinatario("");
+          setUfDestinatario("");
+          setCEPDestinatario("");
+        } else {
+          setRuaDestinatario(data.logradouro);
+          setBairroDestinatario(data.bairro);
+          setCidadeDestinatario(data.localidade);
+          setUfDestinatario(data.uf);
+          setCEPDestinatario(data.cep);
+        }
       } catch (error) {
         console.error('Erro ao buscar o CEP:', error);
       }
@@ -75,10 +84,10 @@ function CadastroDestinatarios({ setTela }) {
     const camposVazios = camposObrigatorios.some(campo => !campo);
 
     if (camposVazios) {
-        alert('Por favor, preencha todos os campos obrigatórios.');
-        return;
+      alert('Por favor, preencha todos os campos obrigatórios.');
+      return;
     }
-    
+
     // Verifica se o e-mail está vazio
     if (des_email.trim() === '') {
       window.alert('O e-mail não pode estar vazio.');
@@ -137,7 +146,7 @@ function CadastroDestinatarios({ setTela }) {
     <body>
       <div className='page-full'>
         <div className='field'>
-            <h2 class="titulo-cadastro">Cadastro de destinatário</h2>
+          <h2 class="titulo-cadastro">Cadastro de destinatário</h2>
         </div>
         <form onSubmit={handleSubmit} className="m-6" >
           <div className='columns'>
@@ -286,7 +295,7 @@ function CadastroDestinatarios({ setTela }) {
           </div>
 
           {showPopup && (
-            <div className='shadow-pop-up' id='popup' style={{ display: 'block', height: '200px', backgroundColor: '#367E90', position: 'fixed', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', textAlign: 'center', width: '40%', alignContent: 'center', justifyContent: 'center', borderRadius: '10px'}}>
+            <div className='shadow-pop-up' id='popup' style={{ display: 'block', height: '200px', backgroundColor: '#367E90', position: 'fixed', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', textAlign: 'center', width: '40%', alignContent: 'center', justifyContent: 'center', borderRadius: '10px' }}>
               <p className='has-text-white is-size-3-desktop is-size-4-mobile has-text-weight-medium'>Destinatário Cadastrado com sucesso!</p>
               <button className='has-text-white is-size-4 p-3 mt-3' style={{ marginLeft: '60%', backgroundColor: '#459EB5', borderRadius: '100%' }} onClick={() => { setShowPopup(false); setCEPDestinatario(''); }}>
                 <p className='is-size-4 has-text-weight-medium'>OK</p>
