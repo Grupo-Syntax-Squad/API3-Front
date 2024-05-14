@@ -7,6 +7,19 @@ function VisualizarManutencao({ setTela }) {
   const [dadosManutencao, setDadosManutencao] = useState({})
   const [carregando, setCarregando] = useState(true);
 
+  const [manAtividade, setManAtividade] = useState('');
+  const [manData, setManData] = useState(new Date());
+  const [manHorario, setManHorario] = useState('');
+  const [manResponsavel, setManResponsavel] = useState('');
+  const [manObservacoes, setManObservacoes] = useState('');
+  const [manCep, setManCep] = useState('');
+  const [manRua, setManRua] = useState('');
+  const [manNumero, setManNumero] = useState('');
+  const [manCidade, setManCidade] = useState('');
+  const [manBairro, setManBairro] = useState('');
+  const [manUf, setManUf] = useState('');
+
+
   const id = localStorage.getItem('id');
 
   const todos_status = ["AGUARDANDO_MANUTENCAO", "EM_MANUTENCAO", "ADIADA", "CANCELADA", "CONCLUIDA"];
@@ -17,12 +30,46 @@ function VisualizarManutencao({ setTela }) {
   const handleAtualizarStatus = () => {
     try {
       dadosManutencao.man_status = status;
+      dadosManutencao.man_atividade = manAtividade;
+      dadosManutencao.man_data = manData;
+      dadosManutencao.man_horario = manHorario;
+      dadosManutencao.man_responsavel = manResponsavel;
+      dadosManutencao.man_observacoes = manObservacoes;
+      dadosManutencao.man_endereco_id.end_cep = manCep;
+      dadosManutencao.man_endereco_id.end_rua = manRua;
+      dadosManutencao.man_endereco_id.end_numero = manNumero;
+      dadosManutencao.man_endereco_id.end_cidade = manCidade;
+      dadosManutencao.man_endereco_id.end_bairro = manBairro;
+      dadosManutencao.man_endereco_id.end_uf = manUf;
       const response = axios.put(`http://localhost:8000/manutencoes/${Number(id)}`, dadosManutencao);
       handleEdit();
     } catch (error) {
       window.alert("Ocorreu um erro ao tentar atualizar o status da manutenção!");
       console.log(error)
     }
+  }
+
+  const handleCancelarEdicao = async () => {
+    try {
+      const response = await axios.get(`http://localhost:8000/manutencoes/${Number(id)}`);
+      const dados = response.data;
+      setDadosManutencao(dados);
+      setStatus(String(todos_status.indexOf(dados.man_status)));
+      setManAtividade(dados.man_atividade)
+      setManData(dados.man_data)
+      setManHorario(dados.man_horario)
+      setManResponsavel(dados.man_responsavel)
+      setManObservacoes(dados.man_observacoes)
+      setManCep(dados.man_endereco_id.end_cep)
+      setManRua(dados.man_endereco_id.end_rua)
+      setManNumero(dados.man_endereco_id.end_numero)
+      setManCidade(dados.man_endereco_id.end_cidade)
+      setManBairro(dados.man_endereco_id.end_bairro)
+      setManUf(dados.man_endereco_id.end_uf)
+    } catch (error) {
+      console.error(`Erro ao buscar dados da manutenção ${id}:`, error);
+    }
+    handleEdit();
   }
 
   useEffect(() => {
@@ -34,6 +81,17 @@ function VisualizarManutencao({ setTela }) {
         setCarregando(false);
         setDadosManutencao(dados);
         setStatus(String(todos_status.indexOf(dados.man_status)));
+        setManAtividade(dados.man_atividade)
+        setManData(dados.man_data)
+        setManHorario(dados.man_horario)
+        setManResponsavel(dados.man_responsavel)
+        setManObservacoes(dados.man_observacoes)
+        setManCep(dados.man_endereco_id.end_cep)
+        setManRua(dados.man_endereco_id.end_rua)
+        setManNumero(dados.man_endereco_id.end_numero)
+        setManCidade(dados.man_endereco_id.end_cidade)
+        setManBairro(dados.man_endereco_id.end_bairro)
+        setManUf(dados.man_endereco_id.end_uf)
       } catch (error) {
         console.error(`Erro ao buscar dados da manutenção ${id}:`, error);
       }
@@ -91,7 +149,8 @@ function VisualizarManutencao({ setTela }) {
                     <input
                       class="input is-small"
                       type="text"
-                      value={dadosManutencao.man_atividade}
+                      value={manAtividade}
+                      onChange={e => setManAtividade(e.target.value)}
                       disabled={!edit}
 
                     />
@@ -124,7 +183,7 @@ function VisualizarManutencao({ setTela }) {
                   <div class="field column">
                     <label class="form-label">Localização do ativo</label><br />
                     <div class="select is-small">
-                      <select class="is-hovered" value={dadosManutencao.man_ativo_id.ati_localizacao_id} disabled={!edit}>
+                      <select class="is-hovered" value={dadosManutencao.man_ativo_id.ati_localizacao_id} disabled>
                         <option>{dadosManutencao.man_ativo_id.ati_localizacao_id?.loc_titulo}</option>
                         <option></option>
                       </select>
@@ -139,7 +198,8 @@ function VisualizarManutencao({ setTela }) {
                   <input
                     class="input is-small"
                     type="text"
-                    value={dadosManutencao.man_responsavel}
+                    value={manResponsavel}
+                    onChange={e => setManResponsavel(e.target.value)}
                     disabled={!edit}
                   />
                 </div>
@@ -151,7 +211,7 @@ function VisualizarManutencao({ setTela }) {
                     class="input is-small"
                     type="text"
                     value={dadosManutencao.man_ativo_id.ati_titulo}
-                    disabled={!edit}
+                    disabled
                   />
                 </div>
 
@@ -162,7 +222,9 @@ function VisualizarManutencao({ setTela }) {
                     class="input is-small"
                     type="text"
                     rows="4"
-                    value={dadosManutencao.man_observacoes == null || dadosManutencao.man_observacoes == undefined ? "Sem observações" : dadosManutencao.man_observacoes}
+                    value={manObservacoes}
+                    placeholder={manObservacoes === null || manObservacoes === undefined || manObservacoes === "" ? "Sem observações" : manObservacoes}
+                    onChange={e => setManObservacoes(e.target.value)}
                     disabled={!edit}
                   />
                 </div>
@@ -174,8 +236,9 @@ function VisualizarManutencao({ setTela }) {
 
                 <input
                   class="input is-small"
-                  type="text"
-                  value={dadosManutencao.man_horario}
+                  type="time"
+                  value={manHorario}
+                  onChange={e => setManHorario(e.target.value)}
                   disabled={!edit}
                 />
               </div>
@@ -185,7 +248,8 @@ function VisualizarManutencao({ setTela }) {
                 <input
                   class="input is-small"
                   type="text"
-                  value={new Date(dadosManutencao.man_data).toDateString()}
+                  value={new Date(manData).toDateString()}
+                  onChange={e => setManData(e.target.value)}
                   disabled={!edit}
                 />
               </div>
@@ -217,7 +281,8 @@ function VisualizarManutencao({ setTela }) {
                     <input
                       class="input is-small"
                       type="text"
-                      value={dadosManutencao.man_endereco_id.end_cep}
+                      value={manCep}
+                      onChange={e => setManCep(e.target.value)}
                       disabled={!edit}
 
                     />
@@ -229,7 +294,8 @@ function VisualizarManutencao({ setTela }) {
                     <input
                       class="input is-small"
                       type="text"
-                      value={dadosManutencao.man_endereco_id.end_rua}
+                      value={manRua}
+                      onChange={e => setManRua(e.target.value)}
                       disabled={!edit}
                     />
                   </div>
@@ -240,7 +306,8 @@ function VisualizarManutencao({ setTela }) {
                     <input
                       class="input is-small"
                       type="text"
-                      value={dadosManutencao.man_endereco_id.end_numero}
+                      value={manNumero}
+                      onChange={e => setManNumero(e.target.value)}
                       disabled={!edit}
                     />
                   </div>
@@ -253,7 +320,8 @@ function VisualizarManutencao({ setTela }) {
                     <input
                       class="input is-small"
                       type="text"
-                      value={dadosManutencao.man_endereco_id.end_cidade}
+                      value={manCidade}
+                      onChange={e => setManCidade(e.target.value)}
                       disabled={!edit}
 
                     />
@@ -264,7 +332,8 @@ function VisualizarManutencao({ setTela }) {
                     <input
                       class="input is-small"
                       type="text"
-                      value={dadosManutencao.man_endereco_id.end_bairro}
+                      value={manBairro}
+                      onChange={e => setManBairro(e.target.value)}
                       disabled={!edit}
                     />
                   </div>
@@ -274,7 +343,8 @@ function VisualizarManutencao({ setTela }) {
                     <input
                       class="input is-small"
                       type="text"
-                      value={dadosManutencao.man_endereco_id.end_uf}
+                      value={manUf}
+                      onChange={e => setManUf(e.target.value)}
                       disabled={!edit}
                     />
                   </div>
@@ -310,7 +380,7 @@ function VisualizarManutencao({ setTela }) {
                     </button>
                   </p>
                   <p class="control">
-                    <button class="button is-danger" type="submit" onClick={handleEdit}>
+                    <button class="button is-danger" type="submit" onClick={handleCancelarEdicao}>
                       Cancelar
                     </button>
                   </p>
