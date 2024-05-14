@@ -33,7 +33,9 @@ function CadastroManutenção({ setTela }) {
   });
 
   const getDataFromLocalStorage = () => {
-    const dataSelecionada = localStorage.getItem('dataSelecionada');
+    const dataSelecionada = new Date(localStorage.getItem('dataSelecionada')).toISOString().split("T")[0];
+    setData(dataSelecionada);
+    console.log("Data selecionada:", dataSelecionada);
     if (dataSelecionada) {
         // Faça o que precisar com a data recuperada
         console.log('Data selecionada:', dataSelecionada);
@@ -91,7 +93,7 @@ useEffect(() => {
     const ativoData = {
       man_endereco_id: response.data,
       man_atividade,
-      man_data: dataSelecionada,
+      man_data: new Date().setDate(new Date(dataSelecionada).getDate()+1),
       man_horario : man_horario === '' ? '00:00:00' : man_horario + ':00',
       man_localizacao: ativoSelecionado.ati_localizacao_id,
       man_ativo_id: ativoSelecionado,
@@ -106,11 +108,12 @@ useEffect(() => {
     // Limpar campos
     setManEnderecoId('');
     setManAtividade('');
-    setManData('');
+    setData('');
     setManHora('');
     setManLocalizacao('');
     setManId('');
     setManAtivoId('');
+    localStorage.setItem("dataSelecionada", "")
   };
 
   const handlerAtivo = (e) => {
@@ -167,7 +170,7 @@ useEffect(() => {
                     type="date"
                     placeholder='Insira a Data da manutenção:'
                     value={dataSelecionada}
-                    onChange={(event) => setManData(event.target.value)}
+                    onChange={(event) => setData(event.target.value)}
                   />
                 </div>
                 <div class="field">

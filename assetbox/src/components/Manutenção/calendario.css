@@ -70,7 +70,7 @@
 }
 
 .has-manutencoes {
-    background-color: red;
+    background-color: rgb(150, 150, 150);
     color: white; /* Para garantir que o texto seja legível */
 }
 

@@ -32,8 +32,7 @@ const Manutencao = ({ setTela }) => {
     return (
         <body>
             <div className='page-full' style={{ backgroundColor: 'transparent', borderTopLeftRadius: '10px', borderTopRightRadius: '10px' }}>
-                <button className="button button-effect is-primary m-5 ml-6 is-rounded is-size-4 shadow-button" style={{ backgroundColor: '#367E90', color: '#fff' }} onClick={() => setTela('CadastroManutenção')}>Cadastrar Manutenção</button>
-                <button className="button button-effect is-primary m-5 ml-6 is-rounded is-size-4 shadow-button" style={{ backgroundColor: '#367E90', color: '#fff' }} onClick={() => setTela('VisualizarAgendamento')}>Visualizar Agendamentos de Manutenção</button>
+                <button className="button button-effect is-primary m-5 ml-6 is-rounded is-size-4 shadow-button" style={{ backgroundColor: '#367E90', color: '#fff' }} onClick={() => setTela('VisualizarAgendamento')}>Cadastrar Manutenção</button>
                 <div className='page-full' style={{ backgroundColor: '#459EB5', borderTopLeftRadius: '10px', borderTopRightRadius: '10px' }}>
                     <div className='field'>
                         <div className="columns filtro mx-0" style={{ borderTopLeftRadius: '10px', borderTopRightRadius: '10px' }}>

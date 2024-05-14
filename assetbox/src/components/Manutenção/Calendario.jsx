@@ -85,7 +85,7 @@ const Calendario = ({ setTela }) => {
     };
 
     const handleDayClick = (day) => {
-        localStorage.setItem('dataSelecionada', `${day}/${currMonth + 1}/${currYear}`);
+        localStorage.setItem('dataSelecionada', `${currYear}/${currMonth + 1}/${day}`);
         setSelectedDate(day);
     };
 
