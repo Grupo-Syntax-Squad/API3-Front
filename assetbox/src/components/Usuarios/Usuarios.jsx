@@ -81,7 +81,11 @@ const Usuarios = ({ setTela }) => {
 
                                 {dadosFiltrados2.map((administrador) => {
                                     if (administrador.adm_id == "1") {
-                                        return "";
+                                        return <div className='asset is-flex is-justify-content-center'>
+                                        <div className='SemHover column is-one-third mr-2 dado-ativo is-flex is-justify-content-center is-align-items-center has-text-weight-medium' style={{ width: '200%' }}>
+                                            <p className='has-text-black'>Nenhum Usuário Cadastrado</p>
+                                        </div>
+                                    </div>
                                     } else {
                                         return (
                                             <div className='SemHover p-2 is-one-third mr-2 dado-ativo is-flex is-align-items-center ml-6 has-text-weight-medium'>
