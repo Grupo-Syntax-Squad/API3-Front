@@ -32,6 +32,9 @@ function CadastroManutenção({ setTela }) {
     }
   });
 
+  
+
+
   const getDataFromLocalStorage = () => {
     const dataSelecionada = new Date(localStorage.getItem('dataSelecionada')).toISOString().split("T")[0];
     setData(dataSelecionada);
@@ -131,10 +134,20 @@ useEffect(() => {
       try {
         const response = await axios.get(`https://viacep.com.br/ws/${cep}/json/`);
         const data = response.data;
-        setManRua(data.logradouro);
-        setManBairro(data.bairro);
-        setManCidade(data.localidade);
-        setManUf(data.uf);
+        if (data.erro) {
+          window.alert("CEP inválido!")
+          setManRua("");
+          setManBairro("");
+          setManCidade("");
+          setManUf("");
+          setManCep("");
+        } else {
+          setManRua(data.logradouro);
+          setManBairro(data.bairro);
+          setManCidade(data.localidade);
+          setManUf(data.uf);
+          setManCep(data.cep);
+        }
       } catch (error) {
         console.error('Erro ao buscar o CEP:', error);
       }
