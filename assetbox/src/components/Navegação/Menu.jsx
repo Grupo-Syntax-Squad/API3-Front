@@ -79,7 +79,6 @@ function Menu(props) {
                 <div className='navbar-dropdown is-right'>
                   <button className='navbar-item' onClick={e => props.seletorView("MeusDados", e)}>Meus Dados</button>
                   <button className='navbar-item' onClick={handleLogout}>Deslogar</button> {/* handleLogout is a function that logs the user out */}
-                 
                 </div>
               )}
             </div>

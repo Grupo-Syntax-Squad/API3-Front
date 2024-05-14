@@ -139,7 +139,7 @@ const Calendario = ({ setTela }) => {
     console.log(selectedDate);
 
     return (
-        <div className="tela columns">
+        <div className="tela columns shadow-button">
             <div className="calendar column is-half">
                 <div className="calendar-header">
                     <span className="year-picker" id="year-picker">{currYear}</span>

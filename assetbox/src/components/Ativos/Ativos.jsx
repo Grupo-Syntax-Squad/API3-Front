@@ -34,7 +34,7 @@ const Ativos = ({ setTela }) => {
         <body>
             <div class='page-full' style={{ backgroundColor: 'transparent' }}>
                 <button class=" shadow-button button button-effect is-primary m-5 ml-6 is-rounded is-size-4" style={{ backgroundColor: '#367E90', color: '#fff' }} onClick={() => setTela('CadastroAtivos')}>Cadastrar Ativo</button>
-                <div class='page-full' style={{ 
+                <div class='page-full shadow-button' style={{ 
                     backgroundColor: '#459EB5' }}>
                     <div class='field'>
                         <div class="columns filtro mx-0" style={{ borderTopLeftRadius: '10px', borderTopRightRadius: '10px' }}>

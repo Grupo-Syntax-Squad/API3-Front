@@ -42,14 +42,14 @@
     overflow: auto;
     padding-bottom: 72%;
 }
+
 .calendar-day:hover{
     background-color: #459eb6;
 }
+
 .calendar {
     height: max-content;
     width: max-content;
-    border-radius: 30px;
-    padding: px;
     position: relative;
     overflow: hidden;
 }
