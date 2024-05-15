@@ -7,27 +7,25 @@ const Usuarios = ({ setTela }) => {
     const [destinatarios, setdestinatarios] = useState([]);
     const [administradores, setAdministradores] = useState([])
     const [filtroNome, setNomes] = useState('')
-
+    const [isRoot, setIsRoot] = useState(false);
     useEffect(() => {
-        axios.get('http://localhost:8000/destinatarios')
-            .then(response => {
-                setdestinatarios(response.data);
-            })
-            .catch(error => {
-                console.error('There was an error!', error);
-            });
-        axios.get('http://localhost:8000/administradores')
-            .then(response => {
-                const admins = [];
-                response.data.forEach(administrador => {
-                    if (administrador.status == "ATIVO") admins.push(administrador);
-                });
+        const fetchData = async () => {
+            try {
+                const destinatariosResponse = await axios.get('http://localhost:8000/destinatarios');
+                setdestinatarios(destinatariosResponse.data);
+
+                const administradoresResponse = await axios.get('http://localhost:8000/administradores');
+                const admins = administradoresResponse.data.filter(administrador => administrador.status === "ATIVO");
                 setAdministradores(admins);
-                
-            })
-            .catch(error => {
+
+                const userEmail = localStorage.getItem("userEmail");
+                setIsRoot(userEmail === "admin@gmail.com");
+            } catch (error) {
                 console.error('There was an error!', error);
-            });
+            }
+        };
+
+        fetchData();
     }, []);
 
     const handleClick = (id) => {
@@ -39,6 +37,7 @@ const Usuarios = ({ setTela }) => {
         localStorage.setItem('id', id);
         setTela(`VisualizarAdministradores`);
     };
+    
     const dadosFiltrados = destinatarios.filter(destinatario => {
         return (filtroNome === '' || destinatario.des_nome.toLowerCase().includes(filtroNome.toLowerCase()));
     });
@@ -46,12 +45,16 @@ const Usuarios = ({ setTela }) => {
         return (filtroNome === '' || administrador.adm_nome.toLowerCase().includes(filtroNome.toLowerCase()));
     });
 
-
     return (
         <body>
             <div class='page-full' style={{ backgroundColor: 'transparent', borderTopLeftRadius: '10px', borderTopRightRadius: '10px' }}>
-                <button class="button button-effect is-primary m-5 ml-6 is-rounded is-size-4 shadow-button" style={{ backgroundColor: '#367E90', color: '#fff' }} onClick={() => setTela('CadastroDestinatarios')}>Cadastrar Destinatário</button>
-                <button class="button button-effect is-primary m-5 ml-6 is-rounded is-size-4 shadow-button" style={{ backgroundColor: '#367E90', color: '#fff' }} onClick={() => setTela('CadastroAdministrador')}>Cadastrar Administrador</button>
+            <button class="button button-effect is-primary m-5 ml-6 is-rounded is-size-4 shadow-button" style={{ backgroundColor: '#367E90', color: '#fff' }} onClick={() => setTela('CadastroDestinatarios')}>Cadastrar Destinatário</button>
+                {isRoot && (
+                    <button class="button button-effect is-primary m-5 ml-6 is-rounded is-size-4 shadow-button" style={{ backgroundColor: '#367E90', color: '#fff' }} onClick={() => setTela('CadastroAdministrador')}> Cadastrar Administrador</button>
+                )}
+                {!isRoot &&(
+                    ""
+                )}
                 <div class='page-full shadow-button' style={{ backgroundColor: '#459EB5', borderTopLeftRadius: '10px', borderTopRightRadius: '10px' }}>
                     <div class='field'>
                         <div class="columns filtro mx-0" style={{ borderTopLeftRadius: '10px', borderTopRightRadius: '10px' }}>
