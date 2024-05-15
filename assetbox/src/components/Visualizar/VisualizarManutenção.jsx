@@ -32,7 +32,7 @@ function VisualizarManutencao({ setTela }) {
       dadosManutencao.man_status = status;
       dadosManutencao.man_atividade = manAtividade;
       dadosManutencao.man_data = manData;
-      dadosManutencao.man_horario = manHorario;
+      dadosManutencao.man_horario = manHorario === '' ? '00:00:00' : manHorario + ':00';
       dadosManutencao.man_responsavel = manResponsavel;
       dadosManutencao.man_observacoes = manObservacoes;
       dadosManutencao.man_endereco_id.end_cep = manCep;
@@ -70,7 +70,37 @@ function VisualizarManutencao({ setTela }) {
       console.error(`Erro ao buscar dados da manutenção ${id}:`, error);
     }
     handleEdit();
-  }
+  };
+
+  const handleCepChange = async (event) => {
+    const cep = event.target.value;
+    console.log(cep.replace("-", ""))
+    setManCep(cep.replace("-", ""));
+    console.log(manCep)
+
+    if (cep.length === 8) {
+      try {
+        const response = await axios.get(`https://viacep.com.br/ws/${cep}/json/`);
+        const data = response.data;
+        if (data.erro) {
+          window.alert("CEP inválido!")
+          setManRua("");
+          setManBairro("");
+          setManCidade("");
+          setManUf("");
+          setManCep("");
+        } else {
+          setManRua(data.logradouro);
+          setManBairro(data.bairro);
+          setManCidade(data.localidade);
+          setManUf(data.uf);
+          setManCep(data.cep);
+        }
+      } catch (error) {
+        console.error('Erro ao buscar o CEP:', error);
+      }
+    }
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -116,6 +146,7 @@ function VisualizarManutencao({ setTela }) {
     }
   }
 
+  console.log()
 
   function handleDelete(id) {
     axios.delete(`http://localhost:8000/manutencoes/${id}`)
@@ -260,7 +291,7 @@ function VisualizarManutencao({ setTela }) {
                   class="input is-small"
                   type="text"
                   value={dadosManutencao.man_ativo_id.ati_id}
-                  disabled={!edit}
+                  disabled
 
                 />
               </div>
@@ -282,7 +313,7 @@ function VisualizarManutencao({ setTela }) {
                       class="input is-small"
                       type="text"
                       value={manCep}
-                      onChange={e => setManCep(e.target.value)}
+                      onChange={handleCepChange}
                       disabled={!edit}
 
                     />
