@@ -75,7 +75,6 @@ function CadastroAtivos({ setTela }) {
 
   const handleDocumentoChange = (event) => {
     setDocumentoSelecionado(event.target.files[0]);
-    console.log(documentoSelecionado);
   }
 
   // Função para lidar com o envio do formulário
@@ -389,7 +388,26 @@ function CadastroAtivos({ setTela }) {
                     onChange={(event) => setCapacidadeAtivo(event.target.value)}
                   />
                 </div>
-
+                {/* <div className="field" >
+          <label className="form-label has-text-black">Quantidade:</label>
+          
+          <input
+            class="input is-small"
+            type="text"
+            placeholder='Insira a Quantidade:'
+            value={numeroAtivo}
+            onChange={(event) => setNumAtivo(event.target.value)}
+          />
+        </div> */}
+                {/* <div class="field">
+                  <label class="label has-text-black">Fornecedor:</label>
+                  <div class="select is-small">
+                    <select class="is-hovered">
+                      <option></option>
+                      <option></option>
+                    </select>
+                  </div>
+                </div> */}
                 <div className="field" >
                   <label className="form-label has-text-black">Ano de Fabricação:</label>
 
@@ -427,7 +445,7 @@ function CadastroAtivos({ setTela }) {
           </div>
 
           <div class='column is-half'>
-            <form className='documentos-ativo' onSubmit={e => {handleDocumentoChange(); handleSubmit(); }}>
+            <form className='documentos-ativo' onSubmit={handleSubmit}>
               <div className="field" >
                 <label className="form-label has-text-black">Chave NFe: <span className='has-text-danger'>*</span></label>
                 <input
@@ -471,7 +489,7 @@ function CadastroAtivos({ setTela }) {
 
         <div class="field is-grouped is-grouped-centered">
           <p class="control">
-            <button class="button is-primary" type="submit" formMethod='POST' onClick={e => {handleDocumentoChange(); handleSubmit(); }}>
+            <button class="button is-primary" type="submit" formMethod='POST' onClick={handleSubmit}>
               Cadastrar
             </button>
           </p>
