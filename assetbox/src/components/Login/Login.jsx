@@ -15,6 +15,7 @@ const Login = ({ setTela }) => {
                 senha: senha
             }).then(response => {
                 localStorage.setItem("token", response.data[0]);
+                localStorage.setItem("userEmail", email);
                 localStorage.setItem("idUser", response.data[1]);
                 console.log("login", localStorage.getItem("token"), "data", new Date())
                 window.location.replace("http://localhost:3000")

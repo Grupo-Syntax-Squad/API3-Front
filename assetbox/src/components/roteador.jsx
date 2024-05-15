@@ -18,11 +18,14 @@ import Historico from "./Manutenção/Historico";
 import EditarManutencao from "./Editar/editarManutecao";
 import VisualizarAdministradores from "./Visualizar/VisualizarAdministradores";
 import MeusDados from "./Visualizar/MeusDados";
+import MenuRoot from "./Navegação/MenuRoot";
+import EditarEmpresa from "./Root/EditarEmpresa";
 
 export default function Roteador() {
     const [tela, setTela] = useState('Home');
     const [verificacaoToken, setVerificacaoToken] = useState("");
-    const [selectedDate, setSelectedDate] = useState(null);
+
+    const [root, setRootLogin] = useState("")
 
     useEffect(() => {
         verificarToken();
@@ -30,7 +33,9 @@ export default function Roteador() {
 
     const verificarToken = async () => {
         let token = localStorage.getItem("token");
-        console.log(token);
+        const userEmail = localStorage.getItem("userEmail");
+        if (userEmail === "admin@gmail.com") setRootLogin(true);
+        console.log(userEmail);
         if (token === null || token === "") setVerificacaoToken(false);
         else {
             try {
@@ -65,13 +70,35 @@ export default function Roteador() {
 
         else if (tela === 'Home') {
             if (verificacaoToken) {
-                return (
-                    <>
-                        <Menu seletorView={selecionarView} botoes={botoes} />
-                        <Home setTela={setTela} />
-                    </>
-                )
+                if (root) {
+                    return (
+                        <>
+                            <MenuRoot seletorView={selecionarView} botoes={botoes} />
+                            <Home setTela={setTela} />
+                        </>
+                    )
+                } else {
+                    return (
+                        <>
+                            <Menu selecionarView={selecionarView} botoes={botoes} />
+                            <Home selecionarView={selecionarView} botoes={botoes}/>
+                        </>
+                    )
+                }
             } else return <Login setTela={setTela} />
+        }
+
+        else if(tela === "EditarEmpresa"){
+            if (verificacaoToken){
+                if (root){
+                    return(
+                        <>
+                            <Menu seletorView={selecionarView} botoes={botoes}/>
+                            <EditarEmpresa selecionarView={selecionarView} botoes={botoes}/>
+                        </>
+                    )
+                }
+            }
         }
 
         else if (tela === 'Ativos') {
@@ -116,11 +143,11 @@ export default function Roteador() {
             } else return <p>É necessário realizar o login para continuar para a página desejada!</p>
         }
 
-        else if (tela === 'CadastroAdministrador'){
+        else if (tela === 'CadastroAdministrador') {
             if (verificacaoToken) {
-                return(
+                return (
                     <>
-                        <Menu seletorView={selecionarView} botoes={botoes}/>
+                        <Menu seletorView={selecionarView} botoes={botoes} />
                         <CadastroAdministrador setTela={setTela} />
                     </>
                 )
@@ -187,7 +214,7 @@ export default function Roteador() {
                 return (
                     <>
                         <Menu seletorView={selecionarView} botoes={botoes} />
-                        <CadastroManutenção setSelectedDate={setSelectedDate} setTela={setTela} />
+                        <CadastroManutenção setTela={setTela} />
                     </>
                 )
             } else return <p>É necessário realizar o login para continuar para a página desejada!</p>
@@ -198,7 +225,7 @@ export default function Roteador() {
                 return (
                     <>
                         <Menu seletorView={selecionarView} botoes={botoes} />
-                        <Calendario setSelectedDate={setSelectedDate} setTela={setTela} />
+                        <Calendario setTela={setTela} />
                     </>
                 )
             } else return <p>É necessário realizar o login para continuar para a página desejada!</p>
@@ -247,7 +274,7 @@ export default function Roteador() {
                 )
             } else return <p>É necessário realizar o login para continuar para a página desejada!</p>
         }
-        
+
         else if (tela === 'Dashboard') {
             return (<>
                 <Menu seletorView={selecionarView} botoes={botoes} />
