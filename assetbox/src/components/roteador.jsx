@@ -76,9 +76,355 @@ export default function Roteador() {
             return (
                 <Login setTela={setTela} />
             )
-        } else {
-            if(verificacaoToken){
-            if (matrizStatus == 400) {
+        }
+
+        else if (tela === 'Home') {
+            if (verificacaoToken) {
+                if (root) {
+                    return (
+                        <>
+                            <MenuRoot seletorView={selecionarView} botoes={botoes} />
+                            <Home setTela={setTela} />
+                        </>
+                    )
+                } else {
+                    return (
+                        <>
+                            <Menu seletorView={selecionarView} botoes={botoes} />
+                            <Home setTela={setTela} />
+                        </>
+                    )
+                }
+            } else return <Login setTela={setTela} />
+        }
+        else if (tela === "EditarFilial"){
+            if (verificacaoToken) {
+                if (root) {
+                    return (
+                        <>
+                            <MenuRoot seletorView={selecionarView} botoes={botoes} />
+                            <EditarFilial setTela={setTela} botoes={botoes} />
+                        </>
+                    )
+                }
+            }
+        }
+        else if (tela === "EditarEmpresa") {
+            if (verificacaoToken) {
+                if (root) {
+                    return (
+                        <>
+                            <MenuRoot seletorView={selecionarView} botoes={botoes} />
+                            <EditarEmpresa setTela={setTela} botoes={botoes} />
+                        </>
+                    )
+                }
+            }
+        }
+
+        else if (tela === 'Ativos') {
+            if (verificacaoToken) {
+                if (root) {
+                    return (
+                        <>
+                            <MenuRoot seletorView={selecionarView} botoes={botoes} />
+                            <Ativos setTela={setTela} botoes={botoes} />
+                        </>
+                    )
+                }
+                else {
+                    return (
+                        <>
+                            <Menu seletorView={selecionarView} botoes={botoes} />
+                            <Ativos setTela={setTela} />
+                        </>
+                    )
+                }
+            }
+            else return <p>É necessário realizar o login para continuar para a página desejada!</p>
+        }
+
+        else if (tela === 'Login') {
+
+            return (
+                <>
+                    <Login setTela={setTela} />
+                </>
+            )
+        }
+
+        else if (tela === 'CadastroAtivos') {
+            if (verificacaoToken) {
+                if (root) {
+                    return (
+                        <>
+                            <MenuRoot seletorView={selecionarView} botoes={botoes} />
+                            <CadastroAtivos setTela={setTela} />
+                        </>
+                    )
+                }
+                else {
+                    return (
+                        <>
+                            <Menu seletorView={selecionarView} botoes={botoes} />
+                            <CadastroAtivos setTela={setTela} />
+                        </>
+                    )
+                }
+            } else return <p>É necessário realizar o login para continuar para a página desejada!</p>
+        }
+
+        else if (tela === 'CadastroDestinatarios') {
+            if (verificacaoToken) {
+                if (root) {
+                    return (
+                        <>
+                            <MenuRoot seletorView={selecionarView} botoes={botoes} />
+                            <CadastroDestinatarios setTela={setTela} />
+                        </>
+                    )
+                }
+                else {
+                    return (
+                        <>
+                            <Menu seletorView={selecionarView} botoes={botoes} />
+                            <CadastroDestinatarios setTela={setTela} />
+                        </>
+                    )
+                }
+            } else return <p>É necessário realizar o login para continuar para a página desejada!</p>
+        }
+
+        else if (tela === 'CadastroAdministrador') {
+            if (verificacaoToken) {
+                if (root) {
+                    return (
+                        <>
+                            <MenuRoot seletorView={selecionarView} botoes={botoes} />
+                            <CadastroAdministrador setTela={setTela} />
+                        </>
+                    )
+                }
+
+            }
+        }
+
+        else if (tela === 'VisualizarAtivo') {
+            if (verificacaoToken) {
+                if (root) {
+                    return (
+                        <>
+                            <MenuRoot seletorView={selecionarView} botoes={botoes} />
+                            <VisualizarAtivos setTela={setTela} />
+                        </>
+                    )
+                } else {
+                    return (
+                        <>
+                            <Menu seletorView={selecionarView} botoes={botoes} />
+                            <VisualizarAtivos setTela={setTela} />
+                        </>
+                    )
+                }
+            } else return <p>É necessário realizar o login para continuar para a página desejada!</p>
+        }
+
+        else if (tela === 'VisualizarDestinatarios') {
+            if (verificacaoToken) {
+                if (root) {
+                    return (
+                        <>
+                            <MenuRoot seletorView={selecionarView} botoes={botoes} />
+                            <VisualizarDestinatarios setTela={setTela} />
+                        </>
+                    )
+                } else {
+                    return (
+                        <>
+                            <Menu seletorView={selecionarView} botoes={botoes} />
+                            <VisualizarDestinatarios setTela={setTela} />
+                        </>
+                    )
+                }
+            } else return <p>É necessário realizar o login para continuar para a página desejada!</p>
+        }
+
+        else if (tela === 'VisualizarAdministradores') {
+            if (verificacaoToken) {
+                if (root) {
+                    return (
+                        <>
+                            <MenuRoot seletorView={selecionarView} botoes={botoes} />
+                            <VisualizarAdministradores setTela={setTela} />
+                        </>
+                    )
+                }
+                else {
+                    return (
+                        <>
+                            <Menu seletorView={selecionarView} botoes={botoes} />
+                            <Usuarios setTela={setTela} />
+                        </>
+                    )
+                }
+            } else return <p>É necessário realizar o login para continuar para a página desejada!</p>
+        }
+
+        else if (tela === 'Usuarios') {
+            if (verificacaoToken) {
+                if (root) {
+                    return (
+                        <>
+                            <MenuRoot seletorView={selecionarView} botoes={botoes} />
+                            <Usuarios setTela={setTela} />
+                        </>
+                    )
+                }
+                else {
+                    return (
+                        <>
+                            <Menu seletorView={selecionarView} botoes={botoes} />
+                            <Usuarios setTela={setTela} />
+                        </>
+                    )
+                }
+            } else return <p>É necessário realizar o login para continuar para a página desejada!</p>
+        }
+
+        else if (tela === 'Manutenções') {
+            if (verificacaoToken) {
+                if (root) {
+                    return (
+                        <>
+                            <MenuRoot seletorView={selecionarView} botoes={botoes} />
+                            <Manutencao setTela={setTela} />
+                        </>
+                    )
+                }
+                else {
+                    return (
+                        <>
+                            <Menu seletorView={selecionarView} botoes={botoes} />
+                            <Manutencao setTela={setTela} />
+                        </>
+                    )
+                }
+
+            } else return <p>É necessário realizar o login para continuar para a página desejada!</p>
+        }
+
+        else if (tela === 'CadastroManutenção') {
+            if (verificacaoToken) {
+                if (root) {
+                    return (
+                        <>
+                            <MenuRoot seletorView={selecionarView} botoes={botoes} />
+                            <CadastroManutenção setTela={setTela} />
+                        </>
+                    )
+                }
+                else {
+                    return (
+                        <>
+                            <Menu seletorView={selecionarView} botoes={botoes} />
+                            <CadastroManutenção setTela={setTela} />
+                        </>
+                    )
+                }
+
+            } else return <p>É necessário realizar o login para continuar para a página desejada!</p>
+        }
+
+        else if (tela === 'VisualizarAgendamento') {
+            if (verificacaoToken) {
+                if (root) {
+                    return (
+                        <>
+                            <MenuRoot seletorView={selecionarView} botoes={botoes} />
+                            <Calendario setTela={setTela} />
+                        </>
+                    )
+                }
+                else {
+                    return (
+                        <>
+                            <Menu seletorView={selecionarView} botoes={botoes} />
+                            <Calendario setTela={setTela} />
+                        </>
+                    )
+
+                }
+
+            } else return <p>É necessário realizar o login para continuar para a página desejada!</p>
+        }
+
+        else if (tela === 'VisualizarHistManut') {
+            if (verificacaoToken) {
+                if (root) {
+                    return (
+                        <>
+                            <MenuRoot seletorView={selecionarView} botoes={botoes} />
+                            <Historico setTela={setTela} />
+                        </>
+                    )
+                }
+                else {
+                    return (
+                        <>
+                            <Menu seletorView={selecionarView} botoes={botoes} />
+                            <Historico setTela={setTela} />
+                        </>
+                    )
+                }
+            } else return <p>É necessário realizar o login para continuar para a página desejada!</p>
+        }
+
+        else if (tela === 'VisualizarManutenção') {
+            if (verificacaoToken) {
+                if (root) {
+                    return (
+                        <>
+                            <MenuRoot seletorView={selecionarView} botoes={botoes} />
+                            <VisualizarManutencao setTela={setTela} />
+                        </>
+                    )
+                }
+                else {
+                    return (
+                        <>
+                            <Menu seletorView={selecionarView} botoes={botoes} />
+                            <VisualizarManutencao setTela={setTela} />
+                        </>
+                    )
+                }
+
+            } else return <p>É necessário realizar o login para continuar para a página desejada!</p>
+        }
+
+        else if (tela === 'EditarManutencao') {
+            if (verificacaoToken) {
+                if (root) {
+                    return (
+                        <>
+                            <MenuRoot seletorView={selecionarView} botoes={botoes} />
+                            <EditarManutencao setTela={setTela} />
+                        </>
+                    )
+                }
+                else {
+                    return (
+                        <>
+                            <Menu seletorView={selecionarView} botoes={botoes} />
+                            <EditarManutencao setTela={setTela} />
+                        </>
+                    )
+                }
+
+            } else return <p>É necessário realizar o login para continuar para a página desejada!</p>
+        }
+
+        else if (tela === 'MeusDados') {
+            if (verificacaoToken) {
                 return (
                     <>
                         <MenuRoot seletorView={selecionarView} botoes={botoes} />
