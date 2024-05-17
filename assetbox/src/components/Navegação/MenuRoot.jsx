@@ -78,6 +78,7 @@ function MenuRoot(props) {
               {showLogout && (
                 <div className='navbar-dropdown is-right'>
                   <button className='navbar-item' onClick={e => props.seletorView("EditarEmpresa", e)}>Editar Empresa</button>
+                  <button className='navbar-item' onClick={e => props.seletorView("EditarFilial", e)}>filiais </button>
                   <button className='navbar-item' onClick={handleLogout}>Deslogar</button> {/* handleLogout is a function that logs the user out */}
                 </div>
               )}

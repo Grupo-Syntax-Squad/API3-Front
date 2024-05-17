@@ -88,7 +88,7 @@ export default function Roteador() {
                 }
             } else return <Login setTela={setTela} />
         }
-        else if (tela === "EditFilial"){
+        else if (tela === "EditarFilial"){
             if (verificacaoToken) {
                 if (root) {
                     return (
