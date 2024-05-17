@@ -250,6 +250,14 @@ export default function Roteador() {
                         </>
                     )
                 }
+                else {
+                    return (
+                        <>
+                            <Menu seletorView={selecionarView} botoes={botoes} />
+                            <Usuarios setTela={setTela} />
+                        </>
+                    )
+                }
             } else return <p>É necessário realizar o login para continuar para a página desejada!</p>
         }
 
