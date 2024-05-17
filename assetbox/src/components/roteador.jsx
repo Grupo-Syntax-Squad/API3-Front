@@ -20,6 +20,7 @@ import VisualizarAdministradores from "./Visualizar/VisualizarAdministradores";
 import MeusDados from "./Visualizar/MeusDados";
 import MenuRoot from "./Navegação/MenuRoot";
 import EditarEmpresa from "./Root/EditarEmpresa";
+import EditarFilial from "./Root/EditarFilial";
 
 export default function Roteador() {
     const [tela, setTela] = useState('Home');
@@ -87,7 +88,18 @@ export default function Roteador() {
                 }
             } else return <Login setTela={setTela} />
         }
-
+        else if (tela === "EditFilial"){
+            if (verificacaoToken) {
+                if (root) {
+                    return (
+                        <>
+                            <MenuRoot seletorView={selecionarView} botoes={botoes} />
+                            <EditarFilial setTela={setTela} botoes={botoes} />
+                        </>
+                    )
+                }
+            }
+        }
         else if (tela === "EditarEmpresa") {
             if (verificacaoToken) {
                 if (root) {

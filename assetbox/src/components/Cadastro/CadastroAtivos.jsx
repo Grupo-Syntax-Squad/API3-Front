@@ -198,14 +198,6 @@ function CadastroAtivos({ setTela }) {
                 </div>
                 <div class="field">
                   <label class="label has-text-black">Tipo: <span className='has-text-danger'>*</span></label>
-                  {/* <input
-                    class="input is-small"
-                    type="text"
-                    title="Digite o número de série do ativo"
-                    placeholder='Insira o Tipo:'
-                    value={ati_tipo}
-                    onChange={(event) => setTipoAtivo(event.target.value)}
-                  /> */}
                   <div class="select is-small">
                     {tipos && tipos.length > 0 ? (
                       <select class="is-hovered" onChange={e => setTipoAtivo(e.target.value)}>
@@ -221,14 +213,6 @@ function CadastroAtivos({ setTela }) {
 
                 <div class="field">
                   <label class="label has-text-black">Localização:</label>
-                  {/* <input
-                    class="input is-small"
-                    type="text"
-                    title="Digite a localização"
-                    placeholder='Insira a Localização:'
-                    value={ati_localizacao}
-                    onChange={(event) => setLocalizacaoAtivo(event.target.value)}
-                  /> */}
                   <div class="select is-small">
                     {localizacoes && localizacoes.length > 0 ? (
                       <select class="is-hovered" onChange={e => setLocalizacaoAtivo(e.target.value)}>
@@ -253,9 +237,7 @@ function CadastroAtivos({ setTela }) {
                       <option value="3">Desativado</option>
                     </select>
                   </div>
-                  {/* <img src={adicionar} style={{marginLeft: '10px', width : '15%'}} title="cadastrar novo status"/> */}
                 </div>
-
                 <div className="field" >
                   <label className="label has-text-black">Destinatário:</label>
                   {destinatarios && destinatarios.length > 0 ? (
@@ -269,7 +251,6 @@ function CadastroAtivos({ setTela }) {
                     <p>Nenhum destinatário disponível</p>
                   )}
                 </div>
-
                 <div className="field" >
                   <label className="form-label has-text-black ">Titulo: <span className='has-text-danger'>*</span></label>
                   <input
@@ -280,7 +261,6 @@ function CadastroAtivos({ setTela }) {
                     value={ati_titulo}
                     onChange={(event) => setTituloAtivo(event.target.value)}
                   />
-
                   <div className="field" >
                     <label className="form-label has-text-black">Complemento:</label>
                     <input
@@ -298,19 +278,13 @@ function CadastroAtivos({ setTela }) {
             </div>
           </div>
         </div>
-
         <h1>Características</h1>
-
         <div class="mid-page" >
-
           <div class="columns m-3">
-
-
             <div class="column is-half">
               <form onSubmit={handleSubmit}>
                 <div className="field" >
                   <label className="form-label has-text-black">Marca:</label>
-
                   <input
                     class="input is-small"
                     type="text"
@@ -322,7 +296,6 @@ function CadastroAtivos({ setTela }) {
                 </div>
                 <div className="field" >
                   <label className="form-label has-text-black">Modelo:</label>
-
                   <input
                     class="input is-small"
                     type="text"
@@ -343,7 +316,6 @@ function CadastroAtivos({ setTela }) {
                     onChange={(event) => setSerieAtivo(event.target.value)}
                   />
                 </div>
-
                 <div className="field" >
                   <label className="form-label has-text-black">Valor de Aquisição: <span className='has-text-danger'>*</span></label>
                   <input
@@ -355,9 +327,6 @@ function CadastroAtivos({ setTela }) {
                     onChange={(event) => setValorAtivo(event.target.value)}
                   />
                 </div>
-
-
-
                 <div className="field" >
                   <label className="form-label has-text-black">Tamanho:</label>
 
@@ -388,26 +357,6 @@ function CadastroAtivos({ setTela }) {
                     onChange={(event) => setCapacidadeAtivo(event.target.value)}
                   />
                 </div>
-                {/* <div className="field" >
-          <label className="form-label has-text-black">Quantidade:</label>
-          
-          <input
-            class="input is-small"
-            type="text"
-            placeholder='Insira a Quantidade:'
-            value={numeroAtivo}
-            onChange={(event) => setNumAtivo(event.target.value)}
-          />
-        </div> */}
-                {/* <div class="field">
-                  <label class="label has-text-black">Fornecedor:</label>
-                  <div class="select is-small">
-                    <select class="is-hovered">
-                      <option></option>
-                      <option></option>
-                    </select>
-                  </div>
-                </div> */}
                 <div className="field" >
                   <label className="form-label has-text-black">Ano de Fabricação:</label>
 
