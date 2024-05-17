@@ -142,7 +142,6 @@ function CadastroAtivos({ setTela }) {
     console.log(ativoData);
 
     response = await axios.post('http://localhost:8000/ativos', ativoData);
-    console.log(response.data);
     exibirPopUp();
 
     // Limpar campos

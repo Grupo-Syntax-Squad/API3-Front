@@ -19,10 +19,11 @@ function MenuRoot(props) {
 
  
 
-  const handleLogout = () => {
+  const handleLogout = (e) => {
     alert('Você está sendo deslogado, até a próxima!')
     setTimeout(() => {
       localStorage.removeItem('token');
+      props.seletorView("Login", e);
       window.location.reload();
     }, 3000);
   }
@@ -78,7 +79,7 @@ function MenuRoot(props) {
               {showLogout && (
                 <div className='navbar-dropdown is-right'>
                   <button className='navbar-item' onClick={e => props.seletorView("EditarEmpresa", e)}>Editar Empresa</button>
-                  <button className='navbar-item' onClick={handleLogout}>Deslogar</button> {/* handleLogout is a function that logs the user out */}
+                  <button className='navbar-item' onClick={e => handleLogout(e)}>Deslogar</button>
                 </div>
               )}
             </div>
