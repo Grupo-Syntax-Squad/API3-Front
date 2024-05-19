@@ -427,8 +427,8 @@ export default function Roteador() {
             if (verificacaoToken) {
                 return (
                     <>
-                        <MenuRoot seletorView={selecionarView} botoes={botoes} />
-                        <EditarEmpresa setTela={setTela} />
+                        <Menu seletorView={selecionarView} botoes={botoes} />
+                        <MeusDados setTela={setTela} />
                     </>
                 )
 
@@ -803,10 +803,8 @@ export default function Roteador() {
                 }
             }
         }
-
-    }
-
-    return (
+            return (
         construirView()
     )
-}
+
+    }

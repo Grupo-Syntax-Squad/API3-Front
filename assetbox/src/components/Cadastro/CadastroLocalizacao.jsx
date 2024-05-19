@@ -11,17 +11,17 @@ const CadastroLocalizacao = ({handleLocalizacaoClick, setLocalizacoes}) => {
             top: "50%",
             left: "50%",
             transform: "translate(-50%, -50%)",
-            backgroundColor: "white",
+            backgroundColor: "#367E90",
             display: "flex",
             flexDirection: "column",
             borderRadius: "10px",
             padding: "5px"
         },
         label: {
-            color: "black"
+            color: "white"
         },
         h1: {
-            color: "black"
+            color: "white"
         },
         buttons: {
             display: "flex",
@@ -62,7 +62,7 @@ const CadastroLocalizacao = ({handleLocalizacaoClick, setLocalizacoes}) => {
         <form style={estilo.form} onSubmit={event => handleSubmit(event)}>
             <h1 style={estilo.h1}>Cadastrar tipo</h1>
             
-            <label htmlFor="localizacao" style={estilo.label}>Tipo:</label>
+            <label htmlFor="localizacao" style={estilo.label}>Localização:</label>
             
             <input type="text" name="localizacao" onChange={e => setLocalizacao(e.target.value)} className="input is-small" placeholder="Digite o localização" />
             
