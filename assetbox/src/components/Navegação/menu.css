@@ -2,6 +2,16 @@
   --verde: #459EB5;
   --verdeEscuro: #367E90;
   --branco: #FFFFFF;
+  --vermelho: #903636;
+  --azul: #459EB5;
+
+  @media(prefers-color-scheme: dark){
+    --verde: #3b889b;
+    --verdeEscuro: #1a2351;
+    --branco: #000;
+    --vermelho: #903636;
+    --azul: #459EB5;
+  }
 }
 
 .custom-background {
@@ -17,19 +27,19 @@ a.nav-item {
 }
 
 .navbar p:hover{
-  background-color: #367E90;
+  background-color: var(--verdeEscuro);
   transition: 200ms ease-in-out;
   cursor: pointer;
 }
 
 .navbar p::after{
-  background-color: #903636;
+  background-color: var(--vermelho);
   transition: 200ms ease-in-out;
   cursor: pointer;
 }
 
 .navbar-menu {
-  background-color: #459EB5 !important;
+  background-color: var(--azul) !important;
 }
 
 @media screen and (max-width: 1024px) {

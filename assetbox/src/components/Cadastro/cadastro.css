@@ -1,8 +1,25 @@
+:root{
+  --cinzaclaro: #D9D9D9;
+  --azul: #459eb6;
+  --branco: #fff;
+  --cinza: rgb(189, 189, 189);
+  --h2azul: #459eb6;
+  --vermelho: red;
+
+  @media(prefers-color-scheme: dark){
+    --cinzaclaro: #222;
+    --azul: #2a3f9c;
+    --branco: #fff;
+    --cinza: rgb(96, 96, 96);
+    --h2azul: #2c369d;
+    --vermelho: red;
+  }
+}
 
 .page-full{
   align-items: stretch;
   justify-content: space-around;
-  background-color: #D9D9D9;
+  background-color: var(--cinzaclaro);
   margin: 1% 10% 1% 10%;
   padding-bottom: 0.5%;
   border-radius: 1rem;
@@ -10,10 +27,10 @@
 
 h2{
   text-align: center;
-  background-color: #459eb6;
+  background-color: var(--azul);
   margin: auto;
   font-size: x-large;
-  color: #fff;
+  color: var(--branco);
 }
 
 h1{
@@ -23,7 +40,7 @@ h1{
 }
 
 .obrigatorio{
-  color: red;
+  color: var(--vermelho);
 }
 
 .titulo-cadastro{

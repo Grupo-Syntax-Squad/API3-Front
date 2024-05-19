@@ -35,6 +35,21 @@
     --color-txt: var(--light-text);
 } */
 
+:root {
+    --fundoazul: #459eb6;
+    --cinza: rgb(150, 150, 150);
+    --branco: #fff;
+    --cinzaclaro: #D9D9D9;
+
+    @media (prefers-color-scheme: dark){
+        --fundoazul: #037594;
+        --cinzaclaro: rgb(58, 58, 58);
+        --branco: #000;
+        --cinza: #222;
+    }
+
+}
+
 .tela-content{
     border-radius: 10px;
     margin-top: 20px;
@@ -44,7 +59,7 @@
 }
 
 .calendar-day:hover{
-    background-color: #459eb6;
+    background-color: var(--fundoazul);
 }
 
 .calendar {
@@ -66,17 +81,17 @@
     font-weight: 600;
     color:white;
     padding: 10px;
-    background-color: #459eb6;
+    background-color: var(--fundoazul);
 }
 
 .has-manutencoes {
-    background-color: rgb(150, 150, 150);
-    color: white; /* Para garantir que o texto seja legível */
+    background-color: var(--cinza);
+    color: var(var(--branco)); /* Para garantir que o texto seja legível */
 }
 
 .calendar-body {
     padding: 10px;
-    background-color: white;
+    background-color: var(--branco);
 }
 
 .calendar-week-day {
@@ -313,7 +328,7 @@
     align-items: stretch;
     border-radius: 20px;
     justify-content: space-around;
-    background-color: #D9D9D9; 
+    background-color: var(--cinzaclaro); 
     margin: 5% 10% 5% 10%;
     padding-bottom: 0.5%;
 

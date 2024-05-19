@@ -1,10 +1,26 @@
 :root{
    --cinza:  rgb(189, 189, 189);
+   --h2azul: #459eb6;
+   --indice: #459EB5;
+   --fundocinza: #D9D9D9;
+   --filtroazul: #367E90;
+   --dadoativo: #000;
+   --fundobranco: #fff;
+
+   @media(prefers-color-scheme: dark){
+      --cinza:  rgb(96, 96, 96);
+      --h2azul: #459eb6;
+      --indice: #459EB5;
+      --fundocinza: #333333;
+      --filtroazul: #286776;
+      --dadoativo: #000;
+      --fundobranco: #222;
+   }
 }
 .page-full{
     align-items: stretch;
     justify-content: space-around;
-    background-color: #D9D9D9;
+    background-color: var(--fundocinza);
     margin: 1% 10% 1% 10%;
   }
 
@@ -14,7 +30,7 @@
 
   h2{
     text-align: center;
-    background-color: #459eb6;
+    background-color: var(--h2azul);
     margin: auto;
     font-size: x-large;
     color: #fff;
@@ -26,11 +42,11 @@
     padding: 0.5%;
   }
  .indice{
-    background-color: #459EB5;
+    background-color: var(--indice);
  }
 
  .filtro{
-    background-color: #367E90;
+    background-color: var(--filtroazul);
  }
 
  .filtro {
@@ -46,7 +62,7 @@
  .dado-ativo{
     font-size: 20px;
     font-weight: 600;
-    color: #000;
+    color: var(--dadoativo);
  }
   
    .top-one{
@@ -63,7 +79,7 @@
    background-color: transparent;
   }
   .asset{
-   background-color: #fff !important;
+   background-color: var(--fundobranco) !important;
   }
   .asset:hover{
    background-color:var(--cinza);
