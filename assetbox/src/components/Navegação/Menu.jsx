@@ -6,6 +6,8 @@ import MainteinIcon from '../../assets/img/Maintein.svg'
 import SettingsIcon from '../../assets/img/Settings.svg'
 import UserIcon from '../../assets/img/User.svg'
 import Notify from '../../assets/img/Notifications.svg'
+import Exit from '../../assets/img/Deslogar.svg'
+import Edit from '../../assets/img/Editar.svg'
 import './menu.css';
 
 
@@ -78,8 +80,8 @@ function Menu(props) {
               <p className="navbar-item" onClick={handleSettingsClick} ><img src={SettingsIcon} alt="configurações" /></p>
               {showLogout && (
                 <div className='navbar-dropdown is-right'>
-                  <button className='navbar-item' onClick={e => props.seletorView("MeusDados", e)}>Meus Dados</button>
-                  <button className='navbar-item' onClick={e => handleLogout(e)}>Deslogar</button>
+                  <button className='navbar-item' onClick={e => props.seletorView("MeusDados", e)}>Meus Dados <img className='is-flex ml-1'src={Edit}/></button>
+                  <button className='navbar-item is-flex' onClick={e => handleLogout(e)}>Sair<img className='is-flex ml-1'src={Exit}/></button>
                 </div>
               )}
             </div>
