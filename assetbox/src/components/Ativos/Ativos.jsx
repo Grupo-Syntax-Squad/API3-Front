@@ -8,6 +8,7 @@ const Ativos = ({ setTela }) => {
     const [filtroId, setFiltroId] = useState('');
     const [filtroTitulo, setFiltroTitulo] = useState('');
     const [filtroStatus, setFiltroStatus] = useState('');
+    const [modalAberto, setModalAberto] = useState(false);
 
     useEffect(() => {
         axios.get('http://localhost:8000/ativos')
@@ -25,6 +26,14 @@ const Ativos = ({ setTela }) => {
         setTela(`VisualizarAtivo`);
     };
 
+    const abrirModal = () => {
+        setModalAberto(true);
+    };
+
+    const fecharModal = () => {
+        setModalAberto(false);
+    };
+
     const dadosFiltrados = assets.filter(asset => {
     return (filtroId === '' || String(asset.ati_id).includes(filtroId)) && (filtroTitulo === '' || asset.ati_titulo.toLowerCase().includes(filtroTitulo.toLowerCase())) && (filtroStatus === '' || asset.ati_status.toLowerCase().includes(filtroStatus.toLowerCase()));
   });
@@ -34,6 +43,42 @@ const Ativos = ({ setTela }) => {
         <body>
             <div class='page-full' style={{ backgroundColor: 'transparent' }}>
                 <button class=" shadow-button button button-effect is-primary m-5 ml-6 is-rounded is-size-4" style={{ backgroundColor: '#367E90', color: '#fff' }} onClick={() => setTela('CadastroAtivos')}>Cadastrar Ativo</button>
+                <button class=" shadow-button button button-effect is-primary m-5 ml-6 is-rounded is-size-4" style={{ backgroundColor: '#367E90', color: '#fff' }} onClick={abrirModal}>Relatório</button>
+
+                 {/* Modal */}
+                 <div class={`modal ${modalAberto ? 'is-active' : ''}`}>
+                    <div class="modal-background"></div>
+                    <div class="modal-content">
+                    <div class="modal-card">
+                        <header class="modal-card-head">
+                            <p class="modal-card-title">Selecione uma unidade:</p>
+                            <button class="delete" aria-label="close" onClick={fecharModal}></button>
+                        </header>
+                        <section class="modal-card-body">
+                        
+                        {/* INSERIR A LISTA / MENU OU DROPDOWN */}
+                                                       
+                        </section>
+                        <footer class="modal-card-foot">
+                            <div class="buttons">
+                            <button class="shadow-button button button-effect is-primary m-5 ml-6 is-rounded is-size-5" style={{ backgroundColor: '#367E90', color: '#fff' }} >Selecionar</button>
+                            </div>
+                        </footer>
+                    </div>    
+                        
+                        
+                        {/* <div class="box">
+                            <span class="icon is-large" onClick={fecharModal}>
+                                <i class="fas fa-times"></i>
+                            </span>
+                            <p></p>
+                        </div> */}
+                    </div>
+                    {/* <button class="modal-close is-large" aria-label="close" onClick={fecharModal}></button> */}
+                </div>
+                {/* Fim do Modal */}
+
+
                 <div class='page-full shadow-button' style={{ 
                     backgroundColor: '#459EB5' }}>
                     <div class='field'>
