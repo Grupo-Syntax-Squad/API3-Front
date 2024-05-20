@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import './editarempresa.css';
 import CadastroLocalizacao from '../Cadastro/CadastroLocalizacao';
 import adicionar from './adicionar.svg';
+import matriz from '../../assets/img/matriz.png'
+import filial from '../../assets/img/filial.png'
 
 function EditarEmpresa({ setTela }) {
     //Dados Matriz
@@ -234,162 +236,159 @@ function EditarEmpresa({ setTela }) {
     }
 
 
-
+//  style={{ borderRadius: '50px', backgroundColor: "rgb(230, 230, 230)" }}
     return (
-        <div className="m-2">
-            <h1 className="has-text-black is-size-4">Painel da Empresa</h1>
-            <form onSubmit={handleSubmit} className="is-flex" style={{ borderRadius: '50px', backgroundColor: "rgb(230, 230, 230)" }}>
-                <div className="columns is-variable is-1 m-3">
-                    <div className="column is-one-third">
-                        <h3 className="has-text-black is-size-5 mb-5" style={{ textAlign: 'center' }}>Dados da Empresa</h3>
-                        <div className="field">
-                            <label htmlFor="razao-social" className="label has-text-black">Razão Social da Empresa:</label>
-                            <div className="control">
-                                <input value={matrizNome} onChange={(event) => setNomeMatriz(event.target.value)} placeholder="Digite a razão social da empresa" className="input" />
+        <div>
+            <div className="m-2 columns">
+                <form onSubmit={handleSubmit} className="column ">
+                <h1 className="has-text-black is-size-4">Painel da Empresa</h1>
+                    <div className="column m-3">
+                        <div className="column p-5"  style={{ borderRadius: '50px', backgroundColor: "rgb(230, 230, 230)" }}>
+                            <div className="field">
+                            <img src={matriz} class='image is-96x96 container' alt="AssetBox Logo"/>
+                                <label htmlFor="razao-social" className="label has-text-black">Razão Social da Empresa:</label>
+                                <div className="control">
+                                    <input value={matrizNome} onChange={(event) => setNomeMatriz(event.target.value)} placeholder="Digite a razão social da empresa" className="input" />
+                                </div>
                             </div>
-                        </div>
-                        <div className="field">
-                            <label htmlFor="nome-fantasia" className="label has-text-black">Nome Fantasia:</label>
-                            <div className="control">
-                                <input value={matrizNomeFicticio} onChange={(event) => setNomeFicticio(event.target.value)} placeholder="Digite o nome fantasia da empresa" className="input" />
+                            <div className="field">
+                                <label htmlFor="nome-fantasia" className="label has-text-black">Nome Fantasia:</label>
+                                <div className="control">
+                                    <input value={matrizNomeFicticio} onChange={(event) => setNomeFicticio(event.target.value)} placeholder="Digite o nome fantasia da empresa" className="input" />
+                                </div>
                             </div>
-                        </div>
-                        <div className="field">
-                            <label htmlFor="cnpj" className="label has-text-black">CNPJ:</label>
-                            <div className="control">
-                                <input value={matrizCNPJ} onChange={(event) => setCNPJMatriz(event.target.value)} placeholder="Digite o CNPJ da empresa" className="input" />
+                            <div className="field">
+                                <label htmlFor="cnpj" className="label has-text-black">CNPJ:</label>
+                                <div className="control">
+                                    <input value={matrizCNPJ} onChange={(event) => setCNPJMatriz(event.target.value)} placeholder="Digite o CNPJ da empresa" className="input" />
+                                </div>
                             </div>
-                        </div>
-                        <div className="field">
-                            <label htmlFor="email" className="label has-text-black">Email:</label>
-                            <div className="control">
-                                <input value={matrizEmail} onChange={handleEmailMatrizChange} placeholder="Digite o email da empresa" className="input" />
+                            <div className="field">
+                                <label htmlFor="email" className="label has-text-black">Email:</label>
+                                <div className="control">
+                                    <input value={matrizEmail} onChange={handleEmailMatrizChange} placeholder="Digite o email da empresa" className="input" />
+                                </div>
                             </div>
-                        </div>
-                        <div className="field">
-                            <label htmlFor="telefone" className="label has-text-black">Telefone:</label>
-                            <div className="control">
-                                <input value={matrizTel} onChange={handleTelefoneMatrizChange} placeholder="Digite o telefone da empresa" className="input" />
+                            <div className="field">
+                                <label htmlFor="telefone" className="label has-text-black">Telefone:</label>
+                                <div className="control">
+                                    <input value={matrizTel} onChange={handleTelefoneMatrizChange} placeholder="Digite o telefone da empresa" className="input" />
+                                </div>
+                            <h3 className="has-text-black is-size-5 mb-5" style={{ textAlign: 'center' }}>Endereço Matriz</h3>
+                            <div className="field">
+                                <label htmlFor="cep" className="label has-text-black">CEP:</label>
+                                <div className="control">
+                                    <input value={matrizCEP} onChange={handleCepMatriz} placeholder="Digite o CEP da matriz" className="input" />
+                                </div>
+                            </div>
+                            <div className="field">
+                                <label htmlFor="rua" className="label has-text-black">Rua:</label>
+                                <div className="control">
+                                    <input value={matrizRua} onChange={(event) => setRuaMatriz(event.target.value)} placeholder="Digite a rua da matriz" className="input" />
+                                </div>
+                            </div>
+                            <div className="field">
+                                <label htmlFor="numero" className="label has-text-black">Número:</label>
+                                <div className="control">
+                                    <input value={matrizNumero} onChange={(event) => setNumeroMatriz(event.target.value)} placeholder="Digite o número da matriz" className="input" />
+                                </div>
+                            </div>
+                            <div className="field">
+                                <label htmlFor="bairro" className="label has-text-black">Bairro:</label>
+                                <div className="control">
+                                    <input value={matrizBairro} onChange={(event) => setBairroMatriz(event.target.value)} placeholder="Digite o bairro da matriz" className="input" />
+                                </div>
+                            </div>
+                            <div className="field">
+                                <label htmlFor="cidade" className="label has-text-black">Cidade:</label>
+                                <div className="control">
+                                    <input value={matrizCidade} onChange={(event) => setCidadeMatriz(event.target.value)} placeholder="Digite a cidade da matriz" className="input" />
+                                </div>
+                            </div>
+                            <div className="field">
+                                <label htmlFor="estado" className="label has-text-black">Estado:</label>
+                                <div className="control">
+                                    <input value={matrizEstado} onChange={(event) => setEstadoMatriz(event.target.value)} placeholder="Digite o estado da matriz" className="input" />
+                                </div>
+                            </div>
+                            </div>
+                            <h3 className="has-text-black is-size-5 mb-5" style={{ textAlign: 'center' }}>Localizações Matriz</h3>
+                            <div className="field">
+                                <label htmlFor="local" className="label has-text-black">Nome do Local:</label>
+                                <div className="control">
+                                    <input value={localizacao} onChange={(event) => SubmitLocalizacao(event.target.value)} placeholder="Digite o nome do local" className="input" />
+                                </div>
+                            </div>
+                            <div className="field">
+                                <button className="button is-info mt-3" onClick={() => SubmitLocalizacao([...localizacao, localizacao])}>Cadastrar Localização</button>
                             </div>
                         </div>
                     </div>
-
-                    <div className="column is-one-third">
-                        <h3 className="has-text-black is-size-5 mb-5" style={{ textAlign: 'center' }}>Endereço Matriz</h3>
-                        <div className="field">
-                            <label htmlFor="cep" className="label has-text-black">CEP:</label>
-                            <div className="control">
-                                <input value={matrizCEP} onChange={handleCepMatriz} placeholder="Digite o CEP da matriz" className="input" />
+                    </form>
+                    {/* cadastro da filial */}
+                    <form onSubmit={handleSubmitFilial} className="column">
+                                <h3 className="has-text-black is-size-5 mb-5" style={{ textAlign: 'center' }}>Filial</h3>
+                        <div className=" column m-3">
+                            <div className="column p-5"  style={{ borderRadius: '50px', backgroundColor: "rgb(230, 230, 230)" }}>
+                                    <img src={filial} class='image is-96x96 container' alt="AssetBox Logo"/>
+                                <div className="field">
+                                    <div className="control pr-3">
+                                        <label htmlFor="local is-flex" className="label has-text-black">Nome da Filial:</label>
+                                        <input value={filialNome} onChange={(event) => setNomeFilial(event.target.value)} placeholder="Digite o nome da filial" className="input" />
+                                    </div>
+                                    <div className="control">
+                                        <label htmlFor="local" className="label has-text-black">CNPJ Filial:</label>
+                                        <input value={filialCNPJ} onChange={(event) => setCNPJFilial(event.target.value)} placeholder="Digite o cnpj da filial" className="input" />
+                                    </div>
+                                </div>
+                                <div className="field">
+                                    <div className="control pr-3">
+                                        <label htmlFor="local is-flex" className="label has-text-black">Telefone Filial: </label>
+                                        <input value={filialTelefone} onChange={(event) => setTelefoneFilial(event.target.value)} placeholder="Digite o cep da filial" className="input" />
+                                    </div>
+                                    <div className="control">
+                                        <label htmlFor="local is-flex" className="label has-text-black">CEP Filial: </label>
+                                        <input value={filialCEP} onChange={handleCepFilial} placeholder="Digite o cep da filial" className="input" />
+                                    </div>
+                                </div>
+                                <div className="field">
+                                    <div className="control pr-3">
+                                    <label htmlFor="local" className="label has-text-black">Rua Filial:</label>
+                                        <input value={filialRua} onChange={(event) => setRuaFilial(event.target.value)} placeholder="Digite o nome do local" className="input" />
+                                    </div>
+                                    <div className="control">
+                                    <label htmlFor="local" className="label has-text-black">Numero Filial: </label>
+                                        <input value={filialNumero} onChange={(event) => setNumeroFilial(event.target.value)} placeholder="Digite o cep da filial" className="input" />
+                                    </div>
+                                </div>
+                                <div className="field">
+                                    <div className="control pr-3">
+                                    <label htmlFor="local" className="label has-text-black">Cidade Filial:</label>
+                                        <input value={filialCidade} onChange={(event) => SubmitLocalizacao(event.target.value)} placeholder="Digite o nome do local" className="input" />
+                                    </div>
+                                    <div className="control">
+                                    <label htmlFor="local" className="label has-text-black">Estado Filial:</label>
+                                        <input value={filialEstado} onChange={(event) => SubmitLocalizacao(event.target.value)} placeholder="Digite o nome do local" className="input" />
+                                    </div>
+                                </div>
+                                <div className="field">
+                                    <div className="control pr-3">
+                                    <label htmlFor="local" className="label has-text-black is-flex">Localizações Filial:<img src={adicionar} className='ml-2 image is-24x24' onClick={(event) => showpopup()}/></label>
+                                    </div>
+                                    <div className="control">
+                                    </div>
+                                </div>
+                                <button className="button is-info mt-5" onClick={() => handleSubmitFilial()}>Cadastrar Filial</button>
                             </div>
                         </div>
-                        <div className="field">
-                            <label htmlFor="rua" className="label has-text-black">Rua:</label>
-                            <div className="control">
-                                <input value={matrizRua} onChange={(event) => setRuaMatriz(event.target.value)} placeholder="Digite a rua da matriz" className="input" />
-                            </div>
+                    </form>
+            
+            </div>
+                        <div className='columns container m-5'>
+                            <button className="button is-primary mx-0 " onClick={() =>  setTela('Home')}>Finalizar Cadastro</button>
+                            <button className="button is-danger mx-2 " onClick={() => setTela('Home')}>Cancelar</button>
                         </div>
-                        <div className="field">
-                            <label htmlFor="numero" className="label has-text-black">Número:</label>
-                            <div className="control">
-                                <input value={matrizNumero} onChange={(event) => setNumeroMatriz(event.target.value)} placeholder="Digite o número da matriz" className="input" />
-                            </div>
-                        </div>
-                        <div className="field">
-                            <label htmlFor="bairro" className="label has-text-black">Bairro:</label>
-                            <div className="control">
-                                <input value={matrizBairro} onChange={(event) => setBairroMatriz(event.target.value)} placeholder="Digite o bairro da matriz" className="input" />
-                            </div>
-                        </div>
-                        <div className="field">
-                            <label htmlFor="cidade" className="label has-text-black">Cidade:</label>
-                            <div className="control">
-                                <input value={matrizCidade} onChange={(event) => setCidadeMatriz(event.target.value)} placeholder="Digite a cidade da matriz" className="input" />
-                            </div>
-                        </div>
-                        <div className="field">
-                            <label htmlFor="estado" className="label has-text-black">Estado:</label>
-                            <div className="control">
-                                <input value={matrizEstado} onChange={(event) => setEstadoMatriz(event.target.value)} placeholder="Digite o estado da matriz" className="input" />
-                            </div>
-                        </div>
-                    </div>
-                    <div className="column is-one-third">
-                        <h3 className="has-text-black is-size-5 mb-5" style={{ textAlign: 'center' }}>Localizações Matriz</h3>
-                        <div className="field">
-                            <label htmlFor="local" className="label has-text-black">Nome do Local:</label>
-                            <div className="control">
-                                <input value={localizacao} onChange={(event) => SubmitLocalizacao(event.target.value)} placeholder="Digite o nome do local" className="input" />
-                            </div>
-                        </div>
-                        <div className="field">
-                            <button className="button is-info mt-3" onClick={() => SubmitLocalizacao([...localizacao, localizacao])}>Cadastrar Localização</button>
-                        </div>
-                    </div>
-                </div>
-
-                {/* cadastro da filial */}
-
-
-                <form onSubmit={handleSubmitFilial}>
-                    <div className="columns is-variable is-1 ml-6 m-3">
-                        <div className="column is-one-half">
-                            <h3 className="has-text-black is-size-5 mb-5" style={{ textAlign: 'center' }}>Filial</h3>
-                            <div className="field is-flex">
-                                <div className="control pr-3">
-                                    <label htmlFor="local is-flex" className="label has-text-black">Nome da Filial:</label>
-                                    <input value={filialNome} onChange={(event) => setNomeFilial(event.target.value)} placeholder="Digite o nome da filial" className="input" />
-                                </div>
-                                <div className="control">
-                                    <label htmlFor="local" className="label has-text-black">CNPJ Filial:</label>
-                                    <input value={filialCNPJ} onChange={(event) => setCNPJFilial(event.target.value)} placeholder="Digite o cnpj da filial" className="input" />
-                                </div>
-                            </div>
-                            <div className="field is-flex">
-                                <div className="control pr-3">
-                                    <label htmlFor="local is-flex" className="label has-text-black">Telefone Filial: </label>
-                                    <input value={filialTelefone} onChange={(event) => setTelefoneFilial(event.target.value)} placeholder="Digite o cep da filial" className="input" />
-                                </div>
-                                <div className="control">
-                                    <label htmlFor="local is-flex" className="label has-text-black">CEP Filial: </label>
-                                    <input value={filialCEP} onChange={handleCepFilial} placeholder="Digite o cep da filial" className="input" />
-                                </div>
-                            </div>
-                            <div className="field is-flex">
-                                <div className="control pr-3">
-                                <label htmlFor="local" className="label has-text-black">Rua Filial:</label>
-                                    <input value={filialRua} onChange={(event) => setRuaFilial(event.target.value)} placeholder="Digite o nome do local" className="input" />
-                                </div>
-                                <div className="control">
-                                <label htmlFor="local is-flex" className="label has-text-black">Numero Filial: </label>
-                                    <input value={filialNumero} onChange={(event) => setNumeroFilial(event.target.value)} placeholder="Digite o cep da filial" className="input" />
-                                </div>
-                            </div>
-                            <div className="field is-flex">
-                                <div className="control pr-3">
-                                <label htmlFor="local" className="label has-text-black">Cidade Filial:</label>
-                                    <input value={filialCidade} onChange={(event) => SubmitLocalizacao(event.target.value)} placeholder="Digite o nome do local" className="input" />
-                                </div>
-                                <div className="control">
-                                <label htmlFor="local" className="label has-text-black">Estado Filial:</label>
-                                    <input value={filialEstado} onChange={(event) => SubmitLocalizacao(event.target.value)} placeholder="Digite o nome do local" className="input" />
-                                </div>
-                            </div>
-                            <div className="field is-flex">
-                                <div className="control pr-3">
-                                <label htmlFor="local" className="label has-text-black">Localizações Filial:<img src={adicionar} className='ml-2'style={{ width: '20%', height: '20%', cursor:'pointer'}} onClick={(event) => showpopup()}/></label>
-                                </div>
-                                <div className="control">
-
-                                </div>
-                            </div>
-                            <button className="button is-info mt-5" onClick={() => handleSubmitFilial()}>Cadastrar Filial</button>
-                        </div>
-                    </div>
-                </form>
-            </form>
-            <button className="button is-primary mx-0" onClick={() =>  setTela('Home')}>Finalizar Cadastro</button>
-            <button className="button is-danger mx-2" onClick={() => setTela('Home')}>Cancelar</button>
-            {mostrarLocalizacao && <CadastroLocalizacao handleLocalizacaoClick={showpopup} setLocalizacoes={setLocalizacaoFilial}/>}
+                    {mostrarLocalizacao && <CadastroLocalizacao handleLocalizacaoClick={showpopup} setLocalizacoes={setLocalizacaoFilial}/>}
         </div>
     );
 }
