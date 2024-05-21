@@ -21,6 +21,7 @@ import MeusDados from "./Visualizar/MeusDados";
 import MenuRoot from "./Navegação/MenuRoot";
 import EditarEmpresa from "./Root/EditarEmpresa";
 import EditarFilial from "./Root/EditarFilial";
+import VisualizarFilial from "./Visualizar/VisualizarFilial";
 
 export default function Roteador() {
     const [tela, setTela] = useState('Home');
@@ -472,6 +473,19 @@ export default function Roteador() {
                                 <>
                                     <MenuRoot seletorView={selecionarView} botoes={botoes} />
                                     <EditarEmpresa setTela={setTela} botoes={botoes} />
+                                </>
+                            )
+                        }
+                    }
+                }
+
+                else if (tela === "VisualizarFilial") {
+                    if (verificacaoToken) {
+                        if (root) {
+                            return (
+                                <>
+                                    <MenuRoot seletorView={selecionarView} botoes={botoes} />
+                                    <VisualizarFilial setTela={setTela} botoes={botoes} />
                                 </>
                             )
                         }
