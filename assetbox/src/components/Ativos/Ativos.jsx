@@ -9,6 +9,8 @@ const Ativos = ({ setTela }) => {
     const [filtroTitulo, setFiltroTitulo] = useState('');
     const [filtroStatus, setFiltroStatus] = useState('');
     const [modalAberto, setModalAberto] = useState(false);
+    const [filiais, setFiliais] = useState([]);
+    const [filialId, setFilialId] = useState(0);
 
     useEffect(() => {
         axios.get('http://localhost:8000/ativos')
@@ -18,7 +20,19 @@ const Ativos = ({ setTela }) => {
             .catch(error => {
                 console.error('There was an error!', error);
             });
+        axios.get("http://localhost:8000/filiais")
+            .then(response => {
+                setFiliais(response.data);
+            })
+            .catch(error => {
+                console.error("Um erro ocorreu ao buscar filiais: ", error);
+            });
     }, []);
+
+    const handleRelatorio = async () => {
+        let response = axios.get(`http://localhost:8000/relatorios/filial/${filialId}`);
+        console.log(response.data);
+    }
 
     const handleClick = (id) => {
         localStorage.setItem('id', id)
@@ -55,13 +69,20 @@ const Ativos = ({ setTela }) => {
                                 <button class="delete" aria-label="close" onClick={fecharModal}></button>
                             </header>
                             <section class="modal-card-body">
-
+                                <select name="filial" onChange={e => setFilialId(e.target.value)}>
+                                    <option value={null}>Selecione a unidade</option>
+                                    {filiais.map(filial => {
+                                        return (
+                                            <option value={filial.fil_id}>{filial.fil_nome}</option>
+                                        );
+                                    })}
+                                </select>
                                 {/* INSERIR A LISTA / MENU OU DROPDOWN */}
 
                             </section>
                             <footer class="modal-card-foot">
                                 <div class="buttons">
-                                    <button class="shadow-button button button-effect is-primary m-5 ml-6 is-rounded is-size-5" style={{ backgroundColor: '#367E90', color: '#fff' }} >Selecionar</button>
+                                    <button class="shadow-button button button-effect is-primary m-5 ml-6 is-rounded is-size-5" style={{ backgroundColor: '#367E90', color: '#fff' }} onClick={handleRelatorio} >Selecionar</button>
                                 </div>
                             </footer>
                         </div>
