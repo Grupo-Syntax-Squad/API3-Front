@@ -43,9 +43,9 @@ function VisualizarDestinatarios({ setTela }) {
         setDadosDestinatario(dados);
         setDadosEndereco(dados.des_endereco_id);
         setNome(dados.des_nome);
-        setEmail(dados.des_email);
-        setTelefone(dados.des_telefone);
-        setCpf(dados.des_cpf);
+        setEmail(dados.email);
+        setTelefone(dados.telefone);
+        setCpf(dados.cpf);
         setRua(dados.des_endereco_id.end_rua)
         setComplemento(dados.des_endereco_id.end_complemento)
         setNumero(dados.des_endereco_id.end_numero)
@@ -53,7 +53,8 @@ function VisualizarDestinatarios({ setTela }) {
         setCidade(dados.des_endereco_id.end_cidade)
         setEstado(dados.des_endereco_id.end_uf)
         setCep(dados.des_endereco_id.end_cep)
-        setEnderecoId(dados.des_endereco_id.idend)
+        setEnderecoId(dados.des_endereco_id.end_id)
+        // console.log(dados);
       } catch (error) {
         console.error(`Erro ao buscar dados do destinatário ${id}:`, error);
       }
@@ -64,15 +65,13 @@ function VisualizarDestinatarios({ setTela }) {
   const handleUpdate = async () => {
     const dadosAtualizados = {
       des_nome: nome,
-      des_email: email,
-      des_telefone: telefone,
-      des_cpf: cpf,
-      des_endereco_id: {
-        id: enderecoId
-      }
+      email: email,
+      telefone: telefone,
+      cpf: cpf,
+      des_endereco_id: enderecoId
     }
+
     const enderecoAtualizado = {
-      id: enderecoId,
       end_rua: rua,
       end_numero: numero,
       end_complemento: complemento,
@@ -81,6 +80,7 @@ function VisualizarDestinatarios({ setTela }) {
       end_uf: uf,
       end_cep: cep
     };
+    console.log(dadosAtualizados);
 
     try {
       const responseEnd = await axios.put(`http://localhost:8000/enderecos/${enderecoId}`, enderecoAtualizado);
