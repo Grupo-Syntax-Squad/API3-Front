@@ -60,7 +60,7 @@ const Usuarios = ({ setTela }) => {
                         <div class="columns filtro mx-0" style={{ borderTopLeftRadius: '10px', borderTopRightRadius: '10px' }}>
                             <div class="column is-full pr-6" style={{ display: 'flex', alignItems: 'center' }}>
                                 <img src={Filtro} class="mr-6" alt='filter'></img><label className='filtros mx-1 has-text-white has-text-weight-medium mr-3'>Nome</label>
-                                <input class="input is-small is-half is-flex-grow-1 is-rounded border-none" type="text" placeholder='Digite o nome do usuário:' value={filtroNome} onChange={e => setNomes(e.target.value)} />
+                                <input class="input is-small is-half is-flex-grow-1 is-rounded border-none" type="text" placeholder='Digite o nome do usuário' value={filtroNome} onChange={e => setNomes(e.target.value)} />
                             </div>
                         </div>
                     </div>

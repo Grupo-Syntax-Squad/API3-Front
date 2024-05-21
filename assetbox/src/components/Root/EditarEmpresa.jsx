@@ -262,11 +262,11 @@ function EditarEmpresa({ setTela }) {
     //  style={{ borderRadius: '50px', backgroundColor: "rgb(230, 230, 230)" }}
     return (
         <div>
-            <div className="m-2 columns">
+            <div className="m-2 columns ">
                 <form onSubmit={handleSubmit} className="column ">
                     <h3 className="has-text-black has-text-centered has-text-weight-medium is-size-4 mb-5">Painel da Empresa</h3>
-                    <div className="column m-3">
-                        <div className="column p-5" style={{ borderRadius: '50px', backgroundColor: "rgb(230, 230, 230)" }}>
+                    <div className="column m-3 ">
+                        <div className="column p-5 shadow-button" style={{ borderRadius: '50px', backgroundColor: "rgb(230, 230, 230)" }}>
                             <div className="field">
                                 <img src={matriz} class='image is-96x96 container' alt="AssetBox Logo" />
                                 <label htmlFor="razao-social" className="label has-text-black">Razão Social da Empresa:</label>
@@ -352,7 +352,7 @@ function EditarEmpresa({ setTela }) {
                 <form onSubmit={handleSubmitFilial} className="column">
                     <h3 className="has-text-black is-size-4 mb-5 has-text-weight-medium" style={{ textAlign: 'center' }}>Filial</h3>
                     <div className=" column m-3 ">
-                        <div className="column p-6" style={{ borderRadius: '50px', backgroundColor: "rgb(230, 230, 230)" }}>
+                        <div className="column p-6 shadow-button" style={{ borderRadius: '50px', backgroundColor: "rgb(230, 230, 230)" }}>
                             <img src={filial} class='image is-64x64  container' alt="AssetBox Logo" />
                             <div className="field">
                                 <div className="control">

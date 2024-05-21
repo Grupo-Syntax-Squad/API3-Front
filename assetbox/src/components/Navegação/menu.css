@@ -46,10 +46,22 @@ a.nav-item {
   .empresa {
     display: none;
   }
+
+  .navbar{
+    display:flex;
+    flex-direction: column;
+  }
+
   .navbar-menu {
     flex-direction: column;
     background-color: transparent;
     
+  }
+  .navbar-brand{
+    display:none
+  }
+  .navbar-item{
+    width: 100vh;
   }
 }
 
@@ -62,4 +74,8 @@ ul{
 
 .shadow-menu{
   box-shadow: 0px .5px 5px rgba(0, 0, 0, 0.534);
+}
+
+.navbar-menu{
+  box-shadow: none;
 }

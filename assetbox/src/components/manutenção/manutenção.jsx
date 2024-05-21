@@ -38,7 +38,7 @@ const Manutencao = ({ setTela }) => {
                         <div className="columns filtro mx-0" style={{ borderTopLeftRadius: '10px', borderTopRightRadius: '10px' }}>
                             <div className="column is-two-fifths is-flex is-align-items-center" style={{ display: 'flex', alignItems: 'center' }}>
                                 <img src={Filtro} className="mx-1" alt='filter'></img><label className='filtros mx-1 has-text-white has-text-weight-medium mr-3'>Horário</label>
-                                <input className="input is-small is-flex-grow-2 is-rounded border-none" type="time" placeholder='Digite um horário:' value={filtroHorario} onChange={(e) => setFiltroHorario(e.target.value)} />
+                                <input className="input is-small is-flex-grow-2 is-rounded border-none" type="time" placeholder='Digite um horário' value={filtroHorario} onChange={(e) => setFiltroHorario(e.target.value)} />
                             </div>
                             <div className="column is-two-fifths is-flex is-align-items-center">
                                 <label className='filtros mx-1 has-text-white has-text-weight-medium mr-3' >ID</label>
@@ -46,7 +46,7 @@ const Manutencao = ({ setTela }) => {
                             </div>
                             <div className="column is-one-fifth is-flex is-align-items-center">
                                 <label className='filtros mx-1 has-text-white has-text-weight-medium mr-3'>Status</label>
-                                <input className="input is-small is-flex-grow-2 is-rounded border-none" type="text" placeholder='Digite um Status:' value={filtroStatus} onChange={(e) => setFiltroStatus(e.target.value)} />
+                                <input className="input is-small is-flex-grow-2 is-rounded border-none" type="text" placeholder='Digite um Status' value={filtroStatus} onChange={(e) => setFiltroStatus(e.target.value)} />
                             </div>
                         </div>
                     </div>

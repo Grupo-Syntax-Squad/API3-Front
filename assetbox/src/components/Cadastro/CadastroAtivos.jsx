@@ -166,7 +166,7 @@ function CadastroAtivos({ setTela }) {
 
   return (
     <body>
-      <div class='page-full'>
+      <div class='page-full shadow-button'>
         <div class='field'>
           <h2 class="titulo-cadastro">Cadastro de Ativos</h2>
         </div>

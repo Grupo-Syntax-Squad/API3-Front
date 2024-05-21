@@ -30,24 +30,22 @@ function MenuRoot(props) {
     }, 3000);
   }
 
-  
-
   return (
     <div>
       <div className="navbar shadow-menu is-flex is-justify-content-space-between custom-background" role="navigation" aria-label="main navigation">
-        <div className='navbar-brand'>
-          <img src={LogoIcon} class='pl-6 pr-0' alt="AssetBox" onClick={(e) => props.seletorView('Home', e)} />
-          <span className="navbar-brand has-text-white navbar-item mr-2 is-size-3 p-0 has-text-weight-bold empresa is-clickable" 
-          href="" onClick={(e) => props.seletorView('Home', e)}>AssetBox</span>
-        </div>
-        
-        <div className={`navbar-burger burger ${showMenu ? 'is-active' : ''}`} 
+      <div className={`navbar-burger  custom-background burger ${showMenu ? 'is-active' : ''}`} 
         aria-label="menu" aria-expanded={showMenu ? 'true' : 'false'} 
         onClick={() => setShowMenu(!showMenu)}>
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
+        </div>
+        
+        <div className='navbar-brand'>
+          <img src={LogoIcon} class='pl-6 pr-0' alt="AssetBox" onClick={(e) => props.seletorView('Home', e)} />
+          <span className="navbar-brand has-text-white navbar-item mr-2 is-size-3 p-0 has-text-weight-bold empresa is-clickable" 
+          href="" onClick={(e) => props.seletorView('Home', e)}>AssetBox</span>
         </div>
 
         <div className={`navbar-menu ${showMenu ? 'is-active' : ''}`}>
@@ -70,11 +68,11 @@ function MenuRoot(props) {
               </a> */}
 
           </div>
-          {<div className="navbar-end">
+          <div className="navbar-end">
             <div className="navbar-item has-dropdown is-active">
               <p className="navbar-item" ><img src={Notify} alt="configurações" /></p>
             </div>
-          </div>}
+          </div>
           <div className="navbar-end">
             <div className="navbar-item has-dropdown is-active">
               <p className="navbar-item" onClick={handleSettingsClick} ><img src={SettingsIcon} alt="configurações" /></p>
@@ -85,6 +83,7 @@ function MenuRoot(props) {
                   <button className='navbar-item is-flex dropdown-item' onClick={e => handleLogout(e)}>Sair<img className='is-flex ml-1'src={Exit}/></button>
                 </div>
               )}
+              
             </div>
           </div>
         </div>

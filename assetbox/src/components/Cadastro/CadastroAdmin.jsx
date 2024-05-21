@@ -86,15 +86,15 @@ function CadastroAdministrador({ setTela }) {
 
     return (
         <body>
-            <div className='page-full'>
+            <div className='page-full shadow-button'>
                 <div className='field'>
-                    <h2 class="titulo-cadastro">Cadastro de administrador</h2>
+                    <h2 class="titulo-cadastro p-2">Cadastro de Administrador</h2>
                 </div>
                 <form onSubmit={handleSubmit} className="m-6" >
 
                     <div className="column is-flex is-flex-direction-column m-3 is-justify-content-center is-align-items-center">
 
-                        <h1 className='has-text-weight-light is-size-4'>Dados</h1>
+                        <h3 className=' is-size-4 has-text-black'>Dados</h3>
 
                         <div className="field column is-two-thirds">
                             <label className="form-label is-size-5">Nome: <span className='has-text-danger'>*</span></label>

@@ -156,16 +156,16 @@ useEffect(() => {
 
   return (
     <body>
-      <div class='page-full'>
+      <div class='page-full shadow-button'>
         <div class='field'>
-          <h2 class="titulo-cadastro">Cadastro de manutenção</h2>
+          <h2 class="titulo-cadastro p-2">Cadastro de Manutenção</h2>
         </div>
         <div class="columns m-3">
           <div class="column is-half">
             <form onSubmit={handleSubmit}>
               <div className='top-one'>
                 <div class="field">
-                  <label class="label has-text-black">Status: <span className='has-text-danger'>*</span></label>
+                  <label class="label has-text-black has-text-weight-normal">Status <span className='has-text-danger'>*</span></label>
                   <div class="select is-small">
                     <select class="is-hovered" onChange={e => setManStatus(e.target.value)}>
                       <option value="0" selected>Aguardando Manutenção</option>
@@ -187,7 +187,7 @@ useEffect(() => {
                   />
                 </div>
                 <div class="field">
-                  <label class="label has-text-black">Horario da Manutenção: <span className='has-text-danger'>*</span></label>
+                  <label class="label has-text-black has-text-weight-normal">Horario da Manutenção <span className='has-text-danger'>*</span></label>
                   <input
                     class="input is-small"
                     type="time"
@@ -198,7 +198,7 @@ useEffect(() => {
                   />
                 </div>
                 <div class="field">
-                  <label class="label has-text-black">Atividade:<span className='has-text-danger'>*</span></label>
+                  <label class="label has-text-black has-text-weight-normal">Atividade<span className='has-text-danger'>*</span></label>
                   <input
                     class="input is-small"
                     type="text"
@@ -209,7 +209,7 @@ useEffect(() => {
                   />
                 </div>
                 <div class="field">
-                  <label class="label has-text-black">Ativo: <span className='has-text-danger'>*</span></label>
+                  <label class="label has-text-black has-text-weight-normal">Ativo <span className='has-text-danger'>*</span></label>
                   <div class="select is-small">
                     <select class="is-hovered" onChange={e => handlerAtivo(e)}>
                       <option value={null}>Selecione um ativo</option>
@@ -220,7 +220,7 @@ useEffect(() => {
                   </div>
                 </div>
                 <div className="field" >
-                  <label className="label has-text-black">Responsavel:<span className='has-text-danger'>*</span></label>
+                  <label className="label has-text-black has-text-weight-normal">Responsável<span className='has-text-danger'>*</span></label>
                   <input
                     class="input is-small"
                     type="text"
@@ -231,7 +231,7 @@ useEffect(() => {
                   />
                 </div>
                 <div class="field">
-                  <label class="label has-text-black">Localização:</label>
+                  <label class="label has-text-black has-text-weight-normal">Localização</label>
                   <input
                     class="input is-small"
                     type="text"
@@ -242,7 +242,7 @@ useEffect(() => {
                   />
                 </div>
                 <div className="field" >
-                  <label className="label has-text-black">Observações:</label>
+                  <label className="label has-text-black has-text-weight-normal">Observações</label>
                   <input
                     class="input is-small"
                     type="text"
@@ -334,7 +334,7 @@ useEffect(() => {
                     onChange={(event) => setManBairro(event.target.value)}
                   />
                 </div>
-                <div className="field" style={{ marginInline: '20px', marginBottom: '20px' }}>
+                <div className="field" >
                   <label className="form-label has-text-black" >Complemento:</label>
                   <input
                     class="input is-small"

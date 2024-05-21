@@ -144,16 +144,16 @@ function CadastroDestinatarios({ setTela }) {
 
   return (
     <body>
-      <div className='page-full'>
+      <div className='page-full shadow-button'>
         <div className='field'>
-          <h2 class="titulo-cadastro">Cadastro de destinatário</h2>
+          <h2 class="titulo-cadastro p-2">Cadastro de Destinatário</h2>
         </div>
         <form onSubmit={handleSubmit} className="m-6" >
           <div className='columns'>
 
             <div className="column is-half m-3">
 
-              <h1 className='has-text-weight-light is-size-4'>Dados</h1>
+              <h3 className='has-text-weight-light has-text-centered is-size-4 has-text-black'>Dados</h3>
 
               <div className="field column">
                 <label className="form-label is-size-5">Nome: <span className='has-text-danger'>*</span></label>
