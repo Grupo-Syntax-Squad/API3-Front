@@ -35,8 +35,7 @@ function VisualizarFilial({ setTela }) {
                         </span>
                     </button>
                 </header>
-                <details>
-                    <summary>Clique aqui</summary>
+
                     <div className="card-content">
                         <div className="content">
                             <div className="columns m-3">
@@ -145,7 +144,6 @@ function VisualizarFilial({ setTela }) {
                             {edit && <button onClick={handleCancelarEditar} className="button">Cancelar</button>}
                         </div>
                     </div>
-                </details>
             </div>
         </div>
     );

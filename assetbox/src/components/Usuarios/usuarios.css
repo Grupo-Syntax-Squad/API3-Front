@@ -90,6 +90,10 @@
    border-top-right-radius: 10px;
   }
 
+  .input{
+   border-color: #000;
+  }
+
   @media screen and (max-width: 1200px) {
    .filtro {
       flex-direction: column;
