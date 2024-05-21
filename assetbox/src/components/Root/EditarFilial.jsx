@@ -9,7 +9,7 @@ function EditarFilial({ setTela }) {
     const [nome, setNome] = useState("");
     const [email, setEmail] = useState("");
     const [telefone, setTelefone] = useState("");
-    const [CNPJ, setCNPJ] = useState("");
+    const [cnpj, setCnpj] = useState("");
     const [endereco, setEndereco] = useState("");
     const [edit, setEdit] = useState(false);
     const [assets, setAssets] = useState([]);
@@ -18,24 +18,17 @@ function EditarFilial({ setTela }) {
     const [filtroEndereco, setFiltroEndereco] = useState('');
     const handleEdit = () => edit ? setEdit(false) : setEdit(true);
 
-    useEffect(() => {
-        const fetchData = async () => {
+    useEffect(() => { 
+            axios.get('http://localhost:8000/filiais')
+                .then(response => {
+                    setAssets(response.data);
+                })
+                .catch(error => {
+                    console.error('There was an error!', error);
+                });
+        }, []);
 
-            try {
-                const response = await axios.get(`http://localhost:8000/filiais/{Id}`);
-                const data = response.data;
-                setNome(data.fil_nome);
-                setEmail(data.fil_email);
-                setCNPJ(data.fil_CNPJ);
-                setTelefone(data.Fil_telefone);
-                setEndereco(data.fil_endereco);
-            } catch (error) {
-                console.log("Erro:", error);
-            }
-        };
-
-        fetchData(); 
-    }, []);
+  
 
     const dadosFiltrados = assets.filter(asset => {
         return (filtroId === '' || String(asset.fil_id).includes(filtroId)) && (filtroTitulo === '' || asset.fil_nome.toLowerCase().includes(filtroTitulo.toLowerCase())) && (filtroEndereco === '' || asset.fil_endereco.toLowerCase().includes(filtroEndereco.toLowerCase()));
@@ -49,7 +42,7 @@ function EditarFilial({ setTela }) {
                 fil_email: email,
                 fil_endereco: endereco,
                 fil_telefone: telefone,
-                fil_CNPJ: CNPJ
+                fil_cnpj: cnpj
             }
 
             const response = await axios.put(`http://localhost:8000/filiais/{Id}`, dataPUT);
@@ -77,7 +70,7 @@ function EditarFilial({ setTela }) {
             setEmail(data.fil_email);
             setEndereco(data.fil_endereco);
             setTelefone(data.fil_telefone);
-            setCNPJ(data.fil_CNPJ);
+            setCnpj(data.fil_cnpj);
         } catch (error) {
             console.log("Erro:", error);
         }
@@ -101,7 +94,7 @@ function EditarFilial({ setTela }) {
                         <input class="input is-small is-flex-grow-3 is-rounded" type="text" placeholder='Digite um titulo:' value={filtroTitulo} onChange={e => setFiltroTitulo(e.target.value)} />
                     </div>
                     <div class="column is-one-third is-flex is-align-items-center">
-                        <label className='filtros mx-1 has-text-white has-text-weight-medium mr-3'>Status</label>
+                        <label className='filtros mx-1 has-text-white has-text-weight-medium mr-3'>cnpj</label>
                         <input class="input is-small is-flex-grow-2 is-rounded" type="text" placeholder='Digite um Status:' value={filtroEndereco} onChange={e => setFiltroEndereco(e.target.value)} />
                     </div>
                 </div>
@@ -114,7 +107,7 @@ function EditarFilial({ setTela }) {
                             <label className='has-text-white is-size-4 has-text-weight-medium'>Título</label>
                         </div>
                         <div class="column is-one-third mr-2 is-flex is-justify-content-center is-align-items-center">
-                            <label className='has-text-white is-size-4 has-text-weight-medium'>Status</label>
+                            <label className='has-text-white is-size-4 has-text-weight-medium'>cnpj</label>
                         </div>
                     </div>
 
@@ -122,14 +115,14 @@ function EditarFilial({ setTela }) {
                         {assets.length === 0 && (
                             <div className='asset mx-5 is-flex is-justify-content-center'>
                                 <div className='SemHover column is-one-third mr-2 dado-ativo is-flex is-justify-content-center is-align-items-center has-text-weight-medium'>
-                                    <p className='has-text-black'>Nenhum Ativo Cadastrado</p>
+                                    <p className='has-text-black'>Nenhuma filial Cadastrada</p>
                                 </div>
                             </div>
                         )}
                     </div>
 
                 {dadosFiltrados.map((asset) => (
-                            <div key={asset.ati_id} onClick={() => handleClick(asset.fil_id)} className='asset' class='asset is-flex is-justify-content-center'>
+                            <div key={asset.fil_id} onClick={() => handleClick(asset.fil_id)} className='asset' class='asset mx-5 is-flex is-justify-content-center'>
                                 <div class='SemHover column is-one-third mr-2 dado-ativo is-flex is-justify-content-center is-align-items-center has-text-weight-medium'>
                                     <p className='has-text-black'>{asset.fil_id}</p>
                                 </div>
@@ -137,7 +130,7 @@ function EditarFilial({ setTela }) {
                                     <p className='has-text-black'> {asset.fil_nome}</p>
                                 </div>
                                 <div class='SemHover column is-one-third mr-2 dado-ativo is-flex is-justify-content-center is-align-items-center has-text-weight-medium'>
-                                    <p className='has-text-black'> {asset.fil_endereco}</p>
+                                    <p className='has-text-black'> {asset.fil_cnpj}</p>
                                 </div>
                             </div>
                         ))}
