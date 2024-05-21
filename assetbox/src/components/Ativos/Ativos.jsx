@@ -100,8 +100,7 @@ const Ativos = ({ setTela }) => {
                     </div>
                     <div class="columns indice m-0 is-flex is-justify-content-center border-radius-top" >
                         <div class="column is-one-third ml-2 is-flex is-justify-content-center is-align-items-center">
-                            <label className='has-text-white is-size-4
-has-text-weight-medium'>Número</label>
+                            <label className='has-text-white is-size-4 has-text-weight-medium'>Número</label>
                         </div>
                         <div class="column is-one-third ml-2 mr-2 is-flex is-justify-content-center is-align-items-center">
                             <label className='has-text-white is-size-4 has-text-weight-medium'>Título</label>
