@@ -40,7 +40,7 @@ function VisualizarAtivos({ setTela }) {
         if (dados.ati_imagem_id != null) {
           setImageUrl(`http://localhost:8000/imagens/${dados.ati_imagem_id.img_id}`);
         }
-        if (dados.ati_documento_id != null){
+        if (dados.ati_documento_id != null) {
           setDocument(`http://localhost:8000/documentos/${dados.ati_documento_id.documento_id}`)
         }
         console.log(dados)
@@ -282,16 +282,6 @@ function VisualizarAtivos({ setTela }) {
 
                     />
                   </div>
-                  <div className="field column" >
-                    <label className="form-label">Quantidade</label>
-
-                    <input
-                      class="input is-small"
-                      type="text"
-                      value={dadosAtivo.ati_quantidade}
-                      disabled={!edit}
-                    />
-                  </div>
 
                   {/* <div class="field column">
                     <label class="form-label">Fornecedor</label><br />
@@ -391,16 +381,16 @@ function VisualizarAtivos({ setTela }) {
 
             </div>
 
-            
+
             <div class="field is-grouped is-grouped-centered">
               {!edit &&
                 <>
                   <p class="control">
-                <button class="button is-danger" type="submit" onClick={exibirPopUpDelecao}>
-                  Desativar Ativo
-                </button>
+                    <button class="button is-danger" type="submit" onClick={exibirPopUpDelecao}>
+                      Desativar Ativo
+                    </button>
 
-              </p>
+                  </p>
                   <p class="control">
                     <button class="button is-light" onClick={handleEdit}>
                       Atualizar Ativo
@@ -429,7 +419,7 @@ function VisualizarAtivos({ setTela }) {
               }
             </div>
 
-            
+
 
           </div>
           <div id='popupdelecao' style={{ display: 'none', height: '200px', backgroundColor: '#FFFFFF', position: 'fixed', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', textAlign: 'center', width: '50%', alignContent: 'center', justifyContent: 'center', borderRadius: '10px' }}>

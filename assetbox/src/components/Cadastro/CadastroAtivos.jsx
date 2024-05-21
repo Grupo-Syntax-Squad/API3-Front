@@ -17,7 +17,6 @@ function CadastroAtivos({ setTela }) {
   const [ati_marca, setMarcaAtivo] = useState('');
   const [ati_modelo, setModeloAtivo] = useState('');
   const [ati_numero_serie, setSerieAtivo] = useState('');
-  const [ati_quantidade, setQuantidadeAtivo] = useState(1);
   const [ati_data_expiracao, setExpiracaoAtivo] = useState('');
   const [ati_previsao_manutencao, setPrevisaoManutencaoAtivo] = useState('');
   const [ati_preco_aquisicao, setValorAtivo] = useState('');
@@ -121,7 +120,6 @@ function CadastroAtivos({ setTela }) {
       ati_marca,
       ati_modelo,
       ati_numero_serie,
-      ati_quantidade,
       ati_data_expiracao,
       ati_previsao_manutencao,
       ati_preco_aquisicao,

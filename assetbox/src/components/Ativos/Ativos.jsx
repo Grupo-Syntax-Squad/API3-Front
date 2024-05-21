@@ -35,8 +35,8 @@ const Ativos = ({ setTela }) => {
     };
 
     const dadosFiltrados = assets.filter(asset => {
-    return (filtroId === '' || String(asset.ati_id).includes(filtroId)) && (filtroTitulo === '' || asset.ati_titulo.toLowerCase().includes(filtroTitulo.toLowerCase())) && (filtroStatus === '' || asset.ati_status.toLowerCase().includes(filtroStatus.toLowerCase()));
-  });
+        return (filtroId === '' || String(asset.ati_id).includes(filtroId)) && (filtroTitulo === '' || asset.ati_titulo.toLowerCase().includes(filtroTitulo.toLowerCase())) && (filtroStatus === '' || asset.ati_status.toLowerCase().includes(filtroStatus.toLowerCase()));
+    });
 
 
     return (
@@ -45,42 +45,43 @@ const Ativos = ({ setTela }) => {
                 <button class=" shadow-button button button-effect is-primary m-5 ml-6 is-rounded is-size-4" style={{ backgroundColor: '#367E90', color: '#fff' }} onClick={() => setTela('CadastroAtivos')}>Cadastrar Ativo</button>
                 <button class=" shadow-button button button-effect is-primary m-5 ml-6 is-rounded is-size-4" style={{ backgroundColor: '#367E90', color: '#fff' }} onClick={abrirModal}>Relatório</button>
 
-                 {/* Modal */}
-                 <div class={`modal ${modalAberto ? 'is-active' : ''}`}>
+                {/* Modal */}
+                <div class={`modal ${modalAberto ? 'is-active' : ''}`}>
                     <div class="modal-background"></div>
                     <div class="modal-content">
-                    <div class="modal-card">
-                        <header class="modal-card-head">
-                            <p class="modal-card-title">Selecione uma unidade:</p>
-                            <button class="delete" aria-label="close" onClick={fecharModal}></button>
-                        </header>
-                        <section class="modal-card-body">
-                        
-                        {/* INSERIR A LISTA / MENU OU DROPDOWN */}
-                                                       
-                        </section>
-                        <footer class="modal-card-foot">
-                            <div class="buttons">
-                            <button class="shadow-button button button-effect is-primary m-5 ml-6 is-rounded is-size-5" style={{ backgroundColor: '#367E90', color: '#fff' }} >Selecionar</button>
-                            </div>
-                        </footer>
-                    </div>    
-                        
-                        
+                        <div class="modal-card">
+                            <header class="modal-card-head">
+                                <p class="modal-card-title">Selecione uma unidade:</p>
+                                <button class="delete" aria-label="close" onClick={fecharModal}></button>
+                            </header>
+                            <section class="modal-card-body">
+
+                                {/* INSERIR A LISTA / MENU OU DROPDOWN */}
+
+                            </section>
+                            <footer class="modal-card-foot">
+                                <div class="buttons">
+                                    <button class="shadow-button button button-effect is-primary m-5 ml-6 is-rounded is-size-5" style={{ backgroundColor: '#367E90', color: '#fff' }} >Selecionar</button>
+                                </div>
+                            </footer>
+                        </div>
+
+
                         {/* <div class="box">
-                            <span class="icon is-large" onClick={fecharModal}>
-                                <i class="fas fa-times"></i>
-                            </span>
-                            <p></p>
-                        </div> */}
+<span class="icon is-large" onClick={fecharModal}>
+<i class="fas fa-times"></i>
+</span>
+<p></p>
+</div> */}
                     </div>
                     {/* <button class="modal-close is-large" aria-label="close" onClick={fecharModal}></button> */}
                 </div>
                 {/* Fim do Modal */}
 
 
-                <div class='page-full shadow-button' style={{ 
-                    backgroundColor: '#459EB5' }}>
+                <div class='page-full shadow-button' style={{
+                    backgroundColor: '#459EB5'
+                }}>
                     <div class='field'>
                         <div class="columns filtro mx-0" style={{ borderTopLeftRadius: '10px', borderTopRightRadius: '10px' }}>
                             <div class="column is-one-fifth" style={{ display: 'flex', alignItems: 'center' }}>
@@ -100,7 +101,7 @@ const Ativos = ({ setTela }) => {
                     <div class="columns indice m-0 is-flex is-justify-content-center border-radius-top" >
                         <div class="column is-one-third ml-2 is-flex is-justify-content-center is-align-items-center">
                             <label className='has-text-white is-size-4
-                            has-text-weight-medium'>Número</label>
+has-text-weight-medium'>Número</label>
                         </div>
                         <div class="column is-one-third ml-2 mr-2 is-flex is-justify-content-center is-align-items-center">
                             <label className='has-text-white is-size-4 has-text-weight-medium'>Título</label>
@@ -111,13 +112,13 @@ const Ativos = ({ setTela }) => {
                     </div>
 
                     <div class='p-0'>
-                    {assets.length === 0 && (
-                    <div className='asset is-flex is-justify-content-center'>
-                        <div className='SemHover column is-one-third mr-2 dado-ativo is-flex is-justify-content-center is-align-items-center has-text-weight-medium'>
-                            <p className='has-text-black'>Nenhum Ativo Cadastrado</p>
-                        </div>
-                    </div>
-                )}
+                        {assets.length === 0 && (
+                            <div className='asset is-flex is-justify-content-center'>
+                                <div className='SemHover column is-one-third mr-2 dado-ativo is-flex is-justify-content-center is-align-items-center has-text-weight-medium'>
+                                    <p className='has-text-black'>Nenhum Ativo Cadastrado</p>
+                                </div>
+                            </div>
+                        )}
                         {/*aqui eu percorro o array de objetos e crio um card para cada objeto*/}
                         {dadosFiltrados.map((asset) => (
                             <div key={asset.ati_id} onClick={() => handleClick(asset.ati_id)} className='asset' class='asset is-flex is-justify-content-center'>
