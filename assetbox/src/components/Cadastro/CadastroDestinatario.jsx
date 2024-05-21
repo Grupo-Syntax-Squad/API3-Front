@@ -4,8 +4,8 @@ import axios from 'axios';
 
 function CadastroDestinatarios({ setTela }) {
   const [des_nome, setNomeDestinatario] = useState('');
-  const [des_email, setEmailDestinatario] = useState('');
-  const [des_telefone, setTelefoneDestinatario] = useState('');
+  const [email, setEmailDestinatario] = useState('');
+  const [telefone, setTelefoneDestinatario] = useState('');
   const [des_endereco_id, setDesEnderecoId] = useState('');
   const [cep, setCep] = useState('');
   const [end_rua, setRuaDestinatario] = useState('');
@@ -17,7 +17,7 @@ function CadastroDestinatarios({ setTela }) {
   const [end_cep, setCEPDestinatario] = useState('');
   const [des_tip, setTipoDestinatario] = useState('');
   const [showPopup, setShowPopup] = useState(false); // Estado para controlar a exibição do pop-up
-  const [des_cpf, setCPFDestinatario] = useState('');
+  const [cpf, setCPFDestinatario] = useState('');
 
   const handleTelefone = (value) => {
     // Remove tudo que não for dígito
@@ -80,7 +80,7 @@ function CadastroDestinatarios({ setTela }) {
     event.preventDefault();
 
 
-    const camposObrigatorios = [des_nome, des_email, des_telefone, des_cpf, end_rua, end_numero, end_bairro, end_cidade, end_uf, end_cep];
+    const camposObrigatorios = [des_nome, email, telefone, cpf, end_rua, end_numero, end_bairro, end_cidade, end_uf, end_cep];
     const camposVazios = camposObrigatorios.some(campo => !campo);
 
     if (camposVazios) {
@@ -89,13 +89,13 @@ function CadastroDestinatarios({ setTela }) {
     }
 
     // Verifica se o e-mail está vazio
-    if (des_email.trim() === '') {
+    if (email.trim() === '') {
       window.alert('O e-mail não pode estar vazio.');
       return;
     }
 
     // Verifica se o e-mail é válido
-    if (!HandleEmail(des_email)) {
+    if (!HandleEmail(email)) {
       window.alert('E-mail inválido.');
       return;
     }
@@ -115,11 +115,11 @@ function CadastroDestinatarios({ setTela }) {
 
     const dadosDestinatario = {
       des_nome,
-      des_email,
-      des_telefone,
+      email: email,
+      telefone: telefone,
       des_endereco_id,
       des_tip,
-      des_cpf
+      cpf
     };
 
     response = await axios.post('http://localhost:8000/destinatarios', dadosDestinatario);
@@ -172,7 +172,7 @@ function CadastroDestinatarios({ setTela }) {
                   className="input is-small"
                   type="text"
                   placeholder='Digite o número de telefone:'
-                  value={des_telefone}
+                  value={telefone}
                   onChange={handleTelefoneChange}
                 />
               </div>
@@ -183,7 +183,7 @@ function CadastroDestinatarios({ setTela }) {
                   className="input is-small"
                   type="text"
                   placeholder='Digite o email:'
-                  value={des_email}
+                  value={email}
                   onChange={handleEmailChange}
                 />
               </div>
@@ -194,7 +194,7 @@ function CadastroDestinatarios({ setTela }) {
                   className="input is-small"
                   type="text"
                   placeholder='Digite o CPF:'
-                  value={des_cpf}
+                  value={cpf}
                   onChange={e => setCPFDestinatario(e.target.value)}
                 />
               </div>
