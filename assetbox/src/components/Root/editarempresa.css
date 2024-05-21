@@ -14,3 +14,117 @@
     left: 50%;
     transform: translate(-50%, -50%);
   }
+
+  :root{
+    --cinzaclaro: #D9D9D9;
+    --azul: #459eb6;
+    --branco: #fff;
+    --cinza: rgb(189, 189, 189);
+    --h2azul: #459eb6;
+    --vermelho: red;
+    --preto: #000;
+    --azulh2: rgb(69, 158, 182);
+    --azulfiltro: #367E90;
+ 
+    @media(prefers-color-scheme: dark){
+       --cinzaclaro: #222;
+       --azul: #2a3f9c;
+       --branco: #fff;
+       --cinza: rgb(96, 96, 96);
+       --h2azul: #2c369d;
+       --vermelho: red;
+  }
+ 
+ .page-full{
+    align-items: stretch;
+    justify-content: space-around;
+    background-color: var(--cinzaclaro);
+    margin: 1% 10% 1% 10%;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+ }
+ 
+ .asset a {
+    pointer-events: none;
+ }
+ 
+ .button-effect{
+    transition: box-shadow 0.3s ease, transform 0.3s ease
+ }
+ 
+ .button-effect:hover{
+    box-shadow: 0 0 0 0 rgb(23, 49, 61), inset 3px 3px 3px rgb(23, 53, 61);
+    transform: translate(3px, 3px)
+ }
+ 
+ 
+ h2{
+    text-align: center;
+    background-color: var(--azulh2);
+    margin: auto;
+    font-size: x-large;
+    color: var(--branco);
+ }
+ 
+ h1{
+    text-align: center;
+    font-size: larger;
+    padding: 0.5%;
+ }
+ .indice{
+    background-color: var(--azul);
+ }
+ 
+ .filtro{
+    background-color: var(--azulfiltro);
+ }
+ 
+ .filtro {
+    flex-direction: row;
+ }
+ 
+ .filtros{
+    color: var(--branco);
+    font-size: 25px;
+    font-weight: 200;
+ }
+ 
+ .dado-ativo{
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--preto);
+ }
+ 
+ .top-one{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 2%;
+ }
+ 
+ .SemHover:hover{
+    background-color: transparent;
+ }
+ .asset{
+    background-color: var(--branco) !important;
+ }
+ .asset:hover{
+    background-color:var(--cinza);
+ }
+ 
+ @media screen and (max-width: 1200px) {
+    .filtro {
+       flex-direction: column;
+    }
+    .input {
+       width: 50rem;
+       flex-grow: 4;
+    }
+ }
+ 
+ .shadow-button{
+    box-shadow: 0px 3px 2px rgba(0, 0, 0, 0.274);
+ }}

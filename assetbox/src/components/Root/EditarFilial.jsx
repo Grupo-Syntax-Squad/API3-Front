@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import React from 'react';
+import Filtro from '../../assets/img/filtro.svg';
 import './editarempresa.css';
 import axios from "axios";
 function EditarFilial({ setTela }) {
@@ -11,6 +12,10 @@ function EditarFilial({ setTela }) {
     const [CNPJ, setCNPJ] = useState("");
     const [endereco, setEndereco] = useState("");
     const [edit, setEdit] = useState(false);
+    const [assets, setAssets] = useState([]);
+    const [filtroId, setFiltroId] = useState('');
+    const [filtroTitulo, setFiltroTitulo] = useState('');
+    const [filtroEndereco, setFiltroEndereco] = useState('');
     const handleEdit = () => edit ? setEdit(false) : setEdit(true);
 
     useEffect(() => {
@@ -32,6 +37,9 @@ function EditarFilial({ setTela }) {
         fetchData(); 
     }, []);
 
+    const dadosFiltrados = assets.filter(asset => {
+        return (filtroId === '' || String(asset.fil_id).includes(filtroId)) && (filtroTitulo === '' || asset.fil_nome.toLowerCase().includes(filtroTitulo.toLowerCase())) && (filtroEndereco === '' || asset.fil_endereco.toLowerCase().includes(filtroEndereco.toLowerCase()));
+    });
     const handleAtualizarDados = async (e) => {
         e.preventDefault();
 
@@ -51,6 +59,12 @@ function EditarFilial({ setTela }) {
             else window.alert("Ocorreu algum erro no sistema!");
         }
     }
+
+    const handleClick = (id) => {
+        localStorage.setItem('id', id)
+        console.log(id);
+        setTela(`VisualizarFilial`);
+    };
 
     const handleCancelarEditar = async (e) => {
         e.preventDefault();
@@ -74,214 +88,62 @@ function EditarFilial({ setTela }) {
     //só um modelo de como está a pagina de cadastro de filial, talvez dê para implemnetar na página de visualização geral da empresa, uma vez que da pra fazer usando os cards para cadastro e update
     return (
         <body className="m-2">
-            <h1 className="has-text-black is-size-4" >Painel da Filial</h1>
-            <form className="is-flex is-justify-content-space-around is-flex-direction-column is-flex is-align-items-center" style={{ borderRadius: '50px', backgroundColor: "rgb(230, 230, 230)" }}>
-                <div className='is-flex is-flex-direction-column' style={{ marginTop: '30px', width:'50%' }}>
-                    <h1 className="has-text-black is-size-4" style={{ textAlign: 'center', marginBottom: '30px' }} >Dados das Filiais</h1>
-                    <div class="columns m-3">
-                        <div class="card" style={{width:'200%'}}>
-                            <header class="card-header">
-                                <p class="card-header-title">vizualizar Filial</p>
-                                <button class="card-header-icon" aria-label="more options">
-                                    <span class="icon">
-                                        <i class="fas fa-angle-down" aria-hidden="true"></i>
-                                    </span>
-                                </button>
-                            </header>
-                            <details>
-                                <summary>Clique aqui</summary>
-                                <div class="card-content">
-                                    <div class="content">
-                                        <div class="columns m-3">
-                                            <div class="column is-half">
-                                                <div className="field" >
-                                                    <label htmlFor="email" className="label has-text-black">Nome da Filial: </label>
-                                                    <div className="">
-                                                        <input                       
-                                                            type="text"
-                                                            value={nome}
-                                                            disabled={!edit}
-                                                        />
-                                                    </div>
-                                                </div>
-                                                <div className="field">
-                                                    <label htmlFor="CNPJ" className="label has-text-black">CNPJ: </label>
-                                                    <div className="">
-                                                        <input                                                          type="text"
-                                                            value={CNPJ}
-                                                            disabled={!edit}
-                                                        />
-                                                    </div>
-                                                </div>
-
-                                                <div className="field">
-                                                    <label htmlFor="Telefone" className="label has-text-black">Telefone: </label>
-                                                    <div className="">
-                                                        <input                                                          type="text"
-                                                            value={telefone}
-                                                            disabled={!edit}
-                                                            />
-                                                    </div>
-                                                </div>
-
-                                                <div className="field">
-                                                    <label htmlFor="Email" className="label has-text-black">Email: </label>
-                                                    <div className="">
-                                                        <input                                                          type="text"
-                                                            value={email}
-                                                            disabled={!edit}
-                                                            />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className='column is-half'>
-                                                <h5 className="has-text-black is-size-4" style={{ width: '200%', textAlign: 'left', marginBottom: '30px' }} >Localização Matriz</h5>
-                                                <div className="field">
-                                                    <label htmlFor="cep" className="label has-text-black">CEP: </label>
-                                                    <div className="">
-                                                        <input                                                          type="text"
-                                                            value={""}
-                                                            disabled={!edit}
-                                                            />
-                                                    </div>
-                                                </div>
-                                                <div className="field">
-                                                    <label htmlFor="nome" className="label has-text-black">Cidade: </label>
-                                                    <div className="">
-                                                        <input                                                          type="text"
-                                                            value={""}
-                                                            disabled={!edit}
-                                                        />
-                                                    </div>
-                                                </div>
-                                                <div className="field">
-                                                    <label htmlFor="Rua" className="label has-text-black">Rua: </label>
-                                                    <div className="">
-                                                        <input                                                          type="text"
-                                                            value={""}
-                                                            disabled={!edit}
-                                                        />
-                                                    </div>
-                                                </div>
-                                                <div className="field">
-                                                    <label htmlFor="numero" className="label has-text-black">Número: </label>
-                                                    <div className="">
-                                                        <input                                                          type="text"
-                                                            value={""}
-                                                            disabled={!edit}
-                                                        />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="field is-grouped is-grouped-centered">
-                    <div className="control">
-                        {edit && <button type="submit" onClick={e => handleAtualizarDados(e)} className="button is-primary">Atualizar dados</button>}
-                        {edit === false && <button type="submit" onClick={handleEdit} className="button is-primary">Editar dados</button>}
+            <h1 className="mb-5 has-text-black is-size-4 " >Dados das Filiais </h1>
+                  
+                <div class="columns filtro mx-5" style={{ borderTopLeftRadius: '10px', borderTopRightRadius: '10px' }}>
+                    <div class="column is-one-fifth" style={{ display: 'flex', alignItems: 'center' }}>
+                        <img src={Filtro} class="mx-1" alt='filter'/>
+                        <label className='filtros mx-1 has-text-white has-text-weight-medium mr-3'>ID</label>
+                        <input class="input is-small is-flex-grow-1 is-rounded" type="text" placeholder='Digite um ID:' value={filtroId} onChange={e => setFiltroId(e.target.value)} />
                     </div>
-                    <div className="control">
-                        {edit && <button onClick={e => handleCancelarEditar(e)} className="button">Cancelar</button>}
+                    <div class="column is-two-fifths is-flex is-align-items-center">
+                        <label className='filtros mx-1 has-text-white has-text-weight-medium mr-3' >Titulo</label>
+                        <input class="input is-small is-flex-grow-3 is-rounded" type="text" placeholder='Digite um titulo:' value={filtroTitulo} onChange={e => setFiltroTitulo(e.target.value)} />
+                    </div>
+                    <div class="column is-one-third is-flex is-align-items-center">
+                        <label className='filtros mx-1 has-text-white has-text-weight-medium mr-3'>Status</label>
+                        <input class="input is-small is-flex-grow-2 is-rounded" type="text" placeholder='Digite um Status:' value={filtroEndereco} onChange={e => setFiltroEndereco(e.target.value)} />
                     </div>
                 </div>
-                            </details>
 
-                            
+                <div class="columns indice mx-5 is-flex is-justify-content-center" >
+                        <div class="column is-one-third m-0 is-flex is-justify-content-center is-align-items-center">
+                            <label className='has-text-white is-size-4 has-text-weight-medium'>Número</label>
+                        </div>
+                        <div class="column is-one-third ml-2 mr-2 is-flex is-justify-content-center is-align-items-center">
+                            <label className='has-text-white is-size-4 has-text-weight-medium'>Título</label>
+                        </div>
+                        <div class="column is-one-third mr-2 is-flex is-justify-content-center is-align-items-center">
+                            <label className='has-text-white is-size-4 has-text-weight-medium'>Status</label>
                         </div>
                     </div>
-                </div>
 
-                <div className='is-flex is-flex-direction-column' style={{ marginTop: '30px', width:'50%' }}>
-                    <h1 className="has-text-black is-size-4" style={{ textAlign: 'center', marginBottom: '30px' }} >Cadastro de Filial</h1>
-                    <div class="columns m-3">
-                        <div class="card" style={{width:'200%'}}>
-                            <header class="card-header">
-                                <p class="card-header-title">Cadastrar Filial</p>
-                                <button class="card-header-icon" aria-label="more options">
-                                    <span class="icon">
-                                        <i class="fas fa-angle-down" aria-hidden="true"></i>
-                                    </span>
-                                </button>
-                            </header>
-                            <details>
-                                <summary>Clique aqui</summary>
-                                <div class="card-content">
-                                    <div class="content">
-                                        <div class="columns m-3">
-                                            <div class="column is-half">
-                                                <div className="field" >
-                                                    <label htmlFor="email" className="label has-text-black">Nome da Filial: </label>
-                                                    <div className="">
-                                                        <input />
-                                                    </div>
-                                                </div>
-                                                <div className="field">
-                                                    <label htmlFor="CNPJ" className="label has-text-black">CNPJ: </label>
-                                                    <div className="">
-                                                        <input />
-                                                    </div>
-                                                </div>
-
-                                                <div className="field">
-                                                    <label htmlFor="Telefone" className="label has-text-black">Telefone: </label>
-                                                    <div className="">
-                                                        <input />
-                                                    </div>
-                                                </div>
-
-                                                <div className="field">
-                                                    <label htmlFor="Email" className="label has-text-black">Email: </label>
-                                                    <div className="">
-                                                        <input />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className='column is-half'>
-                                                <h5 className="has-text-black is-size-4" style={{ width: '200%', textAlign: 'left', marginBottom: '30px' }} >Localização Matriz</h5>
-                                                <div className="field">
-                                                    <label htmlFor="cep" className="label has-text-black">CEP: </label>
-                                                    <div className="">
-                                                        <input />
-                                                    </div>
-                                                </div>
-                                                <div className="field">
-                                                    <label htmlFor="nome" className="label has-text-black">Cidade: </label>
-                                                    <div className="">
-                                                        <input />
-                                                    </div>
-                                                </div>
-                                                <div className="field">
-                                                    <label htmlFor="Rua" className="label has-text-black">Rua: </label>
-                                                    <div className="">
-                                                        <input />
-                                                    </div>
-                                                </div>
-                                                <div className="field">
-                                                    <label htmlFor="numero" className="label has-text-black">Número: </label>
-                                                    <div className="">
-                                                        <input />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                    <div class='p-0'>
+                        {assets.length === 0 && (
+                            <div className='asset mx-5 is-flex is-justify-content-center'>
+                                <div className='SemHover column is-one-third mr-2 dado-ativo is-flex is-justify-content-center is-align-items-center has-text-weight-medium'>
+                                    <p className='has-text-black'>Nenhum Ativo Cadastrado</p>
                                 </div>
-                                    <div className='is-flex is-align-items-center is-justify-content-center'>
-                                        <button className="button is-primary" style={{ margin: '2%' }}onClick={() =>('')}>Salvar</button>
-                                        <button className="button is-danger" style={{ margin: '2%' }} onClick={() => ('')}>Cancelar</button>
-                                        <button className="button editar" style={{ margin: '2%' }} onClick={() => setTela('Home')}>voltar</button>
-
-                                    </div>
-                            </details>
-
-                            
-                        </div>
+                            </div>
+                        )}
                     </div>
-                </div>
-            </form>
 
+                {dadosFiltrados.map((asset) => (
+                            <div key={asset.ati_id} onClick={() => handleClick(asset.fil_id)} className='asset' class='asset is-flex is-justify-content-center'>
+                                <div class='SemHover column is-one-third mr-2 dado-ativo is-flex is-justify-content-center is-align-items-center has-text-weight-medium'>
+                                    <p className='has-text-black'>{asset.fil_id}</p>
+                                </div>
+                                <div class='SemHover column is-one-third mr-2 dado-ativo is-flex is-justify-content-center is-align-items-center has-text-weight-medium'>
+                                    <p className='has-text-black'> {asset.fil_nome}</p>
+                                </div>
+                                <div class='SemHover column is-one-third mr-2 dado-ativo is-flex is-justify-content-center is-align-items-center has-text-weight-medium'>
+                                    <p className='has-text-black'> {asset.fil_endereco}</p>
+                                </div>
+                            </div>
+                        ))}
         </body >
     );
+
+
 }
 export default EditarFilial;
