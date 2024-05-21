@@ -239,7 +239,7 @@ function EditarEmpresa({ setTela }) {
         filialLocalizacoes.forEach(async localizacao => {
             let DadosLocalizacao = {
                 "loc_titulo": localizacao,
-                "loc_filial": fil_id
+                "loc_filial_id": fil_id
             }
             response = await axios.post("http://localhost:8000/localizacoes", DadosLocalizacao);
         })
