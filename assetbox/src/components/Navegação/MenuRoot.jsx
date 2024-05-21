@@ -79,10 +79,10 @@ function MenuRoot(props) {
             <div className="navbar-item has-dropdown is-active">
               <p className="navbar-item" onClick={handleSettingsClick} ><img src={SettingsIcon} alt="configurações" /></p>
               {showLogout && (
-                <div className='navbar-dropdown is-right'>
+                <div className='dropdown navbar-dropdown is-right mr-1 px-5 '>
                   <button className='navbar-item' onClick={e => props.seletorView("EditarEmpresa", e)}>Empresa <img className='is-flex ml-1'src={Edit}/></button>
                   <button className='navbar-item' onClick={e => props.seletorView("Filial", e)}>Filiais</button>
-                  <button className='navbar-item is-flex' onClick={e => handleLogout(e)}>Sair<img className='is-flex ml-1'src={Exit}/></button>
+                  <button className='navbar-item is-flex dropdown-item' onClick={e => handleLogout(e)}>Sair<img className='is-flex ml-1'src={Exit}/></button>
                 </div>
               )}
             </div>

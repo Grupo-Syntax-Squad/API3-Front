@@ -264,7 +264,7 @@ function EditarEmpresa({ setTela }) {
         <div>
             <div className="m-2 columns">
                 <form onSubmit={handleSubmit} className="column ">
-                    <h1 className="has-text-black is-size-4">Painel da Empresa</h1>
+                    <h3 className="has-text-black has-text-centered has-text-weight-medium is-size-4 mb-5">Painel da Empresa</h3>
                     <div className="column m-3">
                         <div className="column p-5" style={{ borderRadius: '50px', backgroundColor: "rgb(230, 230, 230)" }}>
                             <div className="field">
@@ -350,13 +350,13 @@ function EditarEmpresa({ setTela }) {
                 </form>
                 {/* cadastro da filial */}
                 <form onSubmit={handleSubmitFilial} className="column">
-                    <h3 className="has-text-black is-size-5 mb-5" style={{ textAlign: 'center' }}>Filial</h3>
-                    <div className=" column m-3">
-                        <div className="column p-5" style={{ borderRadius: '50px', backgroundColor: "rgb(230, 230, 230)" }}>
-                            <img src={filial} class='image is-96x96 container' alt="AssetBox Logo" />
+                    <h3 className="has-text-black is-size-4 mb-5 has-text-weight-medium" style={{ textAlign: 'center' }}>Filial</h3>
+                    <div className=" column m-3 ">
+                        <div className="column p-6" style={{ borderRadius: '50px', backgroundColor: "rgb(230, 230, 230)" }}>
+                            <img src={filial} class='image is-64x64  container' alt="AssetBox Logo" />
                             <div className="field">
-                                <div className="control pr-3">
-                                    <label htmlFor="local is-flex" className="label has-text-black">Nome da Filial:</label>
+                                <div className="control">
+                                    <label htmlFor="local" className="label has-text-black">Nome da Filial:</label>
                                     <input value={filialNome} onChange={(event) => setNomeFilial(event.target.value)} placeholder="Digite o nome da filial" className="input" />
                                 </div>
                                 <div className="control">
