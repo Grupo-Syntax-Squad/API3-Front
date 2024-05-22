@@ -8,6 +8,10 @@
 
   @media (prefers-color-scheme: dark){
     background-color: #222;
+
+    label{
+        color: #fff;
+    }
 }
 }
 

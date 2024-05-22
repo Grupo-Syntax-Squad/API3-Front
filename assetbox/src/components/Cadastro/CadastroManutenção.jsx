@@ -161,11 +161,11 @@ useEffect(() => {
           <h2 class="titulo-cadastro p-2">Cadastro de Manutenção</h2>
         </div>
         <div class="columns m-3">
-          <div class="column is-half">
+          <div class="column is-half" style={{width: '80%'}}>
             <form onSubmit={handleSubmit}>
               <div className='top-one'>
                 <div class="field">
-                  <label class="label has-text-black has-text-weight-normal">Status <span className='has-text-danger'>*</span></label>
+                  <label class="label has-text-weight-normal">Status <span className='has-text-danger'>*</span></label>
                   <div class="select is-small">
                     <select class="is-hovered" onChange={e => setManStatus(e.target.value)}>
                       <option value="0" selected>Aguardando Manutenção</option>
@@ -177,7 +177,7 @@ useEffect(() => {
                   </div>
                 </div>
                 <div className="field" >
-                  <label className="form-label has-text-black">Data da manutenção:<span className='has-text-danger'>*</span></label>
+                  <label className="form-label ">Data da manutenção:<span className='has-text-danger'>*</span></label>
                   <input
                     class="input is-small mt-2"
                     type="date"
@@ -187,7 +187,7 @@ useEffect(() => {
                   />
                 </div>
                 <div class="field">
-                  <label class="label has-text-black has-text-weight-normal">Horario da Manutenção <span className='has-text-danger'>*</span></label>
+                  <label class="label has-text-weight-normal">Horario da Manutenção <span className='has-text-danger'>*</span></label>
                   <input
                     class="input is-small"
                     type="time"
@@ -198,7 +198,7 @@ useEffect(() => {
                   />
                 </div>
                 <div class="field">
-                  <label class="label has-text-black has-text-weight-normal">Atividade<span className='has-text-danger'>*</span></label>
+                  <label class="label has-text-weight-normal">Atividade<span className='has-text-danger'>*</span></label>
                   <input
                     class="input is-small"
                     type="text"
@@ -209,7 +209,7 @@ useEffect(() => {
                   />
                 </div>
                 <div class="field">
-                  <label class="label has-text-black has-text-weight-normal">Ativo <span className='has-text-danger'>*</span></label>
+                  <label class="label has-text-weight-normal">Ativo <span className='has-text-danger'>*</span></label>
                   <div class="select is-small">
                     <select class="is-hovered" onChange={e => handlerAtivo(e)}>
                       <option value={null}>Selecione um ativo</option>
@@ -220,7 +220,7 @@ useEffect(() => {
                   </div>
                 </div>
                 <div className="field" >
-                  <label className="label has-text-black has-text-weight-normal">Responsável<span className='has-text-danger'>*</span></label>
+                  <label className="label has-text-weight-normal">Responsável<span className='has-text-danger'>*</span></label>
                   <input
                     class="input is-small"
                     type="text"
@@ -231,7 +231,7 @@ useEffect(() => {
                   />
                 </div>
                 <div class="field">
-                  <label class="label has-text-black has-text-weight-normal">Localização</label>
+                  <label class="label has-text-weight-normal">Localização</label>
                   <input
                     class="input is-small"
                     type="text"
@@ -242,7 +242,7 @@ useEffect(() => {
                   />
                 </div>
                 <div className="field" >
-                  <label className="label has-text-black has-text-weight-normal">Observações</label>
+                  <label className="label has-text-weight-normal">Observações</label>
                   <input
                     class="input is-small"
                     type="text"
@@ -264,7 +264,7 @@ useEffect(() => {
               <form onSubmit={handleSubmit}>
                 <div>
                   <div className="field" >
-                    <label className="form-label has-text-black">CEP:<span className='has-text-danger'>*</span></label>
+                    <label className="form-label">CEP:<span className='has-text-danger'>*</span></label>
                     <input
                       class="input is-small"
                       type="text"
@@ -275,7 +275,7 @@ useEffect(() => {
                     />
                   </div>
                   <div className="field" >
-                    <label className="form-label has-text-black">Número:<span className='has-text-danger'>*</span></label>
+                    <label className="form-label">Número:<span className='has-text-danger'>*</span></label>
                     <input
                       class="input is-small"
                       type="text"
@@ -286,7 +286,7 @@ useEffect(() => {
                     />
                   </div>
                   <div className="field" >
-                    <label className="form-label has-text-black">UF:<span className='has-text-danger'>*</span></label>
+                    <label className="form-label">UF:<span className='has-text-danger'>*</span></label>
                     <input
                       class="input is-small"
                       type="text"
@@ -302,7 +302,7 @@ useEffect(() => {
             <div class="column is-half" style={{ width: '80%' }}>
               <form onSubmit={handleSubmit}>
                 <div className="field">
-                  <label className="form-label has-text-black">Cidade:<span className='has-text-danger'>*</span></label>
+                  <label className="form-label ">Cidade:<span className='has-text-danger'>*</span></label>
                   <input
                     class="input is-small"
                     type="text"
@@ -313,7 +313,7 @@ useEffect(() => {
                   />
                 </div>
                 <div className="field" >
-                  <label className="form-label has-text-black">Rua:<span className='has-text-danger'>*</span></label>
+                  <label className="form-label">Rua:<span className='has-text-danger'>*</span></label>
                   <input
                     class="input is-small"
                     type="text"
@@ -324,7 +324,7 @@ useEffect(() => {
                   />
                 </div>
                 <div className="field" >
-                  <label className="form-label has-text-black">Bairro:<span className='has-text-danger'>*</span></label>
+                  <label className="form-label">Bairro:<span className='has-text-danger'>*</span></label>
                   <input
                     class="input is-small"
                     type="text"
@@ -335,7 +335,7 @@ useEffect(() => {
                   />
                 </div>
                 <div className="field" >
-                  <label className="form-label has-text-black" >Complemento:</label>
+                  <label className="form-label" >Complemento:</label>
                   <input
                     class="input is-small"
                     type="text"

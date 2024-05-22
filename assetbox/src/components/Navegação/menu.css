@@ -6,12 +6,23 @@
   --azul: #459EB5;
 
   @media(prefers-color-scheme: dark){
-    --verde: #3b889b;
+    --verde: #3b4b9b;
     --verdeEscuro: #1a2351;
     --branco: #000;
     --vermelho: #903636;
     --azul: #459EB5;
+
+    .img{
+      filter: invert(100%);
+    }
   }
+}
+
+.img{
+  margin-inline: 10px;
+  flex:auto;
+  margin-top: auto;
+  margin-bottom: auto;
 }
 
 .custom-background {
@@ -39,7 +50,7 @@ a.nav-item {
 }
 
 .navbar-menu {
-  background-color: var(--azul) !important;
+  background-color: var(--verde);
 }
 
 @media screen and (max-width: 1024px) {

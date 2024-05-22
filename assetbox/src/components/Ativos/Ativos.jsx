@@ -56,8 +56,8 @@ const Ativos = ({ setTela }) => {
     return (
         <body>
             <div class='page-full' style={{ backgroundColor: 'transparent' }}>
-                <button class=" shadow-button button button-effect is-primary m-5 ml-6 is-rounded is-size-4" style={{ backgroundColor: '#367E90', color: '#fff' }} onClick={() => setTela('CadastroAtivos')}>Cadastrar Ativo</button>
-                <button class=" shadow-button button button-effect is-primary m-5 ml-6 is-rounded is-size-4" style={{ backgroundColor: '#367E90', color: '#fff' }} onClick={abrirModal}>Relatório</button>
+                <button class=" button m-5 is-rounded is-size-4"  onClick={() => setTela('CadastroAtivos')}>Cadastrar Ativo</button>
+                <button class=" button m-5 ml-6 is-rounded is-size-4"  onClick={abrirModal}>Relatório</button>
 
                 {/* Modal */}
                 <div class={`modal ${modalAberto ? 'is-active' : ''}`}>
@@ -82,7 +82,7 @@ const Ativos = ({ setTela }) => {
                             </section>
                             <footer class="modal-card-foot">
                                 <div class="buttons">
-                                    <button class="shadow-button button button-effect is-primary is-rounded" style={{ backgroundColor: '#367E90', color: '#fff' }} onClick={handleRelatorio} >Download</button>
+                                    <button class="shadow-button button button-effect is-primary m-5 ml-6 is-rounded is-size-5" style={{ backgroundColor: '#367E90', color: '#fff' }} onClick={handleRelatorio} >Selecionar</button>
                                 </div>
                             </footer>
                         </div>

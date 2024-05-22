@@ -387,7 +387,7 @@ function VisualizarManutencao({ setTela }) {
               {!edit &&
                 <>
                   <p class="control">
-                    <button class="button is-danger" type="submit" onClick={exibirPopUpDelecao}>
+                    <button style={{backgroundColor: 'red'}} class="button" type="submit" onClick={exibirPopUpDelecao}>
                       Deletar
                     </button>
                   </p>
@@ -397,7 +397,7 @@ function VisualizarManutencao({ setTela }) {
                     </button>
                   </p>
                   <p class="control">
-                    <button class="button is-light" onClick={() => setTela('Ativos')}>
+                    <button style={{backgroundColor: "gray"}} class="button is-light" onClick={() => setTela('Ativos')}>
                       Voltar
                     </button>
                   </p>

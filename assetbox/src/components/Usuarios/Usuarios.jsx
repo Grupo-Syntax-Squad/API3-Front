@@ -48,9 +48,9 @@ const Usuarios = ({ setTela }) => {
     return (
         <body>
             <div class='page-full' style={{ backgroundColor: 'transparent', borderTopLeftRadius: '10px', borderTopRightRadius: '10px' }}>
-            <button class="button button-effect is-primary m-5 ml-6 is-rounded is-size-4 shadow-button" style={{ backgroundColor: '#367E90', color: '#fff' }} onClick={() => setTela('CadastroDestinatarios')}>Cadastrar Destinatário</button>
+            <button class="button button-effect is-primary m-5 ml-6 is-rounded is-size-4 shadow-button"  onClick={() => setTela('CadastroDestinatarios')}>Cadastrar Destinatário</button>
                 {isRoot && (
-                    <button class="button button-effect is-primary m-5 ml-6 is-rounded is-size-4 shadow-button" style={{ backgroundColor: '#367E90', color: '#fff' }} onClick={() => setTela('CadastroAdministrador')}> Cadastrar Administrador</button>
+                    <button class="button button-effect is-primary m-5 ml-6 is-rounded is-size-4 shadow-button"  onClick={() => setTela('CadastroAdministrador')}> Cadastrar Administrador</button>
                 )}
                 {!isRoot &&(
                     ""

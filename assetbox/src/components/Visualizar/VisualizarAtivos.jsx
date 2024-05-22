@@ -386,7 +386,7 @@ function VisualizarAtivos({ setTela }) {
               {!edit &&
                 <>
                   <p class="control">
-                    <button class="button is-danger" type="submit" onClick={exibirPopUpDelecao}>
+                    <button style={{backgroundColor: 'red'}} class="button" type="submit" onClick={exibirPopUpDelecao}>
                       Desativar Ativo
                     </button>
 
@@ -397,7 +397,7 @@ function VisualizarAtivos({ setTela }) {
                     </button>
                   </p>
                   <p class="control">
-                    <button class="button is-light" onClick={() => setTela('Ativos')}>
+                    <button style={{backgroundColor: 'gray'}}class="button" onClick={() => setTela('Ativos')}>
                       Voltar
                     </button>
                   </p>
@@ -411,7 +411,7 @@ function VisualizarAtivos({ setTela }) {
                     </button>
                   </p>
                   <p class="control">
-                    <button class="button is-danger" type="submit" onClick={handleEdit}>
+                    <button style= {{backgroundColor: 'red'}}class="button" type="submit" onClick={handleEdit}>
                       Cancelar
                     </button>
                   </p>

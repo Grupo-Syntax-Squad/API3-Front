@@ -288,7 +288,7 @@ function CadastroDestinatarios({ setTela }) {
               </button>
             </p>
             <p className="control">
-              <button className="button is-light" onClick={() => setTela('Usuarios')}>
+              <button style={{backgroundColor: 'red'}}className="button " onClick={() => setTela('Usuarios')}>
                 Cancelar
               </button>
             </p>

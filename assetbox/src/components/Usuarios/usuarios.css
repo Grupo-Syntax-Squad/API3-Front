@@ -15,8 +15,13 @@
       --filtroazul: #286776;
       --dadoativo: #000;
       --fundobranco: #222;
+      button { 
+         background-Color: #2a3f9c;
+         color: #fff; }
    }
 }
+
+
 .page-full{
     align-items: stretch;
     justify-content: space-around;

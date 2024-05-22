@@ -51,15 +51,15 @@ function MenuRoot(props) {
         <div className={`navbar-menu ${showMenu ? 'is-active' : ''}`}>
           <div className="navbar-menu is-flex is-justify-content-space-evenly" id="navMenu">
             <p className="nav-item is-flex px-4 is-size-5 has-text-weight-bold my-0 is-clickable" href='' onClick={(e) => props.seletorView('Ativos', e)}>
-              <img src={AssetsIcon} class='mr-2' alt="Ativos" />
+              <img src={AssetsIcon} class='img' alt="Ativos" />
               <p class='navbar-item has-text-white'> Ativos </p>
             </p>
             <p className="navbar-item is-flex px-4 is-size-5 has-text-weight-bold my-0 " href=' ' onClick={(e) => props.seletorView('Usuarios', e)}>
-              <img src={UserIcon} class='mr-3' alt="Destinatários" />
+              <img src={UserIcon} class='img' alt="Destinatários" />
               <p class='navbar-item has-text-white'>Usuários</p>
             </p>
             <p className="navbar-item is-flex px-4 is-size-5 has-text-weight-bold my-0 mx-1" href=' ' onClick={(e) => props.seletorView('Manutenções', e)}>
-              <img src={MainteinIcon} class='mr-3' alt="Manutenções" />
+              <img class='img' src={MainteinIcon} alt="Manutenções" />
               <p class='navbar-item has-text-white'>Manutenção</p>
             </p>
             {/* <a className="navbar-item pr-6 pl-6 is-size-5 has-text-weight-bold my-0 mx-1" >
@@ -70,17 +70,17 @@ function MenuRoot(props) {
           </div>
           <div className="navbar-end">
             <div className="navbar-item has-dropdown is-active">
-              <p className="navbar-item" ><img src={Notify} alt="configurações" /></p>
+              <p class="img" ><img src={Notify} alt="configurações" /></p>
             </div>
           </div>
           <div className="navbar-end">
             <div className="navbar-item has-dropdown is-active">
-              <p className="navbar-item" onClick={handleSettingsClick} ><img src={SettingsIcon} alt="configurações" /></p>
+              <p class="img" style={{backgroundColor: 'transparent'}} onClick={handleSettingsClick} ><img src={SettingsIcon} alt="configurações" /></p>
               {showLogout && (
                 <div className='dropdown navbar-dropdown is-right mr-1 px-5 '>
-                  <button className='navbar-item' onClick={e => props.seletorView("EditarEmpresa", e)}>Empresa <img className='is-flex ml-1'src={Edit}/></button>
+                  <button className='navbar-item' onClick={e => props.seletorView("EditarEmpresa", e)}>Empresa <img class='img'src={Edit}/></button>
                   <button className='navbar-item' onClick={e => props.seletorView("Filial", e)}>Filiais</button>
-                  <button className='navbar-item is-flex dropdown-item' onClick={e => handleLogout(e)}>Sair<img className='is-flex ml-1'src={Exit}/></button>
+                  <button className='navbar-item is-flex dropdown-item' onClick={e => handleLogout(e)}>Sair<img class='img'src={Exit}/></button>
                 </div>
               )}
               

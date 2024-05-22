@@ -163,8 +163,8 @@ function VisualizarAdministradores({ setTela }) {
           {!edit &&
             <>
               <p class="control">
-                <button class="button is-danger" type="submit" formMethod='POST' onClick={exibirPopUpDelecao}>
-                  Deletar
+                <button style={{backgroundColor: 'red'}}class="button is-danger" type="submit" formMethod='POST' onClick={exibirPopUpDelecao}>
+                  Deletar administrador
                 </button>
               </p>
               <p>
@@ -173,7 +173,7 @@ function VisualizarAdministradores({ setTela }) {
                 </button>
               </p>
               <p class="control">
-                <button class="button is-light" onClick={() => setTela('Destinatarios')}>
+                <button style={{backgroundColor: 'gray'}}class="button is-light" onClick={() => setTela('Usuarios')}>
                   Voltar
                 </button>
               </p>

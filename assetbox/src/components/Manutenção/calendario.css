@@ -42,10 +42,11 @@
     --cinzaclaro: #D9D9D9;
 
     @media (prefers-color-scheme: dark){
-        --fundoazul: #037594;
+        --fundoazul: #032594;
         --cinzaclaro: rgb(58, 58, 58);
         --branco: #000;
         --cinza: #222;
+
     }
 
 }

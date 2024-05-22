@@ -264,11 +264,11 @@ function EditarEmpresa({ setTela }) {
         <div>
             <div className="m-2 columns ">
                 <form onSubmit={handleSubmit} className="column ">
-                    <h3 className="has-text-black has-text-centered has-text-weight-medium is-size-4 mb-5">Painel da Empresa</h3>
+                    <h3 className=" has-text-centered has-text-weight-medium is-size-4 mb-5">Painel da Empresa</h3>
                     <div className="column m-3 ">
                         <div className="column p-5 shadow-button" style={{ borderRadius: '50px', backgroundColor: "rgb(230, 230, 230)" }}>
                             <div className="field">
-                                <img src={matriz} class='image is-96x96 container' alt="AssetBox Logo" />
+                                <img style={{color: 'red'}} src={matriz} class='image is-96x96 container' alt="AssetBox Logo" />
                                 <label htmlFor="razao-social" className="label has-text-black">Razão Social da Empresa:</label>
                                 <div className="control">
                                     <input value={matrizNome} onChange={(event) => setNomeMatriz(event.target.value)} placeholder="Digite a razão social da empresa" className="input" />
@@ -350,7 +350,7 @@ function EditarEmpresa({ setTela }) {
                 </form>
                 {/* cadastro da filial */}
                 <form onSubmit={handleSubmitFilial} className="column">
-                    <h3 className="has-text-black is-size-4 mb-5 has-text-weight-medium" style={{ textAlign: 'center' }}>Filial</h3>
+                    <h3 className=" is-size-4 mb-5 has-text-weight-medium" style={{ textAlign: 'center' }}>Filial</h3>
                     <div className=" column m-3 ">
                         <div className="column p-6 shadow-button" style={{ borderRadius: '50px', backgroundColor: "rgb(230, 230, 230)" }}>
                             <img src={filial} class='image is-64x64  container' alt="AssetBox Logo" />
@@ -424,7 +424,7 @@ function EditarEmpresa({ setTela }) {
             </div>
             <div className='columns container m-5'>
                 <button className="button is-primary mx-0 " onClick={() => setTela('Home')}>Finalizar Cadastro</button>
-                <button className="button is-danger mx-2 " onClick={() => setTela('Home')}>Cancelar</button>
+                <button style={{backgroundColor: 'red'}}className="button mx-2 " onClick={() => setTela('Home')}>Cancelar</button>
             </div>
             {mostrarLocalizacao && <CadastroLocalizacaoFilial handleLocalizacaoClick={showpopup} adicionarLocalizacao={adicionarLocalizacao} />}
         </div>

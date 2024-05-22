@@ -174,7 +174,7 @@ const Calendario = ({ setTela }) => {
                 <div className="month-list"></div>
             </div>
             <div className="listas column">
-                <label className="textarea tela-content">
+                <label style={{backgroundColor: '#fff'}}className="textarea tela-content">
                     {selectedDate && (
                         <div>
                             <h3 className='has-text-black'>Manutenções em {selectedDate}/{currMonth + 1}/{currYear}:</h3><br />
@@ -193,7 +193,7 @@ const Calendario = ({ setTela }) => {
                                     </ul>
                                 </div>
                             ))}
-                            <button class="button is-primary m-2 is-rounded is-size-6" style={{ backgroundColor: '#367E90', color: '#fff' }} onClick={() => setTela('CadastroManutenção')}>Cadastrar Manuntenção</button>
+                            <button class="button is-primary m-2 is-rounded is-size-6"  onClick={() => setTela('CadastroManutenção')}>Cadastrar Manuntenção</button>
                         </div>
                     )}
                 </label>

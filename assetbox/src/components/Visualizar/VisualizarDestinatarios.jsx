@@ -270,11 +270,11 @@ function VisualizarDestinatarios({ setTela }) {
               </p>
               <p class="control">
                 <button class="button is-light" onClick={handleEdit}>
-                  Atualizar status
+                  Atualizar dados
                 </button>
               </p>
               <p class="control">
-                <button class="button is-light" onClick={() => setTela('Ativos')}>
+                <button class="button is-light" onClick={() => setTela('Usuarios')}>
                   Voltar
                 </button>
               </p>
