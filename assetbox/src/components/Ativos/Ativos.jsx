@@ -82,7 +82,7 @@ const Ativos = ({ setTela }) => {
                             </section>
                             <footer class="modal-card-foot">
                                 <div class="buttons">
-                                    <button class="shadow-button button button-effect is-primary m-5 ml-6 is-rounded is-size-5" style={{ backgroundColor: '#367E90', color: '#fff' }} onClick={handleRelatorio} >Selecionar</button>
+                                    <button class="shadow-button button button-effect is-primary is-rounded" style={{ backgroundColor: '#367E90', color: '#fff' }} onClick={handleRelatorio} >Download</button>
                                 </div>
                             </footer>
                         </div>
