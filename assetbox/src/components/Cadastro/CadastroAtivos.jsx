@@ -221,7 +221,6 @@ function CadastroAtivos({ setTela }) {
                       <p>Nenhuma localização disponível</p>
                     )}
                   </div>
-                  <img src={adicionar} style={{marginLeft: '10px', width : '15%'}} title="Cadastrar nova localização" onClick={handleLocalizacaoClick}/>
                 </div>
                 <div class="field">
                   <label class="label ">Status: <span className='has-text-danger'>*</span></label>

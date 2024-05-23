@@ -27,15 +27,18 @@ function VisualizarAtivos({ setTela }) {
       console.log("Id:", id);
       try {
         const response = await axios.get(`http://localhost:8000/ativos/${Number(id)}`);
-        const responseLoc = await axios.get(`http://localhost:8000/filiais/${response.data.ati_filial_id.fil_id}`);
         const dados = response.data;
-        setDadosFilial(responseLoc.data);
         setDadosAtivo(dados);
         if (dados.ati_imagem_id != null) {
           setImageUrl(`http://localhost:8000/imagens/${dados.ati_imagem_id.img_id}`);
         }
         if (dados.ati_documento_id != null) {
           setDocument(`http://localhost:8000/documentos/${dados.ati_documento_id.documento_id}`)
+        }
+        if (response !== ''){
+          const responseFilial = await axios.get(`http://localhost:8000/filiais/${dados.ati_localizacao_id.loc_filial_id}`);
+          setDadosFilial(responseFilial.data);
+          console.log(responseFilial, response);
         }
         console.log(dados)
         setCarregando(false);
@@ -56,23 +59,25 @@ function VisualizarAtivos({ setTela }) {
       ati_condicoes_uso: dadosAtivo.ati_condicoes_uso,
       ati_data_cadastro: dadosAtivo.ati_data_cadastro,
       ati_data_expiracao: dadosAtivo.ati_data_expiracao,
-      ati_destinatario_id: {
-        des_id: 1,
-        cpf: '12345678913',
-        des_nome: 'Lucas',
-        email: 'lu@gmail.com',
-        telefone: '(12) 99229-1676'},
+      ati_destinatario_id: "",
+      // ati_destinatario_id: {
+      //   des_id: 1,
+      //   cpf: '12345678913',
+      //   des_nome: 'Lucas',
+      //   email: 'lu@gmail.com',
+      //   telefone: '(12) 99229-1676'},
       ati_documento_id: dadosAtivo.ati_documento_id,
-      ati_filial_id: {
-        fil_id: 1,
-        fil_nome: 'Filial 1',
-        fil_cnpj: '12345678912345',
-        fil_endereco: 'Rua 1, 123',
-        fil_telefone: '(12) 12345-6789'},
+      ati_filial_id : "",
+      // ati_filial_id: {
+      //   fil_id: 1,
+      //   fil_nome: 'Filial 1',
+      //   fil_cnpj: '12345678912345',
+      //   fil_endereco: 'Rua 1, 123',
+      //   fil_telefone: '(12) 12345-6789'},
       ati_id: dadosAtivo.ati_id,
       ati_imagem_id: dadosAtivo.ati_imagem_id,
-      ati_localizacao_id: {
-      },
+      // ati_localizacao_id: {
+      // },
       ati_manutencoes_feitas: dadosAtivo.ati_manutencoes_feitas,
       ati_marca: dadosAtivo.ati_marca,
       ati_modelo: dadosAtivo.ati_modelo,
@@ -87,7 +92,8 @@ function VisualizarAtivos({ setTela }) {
         tip_id: dadosAtivo.ati_tipo_id.tip_id,
         tip_titulo: dadosAtivo.ati_tipo_id.tip_titulo
       },
-      ati_ultima_manutencao: dadosAtivo.ati_ultima_manutencao,
+      ati_titulo: dadosAtivo.ati_titulo,
+      // ati_ultima_manutencao: dadosAtivo.ati_ultima_manutencao,
       ati_url: dadosAtivo.ati_url,
     }
       try {
