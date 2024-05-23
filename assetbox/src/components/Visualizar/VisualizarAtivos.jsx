@@ -4,6 +4,7 @@ import axios from 'axios';
 
 function VisualizarAtivos({ setTela }) {
   const [dadosAtivo, setDadosAtivo] = useState({})
+  const [dadosFilial, setDadosFilial] = useState({})
   const [imageUrl, setImageUrl] = useState(null);
   const [docUrl, setDocument] = useState(null)
   const [carregando, setCarregando] = useState(true);
@@ -17,17 +18,8 @@ function VisualizarAtivos({ setTela }) {
 
   const [edit, setEdit] = useState(false);
   const handleEdit = () => edit ? setEdit(false) : setEdit(true);
-  const handleAtualizarStatus = () => {
-    /* try {
-      dadosManutencao.man_status = status;
-      const response = axios.put(`http://localhost:8000/manutencoes/${Number(id)}`, dadosManutencao);
-      console.log(response.status, response.data);
-      handleEdit();
-    } catch (error) {
-      window.alert("Ocorreu um erro ao tentar atualizar o status da manutenção!");
-      console.log(error)
-    } */
-  }
+
+  
 
 
   useEffect(() => {
@@ -35,7 +27,9 @@ function VisualizarAtivos({ setTela }) {
       console.log("Id:", id);
       try {
         const response = await axios.get(`http://localhost:8000/ativos/${Number(id)}`);
+        const responseLoc = await axios.get(`http://localhost:8000/filiais/${response.data.ati_filial_id.fil_id}`);
         const dados = response.data;
+        setDadosFilial(responseLoc.data);
         setDadosAtivo(dados);
         if (dados.ati_imagem_id != null) {
           setImageUrl(`http://localhost:8000/imagens/${dados.ati_imagem_id.img_id}`);
@@ -52,6 +46,61 @@ function VisualizarAtivos({ setTela }) {
 
     fetchData();
   }, []);
+
+  const handleUpdate = async () => {
+    const putData = {
+      ati_ano_fabricacao: dadosAtivo.ati_ano_fabricacao,
+      ati_capacidade: dadosAtivo.ati_capacidade,
+      ati_chave_nf_e: dadosAtivo.ati_chave_nf_e,
+      ati_complemento: dadosAtivo.ati_complemento,
+      ati_condicoes_uso: dadosAtivo.ati_condicoes_uso,
+      ati_data_cadastro: dadosAtivo.ati_data_cadastro,
+      ati_data_expiracao: dadosAtivo.ati_data_expiracao,
+      ati_destinatario_id: {
+        des_id: 1,
+        cpf: '12345678913',
+        des_nome: 'Lucas',
+        email: 'lu@gmail.com',
+        telefone: '(12) 99229-1676'},
+      ati_documento_id: dadosAtivo.ati_documento_id,
+      ati_filial_id: {
+        fil_id: 1,
+        fil_nome: 'Filial 1',
+        fil_cnpj: '12345678912345',
+        fil_endereco: 'Rua 1, 123',
+        fil_telefone: '(12) 12345-6789'},
+      ati_id: dadosAtivo.ati_id,
+      ati_imagem_id: dadosAtivo.ati_imagem_id,
+      ati_localizacao_id: {
+      },
+      ati_manutencoes_feitas: dadosAtivo.ati_manutencoes_feitas,
+      ati_marca: dadosAtivo.ati_marca,
+      ati_modelo: dadosAtivo.ati_modelo,
+      ati_numero: dadosAtivo.ati_numero,
+      ati_numero_serie: dadosAtivo.ati_numero_serie,
+      ati_observacao: dadosAtivo.ati_observacao,
+      ati_preco_aquisicao: dadosAtivo.ati_preco_aquisicao,
+      ati_previsao_manutencao: dadosAtivo.ati_previsao_manutencao,
+      ati_status: dadosAtivo.ati_status,
+      ati_tamanho: dadosAtivo.ati_tamanho,
+      ati_tipo_id:{
+        tip_id: dadosAtivo.ati_tipo_id.tip_id,
+        tip_titulo: dadosAtivo.ati_tipo_id.tip_titulo
+      },
+      ati_ultima_manutencao: dadosAtivo.ati_ultima_manutencao,
+      ati_url: dadosAtivo.ati_url,
+    }
+      try {
+        const response = await axios.put(`http://localhost:8000/ativos/${id}`, putData);
+        console.log(putData);
+        console.log(response.status);
+        window.alert("Ativo atualizado com sucesso.");
+        handleEdit();
+      } catch (error) {
+        error.response.status == 400 ? window.alert(error.response.data) : window.alert("Erro ao atualizar o ativo.");
+        await setDadosAtivo();
+      }
+  }
 
   function exibirPopUpDelecao() {
     var popup = document.getElementById('popupdelecao');
@@ -406,7 +455,7 @@ function VisualizarAtivos({ setTela }) {
               {edit &&
                 <>
                   <p class="control">
-                    <button class="button is-light" onClick={handleAtualizarStatus}>
+                    <button class="button is-light" onClick={handleUpdate}>
                       Confirmar atualização
                     </button>
                   </p>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React,  {useState, useEffect}  from 'react';
 import AssetsIcon from '../../assets/img/Asset.svg'
 import LogoIcon from '../../assets/img/AssetBoxLogo.svg'
 // import DashboardIcon from '../../assets/img/Graph.svg'
@@ -9,16 +9,36 @@ import Notify from '../../assets/img/Notifications.svg'
 import Exit from '../../assets/img/Deslogar.svg'
 import Edit from '../../assets/img/Editar.svg'
 import './menu.css';
+import axios from 'axios';
 
 
 function MenuRoot(props) {
   const [showLogout, setShowLogout] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
+  const [empresa, setEmpresa] = useState('');
 
   const handleSettingsClick = () => {
     setShowLogout(prevShowLogout => !prevShowLogout);
   };
 
+  const Matriz = async()  => {
+    try{
+      const response = await axios.get('http://localhost:8000/matriz')
+      setEmpresa(response.data.mat_nome_fantasia)
+    }catch (error) {
+      console.error(`Erro ao buscar empresa`, error);
+    }
+  }
+
+  useEffect(() => {
+    Matriz();
+  }, []);
+
+  if (empresa === '') {
+    return (
+      'AssetBox'
+    )
+  }
  
 
   const handleLogout = (e) => {
@@ -45,7 +65,7 @@ function MenuRoot(props) {
         <div className='navbar-brand'>
           <img src={LogoIcon} class='pl-6 pr-0' alt="AssetBox" onClick={(e) => props.seletorView('Home', e)} />
           <span className="navbar-brand has-text-white navbar-item mr-2 is-size-3 p-0 has-text-weight-bold empresa is-clickable" 
-          href="" onClick={(e) => props.seletorView('Home', e)}>AssetBox</span>
+          href="" onClick={(e) => props.seletorView('Home', e)}>{empresa}</span>
         </div>
 
         <div className={`navbar-menu ${showMenu ? 'is-active' : ''}`}>

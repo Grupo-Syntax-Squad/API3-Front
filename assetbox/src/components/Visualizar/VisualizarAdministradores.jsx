@@ -36,6 +36,7 @@ function VisualizarAdministradores({ setTela }) {
     }
     try {
       const response = await axios.put(`http://localhost:8000/administradores/${id}`, putData);
+      console.log(putData);
       console.log(response.status);
       window.alert("Administrador atualizado com sucesso.");
       handleEdit();

@@ -68,7 +68,16 @@ function VisualizarDestinatarios({ setTela }) {
       email: email,
       telefone: telefone,
       cpf: cpf,
-      des_endereco_id: enderecoId
+      des_endereco_id: {
+        end_id: id,
+        end_rua: rua,
+        end_numero: numero,
+        end_complemento: complemento,
+        end_bairro: bairro,
+        end_cidade: cidade,
+        end_uf: uf,
+        end_cep: cep
+      }
     }
 
     const enderecoAtualizado = {
@@ -141,7 +150,7 @@ function VisualizarDestinatarios({ setTela }) {
             <input
               class="input is-small"
               type="text"
-              placeholder='Digite um Número:'
+              placeholder='Digite o Nome do destinatário:'
               value={nome}
               disabled={!edit}
               onChange={e => setNome(e.target.value)}
@@ -152,7 +161,7 @@ function VisualizarDestinatarios({ setTela }) {
             <input
               class="input is-small"
               type="text"
-              placeholder='Digite um Número:'
+              placeholder='Digite o Número ed telefone:'
               value={telefone}
               disabled={!edit}
               onChange={e => setTelefone(e.target.value)}
@@ -163,7 +172,7 @@ function VisualizarDestinatarios({ setTela }) {
             <input
               class="input is-small"
               type="text"
-              placeholder='Digite um Número:'
+              placeholder='Digite o endereço de E-mail:'
               value={email}
               disabled={!edit}
               onChange={e => setEmail(e.target.value)}
@@ -174,7 +183,7 @@ function VisualizarDestinatarios({ setTela }) {
             <input
               class="input is-small"
               type="text"
-              placeholder='Digite um Número:'
+              placeholder='Digite o Número de CPF:'
               value={cpf}
               disabled={!edit}
               onChange={e => setCpf(e.target.value)}
@@ -183,11 +192,11 @@ function VisualizarDestinatarios({ setTela }) {
           <h1 className='has-text-weight-light is-size-4'>Endereço</h1>
 
           <div class="field column">
-            <label class="form-label is-size-5">Rua</label>
+            <label class="form-label is-size-5">Logradouro</label>
             <input
               class="input is-small"
               type="text"
-              placeholder='Digite um Número:'
+              placeholder='Digite o nome da Rua:'
               value={rua}
               disabled={!edit}
               onChange={e => setRua(e.target.value)}
@@ -242,7 +251,7 @@ function VisualizarDestinatarios({ setTela }) {
             <input
               class="input is-small"
               type="text"
-              placeholder='Digite um Número:'
+              placeholder='Digite o Estado:'
               value={uf}
               disabled={!edit}
               onChange={e => setEstado(e.target.value)}
@@ -253,7 +262,7 @@ function VisualizarDestinatarios({ setTela }) {
             <input
               class="input is-small"
               type="text"
-              placeholder='Digite um Número:'
+              placeholder='Digite o Cep:'
               value={cep}
               disabled={!edit}
               onChange={e => setCep(e.target.value)}
