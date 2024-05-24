@@ -206,7 +206,7 @@ function EditarEmpresa({ setTela }) {
                     setCEPFilial(datafilial.cep);
                 }
             } catch (error) {
-                window.alert('CEP inesistente!', error);
+                window.alert('CEP inválido!', error);
             }
         }
         if (cepfilial.length > 8) {
@@ -368,7 +368,7 @@ function EditarEmpresa({ setTela }) {
                                 </div>
                             </div>
                             <div className="field">
-                                <button className="button is-info mt-3" onClick={() => SubmitLocalizacao([localizacao])}>Cadastrar Matriz</button>
+                                <button className="shadow-button button button-effect is-info mt-3" onClick={() => SubmitLocalizacao([localizacao])}>Cadastrar Matriz</button>
                             </div>
                         </div>
                     </div>
@@ -392,13 +392,13 @@ function EditarEmpresa({ setTela }) {
                             <div className="field">
                                 <label htmlFor="email" className="label has-text-black">Email:</label>
                                 <div className="control">
-                                    <input value={filialEmail} onChange={e => setEmailFilial(e.target.value)} placeholder="Digite o email da empresa" className="input" />
+                                    <input value={filialEmail} onChange={e => setEmailFilial(e.target.value)} placeholder="Digite o email da filial" className="input" />
                                 </div>
                             </div>
                             <div className="field">
                                 <div className="control pr-3">
                                     <label htmlFor="local is-flex" className="label has-text-black">Telefone Filial: </label>
-                                    <input value={filialTelefone} onChange={(event) => setTelefoneFilial(event.target.value)} placeholder="Digite o cep da filial" className="input" />
+                                    <input value={filialTelefone} onChange={(event) => setTelefoneFilial(event.target.value)} placeholder="Digite o telefone da filial" className="input" />
                                 </div>
                                 <div className="control">
                                     <label htmlFor="local is-flex" className="label has-text-black">CEP Filial: </label>
@@ -408,21 +408,21 @@ function EditarEmpresa({ setTela }) {
                             <div className="field">
                                 <div className="control pr-3">
                                     <label htmlFor="local" className="label has-text-black">Rua Filial:</label>
-                                    <input value={filialRua} onChange={(event) => setRuaFilial(event.target.value)} placeholder="Digite o nome do local" className="input" />
+                                    <input value={filialRua} onChange={(event) => setRuaFilial(event.target.value)} placeholder="Digite o rua da filial" className="input" />
                                 </div>
                                 <div className="control">
                                     <label htmlFor="local" className="label has-text-black">Numero Filial: </label>
-                                    <input value={filialNumero} onChange={(event) => setNumeroFilial(event.target.value)} placeholder="Digite o cep da filial" className="input" />
+                                    <input value={filialNumero} onChange={(event) => setNumeroFilial(event.target.value)} placeholder="Digite o número da filial" className="input" />
                                 </div>
                             </div>
                             <div className="field">
                                 <div className="control pr-3">
                                     <label htmlFor="local" className="label has-text-black">Cidade Filial:</label>
-                                    <input value={filialCidade} onChange={(event) => SubmitLocalizacao(event.target.value)} placeholder="Digite o nome do local" className="input" />
+                                    <input value={filialCidade} onChange={(event) => SubmitLocalizacao(event.target.value)} placeholder="Digite o cidade da filial" className="input" />
                                 </div>
                                 <div className="control">
                                     <label htmlFor="local" className="label has-text-black">Estado Filial:</label>
-                                    <input value={filialEstado} onChange={(event) => SubmitLocalizacao(event.target.value)} placeholder="Digite o nome do local" className="input" />
+                                    <input value={filialEstado} onChange={(event) => SubmitLocalizacao(event.target.value)} placeholder="Digite o estado da filial" className="input" />
                                 </div>
                             </div>
                             <div className="field">
@@ -439,16 +439,16 @@ function EditarEmpresa({ setTela }) {
                                     </div>
                                 </div>
                             </div>
-                            <button className="button is-info mt-5" onClick={e => handleSubmitFilial(e)}>Cadastrar Filial</button>
+                            <button className="shadow-button button button-effect is-info mt-5" onClick={e => handleSubmitFilial(e)}>Cadastrar Filial</button>
                         </div>
                     </div>
                 </form>
 
             </div>
-            <div className='columns container m-5'>
+            {/* <div className='columns container m-5'>
                 <button className="button is-primary mx-0 " onClick={() => setTela('Home')}>Finalizar Cadastro</button>
                 <button style={{ backgroundColor: 'red' }} className="button mx-2 " onClick={() => setTela('Home')}>Cancelar</button>
-            </div>
+            </div> */}
             {mostrarLocalizacaoFilial && <CadastroLocalizacaoFilial handleLocalizacaoClick={showPopUpFilial} adicionarLocalizacao={adicionarLocalizacaoFilial} />}
             {mostrarLocalizacaoMatriz && <CadastroLocalizacaoFilial handleLocalizacaoClick={showPopUpMatriz} adicionarLocalizacao={adicionarLocalizacaoMatriz} />}
         </div>

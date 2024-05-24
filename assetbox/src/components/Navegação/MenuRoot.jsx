@@ -76,7 +76,7 @@ function MenuRoot(props) {
           </div>
           <div className="navbar-end">
             <div className="navbar-item has-dropdown is-active">
-              <p class="img" ><img src={Notify} alt="configurações" /></p>
+              <p class="img" style={{backgroundColor: 'transparent'}} ><img src={Notify} alt="configurações" /></p>
             </div>
           </div>
           <div className="navbar-end">
