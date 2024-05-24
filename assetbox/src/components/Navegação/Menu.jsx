@@ -16,6 +16,8 @@ function Menu(props) {
   const [showLogout, setShowLogout] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
   const [empresa, setEmpresa] = useState('');
+  const [showNotify, setShowNotify] = useState(false);
+
 
   const handleSettingsClick = () => {
     setShowLogout(prevShowLogout => !prevShowLogout);
@@ -44,6 +46,10 @@ function Menu(props) {
     }, 3000);
   }
 
+    const handleNotifyClick = () => {
+    setShowNotify(prevShowNotify => !prevShowNotify);
+  };
+
   if (empresa === '') {
     return (
       'AssetBox'
@@ -60,9 +66,7 @@ function Menu(props) {
           href="" onClick={(e) => props.seletorView('Home', e)}>{empresa}</span>
         </div>
         
-        <div className={`navbar-burger burger ${showMenu ? 'is-active' : ''}`} 
-        aria-label="menu" aria-expanded={showMenu ? 'true' : 'false'} 
-        onClick={() => setShowMenu(!showMenu)}>
+        <div className={`navbar-burger custom-background burger ${showMenu ? 'is-active' : ''}`} aria-label="menu" aria-expanded={showMenu ? 'true' : 'false'} onClick={() => setShowMenu(!showMenu)}>
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
@@ -90,9 +94,17 @@ function Menu(props) {
 
           </div>
           {<div className="navbar-end">
+          <div className="navbar-end">
             <div className="navbar-item has-dropdown is-active">
-              <p className="navbar-item" ><img src={Notify} alt="configurações" /></p>
+              <p className="img" onClick={handleNotifyClick}><img src={Notify} alt="notificações" /></p>
+              {showNotify && (
+                <div className='dropdown navbar-dropdown is-right mr-1 px-5 '>
+                  <button className='navbar-item' onClick={e => props.seletorView("AtivoPendente", e)}>Ativos pendentes </button>
+                  <button className='navbar-item' onClick={e => props.seletorView("ManutencaoPendente", e)}>manutenções pendentes</button>
+                </div>
+              )}
             </div>
+          </div>
           </div>}
           <div className="navbar-end">
             <div className="navbar-item has-dropdown is-active">

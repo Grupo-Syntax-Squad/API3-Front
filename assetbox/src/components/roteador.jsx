@@ -16,6 +16,8 @@ import CadastroAdministrador from "./Cadastro/CadastroAdmin";
 import Usuarios from "./Usuarios/Usuarios";
 import Historico from "./Manutenção/Historico";
 import EditarManutencao from "./Editar/editarManutecao";
+import ManutencaoPendente from "./Notificacao/ManutencaoPendente";
+import AtivoPendente from "./Notificacao/AtivoPendente";
 import VisualizarAdministradores from "./Visualizar/VisualizarAdministradores";
 import MeusDados from "./Visualizar/MeusDados";
 import MenuRoot from "./Navegação/MenuRoot";
@@ -292,6 +294,8 @@ export default function Roteador() {
             } else return <p>É necessário realizar o login para continuar para a página desejada!</p>
         }
 
+        
+
         else if (tela === 'Manutenções') {
             if (verificacaoToken) {
                 if (root) {
@@ -374,6 +378,48 @@ export default function Roteador() {
                         <>
                             <Menu seletorView={selecionarView} botoes={botoes} />
                             <Historico setTela={setTela} />
+                        </>
+                    )
+                }
+            } else return <p>É necessário realizar o login para continuar para a página desejada!</p>
+        }
+
+        else if (tela === 'ManutencaoPendente') {
+            if (verificacaoToken) {
+                if (root) {
+                    return (
+                        <>
+                            <MenuRoot seletorView={selecionarView} botoes={botoes} />
+                            <ManutencaoPendente setTela={setTela} />
+                        </>
+                    )
+                }
+                else {
+                    return (
+                        <>
+                            <Menu seletorView={selecionarView} botoes={botoes} />
+                            <Home setTela={setTela} />
+                        </>
+                    )
+                }
+            } else return <p>É necessário realizar o login para continuar para a página desejada!</p>
+        }
+
+        else if (tela === 'AtivoPendente') {
+            if (verificacaoToken) {
+                if (root) {
+                    return (
+                        <>
+                            <MenuRoot seletorView={selecionarView} botoes={botoes} />
+                            <AtivoPendente setTela={setTela} />
+                        </>
+                    )
+                }
+                else {
+                    return (
+                        <>
+                            <Menu seletorView={selecionarView} botoes={botoes} />
+                            <Home setTela={setTela} />
                         </>
                     )
                 }

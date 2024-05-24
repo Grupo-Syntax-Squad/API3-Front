@@ -5,7 +5,6 @@
   --cinza: rgb(189, 189, 189);
   --h2azul: #459eb6;
   --vermelho: red;
-  background-color: rgb(52, 52, 52);
 
 
   @media(prefers-color-scheme: dark){
