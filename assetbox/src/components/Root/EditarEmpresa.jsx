@@ -20,6 +20,12 @@ function EditarEmpresa({ setTela }) {
     const [matrizBairro, setBairroMatriz] = useState("");
     const [matrizCidade, setCidadeMatriz] = useState("");
     const [matrizEstado, setEstadoMatriz] = useState("");
+
+    const [matrizLocalizacao, setLocalizacaoMatriz] = useState(false);
+    const [mostrarLocalizacaoMatriz, setMostrarLocalizacaoMatriz] = useState(false);
+    const [matrizLocalizacoes, setLocalizacoesMatriz] = useState([]);
+    const showPopUpMatriz = () => mostrarLocalizacaoMatriz ? setMostrarLocalizacaoMatriz(false) : setMostrarLocalizacaoMatriz(true);
+
     // Dados Filial
     const [filialNome, setNomeFilial] = useState("");
     const [filialCNPJ, setCNPJFilial] = useState("");
@@ -31,15 +37,20 @@ function EditarEmpresa({ setTela }) {
     const [filialEstado, setEstadoFilial] = useState("");
     const [filialTelefone, setTelefoneFilial] = useState("");
     const [filialEmail, setEmailFilial] = useState("");
+
     const [filialLocalizacao, setLocalizacaoFilial] = useState(false);
-    const [mostrarLocalizacao, setMostrarLocalizacao] = useState(false);
+    const [mostrarLocalizacaoFilial, setMostrarLocalizacaoFilial] = useState(false);
     const [filialLocalizacoes, setLocalizacoesFilial] = useState([]);
-    const showpopup = () => mostrarLocalizacao ? setMostrarLocalizacao(false) : setMostrarLocalizacao(true);
+    const showPopUpFilial = () => mostrarLocalizacaoFilial ? setMostrarLocalizacaoFilial(false) : setMostrarLocalizacaoFilial(true);
 
     const [fil_id, setFil_id] = useState(0);
 
-    const adicionarLocalizacao = (localizacao) => {
+    const adicionarLocalizacaoFilial = (localizacao) => {
         filialLocalizacoes.push(localizacao);
+    }
+
+    const adicionarLocalizacaoMatriz = (localizacao) => {
+        matrizLocalizacoes.push(localizacao);
     }
 
     const handleTelefoneMatriz = (value) => {
@@ -148,6 +159,12 @@ function EditarEmpresa({ setTela }) {
 
         response = axios.post("http://localhost:8000/matriz", DadosMatriz);
 
+        matrizLocalizacoes.forEach(async localizacao => {
+            const localizacaoData = {
+                "loc_titulo": localizacao
+            }
+            let response = await axios.post("http://localhost:8000/localizacoes", localizacaoData);
+        });
 
         setNomeMatriz('');
         setBairroMatriz('');
@@ -160,6 +177,7 @@ function EditarEmpresa({ setTela }) {
         setNumeroMatriz('');
         setCidadeMatriz('');
         setEstadoMatriz('');
+        setLocalizacoesMatriz([]);
     }
 
 
@@ -268,7 +286,7 @@ function EditarEmpresa({ setTela }) {
                     <div className="column m-3 ">
                         <div className="column p-5 shadow-button" style={{ borderRadius: '50px', backgroundColor: "rgb(230, 230, 230)" }}>
                             <div className="field">
-                                <img style={{color: 'red'}} src={matriz} class='image is-96x96 container' alt="AssetBox Logo" />
+                                <img style={{ color: 'red' }} src={matriz} class='image is-96x96 container' alt="AssetBox Logo" />
                                 <label htmlFor="razao-social" className="label has-text-black">Razão Social da Empresa:</label>
                                 <div className="control">
                                     <input value={matrizNome} onChange={(event) => setNomeMatriz(event.target.value)} placeholder="Digite a razão social da empresa" className="input" />
@@ -335,15 +353,22 @@ function EditarEmpresa({ setTela }) {
                                     </div>
                                 </div>
                             </div>
-                            <h3 className="has-text-black is-size-5 mb-5" style={{ textAlign: 'center' }}>Localizações Matriz</h3>
                             <div className="field">
-                                <label htmlFor="local" className="label has-text-black">Nome do Local:</label>
-                                <div className="control">
-                                    <input value={localizacao} onChange={(event) => SubmitLocalizacao(event.target.value)} placeholder="Digite o nome do local" className="input" />
+                                <div className="control pr-3">
+                                    <label htmlFor="local" className="label has-text-black is-flex">Localizações Matriz:
+                                        <img src={adicionar} className='ml-2 image is-24x24' onClick={(event) => showPopUpMatriz()} />
+                                    </label>
+                                    <div>
+                                        {matrizLocalizacoes.map(localizacao => {
+                                            return (
+                                                <p className='has-text-black'>{localizacao}</p>
+                                            );
+                                        })}
+                                    </div>
                                 </div>
                             </div>
                             <div className="field">
-                                <button className="button is-info mt-3" onClick={() => SubmitLocalizacao([localizacao])}>Cadastrar Localização</button>
+                                <button className="button is-info mt-3" onClick={() => SubmitLocalizacao([localizacao])}>Cadastrar Matriz</button>
                             </div>
                         </div>
                     </div>
@@ -403,7 +428,7 @@ function EditarEmpresa({ setTela }) {
                             <div className="field">
                                 <div className="control pr-3">
                                     <label htmlFor="local" className="label has-text-black is-flex">Localizações Filial:
-                                        <img src={adicionar} className='ml-2 image is-24x24' onClick={(event) => showpopup()} />
+                                        <img src={adicionar} className='ml-2 image is-24x24' onClick={(event) => showPopUpFilial()} />
                                     </label>
                                     <div>
                                         {filialLocalizacoes.map(localizacao => {
@@ -412,8 +437,6 @@ function EditarEmpresa({ setTela }) {
                                             );
                                         })}
                                     </div>
-                                </div>
-                                <div className="control">
                                 </div>
                             </div>
                             <button className="button is-info mt-5" onClick={e => handleSubmitFilial(e)}>Cadastrar Filial</button>
@@ -424,9 +447,10 @@ function EditarEmpresa({ setTela }) {
             </div>
             <div className='columns container m-5'>
                 <button className="button is-primary mx-0 " onClick={() => setTela('Home')}>Finalizar Cadastro</button>
-                <button style={{backgroundColor: 'red'}}className="button mx-2 " onClick={() => setTela('Home')}>Cancelar</button>
+                <button style={{ backgroundColor: 'red' }} className="button mx-2 " onClick={() => setTela('Home')}>Cancelar</button>
             </div>
-            {mostrarLocalizacao && <CadastroLocalizacaoFilial handleLocalizacaoClick={showpopup} adicionarLocalizacao={adicionarLocalizacao} />}
+            {mostrarLocalizacaoFilial && <CadastroLocalizacaoFilial handleLocalizacaoClick={showPopUpFilial} adicionarLocalizacao={adicionarLocalizacaoFilial} />}
+            {mostrarLocalizacaoMatriz && <CadastroLocalizacaoFilial handleLocalizacaoClick={showPopUpMatriz} adicionarLocalizacao={adicionarLocalizacaoMatriz} />}
         </div>
     );
 }
