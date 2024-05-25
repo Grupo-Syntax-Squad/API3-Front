@@ -34,8 +34,6 @@ function MenuRoot(props) {
     }
   };
 
-  console.log(empresa);
-
   useEffect(() => {
     Matriz();
   }, []);

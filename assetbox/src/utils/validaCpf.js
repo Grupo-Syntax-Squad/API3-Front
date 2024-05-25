@@ -1,6 +1,4 @@
 export default class Validador {
-    constructor() {}
-
     validarCPF(cpf) {
         // Remove caracteres não numéricos do CPF
         cpf = cpf.replace(/\D/g, '');
