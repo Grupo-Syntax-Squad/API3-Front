@@ -111,8 +111,8 @@ function Menu(props) {
               <p className="navbar-item" onClick={handleSettingsClick} ><img src={SettingsIcon} alt="configurações" /></p>
               {showLogout && (
                 <div className='navbar-dropdown is-right'>
-                  <button className='navbar-item' onClick={e => props.seletorView("MeusDados", e)}>Meus Dados <img className='is-flex ml-1'src={Edit}/></button>
-                  <button className='navbar-item is-flex' onClick={e => handleLogout(e)}>Sair<img className='is-flex ml-1'src={Exit}/></button>
+                  <button className='navbar-item' onClick={e => props.seletorView("MeusDados", e)}>Meus Dados <img className='is-flex ml-1'src={Edit} alt='Ícone de acesso ao Meus Dados'/></button>
+                  <button className='navbar-item is-flex' onClick={e => handleLogout(e)}>Sair<img className='is-flex ml-1'src={Exit} alt='Ícone de Logout'/></button>
                 </div>
               )}
             </div>

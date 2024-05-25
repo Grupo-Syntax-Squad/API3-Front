@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import './editarempresa.css';
 import CadastroLocalizacaoFilial from '../Cadastro/CadastroLocalizacaoFilial';
 import adicionar from './adicionar.svg';
@@ -21,7 +21,6 @@ function EditarEmpresa({ setTela }) {
     const [matrizCidade, setCidadeMatriz] = useState("");
     const [matrizEstado, setEstadoMatriz] = useState("");
 
-    const [matrizLocalizacao, setLocalizacaoMatriz] = useState(false);
     const [mostrarLocalizacaoMatriz, setMostrarLocalizacaoMatriz] = useState(false);
     const [matrizLocalizacoes, setLocalizacoesMatriz] = useState([]);
     const showPopUpMatriz = () => mostrarLocalizacaoMatriz ? setMostrarLocalizacaoMatriz(false) : setMostrarLocalizacaoMatriz(true);
@@ -38,12 +37,9 @@ function EditarEmpresa({ setTela }) {
     const [filialTelefone, setTelefoneFilial] = useState("");
     const [filialEmail, setEmailFilial] = useState("");
 
-    const [filialLocalizacao, setLocalizacaoFilial] = useState(false);
     const [mostrarLocalizacaoFilial, setMostrarLocalizacaoFilial] = useState(false);
     const [filialLocalizacoes, setLocalizacoesFilial] = useState([]);
     const showPopUpFilial = () => mostrarLocalizacaoFilial ? setMostrarLocalizacaoFilial(false) : setMostrarLocalizacaoFilial(true);
-
-    const [fil_id, setFil_id] = useState(0);
 
     const adicionarLocalizacaoFilial = (localizacao) => {
         filialLocalizacoes.push(localizacao);
@@ -159,11 +155,15 @@ function EditarEmpresa({ setTela }) {
 
         response = axios.post("http://localhost:8000/matriz", DadosMatriz);
 
+        console.log("POST MATRIZ LOCALIZACOES");
         matrizLocalizacoes.forEach(async localizacao => {
             const localizacaoData = {
                 "loc_titulo": localizacao
             }
             let response = await axios.post("http://localhost:8000/localizacoes", localizacaoData);
+            if (response.status === 200) {
+                console.log(`Localizacao: ${localizacao} cadastrada com sucesso`);
+            }
         });
 
         setNomeMatriz('');
@@ -253,11 +253,12 @@ function EditarEmpresa({ setTela }) {
         }
 
         response = await axios.post("http://localhost:8000/filiais", DadosFilial);
-        setFil_id(response.data.fil_id)
+        const filId = response.data.fil_id;
+
         filialLocalizacoes.forEach(async localizacao => {
             let DadosLocalizacao = {
                 "loc_titulo": localizacao,
-                "loc_filial_id": response.data.fil_id
+                "loc_filial_id": filId
             }
             response = await axios.post("http://localhost:8000/localizacoes", DadosLocalizacao);
         })
@@ -273,7 +274,7 @@ function EditarEmpresa({ setTela }) {
         setEstadoFilial('');
         setTelefoneFilial('');
         setEmailFilial('');
-        setLocalizacaoFilial('');
+        setLocalizacoesFilial([]);
     }
 
 
@@ -356,7 +357,7 @@ function EditarEmpresa({ setTela }) {
                             <div className="field">
                                 <div className="control pr-3">
                                     <label htmlFor="local" className="label has-text-black is-flex">Localizações Matriz:
-                                        <img src={adicionar} className='ml-2 image is-24x24' onClick={(event) => showPopUpMatriz()} />
+                                        <img src={adicionar} className='ml-2 image is-24x24' onClick={(event) => showPopUpMatriz()} alt='Ícone adicionar localização matriz'/>
                                     </label>
                                     <div>
                                         {matrizLocalizacoes.map(localizacao => {
@@ -428,7 +429,7 @@ function EditarEmpresa({ setTela }) {
                             <div className="field">
                                 <div className="control pr-3">
                                     <label htmlFor="local" className="label has-text-black is-flex">Localizações Filial:
-                                        <img src={adicionar} className='ml-2 image is-24x24' onClick={(event) => showPopUpFilial()} />
+                                        <img src={adicionar} className='ml-2 image is-24x24' onClick={(event) => showPopUpFilial()} alt='Ícone adicionar localização filial'/>
                                     </label>
                                     <div>
                                         {filialLocalizacoes.map(localizacao => {
