@@ -49,6 +49,7 @@ function Menu(props) {
         
         // Filtra manutenções pendentes
         const pendingManutencoes = responseManutencoes.data.filter(manut => isManutencaoAtrasada(manut));
+        console.log("Manutenções pendentes:", pendingManutencoes); // Debugging
         setManutencoesPendentes(pendingManutencoes.length);
   
         const responseAtivos = await axios.get('http://localhost:8000/ativos');
@@ -89,6 +90,7 @@ function Menu(props) {
     const dataManutencao = new Date(manutencao.man_data);
     return dataManutencao < dataAtual;
   };
+
   if (empresa === '') {
     return (
       <div>
@@ -224,9 +226,9 @@ function Menu(props) {
               </p>
               {showNotify && (
                 <div className='dropdown navbar-dropdown is-right mr-1 px-5 '>
-                  <button className='navbar-item' onClick={e => props.seletorView("AtivoPendente", e)}>
+                  {/* <button className='navbar-item' onClick={e => props.seletorView("AtivoPendente", e)}>
                     Ativos desativados com pendencias ({ativosPendentes})
-                  </button>
+                  </button> */}
                   <button className='navbar-item' onClick={e => props.seletorView("AtivoExpirado", e)}>
                     Ativos expirados ({ativosExpirados})
                   </button>

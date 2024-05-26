@@ -225,9 +225,9 @@ function MenuRoot(props) {
               </p>
               {showNotify && (
                 <div className='dropdown navbar-dropdown is-right mr-1 px-5 '>
-                  <button className='navbar-item' onClick={e => props.seletorView("AtivoPendente", e)}>
+                  {/* <button className='navbar-item' onClick={e => props.seletorView("AtivoPendente", e)}>
                     Ativos desativados com pendencias ({ativosPendentes})
-                  </button>
+                  </button> */}
                   <button className='navbar-item' onClick={e => props.seletorView("AtivoExpirado", e)}>
                     Ativos expirados ({ativosExpirados})
                   </button>

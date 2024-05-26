@@ -41,3 +41,17 @@ export const putMatriz = async (matriz) => {
         }
     }
 }
+
+export const matrizExists = async () => {
+    try {
+        await axios.get('http://localhost:8000/matriz');
+        return true;
+    } catch (error) {
+        if (error.response.status === 400) {
+            return false;
+        } else {
+            alert("Erro ao verificar existência de matriz");
+            console.error(`Erro ao verificar existência de matriz`, error);
+        }
+    }
+}
