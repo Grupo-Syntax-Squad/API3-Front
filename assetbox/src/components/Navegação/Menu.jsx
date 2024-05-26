@@ -189,15 +189,6 @@ function Menu(props) {
   return (
     <div>
       <div className="navbar shadow-menu is-flex is-justify-content-space-between custom-background" role="navigation" aria-label="main navigation">
-<<<<<<< Updated upstream
-=======
-        <div className='navbar-brand'>
-          <img src={LogoIcon} class='pl-6 pr-0' alt="AssetBox" onClick={(e) => props.seletorView('Relatorio', e)} />
-          <span className="navbar-brand has-text-white navbar-item mr-2 is-size-3 p-0 has-text-weight-bold empresa is-clickable" 
-          href="" onClick={(e) => props.seletorView('Relatorio', e)}>{empresa}</span>
-        </div>
-        
->>>>>>> Stashed changes
         <div className={`navbar-burger custom-background burger ${showMenu ? 'is-active' : ''}`} aria-label="menu" aria-expanded={showMenu ? 'true' : 'false'} onClick={() => setShowMenu(!showMenu)}>
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>

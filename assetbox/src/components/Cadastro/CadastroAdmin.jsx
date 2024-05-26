@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import "./cadastro.css";
 import axios from 'axios';
+import handleEmail from '../../utils/handleEmail';
+import handleTelefone from '../../utils/handleTelefone';
 
 function CadastroAdministrador({ setTela }) {
     const [adm_nome, setNomeAdministrador] = useState('');
@@ -9,24 +11,6 @@ function CadastroAdministrador({ setTela }) {
     const [adm_senha, setSenhaAdministrador] = useState('');
     const [adm_cpf, setCPFAdministrador] = useState('');
     const [showPopup, setShowPopup] = useState(false); // Estado para controlar a exibição do pop-up
-
-    const handleTelefone = (value) => {
-        // Remove tudo que não for dígito
-        const onlyNums = value.replace(/[^\d]/g, '');
-
-        if (onlyNums.length <= 10) {
-            // Formata para (xx) xxxx-xxxx
-            return onlyNums.replace(/(\d{2})(\d{4})(\d{4})/, '($1) $2-$3');
-        } else {
-            // Formata para (xx) xxxxx-xxxx
-            return onlyNums.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
-        }
-    };
-
-    const HandleEmail = (value) => {
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return emailRegex.test(value);
-    }
 
     const handleEmailChange = (event) => {
         const email = event.target.value;
@@ -58,7 +42,7 @@ function CadastroAdministrador({ setTela }) {
         }
 
         // Verifica se o e-mail é válido
-        if (!HandleEmail(adm_email)) {
+        if (!handleEmail(adm_email)) {
             window.alert('E-mail inválido.');
             return;
         }
@@ -71,7 +55,7 @@ function CadastroAdministrador({ setTela }) {
             adm_telefone: adm_telefone,
             adm_cpf: adm_cpf
         };
-
+        console.log(dadosAdministrador);
         let response = await axios.post('http://localhost:8000/autenticacao/registrar', dadosAdministrador);
 
         console.log("Administrador:", response.data);

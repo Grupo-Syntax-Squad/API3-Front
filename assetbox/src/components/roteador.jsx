@@ -26,6 +26,7 @@ import EditarFilial from "./Root/EditarFilial";
 import VisualizarFilial from "./Visualizar/VisualizarFilial";
 import AtivoExpirado from "./Notificacao/AtivoExpirado";
 import NotFound from "./NotFound/page";
+import Relatorio from "./Visualizar/VisualizarRelatorio";
 
 export default function Roteador() {
     const [tela, setTela] = useState('Home');
@@ -244,6 +245,14 @@ export default function Roteador() {
                         <>
                             {root ? <MenuRoot seletorView={selecionarView} botoes={botoes} /> : <Menu seletorView={selecionarView} botoes={botoes} />}
                             {/* <Serviços tema="#5eb4fc" red="#fc6464" green="#00ff00" /> */}
+                        </>
+                    );
+                case 'Relatorio':
+                    return (
+                        <>
+                            {root ? <MenuRoot seletorView={selecionarView} botoes={botoes} /> : <Menu seletorView={selecionarView} botoes={botoes} />
+                            }
+                            <Relatorio />
                         </>
                     );
                 default:

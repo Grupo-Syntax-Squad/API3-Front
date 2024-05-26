@@ -6,6 +6,7 @@ import adicionar from "./adicionar.svg"
 import axios from 'axios';
 import CadastroTipo from './CadastroTipo';
 import CadastroLocalizacao from './CadastroLocalizacao';
+import { getFilial } from '../../services/filialService';
 
 function CadastroAtivos({ setTela }) {
   // Definindo estados para armazenar os dados do ativo
@@ -99,7 +100,7 @@ function CadastroAtivos({ setTela }) {
     }
 
     let ati_documento_id = null;
-    if (documentoSelecionado != null){
+    if (documentoSelecionado != null) {
       //Enviando Documento
       const formData = new FormData();
       formData.append('file', documentoSelecionado);
@@ -108,6 +109,17 @@ function CadastroAtivos({ setTela }) {
     }
 
     let ati_localizacao_id = localizacoes.find(localizacao => ati_localizacao == localizacao.loc_id);
+    let filialId = null;
+    if (ati_localizacao_id.loc_filial_id !== null) {
+      filialId = ati_localizacao_id.loc_filial_id;
+    };
+
+    let ati_filial_id = null;
+    if (filialId !== null) {
+      ati_filial_id = await getFilial(filialId);
+    }
+    console.log(ati_filial_id);
+
     let ati_tipo_id = tipos.find(tipo => ati_tipo == tipo.tip_id);
 
     // Enviando ativo
@@ -135,7 +147,8 @@ function CadastroAtivos({ setTela }) {
       ati_data_cadastro,
       ati_imagem_id,
       ati_documento_id,
-      ati_observacao
+      ati_observacao,
+      ati_filial_id
     };
     console.log(ativoData);
 
@@ -205,7 +218,7 @@ function CadastroAtivos({ setTela }) {
                       <p>Nenhum tipo disponível</p>
                     )}
                   </div>
-                  <img src={adicionar} style={{marginLeft: '10px', width : '15%'}} title="Cadastrar novo tipo" onClick={handleTipoClick}/>
+                  <img src={adicionar} style={{ marginLeft: '10px', width: '15%' }} title="Cadastrar novo tipo" onClick={handleTipoClick} />
                 </div>
 
                 <div class="field">
@@ -226,7 +239,7 @@ function CadastroAtivos({ setTela }) {
                   <label class="label ">Status: <span className='has-text-danger'>*</span></label>
                   <div class="select is-small">
                     <select class="is-hovered" onChange={e => setStatusAtivo(e.target.value)}>
-                    <option value="" disabled selected>Selecione um status</option>
+                      <option value="" disabled selected>Selecione um status</option>
                       <option value="0" selected>Em operação</option>
                       <option value="1">Ocioso</option>
                       <option value="2">Em manutenção</option>
@@ -385,7 +398,7 @@ function CadastroAtivos({ setTela }) {
         <div className="columns m-3">
           <div class="column is-half has-text-centered"><img src={docadd} alt="docadd" style={{ width: '100px', height: '100px' }} />.
             <div>
-              <input className='image-button' type='file' id='doc' name="doc" accept="doc/*" onChange={handleDocumentoChange}/>
+              <input className='image-button' type='file' id='doc' name="doc" accept="doc/*" onChange={handleDocumentoChange} />
             </div>
           </div>
 
@@ -439,7 +452,7 @@ function CadastroAtivos({ setTela }) {
             </button>
           </p>
           <p class="control">
-            <button style={{backgroundColor: "red"}}class="button is-light" onClick={() => setTela('Ativos')}>
+            <button style={{ backgroundColor: "red" }} class="button is-light" onClick={() => setTela('Ativos')}>
               Cancelar
             </button>
           </p>
@@ -452,8 +465,8 @@ function CadastroAtivos({ setTela }) {
 
         </div>
       </div>
-      {mostrarTipo && <CadastroTipo handleTipoClick={handleTipoClick} setTipos={setTipos}/>}
-      {mostrarLocalizacao && <CadastroLocalizacao handleLocalizacaoClick={handleLocalizacaoClick} setLocalizacoes={setLocalizacoes}/>}
+      {mostrarTipo && <CadastroTipo handleTipoClick={handleTipoClick} setTipos={setTipos} />}
+      {mostrarLocalizacao && <CadastroLocalizacao handleLocalizacaoClick={handleLocalizacaoClick} setLocalizacoes={setLocalizacoes} />}
     </body>
   );
 }
