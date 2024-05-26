@@ -101,8 +101,8 @@ function MenuRoot(props) {
           </div>
 
           <div className='navbar-brand'>
-            <img src={LogoIcon} className='pl-6 pr-0' alt="AssetBox" onClick={(e) => props.seletorView('Home', e)} />
-            <span className="navbar-brand has-text-white navbar-item mr-2 is-size-3 p-0 has-text-weight-bold empresa is-clickable" href="" onClick={(e) => props.seletorView('Home', e)}>AssetBox</span>
+            <img src={LogoIcon} className='pl-6 pr-0' alt="AssetBox" onClick={(e) => props.seletorView('Relatorio', e)} />
+            <span className="navbar-brand has-text-white navbar-item mr-2 is-size-3 p-0 has-text-weight-bold empresa is-clickable" href="" onClick={(e) => props.seletorView('Relatorio', e)}>AssetBox</span>
           </div>
 
           <div className={`navbar-menu ${showMenu && showNotify ? 'is-active' : ''}`}>
@@ -196,8 +196,8 @@ function MenuRoot(props) {
         </div>
 
         <div className='navbar-brand'>
-          <img src={LogoIcon} className='pl-6 pr-0' alt="AssetBox" onClick={(e) => props.seletorView('Home', e)} />
-          <span className="navbar-brand has-text-white navbar-item mr-2 is-size-3 p-0 has-text-weight-bold empresa is-clickable" href="" onClick={(e) => props.seletorView('Home', e)}>{empresa}</span>
+          <img src={LogoIcon} className='pl-6 pr-0' alt="AssetBox" onClick={(e) => props.seletorView('Relatorio', e)} />
+          <span className="navbar-brand has-text-white navbar-item mr-2 is-size-3 p-0 has-text-weight-bold empresa is-clickable" href="" onClick={(e) => props.seletorView('Relatorio', e)}>{empresa}</span>
         </div>
 
         <div className={`navbar-menu ${showMenu ? 'is-active' : ''}`}>
