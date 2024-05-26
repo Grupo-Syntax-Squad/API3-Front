@@ -24,6 +24,7 @@ import MenuRoot from "./Navegação/MenuRoot";
 import EditarEmpresa from "./Root/EditarEmpresa";
 import EditarFilial from "./Root/EditarFilial";
 import VisualizarFilial from "./Visualizar/VisualizarFilial";
+import AtivoExpirado from "./Notificacao/AtivoExpirado";
 
 export default function Roteador() {
     const [tela, setTela] = useState('Home');
@@ -391,6 +392,27 @@ export default function Roteador() {
                         <>
                             <MenuRoot seletorView={selecionarView} botoes={botoes} />
                             <ManutencaoPendente setTela={setTela} />
+                        </>
+                    )
+                }
+                else {
+                    return (
+                        <>
+                            <Menu seletorView={selecionarView} botoes={botoes} />
+                            <Home setTela={setTela} />
+                        </>
+                    )
+                }
+            } else return <p>É necessário realizar o login para continuar para a página desejada!</p>
+        }
+
+        else if (tela === 'AtivoExpirado') {
+            if (verificacaoToken) {
+                if (root) {
+                    return (
+                        <>
+                            <MenuRoot seletorView={selecionarView} botoes={botoes} />
+                            <AtivoExpirado setTela={setTela} />
                         </>
                     )
                 }

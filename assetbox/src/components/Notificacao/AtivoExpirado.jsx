@@ -15,6 +15,9 @@ const AtivosPendentes = ({ setTela }) => {
         axios.get('http://localhost:8000/ativos')
             .then(response => {
                 setAssets(response.data);
+                response.data.forEach(asset => {
+                    console.log(asset.ati_data_expiracao); // Aqui você consegue ver cada data de expiração
+                });
             })
             .catch(error => {
                 console.error('There was an error!', error);
@@ -27,6 +30,7 @@ const AtivosPendentes = ({ setTela }) => {
                 console.error("Um erro ocorreu ao buscar filiais: ", error);
             });
     }, []);
+    
 
     const handleRelatorio = async () => {
         let response = axios.get(`http://localhost:8000/relatorios/filial/${filialId}`);
@@ -51,10 +55,11 @@ const AtivosPendentes = ({ setTela }) => {
         return (
             (filtroId === '' || String(asset.ati_id).includes(filtroId)) &&
             (filtroTitulo === '' || asset.ati_titulo.toLowerCase().includes(filtroTitulo.toLowerCase())) &&
-            (filtroStatus === '' || asset.ati_status.toLowerCase().includes(filtroStatus.toLowerCase())) &&
-            ((asset.ati_status === 'DESATIVADO' && asset.ati_destinatario_id !== ''))
+            (filtroStatus === '' || asset.ati_data_expiracao.toLowerCase().includes(filtroStatus.toLowerCase())) &&
+            ((asset.ati_data_expiracao && new Date(asset.ati_data_expiracao) < new Date()) && asset.ati_status !== 'DESATIVADO')
         );
     });
+    
 
     return (
         <body>
@@ -104,7 +109,7 @@ const AtivosPendentes = ({ setTela }) => {
                             </div>
                             <div class="column is-one-third is-flex is-align-items-center">
                                 <label className='filtros mx-1 has-text-white has-text-weight-medium mr-3'>Status</label>
-                                <input class="input is-small is-flex-grow-2 is-rounded border-none" type="text" placeholder='Digite um Status' value={filtroStatus} onChange={e => setFiltroStatus(e.target.value)} />
+                                <input class="input is-small is-flex-grow-2 is-rounded border-none" type="text" placeholder='Digite um status' value={filtroStatus} onChange={e => setFiltroStatus(e.target.value)} />
                             </div>
                         </div>
                     </div>
@@ -116,7 +121,7 @@ const AtivosPendentes = ({ setTela }) => {
                             <label className='has-text-white is-size-4 has-text-weight-medium'>Título</label>
                         </div>
                         <div class="column is-one-third mr-2 is-flex is-justify-content-center is-align-items-center">
-                            <label className='has-text-white is-size-4 has-text-weight-medium'>Status</label>
+                            <label className='has-text-white is-size-4 has-text-weight-medium'>Data expiracao</label>
                         </div>
                     </div>
 
@@ -124,7 +129,7 @@ const AtivosPendentes = ({ setTela }) => {
                         {assets.length === 0 && (
                             <div className='asset is-flex is-justify-content-center'>
                                 <div className='SemHover column is-one-third mr-2 dado-ativo is-flex is-justify-content-center is-align-items-center has-text-weight-medium'>
-                                    <p className='has-text-black'>Nenhum Ativo pendente</p>
+                                    <p className='has-text-black'>Nenhum Ativo expirado</p>
                                 </div>
                             </div>
                         )}
@@ -138,7 +143,7 @@ const AtivosPendentes = ({ setTela }) => {
                                     <p className='has-text-black'> {asset.ati_titulo}</p>
                                 </div>
                                 <div className='SemHover column is-one-third mr-2 dado-ativo is-flex is-justify-content-center is-align-items-center has-text-weight-medium'>
-                                    <p className='has-text-black'> {asset.ati_status}</p>
+                                    <p className='has-text-black'> {asset.ati_data_expiracao}</p>
                                 </div>
                             </div>
                         ))}
