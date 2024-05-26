@@ -178,7 +178,7 @@ export default function Roteador() {
                             <CadastroManutenção setTela={setTela} />
                         </>
                     );
-                case 'VsualizarAgendamento':
+                case 'VisualizarAgendamento':
                     return (
                         <>
                             {root ? <MenuRoot seletorView={selecionarView} botoes={botoes} /> : <Menu seletorView={selecionarView} botoes={botoes} />}
