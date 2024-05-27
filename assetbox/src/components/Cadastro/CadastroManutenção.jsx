@@ -178,6 +178,7 @@ useEffect(() => {
                 </div>
                 <div className="field" >
                   <label className="form-label ">Data da manutenção:<span className='has-text-danger'>*</span></label>
+
                   <input
                     class="input is-small mt-2"
                     type="date"
@@ -212,7 +213,7 @@ useEffect(() => {
                   <label class="label has-text-weight-normal">Ativo <span className='has-text-danger'>*</span></label>
                   <div class="select is-small">
                     <select class="is-hovered" onChange={e => handlerAtivo(e)}>
-                      <option value={null}>Selecione um ativo</option>
+                      <option value={null}>Selecione um ativo </option>
                       {ativos.map((ativo) => (
                         <option value={ativo.ati_id}>{ativo.ati_id} {ativo.ati_titulo}</option>
                       ))}
@@ -221,6 +222,7 @@ useEffect(() => {
                 </div>
                 <div className="field" >
                   <label className="label has-text-weight-normal">Responsável<span className='has-text-danger'>*</span></label>
+
                   <input
                     class="input is-small"
                     type="text"
@@ -264,7 +266,9 @@ useEffect(() => {
               <form onSubmit={handleSubmit}>
                 <div>
                   <div className="field" >
+
                     <label className="form-label">CEP:<span className='has-text-danger'>*</span></label>
+
                     <input
                       class="input is-small"
                       type="text"
@@ -287,6 +291,7 @@ useEffect(() => {
                   </div>
                   <div className="field" >
                     <label className="form-label">UF:<span className='has-text-danger'>*</span></label>
+
                     <input
                       class="input is-small"
                       type="text"
@@ -303,6 +308,7 @@ useEffect(() => {
               <form onSubmit={handleSubmit}>
                 <div className="field">
                   <label className="form-label ">Cidade:<span className='has-text-danger'>*</span></label>
+
                   <input
                     class="input is-small"
                     type="text"
@@ -314,6 +320,7 @@ useEffect(() => {
                 </div>
                 <div className="field" >
                   <label className="form-label">Rua:<span className='has-text-danger'>*</span></label>
+
                   <input
                     class="input is-small"
                     type="text"
@@ -325,6 +332,7 @@ useEffect(() => {
                 </div>
                 <div className="field" >
                   <label className="form-label">Bairro:<span className='has-text-danger'>*</span></label>
+
                   <input
                     class="input is-small"
                     type="text"
@@ -336,6 +344,7 @@ useEffect(() => {
                 </div>
                 <div className="field" >
                   <label className="form-label" >Complemento:</label>
+
                   <input
                     class="input is-small"
                     type="text"
