@@ -1,10 +1,43 @@
 :root{
-   --cinza:  rgb(189, 189, 189);
-}
+   --cinzaclaro: #D9D9D9;
+   --azul: #459eb6;
+   --branco: #fff;
+   --cinza: rgb(189, 189, 189);
+   --h2azul: #459eb6;
+   --vermelho: rgb(255, 0, 0);
+   --preto: #000;
+   --azulh2: rgb(69, 158, 182);
+   --azulfiltro: #367E90;
+
+      @media(prefers-color-scheme: dark){
+      --cinzaclaro: #222;
+      --azul: #2a3f9c;
+      --branco: #fff;
+      --cinza: rgb(96, 96, 96);
+      --h2azul: #2c369d;
+      --vermelho: red;
+      --azulfiltro: #1d2c5e!important;
+
+      
+      button { 
+         background-Color: var(--azul);
+         color: #fff; }
+
+   }
+ }
+
+ button{
+    background-Color: var(--azul);
+    border-radius: 20px;
+    height: 50px;
+    width: auto;
+    text-align: center;
+ }
+
 .page-full{
    align-items: stretch;
    justify-content: space-around;
-   background-color: #D9D9D9;
+   background-color: var(--cinzaclaro);
    margin: 1% 10% 1% 10%;
    border-top-left-radius: 10px;
    border-top-right-radius: 10px;
@@ -14,12 +47,22 @@
    pointer-events: none;
 }
 
+.button-effect{
+   transition: box-shadow 0.3s ease, transform 0.3s ease
+}
+
+.button-effect:hover{
+   box-shadow: 0 0 0 0 rgb(23, 49, 61), inset 3px 3px 3px rgb(23, 53, 61);
+   transform: translate(3px, 3px)
+}
+
+
 h2{
    text-align: center;
-   background-color: #459eb6;
+   background-color: var(--azulh2);
    margin: auto;
    font-size: x-large;
-   color: #fff;
+   color: var(--branco);
 }
 
 h1{
@@ -28,11 +71,11 @@ h1{
    padding: 0.5%;
 }
 .indice{
-   background-color: #459EB5;
+   background-color: var(--azul);
 }
 
 .filtro{
-   background-color: #367E90;
+   background-color: var(--azulfiltro);
 }
 
 .filtro {
@@ -40,7 +83,7 @@ h1{
 }
 
 .filtros{
-   color: white;
+   color: var(--branco);
    font-size: 25px;
    font-weight: 200;
 }
@@ -48,7 +91,7 @@ h1{
 .dado-ativo{
    font-size: 20px;
    font-weight: 600;
-   color: #000;
+   color: var(--preto);
 }
 
 .top-one{
@@ -65,9 +108,7 @@ h1{
    background-color: transparent;
 }
 .asset{
-   background-color: #fff !important;
-   border-bottom-left-radius: 1rem;
-   border-bottom-right-radius: 1rem;
+   background-color: var(--branco) !important;
 }
 .asset:hover{
    background-color:var(--cinza);
@@ -81,4 +122,12 @@ h1{
       width: 50rem;
       flex-grow: 4;
    }
+}
+
+.shadow-button{
+   box-shadow: 0px 3px 2px rgba(0, 0, 0, 0.274);
+}
+
+.modal-card-foot{
+   justify-content: center;
 }

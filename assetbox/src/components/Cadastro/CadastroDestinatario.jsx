@@ -4,8 +4,8 @@ import axios from 'axios';
 
 function CadastroDestinatarios({ setTela }) {
   const [des_nome, setNomeDestinatario] = useState('');
-  const [des_email, setEmailDestinatario] = useState('');
-  const [des_telefone, setTelefoneDestinatario] = useState('');
+  const [email, setEmailDestinatario] = useState('');
+  const [telefone, setTelefoneDestinatario] = useState('');
   const [des_endereco_id, setDesEnderecoId] = useState('');
   const [cep, setCep] = useState('');
   const [end_rua, setRuaDestinatario] = useState('');
@@ -17,7 +17,7 @@ function CadastroDestinatarios({ setTela }) {
   const [end_cep, setCEPDestinatario] = useState('');
   const [des_tip, setTipoDestinatario] = useState('');
   const [showPopup, setShowPopup] = useState(false); // Estado para controlar a exibição do pop-up
-  const [des_cpf, setCPFDestinatario] = useState('');
+  const [cpf, setCPFDestinatario] = useState('');
 
   const handleTelefone = (value) => {
     // Remove tudo que não for dígito
@@ -56,11 +56,20 @@ function CadastroDestinatarios({ setTela }) {
       try {
         const response = await axios.get(`https://viacep.com.br/ws/${cep}/json/`);
         const data = response.data;
-        setRuaDestinatario(data.logradouro);
-        setBairroDestinatario(data.bairro);
-        setCidadeDestinatario(data.localidade);
-        setUfDestinatario(data.uf);
-        setCEPDestinatario(data.cep);
+        if (data.erro) {
+          window.alert("CEP inválido!")
+          setRuaDestinatario("");
+          setBairroDestinatario("");
+          setCidadeDestinatario("");
+          setUfDestinatario("");
+          setCEPDestinatario("");
+        } else {
+          setRuaDestinatario(data.logradouro);
+          setBairroDestinatario(data.bairro);
+          setCidadeDestinatario(data.localidade);
+          setUfDestinatario(data.uf);
+          setCEPDestinatario(data.cep);
+        }
       } catch (error) {
         console.error('Erro ao buscar o CEP:', error);
       }
@@ -70,14 +79,23 @@ function CadastroDestinatarios({ setTela }) {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
+
+    const camposObrigatorios = [des_nome, email, telefone, cpf, end_rua, end_numero, end_bairro, end_cidade, end_uf, end_cep];
+    const camposVazios = camposObrigatorios.some(campo => !campo);
+
+    if (camposVazios) {
+      alert('Por favor, preencha todos os campos obrigatórios.');
+      return;
+    }
+
     // Verifica se o e-mail está vazio
-    if (des_email.trim() === '') {
+    if (email.trim() === '') {
       window.alert('O e-mail não pode estar vazio.');
       return;
     }
 
     // Verifica se o e-mail é válido
-    if (!HandleEmail(des_email)) {
+    if (!HandleEmail(email)) {
       window.alert('E-mail inválido.');
       return;
     }
@@ -97,11 +115,11 @@ function CadastroDestinatarios({ setTela }) {
 
     const dadosDestinatario = {
       des_nome,
-      des_email,
-      des_telefone,
+      email: email,
+      telefone: telefone,
       des_endereco_id,
       des_tip,
-      des_cpf
+      cpf
     };
 
     response = await axios.post('http://localhost:8000/destinatarios', dadosDestinatario);
@@ -126,16 +144,16 @@ function CadastroDestinatarios({ setTela }) {
 
   return (
     <body>
-      <div className='page-full'>
+      <div className='page-full shadow-button'>
         <div className='field'>
-            <h2 class="titulo-cadastro">Cadastro de destinatário</h2>
+          <h2 class="titulo-cadastro p-2">Cadastro de Destinatário</h2>
         </div>
         <form onSubmit={handleSubmit} className="m-6" >
           <div className='columns'>
 
             <div className="column is-half m-3">
 
-              <h1 className='has-text-weight-light is-size-4'>Dados</h1>
+              <h3 className='has-text-weight-light has-text-centered is-size-4 has-text-black'>Dados</h3>
 
               <div className="field column">
                 <label className="form-label is-size-5">Nome: <span className='has-text-danger'>*</span></label>
@@ -154,7 +172,7 @@ function CadastroDestinatarios({ setTela }) {
                   className="input is-small"
                   type="text"
                   placeholder='Digite o número de telefone:'
-                  value={des_telefone}
+                  value={telefone}
                   onChange={handleTelefoneChange}
                 />
               </div>
@@ -165,7 +183,7 @@ function CadastroDestinatarios({ setTela }) {
                   className="input is-small"
                   type="text"
                   placeholder='Digite o email:'
-                  value={des_email}
+                  value={email}
                   onChange={handleEmailChange}
                 />
               </div>
@@ -176,7 +194,7 @@ function CadastroDestinatarios({ setTela }) {
                   className="input is-small"
                   type="text"
                   placeholder='Digite o CPF:'
-                  value={des_cpf}
+                  value={cpf}
                   onChange={e => setCPFDestinatario(e.target.value)}
                 />
               </div>
@@ -270,17 +288,17 @@ function CadastroDestinatarios({ setTela }) {
               </button>
             </p>
             <p className="control">
-              <button className="button is-light" onClick={() => setTela('Destinatarios')}>
+              <button style={{backgroundColor: 'red'}}className="button " onClick={() => setTela('Usuarios')}>
                 Cancelar
               </button>
             </p>
           </div>
 
           {showPopup && (
-            <div id='popup' style={{ display: 'block', height: '200px', backgroundColor: '#367E90', position: 'fixed', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', textAlign: 'center', width: '40%', alignContent: 'center', justifyContent: 'center', borderRadius: '10px' }}>
-              <p className='has-text-white is-size-3-desktop is-size-4-mobile'>Destinatário Cadastrado com sucesso!</p>
-              <button className='has-text-white is-size-4 p-3 mt-3' style={{ marginLeft: '60%', backgroundColor: '#459EB5', borderRadius: '100%' }} onClick={() => { setShowPopup(false); setCEPDestinatario(''); }}>
-                <p className='is-size-4'>OK</p>
+            <div className='shadow-pop-up' id='popup' style={{ display: 'block', height: '200px', backgroundColor: '#367E90', position: 'fixed', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', textAlign: 'center', width: '40%', alignContent: 'center', justifyContent: 'center', borderRadius: '10px' }}>
+              <p className='has-text-white is-size-3-desktop is-size-4-mobile has-text-weight-medium'>Destinatário Cadastrado com sucesso!</p>
+              <button className='has-text-white is-size-4 p-3 mt-3' style={{ marginLeft: '60%', backgroundColor: '#459EB5', borderRadius: '100%' }} onClick={() => { setShowPopup(false); setCEPDestinatario(''); setTela('Usuarios') }}>
+                <p className='is-size-4 has-text-weight-medium' onClick={()=>{setTela('Usuarios')}}>OK</p>
               </button>
             </div>
           )}

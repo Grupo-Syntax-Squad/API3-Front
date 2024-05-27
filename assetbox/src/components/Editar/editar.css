@@ -1,18 +1,29 @@
+:root{
+  --cinzaclaro: #D9D9D9;
+  --azul: #459eb6;
+  --branco: #fff;
+
+  @media(prefers-color-scheme: dark){
+    --cinzaclaro: #222;
+    --azul: #2a3f9c;
+    --branco: #fff;
+  }
+}
 
 .page-full{
   align-items: stretch;
   justify-content: space-around;
-  background-color: #D9D9D9;
+  background-color: var(--cinzaclaro);
   margin: 1% 10% 1% 10%;
   padding-bottom: 0.5%;
 }
 
 h2{
   text-align: center;
-  background-color: #459eb6;
+  background-color: var(--azul);
   margin: auto;
   font-size: x-large;
-  color: #fff;
+  color: var(--branco);
 }
 
 h1{

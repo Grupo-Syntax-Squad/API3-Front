@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import './calendario.css';
 import axios from 'axios';
 
-const month_names = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
+const month_names = [
+    'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
 
 const isLeapYear = (year) => {
     return (year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0);
@@ -12,14 +13,14 @@ const getFebDays = (year) => {
     return isLeapYear(year) ? 29 : 28;
 }
 
-const Calendario = () => {
+const Calendario = ({ setTela }) => {
     const [currMonth, setCurrMonth] = useState(new Date().getMonth());
     const [currYear, setCurrYear] = useState(new Date().getFullYear());
     const [calendarDays, setCalendarDays] = useState([]);
     const [manutencoes, setManutencoes] = useState([]);
     const [selectedDate, setSelectedDate] = useState(null);
     const [selectedManutencoes, setSelectedManutencoes] = useState([]);
-
+    
     useEffect(() => {
         generateCalendar(currMonth, currYear);
     }, [currMonth, currYear]);
@@ -35,9 +36,13 @@ const Calendario = () => {
     }, []);
 
     useEffect(() => {
+        const dataSelecionada = localStorage.getItem('dataSelecionada');
+        console.log(dataSelecionada);
         if (selectedDate !== null) {
+            console.log('Filtrando manutenções...');
             const filteredManutencoes = manutencoes.filter(manut => {
                 const manutDate = new Date(manut.man_data);
+                console.log('Data da manutenção:', manutDate.getDate());
                 return (
                     manutDate.getDate() === selectedDate &&
                     manutDate.getMonth() === currMonth &&
@@ -47,6 +52,7 @@ const Calendario = () => {
             setSelectedManutencoes(filteredManutencoes);
         }
     }, [selectedDate, manutencoes, currMonth, currYear]);
+    
 
     const generateCalendar = (month, year) => {
         const days_of_month = [31, getFebDays(year), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
@@ -80,6 +86,7 @@ const Calendario = () => {
     };
 
     const handleDayClick = (day) => {
+        localStorage.setItem('dataSelecionada', `${currYear}/${currMonth + 1}/${day}`);
         setSelectedDate(day);
     };
 
@@ -116,16 +123,31 @@ const Calendario = () => {
         return groupedManutencoes;
     };
 
+    const hasManutencoes = (day) => {
+        if (day === null) return false; // Se o dia for null, não há manutenções
+        const manutencoesForDay = manutencoes.filter(manut => {
+            const manutDate = new Date(manut.man_data);
+            return (
+                manutDate.getDate() === day &&
+                manutDate.getMonth() === currMonth &&
+                manutDate.getFullYear() === currYear
+            );
+        });
+        return manutencoesForDay.length > 0; // Retorna true se houver manutenções para este dia
+    };
+
+    console.log(selectedDate);
+
     return (
-        <div className="tela columns">
+        <div className="tela columns shadow-button">
             <div className="calendar column is-half">
                 <div className="calendar-header">
-                    <span className="month-picker" id="month-picker">{month_names[currMonth]}</span>
+                    <span className="year-picker" id="year-picker">{currYear}</span>
                     <div className="year-picker">
                         <span className="year-change" id="prev-month" onClick={() => changeMonth(-1)}>
                             <pre>{'<'}</pre>
                         </span>
-                        <span id="year">{currYear}</span>
+                        <span id="year">{month_names[currMonth]}</span>
                         <span className="year-change" id="next-month" onClick={() => changeMonth(1)}>
                             <pre>{'>'}</pre>
                         </span>
@@ -143,7 +165,7 @@ const Calendario = () => {
                     </div>
                     <div className="calendar-days">
                         {calendarDays.map((day, index) => (
-                            <div key={index} className={`calendar-day ${day !== null ? 'active' : ''}`} onClick={() => handleDayClick(day)}>
+                            <div key={index} className={`calendar-day ${day !== null ? 'active' : ''} ${hasManutencoes(day) ? 'has-manutencoes': ''}`} onClick={() => handleDayClick(day)}>
                                 {day}
                             </div>
                         ))}
@@ -152,17 +174,17 @@ const Calendario = () => {
                 <div className="month-list"></div>
             </div>
             <div className="listas column">
-                <label className="textarea tela-content">
+                <label style={{backgroundColor: '#fff'}}className="textarea tela-content">
                     {selectedDate && (
                         <div>
-                            <h3 className='has-text-black'>Manutenções em {selectedDate}/{currMonth + 1}/{currYear}:</h3><br/>
+                            <h3 className='has-text-black'>Manutenções em {selectedDate}/{currMonth + 1}/{currYear}:</h3><br />
                             {Object.entries(groupManutencoesByHour()).map(([hour, manutencoes]) => (
                                 <div key={hour}>
                                     <ul>
                                         {manutencoes.map((manut, index) => (
                                             <li key={index}>
                                                 <strong>Descrição:</strong> {manut.man_atividade}<br />
-                                                <strong>Data da Manutenção:</strong> {formatDate(manut.man_data)}<br/>
+                                                <strong>Data da Manutenção:</strong> {formatDate(manut.man_data)}<br />
                                                 <strong>Horário:</strong> {manut.man_horario}<br />
                                                 <strong>Status:</strong> {manut.man_status}<br />
                                                 <strong>Responsável:</strong> {manut.man_responsavel}<br />
@@ -171,6 +193,7 @@ const Calendario = () => {
                                     </ul>
                                 </div>
                             ))}
+                            <button class="button is-primary m-2 is-rounded is-size-6"  onClick={() => setTela('CadastroManutenção')}>Cadastrar Manuntenção</button>
                         </div>
                     )}
                 </label>

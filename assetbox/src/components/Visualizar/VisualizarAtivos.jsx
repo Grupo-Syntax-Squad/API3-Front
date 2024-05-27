@@ -4,10 +4,23 @@ import axios from 'axios';
 
 function VisualizarAtivos({ setTela }) {
   const [dadosAtivo, setDadosAtivo] = useState({})
+  const [dadosFilial, setDadosFilial] = useState({})
   const [imageUrl, setImageUrl] = useState(null);
+  const [docUrl, setDocument] = useState(null)
   const [carregando, setCarregando] = useState(true);
   const id = localStorage.getItem('id');
   const [ativoId, setAtivoId] = useState(null);
+
+
+  const todos_status = ["AGUARDANDO_MANUTENCAO", "EM_MANUTENCAO", "ADIADA", "CANCELADA", "CONCLUIDA"];
+  const [status, setStatus] = useState("");
+
+
+  const [edit, setEdit] = useState(false);
+  const handleEdit = () => edit ? setEdit(false) : setEdit(true);
+
+  
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -19,6 +32,14 @@ function VisualizarAtivos({ setTela }) {
         if (dados.ati_imagem_id != null) {
           setImageUrl(`http://localhost:8000/imagens/${dados.ati_imagem_id.img_id}`);
         }
+        if (dados.ati_documento_id != null) {
+          setDocument(`http://localhost:8000/documentos/${dados.ati_documento_id.documento_id}`)
+        }
+        if (response !== ''){
+          const responseFilial = await axios.get(`http://localhost:8000/filiais/${dados.ati_localizacao_id.loc_filial_id}`);
+          setDadosFilial(responseFilial.data);
+          console.log(responseFilial, response);
+        }
         console.log(dados)
         setCarregando(false);
       } catch (error) {
@@ -28,6 +49,64 @@ function VisualizarAtivos({ setTela }) {
 
     fetchData();
   }, []);
+
+  const handleUpdate = async () => {
+    const putData = {
+      ati_ano_fabricacao: dadosAtivo.ati_ano_fabricacao,
+      ati_capacidade: dadosAtivo.ati_capacidade,
+      ati_chave_nf_e: dadosAtivo.ati_chave_nf_e,
+      ati_complemento: dadosAtivo.ati_complemento,
+      ati_condicoes_uso: dadosAtivo.ati_condicoes_uso,
+      ati_data_cadastro: dadosAtivo.ati_data_cadastro,
+      ati_data_expiracao: dadosAtivo.ati_data_expiracao,
+      ati_destinatario_id: "",
+      // ati_destinatario_id: {
+      //   des_id: 1,
+      //   cpf: '12345678913',
+      //   des_nome: 'Lucas',
+      //   email: 'lu@gmail.com',
+      //   telefone: '(12) 99229-1676'},
+      ati_documento_id: dadosAtivo.ati_documento_id,
+      ati_filial_id : "",
+      // ati_filial_id: {
+      //   fil_id: 1,
+      //   fil_nome: 'Filial 1',
+      //   fil_cnpj: '12345678912345',
+      //   fil_endereco: 'Rua 1, 123',
+      //   fil_telefone: '(12) 12345-6789'},
+      ati_id: dadosAtivo.ati_id,
+      ati_imagem_id: dadosAtivo.ati_imagem_id,
+      // ati_localizacao_id: {
+      // },
+      ati_manutencoes_feitas: dadosAtivo.ati_manutencoes_feitas,
+      ati_marca: dadosAtivo.ati_marca,
+      ati_modelo: dadosAtivo.ati_modelo,
+      ati_numero: dadosAtivo.ati_numero,
+      ati_numero_serie: dadosAtivo.ati_numero_serie,
+      ati_observacao: dadosAtivo.ati_observacao,
+      ati_preco_aquisicao: dadosAtivo.ati_preco_aquisicao,
+      ati_previsao_manutencao: dadosAtivo.ati_previsao_manutencao,
+      ati_status: dadosAtivo.ati_status,
+      ati_tamanho: dadosAtivo.ati_tamanho,
+      ati_tipo_id:{
+        tip_id: dadosAtivo.ati_tipo_id.tip_id,
+        tip_titulo: dadosAtivo.ati_tipo_id.tip_titulo
+      },
+      ati_titulo: dadosAtivo.ati_titulo,
+      // ati_ultima_manutencao: dadosAtivo.ati_ultima_manutencao,
+      ati_url: dadosAtivo.ati_url,
+    }
+      try {
+        const response = await axios.put(`http://localhost:8000/ativos/${id}`, putData);
+        console.log(putData);
+        console.log(response.status);
+        window.alert("Ativo atualizado com sucesso.");
+        handleEdit();
+      } catch (error) {
+        error.response.status == 400 ? window.alert(error.response.data) : window.alert("Erro ao atualizar o ativo.");
+        await setDadosAtivo();
+      }
+  }
 
   function exibirPopUpDelecao() {
     var popup = document.getElementById('popupdelecao');
@@ -88,14 +167,14 @@ function VisualizarAtivos({ setTela }) {
                       class="input is-small"
                       type="text"
                       value={dadosAtivo.ati_numero}
-                      disabled
+                      disabled={!edit}
 
                     />
                   </div>
                   <div class="field column">
                     <label class="form-label">Tipo</label><br />
                     <div class="select is-small">
-                      <select class="is-hovered" value={dadosAtivo.ati_tipo_id} disabled>
+                      <select class="is-hovered" value={dadosAtivo.ati_tipo_id} disabled={!edit}>
                         <option value={dadosAtivo.ati_tipo_id?.tip_id}>{dadosAtivo.ati_tipo_id?.tip_titulo}</option>
                       </select>
                     </div>
@@ -106,7 +185,7 @@ function VisualizarAtivos({ setTela }) {
                   <div class="field column">
                     <label class="form-label">Localização</label><br />
                     <div class="select is-small">
-                      <select class="is-hovered" value={dadosAtivo.ati_localizacao_id} disabled>
+                      <select class="is-hovered" value={dadosAtivo.ati_localizacao_id} disabled={!edit}>
                         <option>{dadosAtivo.ati_localizacao_id?.loc_titulo}</option>
                         <option></option>
                       </select>
@@ -115,9 +194,24 @@ function VisualizarAtivos({ setTela }) {
                   <div class="field column">
                     <label class="formn-label">Status</label><br />
                     <div class="select is-small">
-                      <select class="is-hovered" value={dadosAtivo.ati_status} disabled>
-                        <option>{dadosAtivo.ati_status}</option>
-                        <option></option>
+                      <select class="is-hovered" on onChange={e => setStatus(e.target.value)} disabled={!edit}>
+                        {
+                          dadosAtivo.man_status === "AGUARDANDO_MANUTENCAO" ? <option value="0" selected>Aguardando Manutenção</option> : <option value="0">Aguardando Manutenção</option>
+                        }
+                        {
+                          dadosAtivo.man_status === "EM_MANUTENCAO" ? <option value="1" selected>Em Manutenção</option> : <option value="1">Em Manutenção</option>
+                        }
+                        {
+                          dadosAtivo.man_status === "ADIADA" ? <option value="2" selected>Adiada</option> : <option value="2">Adiada</option>
+                        }
+                        {
+                          dadosAtivo.man_status === "CANCELADA" ? <option value="3" selected>Cancelada</option> : <option value="3">Cancelada</option>
+                        }
+                        {
+                          dadosAtivo.man_status === "CONCLUIDA" ? <option value="4" selected>Concluída</option> : <option value="4">Concluída</option>
+                        }
+                        {/* <option>{dadosAtivo.ati_status}</option>
+                        <option></option> */}
                       </select>
                     </div>
                   </div>
@@ -130,7 +224,7 @@ function VisualizarAtivos({ setTela }) {
                     class="input is-small"
                     type="text"
                     value={dadosAtivo.ati_destinatario_id !== null && dadosAtivo.ati_destinatario_id.des_nome !== null ? dadosAtivo.ati_destinatario_id.des_nome : 'ativo sem destinatário'}
-                    disabled
+                    disabled={!edit}
                   />
                   {/* <div class="select is-small">
                     <select className="is-hovered" style={{ display: 'none' }} value={dadosAtivo.ati_destinatario_id.des_nome} disabled>
@@ -147,7 +241,7 @@ function VisualizarAtivos({ setTela }) {
                     class="input is-small"
                     type="text"
                     value={dadosAtivo.ati_titulo}
-                    disabled
+                    disabled={!edit}
                   />
                 </div>
 
@@ -159,7 +253,7 @@ function VisualizarAtivos({ setTela }) {
                     type="text"
                     rows="4"
                     value={dadosAtivo.ati_complemento}
-                    disabled
+                    disabled={!edit}
                   />
                 </div>
               </form>
@@ -182,7 +276,7 @@ function VisualizarAtivos({ setTela }) {
                       class="input is-small"
                       type="text"
                       value={dadosAtivo.ati_marca}
-                      disabled
+                      disabled={!edit}
                     />
                   </div>
                   <div className="field column" >
@@ -192,7 +286,7 @@ function VisualizarAtivos({ setTela }) {
                       class="input is-small"
                       type="text"
                       value={dadosAtivo.ati_modelo}
-                      disabled
+                      disabled={!edit}
                     />
                   </div>
                   <div className="field column" >
@@ -202,7 +296,7 @@ function VisualizarAtivos({ setTela }) {
                       class="input is-small"
                       type="text"
                       value={dadosAtivo.ati_numero_serie}
-                      disabled
+                      disabled={!edit}
 
                     />
                   </div>
@@ -213,7 +307,7 @@ function VisualizarAtivos({ setTela }) {
                       class="input is-small"
                       type="text"
                       value={dadosAtivo.ati_preco_aquisicao}
-                      disabled
+                      disabled={!edit}
 
                     />
                   </div>
@@ -227,7 +321,7 @@ function VisualizarAtivos({ setTela }) {
                       class="input is-small"
                       type="text"
                       value={dadosAtivo.ati_tamanho}
-                      disabled
+                      disabled={!edit}
 
                     />
                   </div>
@@ -239,18 +333,8 @@ function VisualizarAtivos({ setTela }) {
                       class="input is-small"
                       type="text"
                       value={dadosAtivo.ati_capacidade}
-                      disabled
+                      disabled={!edit}
 
-                    />
-                  </div>
-                  <div className="field column" >
-                    <label className="form-label">Quantidade</label>
-
-                    <input
-                      class="input is-small"
-                      type="text"
-                      value={dadosAtivo.ati_quantidade}
-                      disabled
                     />
                   </div>
 
@@ -273,7 +357,7 @@ function VisualizarAtivos({ setTela }) {
                       class="input is-small"
                       type="text"
                       value={dadosAtivo.ati_ano_fabricacao}
-                      disabled
+                      disabled={!edit}
                     />
                   </div>
                   <div className="field column " >
@@ -283,7 +367,7 @@ function VisualizarAtivos({ setTela }) {
                       class="input is-small"
                       type="date"
                       value={dadosAtivo.ati_data_expiracao}
-                      disabled
+                      disabled={!edit}
                     />
                   </div>
                 </div>
@@ -303,7 +387,7 @@ function VisualizarAtivos({ setTela }) {
                       class="input is-small"
                       type="text"
                       value={dadosAtivo.ati_chave_nf_e}
-                      disabled
+                      disabled={!edit}
 
                     />
                   </div>
@@ -315,7 +399,7 @@ function VisualizarAtivos({ setTela }) {
                       class="input is-small"
                       type="text"
                       value={dadosAtivo.ati_url}
-                      disabled
+                      disabled={!edit}
 
                     />
                   </div>
@@ -326,7 +410,7 @@ function VisualizarAtivos({ setTela }) {
                       class="input is-small"
                       type="text"
                       value={dadosAtivo.ati_observacao}
-                      disabled
+                      disabled={!edit}
                     />
                   </div>
                 </form>
@@ -341,27 +425,56 @@ function VisualizarAtivos({ setTela }) {
                 </div>
               </div>
 
-              {/* <div className='container'>
-                <h1>Documentos</h1>
-                <div class="container column is-half has-text-centered"><img src={docadd} alt="docadd" style={{ width: '100px', height: '100px' }} />
+              <div className='container'>
+                <h1 className='has-text-weight-light'>Documentos</h1>
+                <div class="container column is-half has-text-centered">
+                  {docUrl == null ? <div>Ativo sem documento</div> : <button class="button is-info">
+                    Donwload do Documento
+                  </button>}
                 </div>
-              </div> */}
+              </div>
 
             </div>
+
 
             <div class="field is-grouped is-grouped-centered">
-              <p class="control">
-                <button class="button is-danger" type="submit" onClick={exibirPopUpDelecao}>
-                  Desativar Ativo
-                </button>
+              {!edit &&
+                <>
+                  <p class="control">
+                    <button style={{backgroundColor: 'red'}} class="button" type="submit" onClick={exibirPopUpDelecao}>
+                      Desativar Ativo
+                    </button>
 
-              </p>
-              <p class="control">
-                <button class="button is-light" onClick={() => setTela('Ativos')}>
-                  Voltar
-                </button>
-              </p>
+                  </p>
+                  <p class="control">
+                    <button class="button is-light" onClick={handleEdit}>
+                      Atualizar Ativo
+                    </button>
+                  </p>
+                  <p class="control">
+                    <button style={{backgroundColor: 'gray'}}class="button" onClick={() => setTela('Ativos')}>
+                      Voltar
+                    </button>
+                  </p>
+                </>
+              }
+              {edit &&
+                <>
+                  <p class="control">
+                    <button class="button is-light" onClick={handleUpdate}>
+                      Confirmar atualização
+                    </button>
+                  </p>
+                  <p class="control">
+                    <button style= {{backgroundColor: 'red'}}class="button" type="submit" onClick={handleEdit}>
+                      Cancelar
+                    </button>
+                  </p>
+                </>
+              }
             </div>
+
+
 
           </div>
           <div id='popupdelecao' style={{ display: 'none', height: '200px', backgroundColor: '#FFFFFF', position: 'fixed', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', textAlign: 'center', width: '50%', alignContent: 'center', justifyContent: 'center', borderRadius: '10px' }}>

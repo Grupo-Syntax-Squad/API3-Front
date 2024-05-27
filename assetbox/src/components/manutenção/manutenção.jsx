@@ -32,22 +32,21 @@ const Manutencao = ({ setTela }) => {
     return (
         <body>
             <div className='page-full' style={{ backgroundColor: 'transparent', borderTopLeftRadius: '10px', borderTopRightRadius: '10px' }}>
-                <button className="button is-primary m-5 ml-6 is-rounded is-size-4" style={{ backgroundColor: '#367E90', color: '#fff' }} onClick={() => setTela('CadastroManutenção')}>Cadastrar Manutenção</button>
-                <button className="button is-primary m-5 ml-6 is-rounded is-size-4" style={{ backgroundColor: '#367E90', color: '#fff' }} onClick={() => setTela('VisualizarAgendamento')}>Visualizar Agendamentos de Manutenção</button>
-                <div className='page-full' style={{ backgroundColor: '#459EB5', borderTopLeftRadius: '10px', borderTopRightRadius: '10px' }}>
+                <button className="button button-effect is-primary m-5 ml-6 is-rounded is-size-4 shadow-button" onClick={() => setTela('VisualizarAgendamento')}>Cadastrar Manutenção</button>
+                <div className='page-full shadow-button' style={{ backgroundColor: '#459EB5', borderTopLeftRadius: '10px', borderTopRightRadius: '10px' }}>
                     <div className='field'>
                         <div className="columns filtro mx-0" style={{ borderTopLeftRadius: '10px', borderTopRightRadius: '10px' }}>
                             <div className="column is-two-fifths is-flex is-align-items-center" style={{ display: 'flex', alignItems: 'center' }}>
                                 <img src={Filtro} className="mx-1" alt='filter'></img><label className='filtros mx-1 has-text-white has-text-weight-medium mr-3'>Horário</label>
-                                <input className="input is-small is-flex-grow-2 is-rounded" type="time" placeholder='Digite um horário:' value={filtroHorario} onChange={(e) => setFiltroHorario(e.target.value)} />
+                                <input className="input is-small is-flex-grow-2 is-rounded border-none" type="time" placeholder='Digite um horário' value={filtroHorario} onChange={(e) => setFiltroHorario(e.target.value)} />
                             </div>
                             <div className="column is-two-fifths is-flex is-align-items-center">
                                 <label className='filtros mx-1 has-text-white has-text-weight-medium mr-3' >ID</label>
-                                <input className="input is-small is-flex-grow-3 is-rounded" type="text" placeholder='Digite o ID da manutenção' value={filtroAtivo} onChange={(e) => setFiltroAtivo(e.target.value)} />
+                                <input className="input is-small is-flex-grow-3 is-rounded border-none" type="text" placeholder='Digite o ID da manutenção' value={filtroAtivo} onChange={(e) => setFiltroAtivo(e.target.value)} />
                             </div>
                             <div className="column is-one-fifth is-flex is-align-items-center">
                                 <label className='filtros mx-1 has-text-white has-text-weight-medium mr-3'>Status</label>
-                                <input className="input is-small is-flex-grow-2 is-rounded" type="text" placeholder='Digite um Status:' value={filtroStatus} onChange={(e) => setFiltroStatus(e.target.value)} />
+                                <input className="input is-small is-flex-grow-2 is-rounded border-none" type="text" placeholder='Digite um Status' value={filtroStatus} onChange={(e) => setFiltroStatus(e.target.value)} />
                             </div>
                         </div>
                     </div>

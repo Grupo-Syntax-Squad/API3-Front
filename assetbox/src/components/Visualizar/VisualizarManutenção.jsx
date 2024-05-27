@@ -7,6 +7,19 @@ function VisualizarManutencao({ setTela }) {
   const [dadosManutencao, setDadosManutencao] = useState({})
   const [carregando, setCarregando] = useState(true);
 
+  const [manAtividade, setManAtividade] = useState('');
+  const [manData, setManData] = useState(new Date());
+  const [manHorario, setManHorario] = useState('');
+  const [manResponsavel, setManResponsavel] = useState('');
+  const [manObservacoes, setManObservacoes] = useState('');
+  const [manCep, setManCep] = useState('');
+  const [manRua, setManRua] = useState('');
+  const [manNumero, setManNumero] = useState('');
+  const [manCidade, setManCidade] = useState('');
+  const [manBairro, setManBairro] = useState('');
+  const [manUf, setManUf] = useState('');
+
+
   const id = localStorage.getItem('id');
 
   const todos_status = ["AGUARDANDO_MANUTENCAO", "EM_MANUTENCAO", "ADIADA", "CANCELADA", "CONCLUIDA"];
@@ -17,8 +30,18 @@ function VisualizarManutencao({ setTela }) {
   const handleAtualizarStatus = () => {
     try {
       dadosManutencao.man_status = status;
+      dadosManutencao.man_atividade = manAtividade;
+      dadosManutencao.man_data = manData;
+      dadosManutencao.man_horario = manHorario === '' ? '00:00:00' : manHorario + ':00';
+      dadosManutencao.man_responsavel = manResponsavel;
+      dadosManutencao.man_observacoes = manObservacoes;
+      dadosManutencao.man_endereco_id.end_cep = manCep;
+      dadosManutencao.man_endereco_id.end_rua = manRua;
+      dadosManutencao.man_endereco_id.end_numero = manNumero;
+      dadosManutencao.man_endereco_id.end_cidade = manCidade;
+      dadosManutencao.man_endereco_id.end_bairro = manBairro;
+      dadosManutencao.man_endereco_id.end_uf = manUf;
       const response = axios.put(`http://localhost:8000/manutencoes/${Number(id)}`, dadosManutencao);
-      console.log(response.status, response.data);
       handleEdit();
     } catch (error) {
       window.alert("Ocorreu um erro ao tentar atualizar o status da manutenção!");
@@ -26,16 +49,79 @@ function VisualizarManutencao({ setTela }) {
     }
   }
 
+  const handleCancelarEdicao = async () => {
+    try {
+      const response = await axios.get(`http://localhost:8000/manutencoes/${Number(id)}`);
+      const dados = response.data;
+      setDadosManutencao(dados);
+      setStatus(String(todos_status.indexOf(dados.man_status)));
+      setManAtividade(dados.man_atividade)
+      setManData(dados.man_data)
+      setManHorario(dados.man_horario)
+      setManResponsavel(dados.man_responsavel)
+      setManObservacoes(dados.man_observacoes)
+      setManCep(dados.man_endereco_id.end_cep)
+      setManRua(dados.man_endereco_id.end_rua)
+      setManNumero(dados.man_endereco_id.end_numero)
+      setManCidade(dados.man_endereco_id.end_cidade)
+      setManBairro(dados.man_endereco_id.end_bairro)
+      setManUf(dados.man_endereco_id.end_uf)
+    } catch (error) {
+      console.error(`Erro ao buscar dados da manutenção ${id}:`, error);
+    }
+    handleEdit();
+  };
+
+  const handleCepChange = async (event) => {
+    const cep = event.target.value;
+    console.log(cep.replace("-", ""))
+    setManCep(cep.replace("-", ""));
+    console.log(manCep)
+
+    if (cep.length === 8) {
+      try {
+        const response = await axios.get(`https://viacep.com.br/ws/${cep}/json/`);
+        const data = response.data;
+        if (data.erro) {
+          window.alert("CEP inválido!")
+          setManRua("");
+          setManBairro("");
+          setManCidade("");
+          setManUf("");
+          setManCep("");
+        } else {
+          setManRua(data.logradouro);
+          setManBairro(data.bairro);
+          setManCidade(data.localidade);
+          setManUf(data.uf);
+          setManCep(data.cep);
+        }
+      } catch (error) {
+        console.error('Erro ao buscar o CEP:', error);
+      }
+    }
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       console.log("Id:", id);
       try {
         const response = await axios.get(`http://localhost:8000/manutencoes/${Number(id)}`);
         const dados = response.data;
-        console.log(dados)
         setCarregando(false);
         setDadosManutencao(dados);
         setStatus(String(todos_status.indexOf(dados.man_status)));
+        setManAtividade(dados.man_atividade)
+        setManData(dados.man_data)
+        setManHorario(dados.man_horario)
+        setManResponsavel(dados.man_responsavel)
+        setManObservacoes(dados.man_observacoes)
+        setManCep(dados.man_endereco_id.end_cep)
+        setManRua(dados.man_endereco_id.end_rua)
+        setManNumero(dados.man_endereco_id.end_numero)
+        setManCidade(dados.man_endereco_id.end_cidade)
+        setManBairro(dados.man_endereco_id.end_bairro)
+        setManUf(dados.man_endereco_id.end_uf)
       } catch (error) {
         console.error(`Erro ao buscar dados da manutenção ${id}:`, error);
       }
@@ -60,6 +146,7 @@ function VisualizarManutencao({ setTela }) {
     }
   }
 
+  console.log()
 
   function handleDelete(id) {
     axios.delete(`http://localhost:8000/manutencoes/${id}`)
@@ -79,7 +166,7 @@ function VisualizarManutencao({ setTela }) {
       <body>
         <div class='page-full'>
           <div class='field'>
-            <h2>{dadosManutencao.man_atividade}</h2>
+            <h2>Manutenção do Ativo: {dadosManutencao.man_ativo_id.ati_titulo}</h2>
           </div>
           <h1 className='has-text-weight-light'>Dados</h1>
           <div class="columns m-3">
@@ -93,8 +180,9 @@ function VisualizarManutencao({ setTela }) {
                     <input
                       class="input is-small"
                       type="text"
-                      value={dadosManutencao.man_atividade}
-                      disabled
+                      value={manAtividade}
+                      onChange={e => setManAtividade(e.target.value)}
+                      disabled={!edit}
 
                     />
                   </div>
@@ -124,7 +212,7 @@ function VisualizarManutencao({ setTela }) {
 
                 <div className='columns'>
                   <div class="field column">
-                    <label class="form-label">Localização</label><br />
+                    <label class="form-label">Localização do ativo</label><br />
                     <div class="select is-small">
                       <select class="is-hovered" value={dadosManutencao.man_ativo_id.ati_localizacao_id} disabled>
                         <option>{dadosManutencao.man_ativo_id.ati_localizacao_id?.loc_titulo}</option>
@@ -137,18 +225,19 @@ function VisualizarManutencao({ setTela }) {
 
 
                 <div className="field" >
-                  <label className="form-label">Responsavel</label>
+                  <label className="form-label">Responsável da manutenção</label>
                   <input
                     class="input is-small"
                     type="text"
-                    value={dadosManutencao.man_responsavel}
-                    disabled
+                    value={manResponsavel}
+                    onChange={e => setManResponsavel(e.target.value)}
+                    disabled={!edit}
                   />
                 </div>
 
 
                 <div className="field" >
-                  <label className="form-label">Titulo</label>
+                  <label className="form-label">Titulo do ativo</label>
                   <input
                     class="input is-small"
                     type="text"
@@ -158,123 +247,139 @@ function VisualizarManutencao({ setTela }) {
                 </div>
 
                 <div className="field" >
-                  <label className="form-label">Complemento</label>
+                  <label className="form-label">Observações</label>
 
                   <input
                     class="input is-small"
                     type="text"
                     rows="4"
-                    value={dadosManutencao.man_ativo_id.ati_complemento}
-                    disabled
+                    value={manObservacoes}
+                    placeholder={manObservacoes === null || manObservacoes === undefined || manObservacoes === "" ? "Sem observações" : manObservacoes}
+                    onChange={e => setManObservacoes(e.target.value)}
+                    disabled={!edit}
                   />
                 </div>
               </form>
             </div>
+            <div className='column is-half'>
+              <div className="field column" >
+                <label className="form-label">Horário</label>
+
+                <input
+                  class="input is-small"
+                  type="time"
+                  value={manHorario}
+                  onChange={e => setManHorario(e.target.value)}
+                  disabled={!edit}
+                />
+              </div>
+              <div className="field column" >
+                <label className="form-label">Data</label>
+
+                <input
+                  class="input is-small"
+                  type="text"
+                  value={new Date(manData).toDateString()}
+                  onChange={e => setManData(e.target.value)}
+                  disabled={!edit}
+                />
+              </div>
+              <div className="field column" >
+                <label className="form-label">ID do ativo</label>
+
+                <input
+                  class="input is-small"
+                  type="text"
+                  value={dadosManutencao.man_ativo_id.ati_id}
+                  disabled
+
+                />
+              </div>
+            </div>
           </div>
 
-          <h1 className='has-text-weight-light'>Características</h1>
+          <h1 className='has-text-weight-light'>Endereço da manutenção</h1>
 
           <div class="mid-page" >
 
             <div class="columns m-3">
-
-
               <div class="column">
                 <div className='columns'>
-                  <div className="field column" >
-                    <label className="form-label">Horário</label>
 
-                    <input
-                      class="input is-small"
-                      type="text"
-                      value={dadosManutencao.man_horario}
-                      disabled
-                    />
-                  </div>
-                  <div className="field column" >
-                    <label className="form-label">Data</label>
-
-                    <input
-                      class="input is-small"
-                      type="text"
-                      value={new Date(dadosManutencao.man_data).toDateString()}
-                      disabled
-                    />
-                  </div>
-                  <div className="field column" >
-                    <label className="form-label">ID do ativo</label>
-
-                    <input
-                      class="input is-small"
-                      type="text"
-                      value={dadosManutencao.man_ativo_id.ati_id}
-                      disabled
-
-                    />
-                  </div>
-                  <div className="field column" >
-                    <label className="form-label">Cidade</label>
-
-                    <input
-                      class="input is-small"
-                      type="text"
-                      value={dadosManutencao.man_endereco_id.end_cidade}
-                      disabled
-
-                    />
-                  </div>
-                </div>
-
-                <div className='columns'>
                   <div className="field column" >
                     <label className="form-label">CEP</label>
 
                     <input
                       class="input is-small"
                       type="text"
-                      value={dadosManutencao.man_endereco_id.end_cep}
-                      disabled
+                      value={manCep}
+                      onChange={handleCepChange}
+                      disabled={!edit}
 
                     />
                   </div>
 
-                  <div className="field column" >
-                    <label className="form-label">Estado</label>
-
-                    <input
-                      class="input is-small"
-                      type="text"
-                      value={dadosManutencao.man_endereco_id.end_uf}
-                      disabled
-
-                    />
-                  </div>
                   <div className="field column" >
                     <label className="form-label">Rua</label>
 
                     <input
                       class="input is-small"
                       type="text"
-                      value={dadosManutencao.man_endereco_id.end_rua}
-                      disabled
+                      value={manRua}
+                      onChange={e => setManRua(e.target.value)}
+                      disabled={!edit}
                     />
                   </div>
 
+                  <div className="field column" >
+                    <label className="form-label">Número</label>
+
+                    <input
+                      class="input is-small"
+                      type="text"
+                      value={manNumero}
+                      onChange={e => setManNumero(e.target.value)}
+                      disabled={!edit}
+                    />
+                  </div>
                 </div>
 
                 <div className='columns'>
+                  <div className="field column" >
+                    <label className="form-label">Cidade</label>
+
+                    <input
+                      class="input is-small"
+                      type="text"
+                      value={manCidade}
+                      onChange={e => setManCidade(e.target.value)}
+                      disabled={!edit}
+
+                    />
+                  </div>
                   <div className="field column" >
                     <label className="form-label">Bairro</label>
 
                     <input
                       class="input is-small"
                       type="text"
-                      value={dadosManutencao.man_endereco_id.end_bairro}
-                      disabled
+                      value={manBairro}
+                      onChange={e => setManBairro(e.target.value)}
+                      disabled={!edit}
+                    />
+                  </div>
+                  <div className="field column" >
+                    <label className="form-label">UF</label>
+
+                    <input
+                      class="input is-small"
+                      type="text"
+                      value={manUf}
+                      onChange={e => setManUf(e.target.value)}
+                      disabled={!edit}
                     />
                   </div>
                 </div>
-
               </div>
             </div>
 
@@ -282,7 +387,7 @@ function VisualizarManutencao({ setTela }) {
               {!edit &&
                 <>
                   <p class="control">
-                    <button class="button is-danger" type="submit" onClick={exibirPopUpDelecao}>
+                    <button style={{backgroundColor: 'red'}} class="button" type="submit" onClick={exibirPopUpDelecao}>
                       Deletar
                     </button>
                   </p>
@@ -292,7 +397,7 @@ function VisualizarManutencao({ setTela }) {
                     </button>
                   </p>
                   <p class="control">
-                    <button class="button is-light" onClick={() => setTela('Ativos')}>
+                    <button style={{backgroundColor: "gray"}} class="button is-light" onClick={() => setTela('Ativos')}>
                       Voltar
                     </button>
                   </p>
@@ -306,7 +411,7 @@ function VisualizarManutencao({ setTela }) {
                     </button>
                   </p>
                   <p class="control">
-                    <button class="button is-danger" type="submit" onClick={handleEdit}>
+                    <button class="button is-danger" type="submit" onClick={handleCancelarEdicao}>
                       Cancelar
                     </button>
                   </p>

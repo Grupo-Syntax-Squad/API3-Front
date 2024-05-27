@@ -25,20 +25,38 @@ function CadastroManutenção({ setTela }) {
   const [localizacoes, setLocalizacoes] = useState([]);
   const [tipos, setTipos] = useState([]);
   const [ativos, setAtivos] = useState([]);
+  const [dataSelecionada, setData] = useState(new Date())
   const [ativoSelecionado, setAtivo] = useState({
     "ati_localizacao_id": {
       "loc_titulo": ""
     }
   });
 
-  useEffect(() => {
-    const fetchData = async () => {
-      let response = await axios.get('http://localhost:8000/ativos');
-      setAtivos(response.data)
-    };
+  
 
-    fetchData();
-  }, []);
+
+  const getDataFromLocalStorage = () => {
+    const dataSelecionada = new Date(localStorage.getItem('dataSelecionada')).toISOString().split("T")[0];
+    setData(dataSelecionada);
+    console.log("Data selecionada:", dataSelecionada);
+    if (dataSelecionada) {
+        // Faça o que precisar com a data recuperada
+        console.log('Data selecionada:', dataSelecionada);
+        // Por exemplo, você pode definir o estado com a data recuperada
+        setManData(dataSelecionada);
+    }
+};
+
+useEffect(() => {
+  const fetchData = async () => {
+    let response = await axios.get('http://localhost:8000/ativos');
+    setAtivos(response.data);
+    getDataFromLocalStorage(); // Chamando a função para recuperar os dados do localStorage
+  };
+
+  fetchData(); // Chamando a função fetchData
+
+}, []); 
 
   function exibirPopUp() {
     var popup = document.getElementById('popup');
@@ -52,6 +70,14 @@ function CadastroManutenção({ setTela }) {
   // Função para lidar com o envio do formulário
   const handleSubmit = async (event) => {
     event.preventDefault();
+
+    const camposObrigatorios = [man_status, man_data, man_cep, man_horario, man_ativo_id, man_responsavel, man_atividade];
+    const camposVazios = camposObrigatorios.some(campo => !campo);
+
+    if (camposVazios) {
+        alert('Por favor, preencha todos os campos obrigatórios.');
+        return;
+    }
 
     let response;
     const EnderecoData = {
@@ -70,7 +96,7 @@ function CadastroManutenção({ setTela }) {
     const ativoData = {
       man_endereco_id: response.data,
       man_atividade,
-      man_data: dataHoraServidor,
+      man_data: new Date().setDate(new Date(dataSelecionada).getDate()+1),
       man_horario : man_horario === '' ? '00:00:00' : man_horario + ':00',
       man_localizacao: ativoSelecionado.ati_localizacao_id,
       man_ativo_id: ativoSelecionado,
@@ -85,11 +111,12 @@ function CadastroManutenção({ setTela }) {
     // Limpar campos
     setManEnderecoId('');
     setManAtividade('');
-    setManData('');
+    setData('');
     setManHora('');
     setManLocalizacao('');
     setManId('');
     setManAtivoId('');
+    localStorage.setItem("dataSelecionada", "")
   };
 
   const handlerAtivo = (e) => {
@@ -107,10 +134,20 @@ function CadastroManutenção({ setTela }) {
       try {
         const response = await axios.get(`https://viacep.com.br/ws/${cep}/json/`);
         const data = response.data;
-        setManRua(data.logradouro);
-        setManBairro(data.bairro);
-        setManCidade(data.localidade);
-        setManUf(data.uf);
+        if (data.erro) {
+          window.alert("CEP inválido!")
+          setManRua("");
+          setManBairro("");
+          setManCidade("");
+          setManUf("");
+          setManCep("");
+        } else {
+          setManRua(data.logradouro);
+          setManBairro(data.bairro);
+          setManCidade(data.localidade);
+          setManUf(data.uf);
+          setManCep(data.cep);
+        }
       } catch (error) {
         console.error('Erro ao buscar o CEP:', error);
       }
@@ -119,16 +156,16 @@ function CadastroManutenção({ setTela }) {
 
   return (
     <body>
-      <div class='page-full'>
+      <div class='page-full shadow-button'>
         <div class='field'>
-          <h2 class="titulo-cadastro">Cadastro de manutenção</h2>
+          <h2 class="titulo-cadastro p-2">Cadastro de Manutenção</h2>
         </div>
         <div class="columns m-3">
-          <div class="column is-half">
+          <div class="column is-half" style={{width: '80%'}}>
             <form onSubmit={handleSubmit}>
               <div className='top-one'>
                 <div class="field">
-                  <label class="label has-text-black">Status: <span className='has-text-danger'>*</span></label>
+                  <label class="label has-text-weight-normal">Status <span className='has-text-danger'>*</span></label>
                   <div class="select is-small">
                     <select class="is-hovered" onChange={e => setManStatus(e.target.value)}>
                       <option value="0" selected>Aguardando Manutenção</option>
@@ -140,17 +177,18 @@ function CadastroManutenção({ setTela }) {
                   </div>
                 </div>
                 <div className="field" >
-                  <label className="form-label has-text-black">Data da manutenção:<span className='has-text-danger'>*</span></label>
+                  <label className="form-label ">Data da manutenção:<span className='has-text-danger'>*</span></label>
+
                   <input
-                    class="input is-small"
+                    class="input is-small mt-2"
                     type="date"
                     placeholder='Insira a Data da manutenção:'
-                    value={man_data}
-                    onChange={(event) => setManData(event.target.value)}
+                    value={dataSelecionada}
+                    onChange={(event) => setData(event.target.value)}
                   />
                 </div>
                 <div class="field">
-                  <label class="label has-text-black">horario: <span className='has-text-danger'>*</span></label>
+                  <label class="label has-text-weight-normal">Horario da Manutenção <span className='has-text-danger'>*</span></label>
                   <input
                     class="input is-small"
                     type="time"
@@ -161,7 +199,7 @@ function CadastroManutenção({ setTela }) {
                   />
                 </div>
                 <div class="field">
-                  <label class="label has-text-black">Atividade: <span className='has-text-danger'>*</span></label>
+                  <label class="label has-text-weight-normal">Atividade<span className='has-text-danger'>*</span></label>
                   <input
                     class="input is-small"
                     type="text"
@@ -172,7 +210,7 @@ function CadastroManutenção({ setTela }) {
                   />
                 </div>
                 <div class="field">
-                  <label class="label has-text-black">Ativo: <span className='has-text-danger'>*</span></label>
+                  <label class="label has-text-weight-normal">Ativo <span className='has-text-danger'>*</span></label>
                   <div class="select is-small">
                     <select class="is-hovered" onChange={e => handlerAtivo(e)}>
                       <option value={null}>Selecione um ativo </option>
@@ -183,7 +221,8 @@ function CadastroManutenção({ setTela }) {
                   </div>
                 </div>
                 <div className="field" >
-                  <label className="label has-text-black">Responsavel:<span className='has-text-danger'>*</span></label>
+                  <label className="label has-text-weight-normal">Responsável<span className='has-text-danger'>*</span></label>
+
                   <input
                     class="input is-small"
                     type="text"
@@ -194,7 +233,7 @@ function CadastroManutenção({ setTela }) {
                   />
                 </div>
                 <div class="field">
-                  <label class="label has-text-black">Localização:</label>
+                  <label class="label has-text-weight-normal">Localização</label>
                   <input
                     class="input is-small"
                     type="text"
@@ -205,7 +244,7 @@ function CadastroManutenção({ setTela }) {
                   />
                 </div>
                 <div className="field" >
-                  <label className="label has-text-black">Observações:</label>
+                  <label className="label has-text-weight-normal">Observações</label>
                   <input
                     class="input is-small"
                     type="text"
@@ -227,7 +266,9 @@ function CadastroManutenção({ setTela }) {
               <form onSubmit={handleSubmit}>
                 <div>
                   <div className="field" >
-                    <label className="form-label has-text-black">CEP:<span className='has-text-danger'>*</span></label>
+
+                    <label className="form-label">CEP:<span className='has-text-danger'>*</span></label>
+
                     <input
                       class="input is-small"
                       type="text"
@@ -238,7 +279,7 @@ function CadastroManutenção({ setTela }) {
                     />
                   </div>
                   <div className="field" >
-                    <label className="form-label has-text-black">Numero: <span className='has-text-danger'>*</span></label>
+                    <label className="form-label">Número:<span className='has-text-danger'>*</span></label>
                     <input
                       class="input is-small"
                       type="text"
@@ -249,7 +290,8 @@ function CadastroManutenção({ setTela }) {
                     />
                   </div>
                   <div className="field" >
-                    <label className="form-label has-text-black">UF:<span className='has-text-danger'>*</span></label>
+                    <label className="form-label">UF:<span className='has-text-danger'>*</span></label>
+
                     <input
                       class="input is-small"
                       type="text"
@@ -265,7 +307,8 @@ function CadastroManutenção({ setTela }) {
             <div class="column is-half" style={{ width: '80%' }}>
               <form onSubmit={handleSubmit}>
                 <div className="field">
-                  <label className="form-label has-text-black">Cidade:<span className='has-text-danger'>*</span></label>
+                  <label className="form-label ">Cidade:<span className='has-text-danger'>*</span></label>
+
                   <input
                     class="input is-small"
                     type="text"
@@ -276,7 +319,8 @@ function CadastroManutenção({ setTela }) {
                   />
                 </div>
                 <div className="field" >
-                  <label className="form-label has-text-black">Rua:<span className='has-text-danger'>*</span></label>
+                  <label className="form-label">Rua:<span className='has-text-danger'>*</span></label>
+
                   <input
                     class="input is-small"
                     type="text"
@@ -287,7 +331,8 @@ function CadastroManutenção({ setTela }) {
                   />
                 </div>
                 <div className="field" >
-                  <label className="form-label has-text-black">Bairro:<span className='has-text-danger'>*</span></label>
+                  <label className="form-label">Bairro:<span className='has-text-danger'>*</span></label>
+
                   <input
                     class="input is-small"
                     type="text"
@@ -297,8 +342,9 @@ function CadastroManutenção({ setTela }) {
                     onChange={(event) => setManBairro(event.target.value)}
                   />
                 </div>
-                <div className="field" style={{ marginInline: '20px', marginBottom: '20px' }}>
-                  <label className="form-label has-text-black" >Complemento:</label>
+                <div className="field" >
+                  <label className="form-label" >Complemento:</label>
+
                   <input
                     class="input is-small"
                     type="text"

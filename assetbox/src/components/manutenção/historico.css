@@ -1,4 +1,11 @@
+:root{
+    --fundocinza: #D9D9D9;
 
+    @media(prefers-color-scheme: dark){
+        --fundocinza: #333333;
+    }
+
+}
 
 .tela-content{
     border-radius: 10px;
@@ -13,7 +20,7 @@
     align-items: stretch;
     border-radius: 20px;
     justify-content: space-around;
-    background-color: #D9D9D9; 
+    background-color: var(--fundocinza); 
     margin: 5% 10% 5% 10%;
     padding-bottom: 0.5%;
 
