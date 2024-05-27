@@ -30,7 +30,7 @@ const AtivosPendentes = ({ setTela }) => {
                 console.error("Um erro ocorreu ao buscar filiais: ", error);
             });
     }, []);
-    
+
 
     const handleRelatorio = async () => {
         let response = axios.get(`http://localhost:8000/relatorios/filial/${filialId}`);
@@ -59,7 +59,7 @@ const AtivosPendentes = ({ setTela }) => {
             ((asset.ati_data_expiracao && new Date(asset.ati_data_expiracao) < new Date()) && asset.ati_status !== 'DESATIVADO')
         );
     });
-    
+
 
     return (
         <body>
@@ -143,7 +143,7 @@ const AtivosPendentes = ({ setTela }) => {
                                     <p className='has-text-black'> {asset.ati_titulo}</p>
                                 </div>
                                 <div className='SemHover column is-one-third mr-2 dado-ativo is-flex is-justify-content-center is-align-items-center has-text-weight-medium'>
-                                    <p className='has-text-black'> {asset.ati_data_expiracao}</p>
+                                    <p className='has-text-black'> {new Date(new Date(asset.ati_data_expiracao)).toLocaleDateString('pt-BR')}</p>
                                 </div>
                             </div>
                         ))}

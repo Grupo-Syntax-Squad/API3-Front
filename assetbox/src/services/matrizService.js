@@ -20,11 +20,11 @@ export const getMatriz = async () => {
         return response.data;
     } catch (error) {
         if (error.response.status === 400) {
-            alert(error.response.data);
+            console.error(error.response.data);
         } else {
-            alert("Erro ao buscar matriz");
             console.error(`Erro ao buscar matriz`, error);
         }
+        return false;
     }
 }
 

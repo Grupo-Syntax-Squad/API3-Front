@@ -19,12 +19,8 @@ export const getFilial = async (id) => {
         const response = await axios.get(`http://localhost:8000/filiais/${id}`);
         return response.data;
     } catch (error) {
-        if (error.response.status === 400) {
-            alert(error.response.data);
-        } else {
-            alert("Erro ao buscar filial");
-            console.error(`Erro ao buscar filial`, error);
-        }
+        console.error(`Erro ao buscar filial`, error);
+        return false;
     }
 }
 

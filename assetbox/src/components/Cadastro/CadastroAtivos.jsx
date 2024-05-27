@@ -6,7 +6,7 @@ import adicionar from "./adicionar.svg"
 import axios from 'axios';
 import CadastroTipo from './CadastroTipo';
 import CadastroLocalizacao from './CadastroLocalizacao';
-import { getFilial } from '../../services/filialService';
+import { getFiliais, getFilial } from '../../services/filialService';
 
 function CadastroAtivos({ setTela }) {
   // Definindo estados para armazenar os dados do ativo
@@ -35,9 +35,15 @@ function CadastroAtivos({ setTela }) {
   const [ati_data_validade, setValidadeAtivo] = useState('');
   const [imagemSelecionada, setImagemSelecionada] = useState(null);
   const [documentoSelecionado, setDocumentoSelecionado] = useState(null);
+
+
   const [localizacoes, setLocalizacoes] = useState([]);
+  const [localizacoesMatriz, setLocalizacoesMatriz] = useState([]);
   const [tipos, setTipos] = useState([]);
   const [destinatarios, setDestinatarios] = useState([]);
+  const [filiais, setFiliais] = useState([]);
+
+  const [carregando, setCarregando] = useState(true);
 
   const [mostrarTipo, setMostrarTipo] = useState(false);
   const handleTipoClick = () => mostrarTipo ? setMostrarTipo(false) : setMostrarTipo(true);
@@ -48,13 +54,21 @@ function CadastroAtivos({ setTela }) {
   useEffect(() => {
     const fetchData = async () => {
       let response = await axios.get('http://localhost:8000/localizacoes');
-      setLocalizacoes(response.data);
+      let locaisMatriz = response.data.filter(localizacao => localizacao.loc_filial_id === null);
+      let locaisFilial = response.data.filter(localizacao => localizacao.loc_filial_id !== null);
+      setLocalizacoesMatriz(locaisMatriz);
+      setLocalizacoes(locaisFilial);
 
       response = await axios.get('http://localhost:8000/tipos');
       setTipos(response.data);
 
       response = await axios.get('http://localhost:8000/destinatarios');
       setDestinatarios(response.data);
+
+      response = await getFiliais();
+      setFiliais(response);
+
+      setCarregando(false);
     };
 
     fetchData();
@@ -177,6 +191,15 @@ function CadastroAtivos({ setTela }) {
     setDocumentoSelecionado(null)
   };
 
+  if (carregando) {
+    return (
+      <body>
+        <div class='page-full'>
+          <h1 className='has-text-weight-light'>Carregando...</h1>
+        </div>
+      </body>);
+  }
+
   return (
     <body>
       <div class=' page-full shadow-button'>
@@ -228,7 +251,9 @@ function CadastroAtivos({ setTela }) {
                       <select class="is-hovered" onChange={e => setLocalizacaoAtivo(e.target.value)}>
                         <option value="" disabled selected>Selecione uma localização</option>
 
-                        {localizacoes.map((localizacao) => <option key={localizacao.loc_titulo} value={localizacao.loc_id}>{localizacao.loc_titulo}</option>)}
+                        {localizacoesMatriz.map((localizacao) => <option key={localizacao.loc_titulo} value={localizacao.loc_id}>{localizacao.loc_titulo} - Matriz</option>)}
+
+                        {localizacoes.map((localizacao) => <option key={localizacao.loc_titulo} value={localizacao.loc_id}>{localizacao.loc_titulo} - {filiais.find(filial => filial.fil_id === localizacao.loc_filial_id).fil_nome}</option>)}
                       </select>
                     ) : (
                       <p>Nenhuma localização disponível</p>

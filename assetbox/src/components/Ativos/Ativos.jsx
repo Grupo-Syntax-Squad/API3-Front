@@ -30,8 +30,8 @@ const Ativos = ({ setTela }) => {
     }, []);
 
     const handleRelatorio = async () => {
-        let response = axios.get(`http://localhost:8000/relatorios/filial/${filialId}`);
-        console.log(response.data);
+        localStorage.setItem('filialId', filialId);
+        setTela('Relatorio');
     }
 
     const handleClick = (id) => {

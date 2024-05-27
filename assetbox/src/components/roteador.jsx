@@ -250,9 +250,11 @@ export default function Roteador() {
                 case 'Relatorio':
                     return (
                         <>
-                            {root ? <MenuRoot seletorView={selecionarView} botoes={botoes} /> : <Menu seletorView={selecionarView} botoes={botoes} />
-                            }
-                            <Relatorio />
+                            <div className="no-print">
+                                {root ? <MenuRoot seletorView={selecionarView} botoes={botoes} /> : <Menu seletorView={selecionarView} botoes={botoes} />
+                                }
+                            </div>
+                            <Relatorio setTela={setTela} />
                         </>
                     );
                 default:
