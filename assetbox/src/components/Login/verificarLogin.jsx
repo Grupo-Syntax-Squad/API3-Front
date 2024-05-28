@@ -3,20 +3,15 @@ import './login.css';
 import logo from '../../assets/img/Logo.svg';
 import axios from 'axios';
 
-const Login = ({ setTela }) => {
+const ConfirmarLogin = ({ setTela }) => {
     const [email, setEmail] = useState("");
     const [senha, setSenha] = useState("");
-    const [validador, setValidador] = useState("");
+    const [login, Verificador] = useState(false);
+    
+ // estou tentando enviar um codigo de confirmação no e-mail do cara
+    const VerificarCodigo = async() => {
+        const receberCodigo = localStorage.getItem("codigo")
 
-    // quero gerar um codigo de verificação no emial do cara quando ele for fazer o login, dai ele só vai logar depois de verificado
-    const GerarValidacao = async() => {
-        if(!email && email !== 'admin@gmail.com'){
-            const numeroAleatorio = Math.floor(Math.random() * 100) + 1;
-            setValidador(numeroAleatorio)
-        }
-        else{
-            window.alert("Por favor informe um e-mail")
-        }
     }
 
     const handleSubmit = async () => {
@@ -26,7 +21,6 @@ const Login = ({ setTela }) => {
                 email: email,
                 senha: senha
             }).then(response => {
-                localStorage.setItem("codigo", validador);
                 localStorage.setItem("token", response.data[0]);
                 localStorage.setItem("userEmail", email);
                 localStorage.setItem("idUser", response.data[1]);
@@ -65,4 +59,4 @@ const Login = ({ setTela }) => {
 
         </body >)
 }
-export default Login;
+export default ConfirmarLogin;
