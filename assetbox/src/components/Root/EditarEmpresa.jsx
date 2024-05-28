@@ -11,6 +11,7 @@ import handleEmail from '../../utils/handleEmail';
 import handleTelefone from '../../utils/handleTelefone';
 import { postEndereco, putEndereco } from '../../services/enderecoService';
 import { getMatriz, postMatriz, putMatriz } from '../../services/matrizService';
+import Validador from '../../utils/validadorCnpj';
 
 function EditarEmpresa({ setTela }) {
     const [matrizAlreadyExist, setMatrizAlreadyExist] = useState(false);
@@ -46,6 +47,8 @@ function EditarEmpresa({ setTela }) {
     const [filialTelefone, setTelefoneFilial] = useState("");
     const [filialEmail, setEmailFilial] = useState("");
 
+    const validador = new Validador();
+
     const [mostrarLocalizacaoFilial, setMostrarLocalizacaoFilial] = useState(false);
     const [filialLocalizacoes, setLocalizacoesFilial] = useState([]);
     const showPopUpFilial = () => mostrarLocalizacaoFilial ? setMostrarLocalizacaoFilial(false) : setMostrarLocalizacaoFilial(true);
@@ -53,7 +56,7 @@ function EditarEmpresa({ setTela }) {
     const adicionarLocalizacaoFilial = (localizacao) => {
         filialLocalizacoes.push(localizacao);
     }
-
+    
     const adicionarLocalizacaoMatriz = (localizacao) => {
         matrizLocalizacoes.push(localizacao);
     }
@@ -141,6 +144,10 @@ function EditarEmpresa({ setTela }) {
     const handleSubmit = async (event) => {
         event.preventDefault();
 
+        if (!validador.validarCNPJ(matrizCNPJ)){
+            window.alert("CNPJ Inválido!")
+            return;
+        }
         const camposObrigatorios = [matrizNome, matrizNomeFicticio, matrizTel, matrizEmail, matrizCEP];
         const camposVazios = camposObrigatorios.some(campo => !campo);
 
@@ -349,22 +356,14 @@ function EditarEmpresa({ setTela }) {
         matriz = await putMatriz(DadosMatriz);
         console.log("PUT MATRIZ", matriz);
 
-        // matrizLocalizacoes.forEach(async localizacao => {
-        //     const localizacaoData = {
-        //         "loc_titulo": localizacao
-        //     }
-        //     await putLocalizacao(localizacaoData);
-        // });
-
         setEditMatriz(false);
     }
 
-    //  style={{ borderRadius: '50px', backgroundColor: "rgb(230, 230, 230)" }}
     return (
         <div>
             <div className="m-2 columns ">
                 <form onSubmit={handleSubmit} className="column ">
-                    <h3 className=" has-text-centered has-text-weight-medium is-size-4 mb-5">Painel da Empresa</h3>
+                    <h3 className=" has-text-centered has-text-black has-text-weight-medium is-size-4 mb-5">Painel da Empresa</h3>
                     <div className="column m-3 ">
                         <div className="column p-5 shadow-button" style={{ borderRadius: '50px', backgroundColor: "rgb(230, 230, 230)" }}>
                             <div className="field">
@@ -464,7 +463,7 @@ function EditarEmpresa({ setTela }) {
 
                             {!matrizAlreadyExist &&
                                 <div className="field">
-                                    <button className="shadow-button button button-effect is-info mt-3" onClick={() => SubmitLocalizacao([localizacao])}>Cadastrar Matriz</button>
+                                    <button className="shadow-button button button-effect is-info mt-3" onClick={() => {SubmitLocalizacao([localizacao]); setTimeout(() => { setTela('EditarEmpresa')}, 1500);}}>Cadastrar Matriz</button>
                                 </div>
                             }
                         </div>
@@ -472,7 +471,7 @@ function EditarEmpresa({ setTela }) {
                 </form>
                 {/* cadastro da filial */}
                 <form onSubmit={handleSubmitFilial} className="column">
-                    <h3 className=" is-size-4 mb-5 has-text-weight-medium" style={{ textAlign: 'center' }}>Filial</h3>
+                    <h3 className=" is-size-4 mb-5 has-text-black has-text-weight-medium" style={{ textAlign: 'center' }}>Filial</h3>
                     <div className=" column m-3 ">
                         <div className="column p-6 shadow-button" style={{ borderRadius: '50px', backgroundColor: "rgb(230, 230, 230)" }}>
                             <img src={filial} class='image is-64x64  container' alt="AssetBox Logo" />

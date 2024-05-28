@@ -3,6 +3,7 @@ import "./cadastro.css";
 import axios from 'axios';
 import handleEmail from '../../utils/handleEmail';
 import handleTelefone from '../../utils/handleTelefone';
+import Validador from '../../utils/validadorCpf';
 
 function CadastroAdministrador({ setTela }) {
     const [adm_nome, setNomeAdministrador] = useState('');
@@ -12,6 +13,7 @@ function CadastroAdministrador({ setTela }) {
     const [adm_cpf, setCPFAdministrador] = useState('');
     const [showPopup, setShowPopup] = useState(false); // Estado para controlar a exibição do pop-up
 
+    const validador = new Validador();
     const handleEmailChange = (event) => {
         const email = event.target.value;
         setEmailAdministrador(email);
@@ -26,7 +28,11 @@ function CadastroAdministrador({ setTela }) {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-
+        
+        if (!validador.validarCPF(adm_cpf)){
+            window.alert("CPF inválido!")
+            return;
+        }
         const camposObrigatorios = [adm_nome, adm_email, adm_telefone, adm_senha, adm_cpf];
         const camposVazios = camposObrigatorios.some(campo => !campo);
 

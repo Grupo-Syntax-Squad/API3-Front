@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import "./cadastro.css";
 import axios from 'axios';
-
+import Validador from '../../utils/validadorCpf';
 function CadastroDestinatarios({ setTela }) {
   const [des_nome, setNomeDestinatario] = useState('');
   const [email, setEmailDestinatario] = useState('');
@@ -18,6 +18,8 @@ function CadastroDestinatarios({ setTela }) {
   const [des_tip, setTipoDestinatario] = useState('');
   const [showPopup, setShowPopup] = useState(false); // Estado para controlar a exibição do pop-up
   const [cpf, setCPFDestinatario] = useState('');
+  
+  const validador = new Validador();
 
   const handleTelefone = (value) => {
     // Remove tudo que não for dígito
@@ -79,6 +81,10 @@ function CadastroDestinatarios({ setTela }) {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
+    if (!validador.validarCPF(cpf)){
+      window.alert("CPF inválido!")
+      return;
+    }
 
     const camposObrigatorios = [des_nome, email, telefone, cpf, end_rua, end_numero, end_bairro, end_cidade, end_uf, end_cep];
     const camposVazios = camposObrigatorios.some(campo => !campo);

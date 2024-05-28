@@ -27,13 +27,14 @@ import VisualizarFilial from "./Visualizar/VisualizarFilial";
 import AtivoExpirado from "./Notificacao/AtivoExpirado";
 import NotFound from "./NotFound/page";
 import Relatorio from "./Visualizar/VisualizarRelatorio";
+import { getMatriz } from "../services/matrizService";
 
 export default function Roteador() {
     const [tela, setTela] = useState('Home');
     const [verificacaoToken, setVerificacaoToken] = useState("");
+    const [matriz, setMatriz] = useState(false);
 
     const [root, setRootLogin] = useState("")
-
     useEffect(() => {
         verificarToken();
     }, []);
@@ -46,7 +47,18 @@ export default function Roteador() {
         else {
             try {
                 let response = await axios.post("http://localhost:8000/autenticacao/verificarToken", token);
-                if (response.data) setVerificacaoToken(true);
+                const matriz = await getMatriz();
+                if (response.data) {
+                    setVerificacaoToken(true);
+                    if (!matriz) {
+                        setTela('EditarEmpresa')
+                        setMatriz(false)
+                    }
+                    else {
+                        localStorage.setItem("matriz", matriz);
+                        setMatriz(true)
+                    }
+                }
                 else {
                     localStorage.setItem("token", null);
                     setVerificacaoToken(false);
@@ -57,10 +69,25 @@ export default function Roteador() {
             }
         }
     }
+    useEffect(() => {
+        validaMatriz();
+    }, [tela]);
+
+    const validaMatriz = async () => {
+        let matrizExiste = localStorage.getItem("matriz");
+        if (!matrizExiste) {
+            setMatriz(false);
+        }
+        else {
+            setMatriz(true);
+        }
+    }
+    console.log(matriz);
 
     const selecionarView = (valor, e) => {
         e.preventDefault()
         setTela(valor);
+        validaMatriz()
     }
 
     const botoes = ['Home', 'Usuarios', 'Ativos', 'Manutenções', 'Dashboard', 'Configurações'];
@@ -68,199 +95,208 @@ export default function Roteador() {
     const construirView = () => {
 
         if (verificacaoToken) {
-            switch (tela) {
-                case 'Home':
-                    return (
-                        <>
-                            {root ? <MenuRoot seletorView={selecionarView} botoes={botoes} /> : <Menu seletorView={selecionarView} botoes={botoes} />}
-                            <Home setTela={setTela} />
-                        </>
-                    );
-                case 'EditarFilial':
-                    if (root) {
+            if (matriz !== true) {
+                return (
+                    <>
+                        <MenuRoot seletorView={selecionarView} botoes={botoes} />
+                        <EditarEmpresa setTela={setTela} />
+                    </>
+                )
+            } else {
+                switch (tela) {
+                    case 'Home':
                         return (
                             <>
-                                <MenuRoot seletorView={selecionarView} botoes={botoes} />
-                                <EditarFilial setTela={setTela} />
-                            </>
-                        )
-                    } else {
-                        return (
-                            <Login setTela={setTela} />
-                        )
-                    }
-                case 'EditarEmpresa':
-                    if (root) {
-                        return (
-                            <>
-                                <MenuRoot seletorView={selecionarView} botoes={botoes} />
-                                <EditarEmpresa setTela={setTela} />
-                            </>
-                        )
-                    } else {
-                        return (
-                            <Login setTela={setTela} />
-                        )
-                    }
-                case 'Ativos':
-                    return (
-                        <>
-                            {root ? <MenuRoot seletorView={selecionarView} botoes={botoes} /> : <Menu seletorView={selecionarView} botoes={botoes} />}
-                            <Ativos setTela={setTela} />
-                        </>
-                    );
-                case 'CadastroAtivos':
-                    return (
-                        <>
-                            {root ? <MenuRoot seletorView={selecionarView} botoes={botoes} /> : <Menu seletorView={selecionarView} botoes={botoes} />}
-                            <CadastroAtivos setTela={setTela} />
-                        </>
-                    );
-                case 'CadastroDestinatarios':
-                    return (
-                        <>
-                            {root ? <MenuRoot seletorView={selecionarView} botoes={botoes} /> : <Menu seletorView={selecionarView} botoes={botoes} />}
-                            <CadastroDestinatarios setTela={setTela} />
-                        </>
-                    );
-                case 'CadastroAdministrador':
-                    if (root) {
-                        return (
-                            <>
-                                <MenuRoot seletorView={selecionarView} botoes={botoes} />
-                                <CadastroAdministrador setTela={setTela} />
+                                {root ? <MenuRoot seletorView={selecionarView} botoes={botoes} /> : <Menu seletorView={selecionarView} botoes={botoes} />}
+                                <Home setTela={setTela} />
                             </>
                         );
-                    } else {
+                    case 'EditarFilial':
+                        if (root) {
+                            return (
+                                <>
+                                    <MenuRoot seletorView={selecionarView} botoes={botoes} />
+                                    <EditarFilial setTela={setTela} />
+                                </>
+                            )
+                        } else {
+                            return (
+                                <Login setTela={setTela} />
+                            )
+                        }
+                    case 'EditarEmpresa':
+                        if (root) {
+                            return (
+                                <>
+                                    <MenuRoot seletorView={selecionarView} botoes={botoes} />
+                                    <EditarEmpresa setTela={setTela} />
+                                </>
+                            )
+                        } else {
+                            return (
+                                <Login setTela={setTela} />
+                            )
+                        }
+                    case 'Ativos':
                         return (
-                            <Login setTela={setTela} />
-                        )
-                    }
-                case 'VisualizarAtivo':
-                    return (
-                        <>
-                            {root ? <MenuRoot seletorView={selecionarView} botoes={botoes} /> : <Menu seletorView={selecionarView} botoes={botoes} />}
-                            <VisualizarAtivos setTela={setTela} />
-                        </>
-                    );
-                case 'VisualizarDestinatarios':
-                    return (
-                        <>
-                            {root ? <MenuRoot seletorView={selecionarView} botoes={botoes} /> : <Menu seletorView={selecionarView} botoes={botoes} />}
-                            <VisualizarDestinatarios setTela={setTela} />
-                        </>
-                    );
-                case 'VisualizarAdministradores':
-                    return (
-                        <>
-                            {root ? <MenuRoot seletorView={selecionarView} botoes={botoes} /> : <Menu seletorView={selecionarView} botoes={botoes} />}
-                            <VisualizarAdministradores setTela={setTela} />
-                        </>
-                    );
-                case 'Usuarios':
-                    return (
-                        <>
-                            {root ? <MenuRoot seletorView={selecionarView} botoes={botoes} /> : <Menu seletorView={selecionarView} botoes={botoes} />}
-                            <Usuarios setTela={setTela} />
-                        </>
-                    );
-                case 'Manutenções':
-                    return (
-                        <>
-                            {root ? <MenuRoot seletorView={selecionarView} botoes={botoes} /> : <Menu seletorView={selecionarView} botoes={botoes} />}
-                            <Manutencao setTela={setTela} />
-                        </>
-                    );
-                case 'CadastroManutenção':
-                    return (
-                        <>
-                            {root ? <MenuRoot seletorView={selecionarView} botoes={botoes} /> : <Menu seletorView={selecionarView} botoes={botoes} />}
-                            <CadastroManutenção setTela={setTela} />
-                        </>
-                    );
-                case 'VisualizarAgendamento':
-                    return (
-                        <>
-                            {root ? <MenuRoot seletorView={selecionarView} botoes={botoes} /> : <Menu seletorView={selecionarView} botoes={botoes} />}
-                            <Calendario setTela={setTela} />
-                        </>
-                    );
-                case 'VisualizarHistManut':
-                    return (
-                        <>
-                            {root ? <MenuRoot seletorView={selecionarView} botoes={botoes} /> : <Menu seletorView={selecionarView} botoes={botoes} />}
-                            <Historico setTela={setTela} />
-                        </>
-                    );
-                case 'ManutencaoPendente':
-                    return (
-                        <>
-                            {root ? <MenuRoot seletorView={selecionarView} botoes={botoes} /> : <Menu seletorView={selecionarView} botoes={botoes} />}
-                            <ManutencaoPendente setTela={setTela} />
-                        </>
-                    );
-                case 'AtivoExpirado':
-                    return (
-                        <>
-                            {root ? <MenuRoot seletorView={selecionarView} botoes={botoes} /> : <Menu seletorView={selecionarView} botoes={botoes} />}
-                            <AtivoExpirado setTela={setTela} />
-                        </>
-                    );
-                case 'AtivoPendente':
-                    return (
-                        <>
-                            {root ? <MenuRoot seletorView={selecionarView} botoes={botoes} /> : <Menu seletorView={selecionarView} botoes={botoes} />}
-                            <AtivoPendente setTela={setTela} />
-                        </>
-                    );
-                case 'VisualizarManutenção':
-                    return (
-                        <>
-                            {root ? <MenuRoot seletorView={selecionarView} botoes={botoes} /> : <Menu seletorView={selecionarView} botoes={botoes} />}
-                            <VisualizarManutencao setTela={setTela} />
-                        </>
-                    );
-                case 'EditarManutencao':
-                    return (
-                        <>
-                            {root ? <MenuRoot seletorView={selecionarView} botoes={botoes} /> : <Menu seletorView={selecionarView} botoes={botoes} />}
-                            <EditarManutencao setTela={setTela} />
-                        </>
-                    );
-                case 'MeusDados':
-                    if (root) {
+                            <>
+                                {root ? <MenuRoot seletorView={selecionarView} botoes={botoes} /> : <Menu seletorView={selecionarView} botoes={botoes} />}
+                                <Ativos setTela={setTela} />
+                            </>
+                        );
+                    case 'CadastroAtivos':
+                        return (
+                            <>
+                                {root ? <MenuRoot seletorView={selecionarView} botoes={botoes} /> : <Menu seletorView={selecionarView} botoes={botoes} />}
+                                <CadastroAtivos setTela={setTela} />
+                            </>
+                        );
+                    case 'CadastroDestinatarios':
+                        return (
+                            <>
+                                {root ? <MenuRoot seletorView={selecionarView} botoes={botoes} /> : <Menu seletorView={selecionarView} botoes={botoes} />}
+                                <CadastroDestinatarios setTela={setTela} />
+                            </>
+                        );
+                    case 'CadastroAdministrador':
+                        if (root) {
+                            return (
+                                <>
+                                    <MenuRoot seletorView={selecionarView} botoes={botoes} />
+                                    <CadastroAdministrador setTela={setTela} />
+                                </>
+                            );
+                        } else {
+                            return (
+                                <Login setTela={setTela} />
+                            )
+                        }
+                    case 'VisualizarAtivo':
+                        return (
+                            <>
+                                {root ? <MenuRoot seletorView={selecionarView} botoes={botoes} /> : <Menu seletorView={selecionarView} botoes={botoes} />}
+                                <VisualizarAtivos setTela={setTela} />
+                            </>
+                        );
+                    case 'VisualizarDestinatarios':
+                        return (
+                            <>
+                                {root ? <MenuRoot seletorView={selecionarView} botoes={botoes} /> : <Menu seletorView={selecionarView} botoes={botoes} />}
+                                <VisualizarDestinatarios setTela={setTela} />
+                            </>
+                        );
+                    case 'VisualizarAdministradores':
+                        return (
+                            <>
+                                {root ? <MenuRoot seletorView={selecionarView} botoes={botoes} /> : <Menu seletorView={selecionarView} botoes={botoes} />}
+                                <VisualizarAdministradores setTela={setTela} />
+                            </>
+                        );
+                    case 'Usuarios':
+                        return (
+                            <>
+                                {root ? <MenuRoot seletorView={selecionarView} botoes={botoes} /> : <Menu seletorView={selecionarView} botoes={botoes} />}
+                                <Usuarios setTela={setTela} />
+                            </>
+                        );
+                    case 'Manutenções':
+                        return (
+                            <>
+                                {root ? <MenuRoot seletorView={selecionarView} botoes={botoes} /> : <Menu seletorView={selecionarView} botoes={botoes} />}
+                                <Manutencao setTela={setTela} />
+                            </>
+                        );
+                    case 'CadastroManutenção':
+                        return (
+                            <>
+                                {root ? <MenuRoot seletorView={selecionarView} botoes={botoes} /> : <Menu seletorView={selecionarView} botoes={botoes} />}
+                                <CadastroManutenção setTela={setTela} />
+                            </>
+                        );
+                    case 'VisualizarAgendamento':
+                        return (
+                            <>
+                                {root ? <MenuRoot seletorView={selecionarView} botoes={botoes} /> : <Menu seletorView={selecionarView} botoes={botoes} />}
+                                <Calendario setTela={setTela} />
+                            </>
+                        );
+                    case 'VisualizarHistManut':
+                        return (
+                            <>
+                                {root ? <MenuRoot seletorView={selecionarView} botoes={botoes} /> : <Menu seletorView={selecionarView} botoes={botoes} />}
+                                <Historico setTela={setTela} />
+                            </>
+                        );
+                    case 'ManutencaoPendente':
+                        return (
+                            <>
+                                {root ? <MenuRoot seletorView={selecionarView} botoes={botoes} /> : <Menu seletorView={selecionarView} botoes={botoes} />}
+                                <ManutencaoPendente setTela={setTela} />
+                            </>
+                        );
+                    case 'AtivoExpirado':
+                        return (
+                            <>
+                                {root ? <MenuRoot seletorView={selecionarView} botoes={botoes} /> : <Menu seletorView={selecionarView} botoes={botoes} />}
+                                <AtivoExpirado setTela={setTela} />
+                            </>
+                        );
+                    case 'AtivoPendente':
+                        return (
+                            <>
+                                {root ? <MenuRoot seletorView={selecionarView} botoes={botoes} /> : <Menu seletorView={selecionarView} botoes={botoes} />}
+                                <AtivoPendente setTela={setTela} />
+                            </>
+                        );
+                    case 'VisualizarManutenção':
+                        return (
+                            <>
+                                {root ? <MenuRoot seletorView={selecionarView} botoes={botoes} /> : <Menu seletorView={selecionarView} botoes={botoes} />}
+                                <VisualizarManutencao setTela={setTela} />
+                            </>
+                        );
+                    case 'EditarManutencao':
+                        return (
+                            <>
+                                {root ? <MenuRoot seletorView={selecionarView} botoes={botoes} /> : <Menu seletorView={selecionarView} botoes={botoes} />}
+                                <EditarManutencao setTela={setTela} />
+                            </>
+                        );
+                    case 'MeusDados':
+                        if (root) {
+                            return (
+                                <NotFound />
+                            );
+                        } else {
+                            return (
+                                <>
+                                    <Menu seletorView={selecionarView} botoes={botoes} />
+                                    <MeusDados setTela={setTela} />
+                                </>
+                            );
+                        }
+                    case 'Dashboard':
+                        return (
+                            <>
+                                {root ? <MenuRoot seletorView={selecionarView} botoes={botoes} /> : <Menu seletorView={selecionarView} botoes={botoes} />}
+                                {/* <Serviços tema="#5eb4fc" red="#fc6464" green="#00ff00" /> */}
+                            </>
+                        );
+                    case 'Relatorio':
+                        return (
+                            <>
+                                <div className="no-print">
+                                    {root ? <MenuRoot seletorView={selecionarView} botoes={botoes} /> : <Menu seletorView={selecionarView} botoes={botoes} />
+                                    }
+                                </div>
+                                <Relatorio setTela={setTela} />
+                            </>
+                        );
+                    default:
                         return (
                             <NotFound />
                         );
-                    } else {
-                        return (
-                            <>
-                                <Menu seletorView={selecionarView} botoes={botoes} />
-                                <MeusDados setTela={setTela} />
-                            </>
-                        );
-                    }
-                case 'Dashboard':
-                    return (
-                        <>
-                            {root ? <MenuRoot seletorView={selecionarView} botoes={botoes} /> : <Menu seletorView={selecionarView} botoes={botoes} />}
-                            {/* <Serviços tema="#5eb4fc" red="#fc6464" green="#00ff00" /> */}
-                        </>
-                    );
-                case 'Relatorio':
-                    return (
-                        <>
-                            <div className="no-print">
-                                {root ? <MenuRoot seletorView={selecionarView} botoes={botoes} /> : <Menu seletorView={selecionarView} botoes={botoes} />
-                                }
-                            </div>
-                            <Relatorio setTela={setTela} />
-                        </>
-                    );
-                default:
-                    return (
-                        <NotFound />
-                    );
+                }
             }
         } else {
             return (
@@ -268,8 +304,9 @@ export default function Roteador() {
             )
         }
     }
-
     return (
         construirView()
     );
 }
+
+
