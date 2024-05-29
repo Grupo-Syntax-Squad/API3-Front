@@ -83,7 +83,7 @@ const Usuarios = ({ setTela }) => {
                             <div className='asset flex-wrap is-justify-content-center'>
 
                                 {dadosFiltrados2.map((administrador) => {
-                                    if (administrador.adm_id == "1") {
+                                    if (administrador.adm_id == "1" && administradores.length === 0 && destinatarios.length === 0) {
                                         return <div className='asset is-flex is-justify-content-center'>
                                         <div className='SemHover column is-one-third mr-2 dado-ativo is-flex is-justify-content-center is-align-items-center has-text-weight-medium' style={{ width: '200%' }}>
                                             <p className='has-text-black'>Nenhum Usuário Cadastrado</p>
