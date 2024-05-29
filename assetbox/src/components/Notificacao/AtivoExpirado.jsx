@@ -64,8 +64,8 @@ const AtivosPendentes = ({ setTela }) => {
     return (
         <body>
             <div class='page-full' style={{ backgroundColor: 'transparent' }}>
-
-                <button class=" button m-5 ml-6 is-rounded is-size-4" onClick={abrirModal}>Relatório</button>
+                <br></br>
+                <br></br>
 
                 {/* Modal */}
                 <div class={`modal ${modalAberto ? 'is-active' : ''}`}>

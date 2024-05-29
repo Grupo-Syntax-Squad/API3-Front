@@ -35,6 +35,7 @@ export default function Roteador() {
     const [matriz, setMatriz] = useState(false);
 
     const [root, setRootLogin] = useState("")
+
     useEffect(() => {
         verificarToken();
     }, []);
@@ -89,6 +90,7 @@ export default function Roteador() {
         setTela(valor);
         validaMatriz()
     }
+    console.log(tela)
 
     const botoes = ['Home', 'Usuarios', 'Ativos', 'Manutenções', 'Dashboard', 'Configurações'];
 
@@ -108,7 +110,7 @@ export default function Roteador() {
                         return (
                             <>
                                 {root ? <MenuRoot seletorView={selecionarView} botoes={botoes} /> : <Menu seletorView={selecionarView} botoes={botoes} />}
-                                <Home setTela={setTela} />
+                                <Home setTela={setTela}/>
                             </>
                         );
                     case 'EditarFilial':
