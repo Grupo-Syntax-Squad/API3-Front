@@ -12,7 +12,7 @@ const Usuarios = ({ setTela }) => {
         const fetchData = async () => {
             try {
                 const destinatariosResponse = await axios.get('http://localhost:8000/destinatarios');
-                setdestinatarios(destinatariosResponse.data);
+                setdestinatarios(destinatariosResponse.data.filter(destinatario => destinatario.des_status === "ATIVO"));
 
                 const administradoresResponse = await axios.get('http://localhost:8000/administradores');
                 const admins = administradoresResponse.data.filter(administrador => administrador.status === "ATIVO");
