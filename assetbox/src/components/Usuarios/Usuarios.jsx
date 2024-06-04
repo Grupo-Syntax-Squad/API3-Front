@@ -55,7 +55,7 @@ const Usuarios = ({ setTela }) => {
                 {!isRoot &&(
                     ""
                 )}
-                <div class='page-full shadow-button' style={{ backgroundColor: '#459EB5', borderTopLeftRadius: '10px', borderTopRightRadius: '10px' }}>
+                <div class='page-full' style={{ backgroundColor: '#459EB5', borderTopLeftRadius: '10px', borderTopRightRadius: '10px' }}>
                     <div class='field'>
                         <div class="columns filtro mx-0" style={{ borderTopLeftRadius: '10px', borderTopRightRadius: '10px' }}>
                             <div class="column is-full pr-6" style={{ display: 'flex', alignItems: 'center' }}>

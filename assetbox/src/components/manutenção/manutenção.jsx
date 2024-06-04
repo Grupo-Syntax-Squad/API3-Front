@@ -33,7 +33,7 @@ const Manutencao = ({ setTela }) => {
         <body>
             <div className='page-full' style={{ backgroundColor: 'transparent', borderTopLeftRadius: '10px', borderTopRightRadius: '10px' }}>
                 <button className="button button-effect is-primary m-5 ml-6 is-rounded is-size-4 shadow-button" onClick={() => setTela('VisualizarAgendamento')}>Cadastrar Manutenção</button>
-                <div className='page-full shadow-button' style={{ backgroundColor: '#459EB5', borderTopLeftRadius: '10px', borderTopRightRadius: '10px' }}>
+                <div className='page-full' style={{ backgroundColor: '#459EB5', borderTopLeftRadius: '10px', borderTopRightRadius: '10px' }}>
                     <div className='field'>
                         <div className="columns filtro mx-0" style={{ borderTopLeftRadius: '10px', borderTopRightRadius: '10px' }}>
                             <div className="column is-two-fifths is-flex is-align-items-center" style={{ display: 'flex', alignItems: 'center' }}>

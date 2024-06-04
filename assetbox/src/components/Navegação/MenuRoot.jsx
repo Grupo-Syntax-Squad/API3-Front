@@ -28,6 +28,12 @@ function MenuRoot(props) {
     setShowLogout(prevShowLogout => !prevShowLogout);
   };
 
+  function impedirNavegacao(){
+    if (empresa === '') {
+      window.alert('Cadastre a empresa primeiro!')
+  }
+  }
+
   const handleNotifyClick = () => {
     setShowNotify(prevShowNotify => !prevShowNotify);
   };
@@ -101,21 +107,21 @@ function MenuRoot(props) {
           </div>
 
           <div className='navbar-brand'>
-            <img src={LogoIcon} className='pl-6 pr-0' alt="AssetBox" onClick={(e) => props.seletorView('EditarEmpresa', e)} />
-            <span className="navbar-brand has-text-white navbar-item mr-2 is-size-3 p-0 has-text-weight-bold empresa is-clickable" href="" onClick={(e) => props.seletorView('EditarEmpresa', e)}>AssetBox</span>
+            <img src={LogoIcon} className='pl-6 pr-0' alt="AssetBox" onClick={(e) => impedirNavegacao()} />
+            <span className="navbar-brand has-text-white navbar-item mr-2 is-size-3 p-0 has-text-weight-bold empresa is-clickable" href="" onClick={(e) => impedirNavegacao()}>AssetBox</span>
           </div>
 
           <div className={`navbar-menu ${showMenu && showNotify ? 'is-active' : ''}`}>
             <div className="navbar-menu is-flex is-justify-content-space-evenly" id="navMenu">
-              <p className="nav-item is-flex px-4 is-size-5 has-text-weight-bold my-0 is-clickable" href='' onClick={(e) => props.seletorView('EditarEmpresa', e)}>
+              <p className="nav-item is-flex px-4 is-size-5 has-text-weight-bold my-0 is-clickable" href='' onClick={(e) => impedirNavegacao()}>
                 <img src={AssetsIcon} className='img' alt="Ativos" />
                 <p className='navbar-item has-text-white'> Ativos </p>
               </p>
-              <p className="navbar-item is-flex px-4 is-size-5 has-text-weight-bold my-0 " href=' ' onClick={(e) => props.seletorView('EditarEmpresa', e)}>
+              <p className="navbar-item is-flex px-4 is-size-5 has-text-weight-bold my-0 " href=' ' onClick={(e) => impedirNavegacao()}>
                 <img src={UserIcon} className='img' alt="Destinatários" />
                 <p className='navbar-item has-text-white'>Usuários</p>
               </p>
-              <p className="navbar-item is-flex px-4 is-size-5 has-text-weight-bold my-0 mx-1" href=' ' onClick={(e) => props.seletorView('EditarEmpresa', e)}>
+              <p className="navbar-item is-flex px-4 is-size-5 has-text-weight-bold my-0 mx-1" href=' ' onClick={(e) => impedirNavegacao()}>
                 <img className='img' src={MainteinIcon} alt="Manutenções" />
                 <p className='navbar-item has-text-white'>Manutenção</p>
               </p>

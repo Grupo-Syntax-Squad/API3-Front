@@ -100,7 +100,7 @@ const Ativos = ({ setTela }) => {
                 {/* Fim do Modal */}
 
 
-                <div class='page-full shadow-button' style={{
+                <div class='page-full' style={{
                     backgroundColor: '#459EB5'
                 }}>
                     <div class='field'>
@@ -120,18 +120,18 @@ const Ativos = ({ setTela }) => {
                         </div>
                     </div>
                     <div class="columns indice m-0 is-flex is-justify-content-center border-radius-top" >
-                        <div class="column is-one-third ml-2 is-flex is-justify-content-center is-align-items-center">
+                        <div class="column tabela is-one-third ml-2 is-flex is-justify-content-center is-align-items-center">
                             <label className='has-text-white is-size-4 has-text-weight-medium'>Número</label>
                         </div>
-                        <div class="column is-one-third ml-2 mr-2 is-flex is-justify-content-center is-align-items-center">
+                        <div class="column tabela is-one-third ml-2 mr-2 is-flex is-justify-content-center is-align-items-center">
                             <label className='has-text-white is-size-4 has-text-weight-medium'>Título</label>
                         </div>
-                        <div class="column is-one-third mr-2 is-flex is-justify-content-center is-align-items-center">
+                        <div class="column tabela is-one-third mr-2 is-flex is-justify-content-center is-align-items-center">
                             <label className='has-text-white is-size-4 has-text-weight-medium'>Status</label>
                         </div>
                     </div>
 
-                    <div class='p-0'>
+                    <div class='p-0 border-radius-button'>
                         {assets.length === 0 && (
                             <div className='asset is-flex is-justify-content-center'>
                                 <div className='SemHover column is-one-third mr-2 dado-ativo is-flex is-justify-content-center is-align-items-center has-text-weight-medium'>

@@ -131,3 +131,7 @@ h1{
 .modal-card-foot{
    justify-content: center;
 }
+
+.columns.border-radius-top{
+   border-radius: 0px;
+}
