@@ -1,10 +1,9 @@
 :root{
     --fundocinza: #D9D9D9;
+}
 
-    @media(prefers-color-scheme: dark){
-        --fundocinza: #333333;
-    }
-
+.dark{
+    --fundocinza: #333333;
 }
 
 .tela-content{

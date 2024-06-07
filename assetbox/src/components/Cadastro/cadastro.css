@@ -5,35 +5,33 @@
   --cinza: rgb(189, 189, 189);
   --h2azul: #459eb6;
   --vermelho: red;
-
-
-  @media(prefers-color-scheme: dark){
-    --cinzaclaro: #616161;
-    --azul: #2a3f9c;
-    --branco: #000000;
-    --cinza: rgb(96, 96, 96);
-    --h2azul: #2a3f9c;
-    --vermelho: red;
-    input{
-      background-color: #dfdfdf;
-      color: #000000;
-    }
-    select{
-      background-color: #dfdfdf;
-      color: #000000;
-    }
-
-    button{ 
-      background-color: var(--h2azul) ;
-      color: var(--branco)!important; 
-  }
-
-  h2{
-    color: #fff;
-  }
-
-
 }
+
+.dark{
+  --cinzaclaro: #616161;
+  --azul: #2a3f9c;
+  --branco: #000000;
+  --cinza: rgb(96, 96, 96);
+  --h2azul: #2a3f9c;
+  --vermelho: red;
+}
+
+  input.dark{
+    background-color: #dfdfdf;
+    color: #000000;
+  }
+  select.dark{
+    background-color: #dfdfdf;
+    color: #000000;
+  }
+
+button.dark{ 
+  background-color: var(--h2azul) ;
+   color: var(--branco)!important; 
+}
+
+h2.dark{
+  color: #fff;
 }
 
 .button{ 

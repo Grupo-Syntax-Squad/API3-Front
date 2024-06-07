@@ -8,7 +8,6 @@ import UserIcon from '../../assets/img/User.svg';
 import Notify from '../../assets/img/Notifications.svg';
 import Exit from '../../assets/img/Deslogar.svg';
 import Edit from '../../assets/img/Editar.svg';
-import './menu.css';
 
 function MenuRoot(props) {
   const [showLogout, setShowLogout] = useState(false);
@@ -23,15 +22,28 @@ function MenuRoot(props) {
   const [filtroAtivo, setFiltroAtivo] = useState('');
   const [filtroStatus, setFiltroStatus] = useState('');
   const [contador, setContador] = useState(0); // Ajustado para ser um número
+  const [dark, setDark] = useState(false);
 
   const handleSettingsClick = () => {
     setShowLogout(prevShowLogout => !prevShowLogout);
   };
 
+  const myFunction = () => {
+    setDark(prevDark => !prevDark);
+  };
+
+  useEffect(() => {
+    if (dark) {
+      document.body.classList.add('dark');
+    } else {
+      document.body.classList.remove('dark');
+    }
+  }, [dark]);
+
   function impedirNavegacao(){
     if (empresa === '') {
-      window.alert('Cadastre a empresa primeiro!')
-  }
+      window.alert('Cadastre a empresa primeiro!');
+    }
   }
 
   const handleNotifyClick = () => {
@@ -88,16 +100,38 @@ function MenuRoot(props) {
     Matriz(); // Chama Matriz para buscar informações da empresa
   }, []);
   
-  
-
   const isManutencaoAtrasada = (manutencao) => {
     const dataAtual = new Date();
     const dataManutencao = new Date(manutencao.man_data);
     return dataManutencao < dataAtual;
   };
+
+  const handleLogout = (e) => {
+    alert('Você está sendo deslogado, até a próxima!');
+    setTimeout(() => {
+      localStorage.removeItem('token');
+      props.seletorView("Login", e);
+      window.location.reload();
+    }, 3000);
+  };
+
+  const getFilterCounts = () => {
+    if (!Array.isArray(manutencoes)) {
+      return { horarioCount: 0, ativoCount: 0, statusCount: 0 };
+    }
+
+    const horarioCount = manutencoes.filter(manut => String(manut.man_horario).includes(filtroHorario)).length;
+    const ativoCount = manutencoes.filter(manut => String(manut.man_id).includes(filtroAtivo)).length;
+    const statusCount = manutencoes.filter(manut => manut.man_status.toLowerCase().includes(filtroStatus.toLowerCase())).length;
+
+    return { horarioCount, ativoCount, statusCount };
+  };
+
+  const { horarioCount, ativoCount, statusCount } = getFilterCounts();
+
   if (empresa === '') {
     return (
-      <div>
+      <div >
         <div className="navbar shadow-menu is-flex is-justify-content-space-between custom-background" role="navigation" aria-label="main navigation">
           <div className={`navbar-burger custom-background burger ${showMenu ? 'is-active' : ''}`} aria-label="menu" aria-expanded={showMenu ? 'true' : 'false'} onClick={() => setShowMenu(!showMenu)}>
             <span aria-hidden="true"></span>
@@ -147,7 +181,6 @@ function MenuRoot(props) {
                     </button>
                   </div>
                 )}
-                
               </div>
             </div>
             <div className="navbar-end">
@@ -157,6 +190,7 @@ function MenuRoot(props) {
                   <div className='dropdown navbar-dropdown is-right mr-1 px-5 '>
                     <button className='navbar-item' onClick={e => props.seletorView("EditarEmpresa", e)}>Empresa <img className='img' src={Edit} alt="editar"/></button>
                     <button className='navbar-item' onClick={e => props.seletorView("Filial", e)}>Filiais</button>
+                    <button onClick={ myFunction} className="button">{dark ? "Modo Claro" : "Modo Escuro"}</button>
                     <button className='navbar-item is-flex dropdown-item' onClick={e => handleLogout(e)}>Sair<img className='img' src={Exit} alt="sair"/></button>
                   </div>
                 )}
@@ -167,29 +201,6 @@ function MenuRoot(props) {
       </div>
     );
   }
-
-  const handleLogout = (e) => {
-    alert('Você está sendo deslogado, até a próxima!');
-    setTimeout(() => {
-      localStorage.removeItem('token');
-      props.seletorView("Login", e);
-      window.location.reload();
-    }, 3000);
-  };
-
-  const getFilterCounts = () => {
-    if (!Array.isArray(manutencoes)) {
-      return { horarioCount: 0, ativoCount: 0, statusCount: 0 };
-    }
-
-    const horarioCount = manutencoes.filter(manut => String(manut.man_horario).includes(filtroHorario)).length;
-    const ativoCount = manutencoes.filter(manut => String(manut.man_id).includes(filtroAtivo)).length;
-    const statusCount = manutencoes.filter(manut => manut.man_status.toLowerCase().includes(filtroStatus.toLowerCase())).length;
-
-    return { horarioCount, ativoCount, statusCount };
-  };
-
-  const { horarioCount, ativoCount, statusCount } = getFilterCounts();
 
   return (
     <div>
@@ -231,14 +242,14 @@ function MenuRoot(props) {
               </p>
               {showNotify && (
                 <div className='dropdown navbar-dropdown is-right mr-1 px-5 '>
-                  {/* <button className='navbar-item' onClick={e => props.seletorView("AtivoPendente", e)}>
-                    Ativos desativados com pendencias ({ativosPendentes})
-                  </button> */}
+                  <button className='navbar-item' onClick={e => props.seletorView("AtivoPendente", e)}>
+                    Ativos pendentes ({ativosPendentes})
+                  </button>
                   <button className='navbar-item' onClick={e => props.seletorView("AtivoExpirado", e)}>
                     Ativos expirados ({ativosExpirados})
                   </button>
                   <button className='navbar-item' onClick={e => props.seletorView("ManutencaoPendente", e)}>
-                    Manutenções atrasadas ({manutencoesPendentes})
+                    Manutenções pendentes ({manutencoesPendentes})
                   </button>
                 </div>
               )}
@@ -251,6 +262,7 @@ function MenuRoot(props) {
                 <div className='dropdown navbar-dropdown is-right mr-1 px-5 '>
                   <button className='navbar-item' onClick={e => props.seletorView("EditarEmpresa", e)}>Empresa <img className='img' src={Edit} alt="editar"/></button>
                   <button className='navbar-item' onClick={e => props.seletorView("Filial", e)}>Filiais</button>
+                  <button onClick={ myFunction} className="navbar-item">{dark ? "Modo Claro" : "Modo Escuro"}</button>
                   <button className='navbar-item is-flex dropdown-item' onClick={e => handleLogout(e)}>Sair<img className='img' src={Exit} alt="sair"/></button>
                 </div>
               )}

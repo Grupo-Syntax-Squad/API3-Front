@@ -6,21 +6,22 @@
    --filtroazul: #367E90;
    --dadoativo: #000;
    --fundobranco: #fff;
-
-   @media(prefers-color-scheme: dark){
-      --cinza:  rgb(96, 96, 96);
-      --h2azul: #459eb6;
-      --indice: #459EB5;
-      --fundocinza: #333333;
-      --filtroazul: #286776;
-      --dadoativo: #000;
-      --fundobranco: #222;
-      button { 
-         background-Color: #2a3f9c;
-         color: #fff; }
-   }
 }
 
+.dark{
+   --cinza:  rgb(96, 96, 96);
+   --h2azul: #459eb6;
+   --indice: #459EB5;
+   --fundocinza: #333333;
+   --filtroazul: #286776;
+   --dadoativo: #000;
+   --fundobranco: #222;
+}
+
+button.dark { 
+   background-Color: #2a3f9c;
+   color: #fff; 
+}
 
 .page-full{
     align-items: stretch;

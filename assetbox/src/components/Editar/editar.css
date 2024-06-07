@@ -2,12 +2,12 @@
   --cinzaclaro: #D9D9D9;
   --azul: #459eb6;
   --branco: #fff;
+}
 
-  @media(prefers-color-scheme: dark){
-    --cinzaclaro: #222;
-    --azul: #2a3f9c;
-    --branco: #fff;
-  }
+.dark{
+  --cinzaclaro: #222;
+  --azul: #2a3f9c;
+  --branco: #fff;
 }
 
 .page-full{

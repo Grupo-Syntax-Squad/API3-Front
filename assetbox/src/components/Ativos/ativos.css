@@ -8,23 +8,26 @@
    --preto: #000;
    --azulh2: rgb(69, 158, 182);
    --azulfiltro: #367E90;
-
-      @media(prefers-color-scheme: dark){
-      --cinzaclaro: #222;
-      --azul: #2a3f9c;
-      --branco: #fff;
-      --cinza: rgb(96, 96, 96);
-      --h2azul: #2c369d;
-      --vermelho: red;
-      --azulfiltro: #1d2c5e!important;
-
-      
-      button { 
-         background-Color: var(--azul);
-         color: #fff; }
-
-   }
  }
+
+ .dark{
+   --cinzaclaro: #222;
+   --azul: #2a3f9c;
+   --branco: #fff;
+   --cinza: rgb(96, 96, 96);
+   --h2azul: #2c369d;
+   --vermelho: red;
+   --azulfiltro: #1d2c5e!important;
+ }
+
+
+   
+button.dark { 
+   background-Color: var(--azul);
+   color: #fff;
+}
+
+
 
  button{
     background-Color: var(--azul);

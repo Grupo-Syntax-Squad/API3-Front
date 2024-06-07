@@ -6,10 +6,10 @@
 
 :root{
   --bulma-body-background-color: #F2F3EE;
+}
 
-  @media (prefers-color-scheme: dark){
-    --bulma-body-background-color: #222;
-  }
+.dark{
+  --bulma-body-background-color: #222;
 }
 
 *{

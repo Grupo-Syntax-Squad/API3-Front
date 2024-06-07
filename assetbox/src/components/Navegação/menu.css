@@ -4,18 +4,19 @@
   --branco: #FFFFFF;
   --vermelho: #903636;
   --azul: #459EB5;
+}
 
-  @media(prefers-color-scheme: dark){
-    --verde: #3b4b9b;
-    --verdeEscuro: #1a2351;
-    --branco: #000;
-    --vermelho: #903636;
-    --azul: #459EB5;
 
-    .img{
-      filter: invert(100%);
-    }
-  }
+.dark{
+  --verde: #3b4b9b;
+  --verdeEscuro: #1a2351;
+  --branco: #000;
+  --vermelho: #903636;
+  --azul: #459EB5;
+}
+
+.img.dark{
+  filter: invert(100%);
 }
 
 .img{
