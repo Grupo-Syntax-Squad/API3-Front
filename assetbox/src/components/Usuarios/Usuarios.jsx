@@ -47,6 +47,7 @@ const Usuarios = ({ setTela }) => {
 
     return (
         <body>
+            <div class="help-button"><button class=" shadow-button button button-effect is-primary m-5 ml-6 is-rounded is-size-4">?</button></div>
             <div class='page-full' style={{ backgroundColor: 'transparent', borderTopLeftRadius: '10px', borderTopRightRadius: '10px' }}>
             <button class="button button-effect is-primary m-5 ml-6 is-rounded is-size-4 shadow-button"  onClick={() => setTela('CadastroDestinatarios')}>Cadastrar Destinatário</button>
                 {isRoot && (

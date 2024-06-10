@@ -138,3 +138,9 @@ h1{
 .columns.border-radius-top{
    border-radius: 0px;
 }
+
+.help-button{
+   position: fixed;
+   right: 0%;
+   bottom: 0%;
+}
