@@ -53,12 +53,25 @@ const Ativos = ({ setTela }) => {
     });
 
 
+    
+    const [modalOpen, setModalOpen] = useState(false);
+    
+    const abrirHelp = () => {
+            setModalOpen(true);
+        };
+    
+    const fecharHelp = () => {
+            setModalOpen(false);
+        };
+
+
     return (
         <body>
-            <div class="help-button"><button class=" shadow-button button button-effect is-primary m-5 ml-6 is-rounded is-size-4">?</button></div>
+            
             <div class='page-full' style={{ backgroundColor: 'transparent' }}>
                 <button class=" shadow-button button button-effect is-primary m-5 ml-6 is-rounded is-size-4"  onClick={() => setTela('CadastroAtivos')}>Cadastrar Ativo</button>
                 <button class=" shadow-button button button-effect is-primary m-5 ml-6 is-rounded is-size-4"  onClick={abrirModal}>Relatório</button>
+
 
                 {/* Modal */}
                 <div class={`modal ${modalAberto ? 'is-active' : ''}`}>
@@ -100,7 +113,7 @@ const Ativos = ({ setTela }) => {
                 </div>
                 {/* Fim do Modal */}
 
-
+                
                 <div class='page-full' style={{
                     backgroundColor: '#459EB5'
                 }}>
@@ -154,6 +167,24 @@ const Ativos = ({ setTela }) => {
                                 </div>
                             </div>
                         ))}
+                    </div>
+                    <div className="help-button">
+                    <button className="shadow-button button button-effect is-primary m-5 ml-6 is-rounded is-size-4" onClick={abrirHelp}>?</button>
+
+                    <div className={`modal ${modalOpen ? 'is-active' : ''}`}>
+                        <div className="modal-background" onClick={fecharHelp}></div>
+                        <div className="modal-content">
+                        
+                        
+                            <div className="box has-background-primary has-text-white">
+                                <button class="delete is-pulled-right" aria-label="close" onClick={fecharHelp}></button>
+                                <p>Aqui vai o seu parágrafo de ajuda.</p>
+                                
+                            </div>
+
+                        </div>
+                        <button className="modal-close is-large" aria-label="close" onClick={fecharHelp}></button>
+                    </div>
                     </div>
                 </div>
             </div>
