@@ -72,13 +72,13 @@ export default function Dashboard({ setTela }) {
                         </section>
                     </div>
                     <div className='flex flex-wrap w-full h-full pt-6 gap-2 justify-center'>
-                        <div className='bg-black h-1/2 w-2/3 md:w-1/3 content-center text-center'>gráfico
+                        <div className='bg-black h-1/2 w-2/3 md:w-1/3 content-center text-center hover:scale-105 transition-all'>gráfico
                         </div>
-                        <div className='bg-black h-1/2 w-2/3 md:w-1/3 content-center text-center' >gráfico
+                        <div className='bg-black h-1/2 w-2/3 md:w-1/3 content-center text-center hover:scale-105 transition-all' >gráfico
                         </div>
-                        <div className='bg-black h-1/2 w-2/3 md:w-1/3 content-center text-center'>gráfico
+                        <div className='bg-black h-1/2 w-2/3 md:w-1/3 content-center text-center hover:scale-105 transition-all'>gráfico
                         </div>
-                        <div className='bg-black h-1/2 w-2/3 md:w-1/3 content-center text-center'>gráfico
+                        <div className='bg-black h-1/2 w-2/3 md:w-1/3 content-center text-center hover:scale-105 transition-all'>gráfico
                         </div>
 
                     </div>
