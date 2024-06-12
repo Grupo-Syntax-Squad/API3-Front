@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import "./visualizar.css";
+import Chart from 'chart.js/auto';
 import axios from 'axios';
 
 export default function Dashboard({ setTela }) {
