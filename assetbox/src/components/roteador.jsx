@@ -28,6 +28,7 @@ import AtivoExpirado from "./Notificacao/AtivoExpirado";
 import NotFound from "./NotFound/page";
 import Relatorio from "./Visualizar/VisualizarRelatorio";
 import { getMatriz } from "../services/matrizService";
+import Dashboard from "./Visualizar/dashboard";
 
 export default function Roteador() {
     const [tela, setTela] = useState('Home');
@@ -281,7 +282,7 @@ export default function Roteador() {
                         return (
                             <>
                                 {root ? <MenuRoot seletorView={selecionarView} botoes={botoes} /> : <Menu seletorView={selecionarView} botoes={botoes} />}
-                                {/* <Serviços tema="#5eb4fc" red="#fc6464" green="#00ff00" /> */}
+                                <Dashboard setTela={setTela} />
                             </>
                         );
                     case 'Relatorio':

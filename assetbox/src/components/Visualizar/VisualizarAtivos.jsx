@@ -196,19 +196,19 @@ function VisualizarAtivos({ setTela }) {
                     <div class="select is-small">
                       <select class="is-hovered" on onChange={e => setStatus(e.target.value)} disabled={!edit}>
                         {
-                          dadosAtivo.man_status === "AGUARDANDO_MANUTENCAO" ? <option value="0" selected>Aguardando Manutenção</option> : <option value="0">Aguardando Manutenção</option>
+                          dadosAtivo.ati_status === "EM_OPERACAO" ? <option value="0" selected>Em operação</option> : <option value="0">Em operação</option>
                         }
                         {
-                          dadosAtivo.man_status === "EM_MANUTENCAO" ? <option value="1" selected>Em Manutenção</option> : <option value="1">Em Manutenção</option>
+                          dadosAtivo.ati_status === "OCIOSO" ? <option value="1" selected>Ocioso</option> : <option value="1">Ocioso</option>
                         }
                         {
-                          dadosAtivo.man_status === "ADIADA" ? <option value="2" selected>Adiada</option> : <option value="2">Adiada</option>
+                          dadosAtivo.ati_status === "EM_MANUTENCAO" ? <option value="2" selected>Em Manutenção</option> : <option value="2">Em Manutenção</option>
                         }
                         {
-                          dadosAtivo.man_status === "CANCELADA" ? <option value="3" selected>Cancelada</option> : <option value="3">Cancelada</option>
+                          dadosAtivo.ati_status === "DESATIVADO" ? <option value="3" selected>Desativado</option> : <option value="3">Desativado</option>
                         }
                         {
-                          dadosAtivo.man_status === "CONCLUIDA" ? <option value="4" selected>Concluída</option> : <option value="4">Concluída</option>
+                          dadosAtivo.ati_status === "CONCLUIDA" ? <option value="4" selected>Concluída</option> : <option value="4">Concluída</option>
                         }
                         {/* <option>{dadosAtivo.ati_status}</option>
                         <option></option> */}
