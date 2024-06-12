@@ -8,7 +8,6 @@ const Usuarios = ({ setTela }) => {
     const [administradores, setAdministradores] = useState([])
     const [filtroNome, setNomes] = useState('')
     const [isRoot, setIsRoot] = useState(false);
-    const [modalAberto, setModalAberto] = useState(false);
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -143,7 +142,7 @@ const Usuarios = ({ setTela }) => {
                         <div className="box ajuda m-6 has-text-white">
                             <button class="delete is-pulled-right" aria-label="close" onClick={fecharHelp}></button>
                             <p>Este é o <span className='has-text-weight-bold'>Painel de Usuários</span>, Aqui você visualizará todos os <span className='has-text-weight-bold'>Destinatários</span> e <span className='has-text-weight-bold'>Administradores</span> cadastrados.
-                            Para cadastrar um novo usuário, clique no botão <span className='has-text-weight-bold'>Cadastrar Novo Usuário</span>.
+                            Para cadastrar um novo usuário, clique no botão <span className='has-text-weight-bold'>Cadastrar Destinatário</span> para cadastrar um novo destinatário.<span className='has-text-weight-bold'>Cadastrar Administrador</span> para cadastrar um novo administrador.
                                 </p>
 
                         </div>

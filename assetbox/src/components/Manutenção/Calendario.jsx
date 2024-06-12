@@ -136,12 +136,22 @@ const Calendario = ({ setTela }) => {
         return manutencoesForDay.length > 0; // Retorna true se houver manutenções para este dia
     };
 
+    const [modalOpen, setModalOpen] = useState(false);
+
+    const abrirHelp = () => {
+        setModalOpen(true);
+    };
+
+    const fecharHelp = () => {
+        setModalOpen(false);
+    };
+
     console.log(selectedDate);
 
     return (
         
         <div className="tela columns shadow-button">
-            <div class="help-button"><button class=" shadow-button button button-effect is-primary m-5 ml-6 is-rounded is-size-4">?</button></div>
+            
             <div className="calendar column is-half">
                 <div className="calendar-header">
                     <span className="year-picker" id="year-picker">{currYear}</span>
@@ -199,6 +209,23 @@ const Calendario = ({ setTela }) => {
                         </div>
                     )}
                 </label>
+            </div>
+            <div className="help-button">
+                <button className="shadow-button button button-effect is-primary m-5 ml-6 is-rounded is-size-4" onClick={abrirHelp}>?</button>
+
+                <div className={`modal ${modalOpen ? 'is-active' : ''}`}>
+                    <div className="modal-background" onClick={fecharHelp}></div>
+                    <div className="modal-content">
+
+
+                        <div className="box ajuda m-6 has-text-white">
+                            <button class="delete is-pulled-right" aria-label="close" onClick={fecharHelp}></button>
+                            <p>Este é o <span className='has-text-weight-bold'>Painel de Cadastro das Manutenções</span>,  Aqui você seleciona uma data para cadastrar uma manutenção. Dica: Os Dias que estiverem com cores de fundo cinza, indicam pelo menos, uma manutenção já cadastra para aquele dia. Lembre-se também de não cadastrar manutenções em datas de feríados!</p>                      
+                        </div>
+
+                    </div>
+                    <button className="modal-close is-large" aria-label="close" onClick={fecharHelp}></button>
+                </div>
             </div>
         </div>
     );

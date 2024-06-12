@@ -91,6 +91,15 @@ function CadastroAtivos({ setTela }) {
     setDocumentoSelecionado(event.target.files[0]);
   }
 
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const abrirHelp = () => {
+      setModalOpen(true);
+  };
+
+  const fecharHelp = () => {
+      setModalOpen(false);
+  };
   // Função para lidar com o envio do formulário
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -493,6 +502,23 @@ function CadastroAtivos({ setTela }) {
       </div>
       {mostrarTipo && <CadastroTipo handleTipoClick={handleTipoClick} setTipos={setTipos} />}
       {mostrarLocalizacao && <CadastroLocalizacao handleLocalizacaoClick={handleLocalizacaoClick} setLocalizacoes={setLocalizacoes} />}
+      <div className="help-button">
+        <button className="shadow-button button button-effect is-primary m-5 ml-6 is-rounded is-size-4" onClick={abrirHelp}>?</button>
+
+        <div className={`modal ${modalOpen ? 'is-active' : ''}`}>
+          <div className="modal-background" onClick={fecharHelp}></div>
+          <div className="modal-content">
+
+
+            <div className="box ajuda m-6 has-text-white">
+              <button class="delete is-pulled-right" aria-label="close" onClick={fecharHelp}></button>
+              <p>Esta é a <span className='has-text-weight-bold'>Pagina de Cadastro do Ativo</span>,  Preencha os dados nescessários referentes ao ativo. DICA: Caso nescessário cadastrar um novo tipo para o ativo, clique no botão "+" para cadastrar um novo tipo. Para cadastrar o ativo em uma localização que não esteja disponível, você precisara entrar em contato com o usuário que possuir as credenciais root. Somente ele poderá cadastrar uma nova localização.</p>
+            </div>
+
+          </div>
+          <button className="modal-close is-large" aria-label="close" onClick={fecharHelp}></button>
+        </div>
+      </div>
     </body>
   );
 }

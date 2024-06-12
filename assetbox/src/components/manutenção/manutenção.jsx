@@ -23,6 +23,17 @@ const Manutencao = ({ setTela }) => {
         setTela(`VisualizarManutenção`);
     };
 
+    const [modalOpen, setModalOpen] = useState(false);
+
+    const abrirHelp = () => {
+        setModalOpen(true);
+    };
+
+    const fecharHelp = () => {
+        setModalOpen(false);
+    };
+
+
     const dadosFiltrados = manutencoes.filter(manut => {
         return (filtroHorario === '' || String(manut.man_horario).includes(filtroHorario)) &&
             (filtroAtivo === '' || String(manut.man_id).includes(filtroAtivo)) &&
@@ -31,7 +42,7 @@ const Manutencao = ({ setTela }) => {
 
     return (
         <body>
-            <div class="help-button"><button class=" shadow-button button button-effect is-primary m-5 ml-6 is-rounded is-size-4">?</button></div>
+
             <div className='page-full' style={{ backgroundColor: 'transparent', borderTopLeftRadius: '10px', borderTopRightRadius: '10px' }}>
                 <button className="button button-effect is-primary m-5 ml-6 is-rounded is-size-4 shadow-button" onClick={() => setTela('VisualizarAgendamento')}>Cadastrar Manutenção</button>
                 <div className='page-full' style={{ backgroundColor: '#459EB5', borderTopLeftRadius: '10px', borderTopRightRadius: '10px' }}>
@@ -91,6 +102,27 @@ const Manutencao = ({ setTela }) => {
                             </div>
                         ))}
                     </div>
+                </div>
+            </div>
+            <div className="help-button">
+                <button className="shadow-button button button-effect is-primary m-5 ml-6 is-rounded is-size-4" onClick={abrirHelp}>?</button>
+
+                <div className={`modal ${modalOpen ? 'is-active' : ''}`}>
+                    <div className="modal-background" onClick={fecharHelp}></div>
+                    <div className="modal-content">
+
+
+                        <div className="box ajuda m-6 has-text-white">
+                            <button class="delete is-pulled-right" aria-label="close" onClick={fecharHelp}></button>
+                            <p>Este é o <span className='has-text-weight-bold'>Painel de Manutenções</span>,  Aqui você você visualiza todas as <span className='has-text-weight-bold'>Manutenções cadastradas.</span> Dica: Para encontrar a manutenção desejada mais facilmente você poderá filtrar as manutenções que deseja visualizar digitando nos campos Horário, ID e/ou Status!
+                            Você poderá cadastrar uma nova manutenção clicando no botão
+                            <span className='has-text-weight-bold'>Cadastrar Manutenção</span>, acima do Painel.
+                                </p>
+                                 
+                        </div>
+
+                    </div>
+                    <button className="modal-close is-large" aria-label="close" onClick={fecharHelp}></button>
                 </div>
             </div>
         </body >

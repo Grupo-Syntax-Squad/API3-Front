@@ -3,6 +3,7 @@ import axios from 'axios';
 import AssetsIcon from '../../assets/img/Asset.svg';
 import LogoIcon from '../../assets/img/AssetBoxLogo.svg';
 import MainteinIcon from '../../assets/img/Maintein.svg';
+import Graph from '../../assets/img/Graph.svg';
 import SettingsIcon from '../../assets/img/Settings.svg';
 import UserIcon from '../../assets/img/User.svg';
 import Notify from '../../assets/img/Notifications.svg';
@@ -159,6 +160,10 @@ function MenuRoot(props) {
                 <img className='img' src={MainteinIcon} alt="Manutenções" />
                 <p className='navbar-item has-text-white'>Manutenção</p>
               </p>
+              <p className="navbar-item is-flex px-4 is-size-5 has-text-weight-bold my-0 mx-1" href=' ' onClick={(e) => impedirNavegacao()}>
+                <img className='img' src={Graph} alt="Dashboard" />
+                <p className='navbar-item has-text-white'>Dashboard</p>
+              </p>
             </div>
             <div className="navbar-end">
               <div className="navbar-item has-dropdown is-active">
@@ -230,6 +235,10 @@ function MenuRoot(props) {
             <p className="navbar-item is-flex px-4 is-size-5 has-text-weight-bold my-0 mx-1" href=' ' onClick={(e) => props.seletorView('Manutenções', e)}>
               <img className='img' src={MainteinIcon} alt="Manutenções" />
               <p className='navbar-item has-text-white'>Manutenção</p>
+            </p>
+            <p className="navbar-item is-flex px-4 is-size-5 has-text-weight-bold my-0 mx-1" href=' ' onClick={(e) => props.seletorView('Dashboard', e)}>
+              <img className='img' src={Graph} alt="Manutenções" />
+              <p className='navbar-item has-text-white'>Dashboard</p>
             </p>
           </div>
           <div className="navbar-end">

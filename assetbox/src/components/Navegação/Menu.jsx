@@ -8,6 +8,7 @@ import UserIcon from '../../assets/img/User.svg';
 import Notify from '../../assets/img/Notifications.svg';
 import Exit from '../../assets/img/Deslogar.svg';
 import Edit from '../../assets/img/Editar.svg';
+import Graph from '../../assets/img/Graph.svg';
 import './menu.css';
 
 function Menu(props) {
@@ -120,6 +121,10 @@ function Menu(props) {
               <p className="navbar-item is-flex px-4 is-size-5 has-text-weight-bold my-0 mx-1" href=' ' onClick={(e) => props.seletorView('Manutenções', e)}>
                 <img className='img' src={MainteinIcon} alt="Manutenções" />
                 <p className='navbar-item has-text-white'>Manutenção</p>
+              </p>
+              <p className="navbar-item is-flex px-4 is-size-5 has-text-weight-bold my-0 mx-1" href=' ' onClick={(e) => props.seletorView('Manutenções', e)}>
+                <img className='img' src={Graph} alt="Manutenções" />
+                <p className='navbar-item has-text-white'>Dashboard</p>
               </p>
             </div>
             <div className="navbar-end">

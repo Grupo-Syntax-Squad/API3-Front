@@ -124,6 +124,15 @@ useEffect(() => {
     let ativoSelecionado = ativos.find(ativo => ativo.ati_id == e.target.value);
     setAtivo(ativoSelecionado);
   }
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const abrirHelp = () => {
+      setModalOpen(true);
+  };
+
+  const fecharHelp = () => {
+      setModalOpen(false);
+  };
 
   // Função para lidar com a busca de CEP
   const handleCepChange = async (event) => {
@@ -379,6 +388,23 @@ useEffect(() => {
           </div>
         </div>
       </div>
+      <div className="help-button">
+                <button className="shadow-button button button-effect is-primary m-5 ml-6 is-rounded is-size-4" onClick={abrirHelp}>?</button>
+
+                <div className={`modal ${modalOpen ? 'is-active' : ''}`}>
+                    <div className="modal-background" onClick={fecharHelp}></div>
+                    <div className="modal-content">
+
+
+                        <div className="box ajuda m-6 has-text-white">
+                            <button class="delete is-pulled-right" aria-label="close" onClick={fecharHelp}></button>
+                            <p>Esta é a <span className='has-text-weight-bold'>Pagina de Cadastro da Manutenção</span>,  Preencha os dados nescessários referentes à manutenção. OBSERVAÇÃO: No campo "Endereço" cadastre o endereço do local onde a manutenção será realizada, caso a manutenção seja feita na própria empresa, coloque o endereço da empresa, para os casos em que a manutenção será feita em uma loja técnica, oficina etc. Cadastre o endereço respectivo. No campo "Atividade": Informe a atividade que será feita, por exemplo: "Troca de peças", "Limpeza", "Calibração" etc.</p>                      
+                        </div>
+
+                    </div>
+                    <button className="modal-close is-large" aria-label="close" onClick={fecharHelp}></button>
+                </div>
+            </div>
     </body>
   );
 }
