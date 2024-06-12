@@ -53,24 +53,24 @@ const Ativos = ({ setTela }) => {
     });
 
 
-    
+
     const [modalOpen, setModalOpen] = useState(false);
-    
+
     const abrirHelp = () => {
-            setModalOpen(true);
-        };
-    
+        setModalOpen(true);
+    };
+
     const fecharHelp = () => {
-            setModalOpen(false);
-        };
+        setModalOpen(false);
+    };
 
 
     return (
         <body>
-            
+
             <div class='page-full' style={{ backgroundColor: 'transparent' }}>
-                <button class=" shadow-button button button-effect is-primary m-5 ml-6 is-rounded is-size-4"  onClick={() => setTela('CadastroAtivos')}>Cadastrar Ativo</button>
-                <button class=" shadow-button button button-effect is-primary m-5 ml-6 is-rounded is-size-4"  onClick={abrirModal}>Relatório</button>
+                <button class=" shadow-button button button-effect is-primary m-5 ml-6 is-rounded is-size-4" onClick={() => setTela('CadastroAtivos')}>Cadastrar Ativo</button>
+                <button class=" shadow-button button button-effect is-primary m-5 ml-6 is-rounded is-size-4" onClick={abrirModal}>Relatório</button>
 
 
                 {/* Modal */}
@@ -113,7 +113,7 @@ const Ativos = ({ setTela }) => {
                 </div>
                 {/* Fim do Modal */}
 
-                
+
                 <div class='page-full' style={{
                     backgroundColor: '#459EB5'
                 }}>
@@ -169,22 +169,23 @@ const Ativos = ({ setTela }) => {
                         ))}
                     </div>
                     <div className="help-button">
-                    <button className="shadow-button button button-effect is-primary m-5 ml-6 is-rounded is-size-4" onClick={abrirHelp}>?</button>
+                        <button className="shadow-button button button-effect is-primary m-5 ml-6 is-rounded is-size-4" onClick={abrirHelp}>?</button>
 
-                    <div className={`modal ${modalOpen ? 'is-active' : ''}`}>
-                        <div className="modal-background" onClick={fecharHelp}></div>
-                        <div className="modal-content">
-                        
-                        
-                            <div className="box has-background-primary has-text-white">
-                                <button class="delete is-pulled-right" aria-label="close" onClick={fecharHelp}></button>
-                                <p>Aqui vai o seu parágrafo de ajuda.</p>
-                                
+                        <div className={`modal ${modalOpen ? 'is-active' : ''}`}>
+                            <div className="modal-background" onClick={fecharHelp}></div>
+                            <div className="modal-content">
+
+
+                                <div className="box ajuda m-3 has-text-white">
+                                    <button class="delete is-pulled-right" aria-label="close" onClick={fecharHelp}></button>
+                                    <p>Este é o <span className='has-text-weight-bold'>Painel de Ativos</span>, Aqui você visualizará todos os ativos cadastrados. Dica: Para encontrar o ativo desejado mais facilmente você poderá filtrar os ativos que deseja visualizar digitando nos campos ID, Título e/ou Status!
+                                        Você poderá cadastrar um novo ativo clicando no botão Cadastrar Novo Ativo ou gerar um relatório do mês atual clicando no botão Relatório, acima do Painel.</p>
+
+                                </div>
+
                             </div>
-
+                            <button className="modal-close is-large" aria-label="close" onClick={fecharHelp}></button>
                         </div>
-                        <button className="modal-close is-large" aria-label="close" onClick={fecharHelp}></button>
-                    </div>
                     </div>
                 </div>
             </div>

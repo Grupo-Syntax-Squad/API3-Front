@@ -27,6 +27,10 @@ button.dark {
    color: #fff;
 }
 
+.ajuda{
+   background-Color: var(--azul);
+}
+
 
 
  button{
