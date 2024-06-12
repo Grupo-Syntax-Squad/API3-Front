@@ -38,23 +38,23 @@ function CadastroManutenção({ setTela }) {
     setData(dataSelecionada);
     console.log("Data selecionada:", dataSelecionada);
     if (dataSelecionada) {
-        // Faça o que precisar com a data recuperada
-        console.log('Data selecionada:', dataSelecionada);
-        // Por exemplo, você pode definir o estado com a data recuperada
-        setManData(dataSelecionada);
+      // Faça o que precisar com a data recuperada
+      console.log('Data selecionada:', dataSelecionada);
+      // Por exemplo, você pode definir o estado com a data recuperada
+      setManData(dataSelecionada);
     }
-};
-
-useEffect(() => {
-  const fetchData = async () => {
-    let response = await axios.get('http://localhost:8000/ativos');
-    setAtivos(response.data);
-    getDataFromLocalStorage(); // Chamando a função para recuperar os dados do localStorage
   };
 
-  fetchData(); // Chamando a função fetchData
+  useEffect(() => {
+    const fetchData = async () => {
+      let response = await axios.get('http://localhost:8000/ativos');
+      setAtivos(response.data);
+      getDataFromLocalStorage(); // Chamando a função para recuperar os dados do localStorage
+    };
 
-}, []); 
+    fetchData(); // Chamando a função fetchData
+
+  }, []);
 
 
 
@@ -75,8 +75,8 @@ useEffect(() => {
     const camposVazios = camposObrigatorios.some(campo => !campo);
 
     if (camposVazios) {
-        alert('Por favor, preencha todos os campos obrigatórios.');
-        return;
+      alert('Por favor, preencha todos os campos obrigatórios.');
+      return;
     }
 
     let response;
@@ -90,14 +90,14 @@ useEffect(() => {
       end_complemento: man_complemento
     }
     response = await axios.post('http://localhost:8000/enderecos', EnderecoData)
-    
+
     const dataHoraServidor = new Date(`${man_data}T${man_horario}:00`).toISOString();
     // Enviando ativo
     const ativoData = {
       man_endereco_id: response.data,
       man_atividade,
-      man_data: new Date().setDate(new Date(dataSelecionada).getDate()+1),
-      man_horario : man_horario === '' ? '00:00:00' : man_horario + ':00',
+      man_data: new Date().setDate(new Date(dataSelecionada).getDate() + 1),
+      man_horario: man_horario === '' ? '00:00:00' : man_horario + ':00',
       man_localizacao: ativoSelecionado.ati_localizacao_id,
       man_ativo_id: ativoSelecionado,
       man_status,
@@ -127,11 +127,11 @@ useEffect(() => {
   const [modalOpen, setModalOpen] = useState(false);
 
   const abrirHelp = () => {
-      setModalOpen(true);
+    setModalOpen(true);
   };
 
   const fecharHelp = () => {
-      setModalOpen(false);
+    setModalOpen(false);
   };
 
   // Função para lidar com a busca de CEP
@@ -165,14 +165,14 @@ useEffect(() => {
 
   return (
     <body>
-      
+
       <div class="help-button"><button class=" shadow-button button button-effect is-primary m-5 ml-6 is-rounded is-size-4">?</button></div>
       <div class='page-full shadow-button'>
         <div class='field'>
           <h2 class="titulo-cadastro p-2">Cadastro de Manutenção</h2>
         </div>
         <div class="columns m-3">
-          <div class="column is-half" style={{width: '80%'}}>
+          <div class="column is-half" style={{ width: '80%' }}>
             <form onSubmit={handleSubmit}>
               <div className='top-one'>
                 <div class="field">
@@ -381,38 +381,38 @@ useEffect(() => {
             </button>
           </p>
           {showPopup && (
-                        <div>
-                        <div className="modal-background" onClick={fecharHelp}></div>
-                        <div className="modal-content">
+            <div>
+              <div className="modal-background" onClick={fecharHelp}></div>
+              <div className="modal-content">
 
-                            <div className="box ajuda m-3 has-text-white">
-                                <p className='has-text-weight-bold' >Manutenção Cadastrada com sucesso!</p>
-                                <button class="delete is-pulled-right" aria-label="close" onClick={fecharHelp}></button>
-                            </div>
+                <div className="box ajuda m-3 has-text-white">
+                  <p className='has-text-weight-bold' >Manutenção Cadastrada com sucesso!</p>
+                  <button class="delete is-pulled-right" aria-label="close" onClick={fecharHelp}></button>
+                </div>
 
-                        </div>
-                        <button className="modal-close is-large" aria-label="close" onClick={fecharHelp}></button>
-                    </div>
-                    )}
+              </div>
+              <button className="modal-close is-large" aria-label="close" onClick={fecharHelp}></button>
+            </div>
+          )}
         </div>
       </div>
       <div className="help-button">
-                <button className="shadow-button button button-effect is-primary m-5 ml-6 is-rounded is-size-4" onClick={abrirHelp}>?</button>
+        <button className="shadow-button button button-effect is-primary m-5 ml-6 is-rounded is-size-4" onClick={abrirHelp}>?</button>
 
-                <div className={`modal ${modalOpen ? 'is-active' : ''}`}>
-                    <div className="modal-background" onClick={fecharHelp}></div>
-                    <div className="modal-content">
+        <div className={`modal ${modalOpen ? 'is-active' : ''}`}>
+          <div className="modal-background" onClick={fecharHelp}></div>
+          <div className="modal-content">
 
 
-                        <div className="box ajuda m-6 has-text-white">
-                            <button class="delete is-pulled-right" aria-label="close" onClick={fecharHelp}></button>
-                            <p>Esta é a <span className='has-text-weight-bold'>Pagina de Cadastro da Manutenção</span>,  Preencha os dados nescessários referentes à manutenção. OBSERVAÇÃO: No campo "Endereço" cadastre o endereço do local onde a manutenção será realizada, caso a manutenção seja feita na própria empresa, coloque o endereço da empresa, para os casos em que a manutenção será feita em uma loja técnica, oficina etc. Cadastre o endereço respectivo. No campo "Atividade": Informe a atividade que será feita, por exemplo: "Troca de peças", "Limpeza", "Calibração" etc.</p>                      
-                        </div>
-
-                    </div>
-                    <button className="modal-close is-large" aria-label="close" onClick={fecharHelp}></button>
-                </div>
+            <div className="box ajuda m-6 has-text-white">
+              <button class="delete is-pulled-right" aria-label="close" onClick={fecharHelp}></button>
+              <p>Esta é a <span className='has-text-weight-bold'>Pagina de Cadastro da Manutenção</span>,  Preencha os dados nescessários referentes à manutenção. OBSERVAÇÃO: No campo "Endereço" cadastre o endereço do local onde a manutenção será realizada, caso a manutenção seja feita na própria empresa, coloque o endereço da empresa, para os casos em que a manutenção será feita em uma loja técnica, oficina etc. Cadastre o endereço respectivo. No campo "Atividade": Informe a atividade que será feita, por exemplo: "Troca de peças", "Limpeza", "Calibração" etc.</p>
             </div>
+
+          </div>
+          <button className="modal-close is-large" aria-label="close" onClick={fecharHelp}></button>
+        </div>
+      </div>
     </body>
   );
 }
