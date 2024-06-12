@@ -25,15 +25,13 @@ function CadastroManutenção({ setTela }) {
   const [localizacoes, setLocalizacoes] = useState([]);
   const [tipos, setTipos] = useState([]);
   const [ativos, setAtivos] = useState([]);
+  const [showPopup, setShowPopup] = useState(false);
   const [dataSelecionada, setData] = useState(new Date())
   const [ativoSelecionado, setAtivo] = useState({
     "ati_localizacao_id": {
       "loc_titulo": ""
     }
   });
-
-  
-
 
   const getDataFromLocalStorage = () => {
     const dataSelecionada = new Date(localStorage.getItem('dataSelecionada')).toISOString().split("T")[0];
@@ -57,6 +55,8 @@ useEffect(() => {
   fetchData(); // Chamando a função fetchData
 
 }, []); 
+
+
 
   function exibirPopUp() {
     var popup = document.getElementById('popup');
@@ -380,12 +380,20 @@ useEffect(() => {
               Cancelar
             </button>
           </p>
-          <div id='popup' style={{ display: 'none', height: '200px', backgroundColor: '#367E90', position: 'fixed', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', textAlign: 'center', width: '40%', alignContent: 'center', justifyContent: 'center', borderRadius: '10px' }}>
-            <p className='has-text-white is-size-3-desktop is-size-4-mobile'>Manutenção Cadastrada com sucesso!</p>
-            <button className='has-text-white is-size-4 p-3 mt-3' style={{ marginLeft: '60%', backgroundColor: '#459EB5', borderRadius: '100%' }} onClick={() => exibirPopUp()}>
-              <p className='is-size-4' onClick={() => setTela('Manutenções')}>OK</p>
-            </button>
-          </div>
+          {showPopup && (
+                        <div>
+                        <div className="modal-background" onClick={fecharHelp}></div>
+                        <div className="modal-content">
+
+                            <div className="box ajuda m-3 has-text-white">
+                                <p className='has-text-weight-bold' >Manutenção Cadastrada com sucesso!</p>
+                                <button class="delete is-pulled-right" aria-label="close" onClick={fecharHelp}></button>
+                            </div>
+
+                        </div>
+                        <button className="modal-close is-large" aria-label="close" onClick={fecharHelp}></button>
+                    </div>
+                    )}
         </div>
       </div>
       <div className="help-button">
