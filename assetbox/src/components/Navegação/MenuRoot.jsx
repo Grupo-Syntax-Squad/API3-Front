@@ -194,7 +194,7 @@ function MenuRoot(props) {
                 {showLogout && (
                   <div className='dropdown navbar-dropdown is-right mr-1 px-5 '>
                     <button className='navbar-item' onClick={e => props.seletorView("EditarEmpresa", e)}>Empresa <img className='img' src={Edit} alt="editar"/></button>
-                    <button className='navbar-item' onClick={e => props.seletorView("Filial", e)}>Filiais</button>
+                    <button className='navbar-item' onClick={e => props.seletorView("EditarFilial", e)}>Filiais</button>
                     <button onClick={ myFunction} className="button">{dark ? "Modo Claro" : "Modo Escuro"}</button>
                     <button className='navbar-item is-flex dropdown-item' onClick={e => handleLogout(e)}>Sair<img className='img' src={Exit} alt="sair"/></button>
                   </div>
@@ -270,7 +270,7 @@ function MenuRoot(props) {
               {showLogout && (
                 <div className='dropdown navbar-dropdown is-right mr-1 px-5 '>
                   <button className='navbar-item' onClick={e => props.seletorView("EditarEmpresa", e)}>Empresa <img className='img' src={Edit} alt="editar"/></button>
-                  <button className='navbar-item' onClick={e => props.seletorView("Filial", e)}>Filiais</button>
+                  <button className='navbar-item' onClick={e => props.seletorView("EditarFilial", e)}>Filiais</button>
                   <button onClick={ myFunction} className="navbar-item">{dark ? "Modo Claro" : "Modo Escuro"}</button>
                   <button className='navbar-item is-flex dropdown-item' onClick={e => handleLogout(e)}>Sair<img className='img' src={Exit} alt="sair"/></button>
                 </div>
