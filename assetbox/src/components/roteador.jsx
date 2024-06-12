@@ -126,6 +126,19 @@ export default function Roteador() {
                                 <Login setTela={setTela} />
                             )
                         }
+                        case 'VisualizarFilial':
+                            if (root) {
+                                return (
+                                    <>
+                                        <MenuRoot seletorView={selecionarView} botoes={botoes} />
+                                        <VisualizarFilial setTela={setTela} />
+                                    </>
+                                )
+                            } else {
+                                return (
+                                    <Login setTela={setTela} />
+                                )
+                            }
                     case 'EditarEmpresa':
                         if (root) {
                             return (

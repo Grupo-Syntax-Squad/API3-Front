@@ -84,12 +84,28 @@ function CadastroAtivos({ setTela }) {
   }
 
   const handleImageChange = (event) => {
-    setImagemSelecionada(event.target.files[0]);
-  };
+    const file = event.target.files[0];
+    const fileExtension = file.name.split('.').pop().toLowerCase();
+  
+    if (fileExtension == "jpeg" || fileExtension == "png") {
+      setImagemSelecionada(file);
+      console.log("era pra funfar, mas n funfou")
+    } else {
+      alert('Por favor, selecione um arquivo de imagem JPEG ou PNG.');
+      event.target.value = null; // Limpa o campo de arquivo
+    }  };
 
   const handleDocumentoChange = (event) => {
-    setDocumentoSelecionado(event.target.files[0]);
-  }
+    const file = event.target.files[0];
+    const fileExtension = file.name.split('.').pop().toLowerCase();
+  
+    if (fileExtension == "pdf") {
+      setDocumentoSelecionado(file);
+      console.log("era pra funfar, mas n funfou")
+    } else {
+      alert('Por favor, selecione um arquivo tipo pdf.');
+      event.target.value = null; // Limpa o campo de arquivo
+    }  }
 
   const [modalOpen, setModalOpen] = useState(false);
 
