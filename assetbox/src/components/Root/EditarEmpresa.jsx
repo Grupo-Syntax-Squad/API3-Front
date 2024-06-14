@@ -368,67 +368,67 @@ function EditarEmpresa({ setTela }) {
                         <div className="column p-5 shadow-button" style={{ borderRadius: '50px', backgroundColor: "rgb(230, 230, 230)" }}>
                             <div className="field">
                                 <img style={{ color: 'red' }} src={matriz} class='image is-96x96 container' alt="AssetBox Logo" />
-                                <label htmlFor="razao-social" className="label has-text-black">Razão Social da Empresa:</label>
+                                <label htmlFor="razao-social" className="label has-text-black">Razão Social da Empresa</label>
                                 <div className="control">
-                                    <input value={matrizNome} onChange={(event) => setNomeMatriz(event.target.value)} placeholder="Digite a razão social da empresa" className="input" disabled={matrizAlreadyExist && !editMatriz} />
+                                    <input value={matrizNome} onChange={(event) => setNomeMatriz(event.target.value)} placeholder="Digite a razão social da empresa" required className="input" disabled={matrizAlreadyExist && !editMatriz} />
                                 </div>
                             </div>
                             <div className="field">
-                                <label htmlFor="nome-fantasia" className="label has-text-black">Nome Fantasia:</label>
+                                <label htmlFor="nome-fantasia" className="label has-text-black">Nome Fantasia</label>
                                 <div className="control">
-                                    <input value={matrizNomeFicticio} onChange={(event) => setNomeFicticio(event.target.value)} placeholder="Digite o nome fantasia da empresa" className="input" disabled={matrizAlreadyExist && !editMatriz} />
+                                    <input value={matrizNomeFicticio} onChange={(event) => setNomeFicticio(event.target.value)} placeholder="Digite o nome fantasia da empresa" required className="input" disabled={matrizAlreadyExist && !editMatriz} />
                                 </div>
                             </div>
                             <div className="field">
-                                <label htmlFor="cnpj" className="label has-text-black">CNPJ:</label>
+                                <label htmlFor="cnpj" className="label has-text-black">CNPJ</label>
                                 <div className="control">
-                                    <input value={matrizCNPJ} onChange={(event) => setCNPJMatriz(event.target.value)} placeholder="Digite o CNPJ da empresa" className="input" disabled={matrizAlreadyExist && !editMatriz} />
+                                    <input value={matrizCNPJ} onChange={(event) => setCNPJMatriz(event.target.value)} placeholder="Digite o CNPJ da empresa" className="input" required disabled={matrizAlreadyExist && !editMatriz} />
                                 </div>
                             </div>
                             <div className="field">
                                 <label htmlFor="email" className="label has-text-black">Email:</label>
                                 <div className="control">
-                                    <input value={matrizEmail} onChange={handleEmailMatrizChange} placeholder="Digite o email da empresa" className="input" disabled={matrizAlreadyExist && !editMatriz} />
+                                    <input value={matrizEmail} onChange={handleEmailMatrizChange} placeholder="Digite o email da empresa" className="input" required disabled={matrizAlreadyExist && !editMatriz} />
                                 </div>
                             </div>
                             <div className="field">
-                                <label htmlFor="telefone" className="label has-text-black">Telefone:</label>
+                                <label htmlFor="telefone" className="label has-text-black">Telefone</label>
                                 <div className="control">
-                                    <input value={matrizTel} onChange={handleTelefoneMatrizChange} placeholder="Digite o telefone da empresa" className="input" disabled={matrizAlreadyExist && !editMatriz} />
+                                    <input value={matrizTel} onChange={handleTelefoneMatrizChange} placeholder="Digite o telefone da empresa" className="input" required disabled={matrizAlreadyExist && !editMatriz} />
                                 </div>
-                                <h3 className="has-text-black is-size-5 mb-5" style={{ textAlign: 'center' }}>Endereço Matriz</h3>
+                                <h3 className="has-text-black is-size-5 mb-5 mt-5" style={{ textAlign: 'center' }}>Endereço Matriz</h3>
                                 <div className="field">
-                                    <label htmlFor="cep" className="label has-text-black">CEP:</label>
+                                    <label htmlFor="cep" className="label has-text-black">CEP</label>
                                     <div className="control">
-                                        <input value={matrizCEP} onChange={handleCepMatriz} placeholder="Digite o CEP da matriz" className="input" disabled={matrizAlreadyExist && !editMatriz} />
+                                        <input value={matrizCEP} onChange={handleCepMatriz} placeholder="Digite o CEP da matriz" className="input" required disabled={matrizAlreadyExist && !editMatriz} />
                                     </div>
                                 </div>
                                 <div className="field">
-                                    <label htmlFor="rua" className="label has-text-black">Rua:</label>
+                                    <label htmlFor="rua" className="label has-text-black">Rua</label>
                                     <div className="control">
-                                        <input value={matrizRua} onChange={(event) => setRuaMatriz(event.target.value)} placeholder="Digite a rua da matriz" className="input" disabled={matrizAlreadyExist && !editMatriz} />
+                                        <input value={matrizRua} onChange={(event) => setRuaMatriz(event.target.value)} placeholder="Digite a rua da matriz"  className="input" disabled={matrizAlreadyExist && !editMatriz} />
                                     </div>
                                 </div>
                                 <div className="field">
-                                    <label htmlFor="numero" className="label has-text-black">Número:</label>
+                                    <label htmlFor="numero" className="label has-text-black">Número</label>
                                     <div className="control">
-                                        <input value={matrizNumero} onChange={(event) => setNumeroMatriz(event.target.value)} placeholder="Digite o número da matriz" className="input" disabled={matrizAlreadyExist && !editMatriz} />
+                                        <input value={matrizNumero} onChange={(event) => setNumeroMatriz(event.target.value)} placeholder="Digite o número da matriz"  className="input" disabled={matrizAlreadyExist && !editMatriz} />
                                     </div>
                                 </div>
                                 <div className="field">
-                                    <label htmlFor="bairro" className="label has-text-black">Bairro:</label>
+                                    <label htmlFor="bairro" className="label has-text-black">Bairro</label>
                                     <div className="control">
                                         <input value={matrizBairro} onChange={(event) => setBairroMatriz(event.target.value)} placeholder="Digite o bairro da matriz" className="input" disabled={matrizAlreadyExist && !editMatriz} />
                                     </div>
                                 </div>
                                 <div className="field">
-                                    <label htmlFor="cidade" className="label has-text-black">Cidade:</label>
+                                    <label htmlFor="cidade" className="label has-text-black">Cidade</label>
                                     <div className="control">
                                         <input value={matrizCidade} onChange={(event) => setCidadeMatriz(event.target.value)} placeholder="Digite a cidade da matriz" className="input" disabled={matrizAlreadyExist && !editMatriz} />
                                     </div>
                                 </div>
                                 <div className="field">
-                                    <label htmlFor="estado" className="label has-text-black">Estado:</label>
+                                    <label htmlFor="estado" className="label has-text-black">Estado</label>
                                     <div className="control">
                                         <input value={matrizEstado} onChange={(event) => setEstadoMatriz(event.target.value)} placeholder="Digite o estado da matriz" className="input" disabled={matrizAlreadyExist && !editMatriz} />
                                     </div>
@@ -436,7 +436,7 @@ function EditarEmpresa({ setTela }) {
                             </div>
                             <div className="field">
                                 <div className="control pr-3">
-                                    <label htmlFor="local" className="label has-text-black is-flex">Localizações Matriz:
+                                    <label htmlFor="local" className="label has-text-black is-flex">Localizações Matriz
                                         <img src={adicionar} className='ml-2 image is-24x24' onClick={(event) => showPopUpMatriz()} alt='Ícone adicionar localização matriz' />
                                     </label>
                                     <div>
@@ -477,53 +477,53 @@ function EditarEmpresa({ setTela }) {
                             <img src={filial} class='image is-64x64  container' alt="AssetBox Logo" />
                             <div className="field">
                                 <div className="control">
-                                    <label htmlFor="local" className="label has-text-black">Nome da Filial:</label>
+                                    <label htmlFor="local" className="label has-text-black">Nome da Filial</label>
                                     <input value={filialNome} onChange={(event) => setNomeFilial(event.target.value)} placeholder="Digite o nome da filial" className="input" />
                                 </div>
                                 <div className="control">
-                                    <label htmlFor="local" className="label has-text-black">CNPJ Filial:</label>
+                                    <label htmlFor="local" className="label has-text-black mt-4">CNPJ Filial</label>
                                     <input value={filialCNPJ} onChange={(event) => setCNPJFilial(event.target.value)} placeholder="Digite o cnpj da filial" className="input" />
                                 </div>
                             </div>
                             <div className="field">
-                                <label htmlFor="email" className="label has-text-black">Email:</label>
+                                <label htmlFor="email" className="label has-text-black">Email</label>
                                 <div className="control">
                                     <input value={filialEmail} onChange={e => setEmailFilial(e.target.value)} placeholder="Digite o email da filial" className="input" />
                                 </div>
                             </div>
                             <div className="field">
                                 <div className="control pr-3">
-                                    <label htmlFor="local is-flex" className="label has-text-black">Telefone Filial: </label>
+                                    <label htmlFor="local is-flex" className="label has-text-black">Telefone Filial </label>
                                     <input value={filialTelefone} onChange={(event) => setTelefoneFilial(event.target.value)} placeholder="Digite o telefone da filial" className="input" />
                                 </div>
                                 <div className="control">
-                                    <label htmlFor="local is-flex" className="label has-text-black">CEP Filial: </label>
+                                    <label htmlFor="local is-flex" className="label has-text-black mt-4">CEP Filial </label>
                                     <input value={filialCEP} onChange={handleCepFilial} placeholder="Digite o cep da filial" className="input" />
                                 </div>
                             </div>
                             <div className="field">
                                 <div className="control pr-3">
-                                    <label htmlFor="local" className="label has-text-black">Rua Filial:</label>
+                                    <label htmlFor="local" className="label has-text-black">Rua Filial</label>
                                     <input value={filialRua} onChange={(event) => setRuaFilial(event.target.value)} placeholder="Digite o rua da filial" className="input" />
                                 </div>
                                 <div className="control">
-                                    <label htmlFor="local" className="label has-text-black">Numero Filial: </label>
+                                    <label htmlFor="local" className="label has-text-black mt-4">Numero Filial </label>
                                     <input value={filialNumero} onChange={(event) => setNumeroFilial(event.target.value)} placeholder="Digite o número da filial" className="input" />
                                 </div>
                             </div>
                             <div className="field">
                                 <div className="control pr-3">
-                                    <label htmlFor="local" className="label has-text-black">Cidade Filial:</label>
+                                    <label htmlFor="local" className="label has-text-black">Cidade Filial</label>
                                     <input value={filialCidade} onChange={(event) => SubmitLocalizacao(event.target.value)} placeholder="Digite o cidade da filial" className="input" />
                                 </div>
                                 <div className="control">
-                                    <label htmlFor="local" className="label has-text-black">Estado Filial:</label>
+                                    <label htmlFor="local" className="label has-text-black mt-4">Estado Filial</label>
                                     <input value={filialEstado} onChange={(event) => SubmitLocalizacao(event.target.value)} placeholder="Digite o estado da filial" className="input" />
                                 </div>
                             </div>
                             <div className="field">
                                 <div className="control pr-3">
-                                    <label htmlFor="local" className="label has-text-black is-flex">Localizações Filial:
+                                    <label htmlFor="local" className="label has-text-black is-flex">Localizações Filial
                                         <img src={adicionar} className='ml-2 image is-24x24' onClick={(event) => showPopUpFilial()} alt='Ícone adicionar localização filial' />
                                     </label>
                                     <div>

@@ -45,10 +45,10 @@ const Manutencao = ({ setTela }) => {
 
             <div className='page-full' style={{ backgroundColor: 'transparent', borderTopLeftRadius: '10px', borderTopRightRadius: '10px' }}>
                 <button className="button button-effect is-primary m-5 ml-6 is-rounded is-size-4 shadow-button" onClick={() => setTela('VisualizarAgendamento')}>Cadastrar Manutenção</button>
-                <div className='page-full' style={{ backgroundColor: '#459EB5', borderTopLeftRadius: '10px', borderTopRightRadius: '10px' }}>
+                <div className='page-full ' style={{ backgroundColor: '#459EB5', borderTopLeftRadius: '10px', borderTopRightRadius: '10px' }}>
                     <div className='field'>
                         <div className="columns filtro mx-0" style={{ borderTopLeftRadius: '10px', borderTopRightRadius: '10px' }}>
-                            <div className="column is-two-fifths is-flex is-align-items-center" style={{ display: 'flex', alignItems: 'center' }}>
+                            <div className="column is-two-fifths is-flex is-align-items-center " style={{ display: 'flex', alignItems: 'center' }}>
                                 <img src={Filtro} className="mx-1" alt='filter'></img><label className='filtros mx-1 has-text-white has-text-weight-medium mr-3'>Horário</label>
                                 <input className="input is-small is-flex-grow-2 is-rounded border-none" type="time" placeholder='Digite um horário' value={filtroHorario} onChange={(e) => setFiltroHorario(e.target.value)} />
                             </div>
@@ -62,8 +62,8 @@ const Manutencao = ({ setTela }) => {
                             </div>
                         </div>
                     </div>
-                    <div className="columns indice m-0 is-flex is-justify-content-center border-radius-top" >
-                        <div className="column is-one-fifth ml-2 is-flex is-justify-content-center is-align-items-center">
+                    <div className="columns indice m-0 is-flex is-justify-content-center border-radius-top titulos-manutencao" >
+                        <div className="column is-one-fifth ml-2 is-flex is-justify-content-center is-align-items-center  ">
                             <label className='has-text-white is-size-4 has-text-weight-medium'>Data</label>
                         </div>
                         <div className="column is-one-fifth ml-2 mr-2 is-flex is-justify-content-center is-align-items-center">

@@ -29,3 +29,15 @@ pre{
     background-color: var(--shadow);
     padding: 0;
 }
+
+
+/* Tela de Manutenção */
+
+
+@media screen and (max-width: 900px) {
+    .titulos-manutencao{
+        width: 500px;
+    }
+    
+
+ }
