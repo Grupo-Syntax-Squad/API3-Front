@@ -132,14 +132,14 @@ const Usuarios = ({ setTela }) => {
                 </div>
             </div>
             <div className="help-button">
-                <button className="shadow-button button button-effect is-primary m-5 ml-6 is-rounded is-size-4" onClick={abrirHelp}>?</button>
+                <button className="shadow-button button button-effect is-primary m-5 ml-6 ajuda-botao is-size-4" onClick={abrirHelp}>?</button>
 
                 <div className={`modal ${modalOpen ? 'is-active' : ''}`}>
                     <div className="modal-background" onClick={fecharHelp}></div>
                     <div className="modal-content">
 
 
-                        <div className="box ajuda m-6 has-text-white">
+                        <div className="box ajuda m-6 has-text-white ajuda-content">
                             <button class="delete is-pulled-right" aria-label="close" onClick={fecharHelp}></button>
                             <p>Este é o <span className='has-text-weight-bold'>Painel de Usuários</span>, Aqui você visualizará todos os <span className='has-text-weight-bold'>Destinatários</span> e <span className='has-text-weight-bold'>Administradores</span> cadastrados.
                             Para cadastrar um novo usuário, clique no botão <span className='has-text-weight-bold'>Cadastrar Destinatário</span> para cadastrar um novo destinatário.<span className='has-text-weight-bold'>Cadastrar Administrador</span> para cadastrar um novo administrador.

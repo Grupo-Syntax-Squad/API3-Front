@@ -163,7 +163,7 @@ function CadastroDestinatarios({ setTela }) {
 
   return (
     <body>
-      <div class="help-button"><button class=" shadow-button button button-effect is-primary m-5 ml-6 is-rounded is-size-4">?</button></div>
+      <div class="help-button"><button class=" shadow-button button button-effect is-primary m-5 ml-6 ajuda-botao is-size-4">?</button></div>
       <div className='page-full shadow-button'>
         <div className='field'>
           <h2 class="titulo-cadastro p-2">Cadastro de Destinatário</h2>

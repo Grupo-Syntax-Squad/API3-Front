@@ -35,40 +35,40 @@ export default function Dashboard({ setTela }) {
     return (
         <>
             <body className='flex w-screen h-screen '>
-                <div className='bg-black h-fit w-1/6 rounded-br-2xl text-sm md:text-base'>
+                <div className='bg-black h-fit w-1/6 rounded-br-2xl text-sm md:text-base background-azul shadow-button'>
                     <div className='m-3'>
                         <h3 className='mb-3'>Visualizar Por Filial</h3>
                         <div className='flex'>
                             <input type="checkbox" />
-                            <label htmlFor="">Nome da Filial</label>
+                            <label htmlFor="" className='pl-1 has-text-white'>Nome da Filial</label>
                         </div>
                         <div className=''>
                             <input type="checkbox" />
-                            <label htmlFor="">Nome da Filial</label>
+                            <label htmlFor="" className='pl-1 has-text-white'>Nome da Filial</label>
                         </div>
                         <div className=''>
                             <input type="checkbox" />
-                            <label htmlFor="">Nome da Filial</label>
+                            <label htmlFor="" className='pl-1 has-text-white'>Nome da Filial</label>
                         </div>
                         <div className=''>
                             <input type="checkbox" />
-                            <label htmlFor="">Nome da Filial</label>
+                            <label htmlFor="" className='pl-1 has-text-white'>Nome da Filial</label>
                         </div>
                         <div className=''>
                             <input type="checkbox" />
-                            <label htmlFor="">Nome da Filial</label>
+                            <label htmlFor="" className='pl-1 has-text-white'>Nome da Filial</label>
                         </div>
                     </div>
                 </div>
                 <div class='flex flex-col w-full  items-center p-6'>
                     <div className='flex gap-6 p-1'>
-                        <section className='bg-white rounded-lg text-center p-2 hover:scale-105 transition-all'>
+                        <section className='bg-white rounded-lg text-center p-2 hover:scale-105 transition-all background-azul px-5'>
                             <label htmlFor="">Valor Total</label>
-                            <h1 className='has-text-weight-light is-size-4'>R$ValorTotal</h1>
+                            <h1 className='has-text-weight-bold is-size-4 has-text-white'>R$ValorTotal</h1>
                         </section>
-                        <section className='bg-white rounded-lg text-center p-2 hover:scale-105 transition-all'>
+                        <section className='bg-white rounded-lg text-center p-2 hover:scale-105 transition-all background-azul px-5'>
                             <label className='' htmlFor="">Quantidade Total</label>
-                            <h1 className='has-text-weight-light is-size-4'>QuantidadeTotal</h1>
+                            <h1 className='has-text-weight-bold is-size-4 has-text-white'>QuantidadeTotal</h1>
                         </section>
                     </div>
                     <div className='flex flex-wrap w-full h-full pt-6 gap-2 justify-center'>
@@ -85,7 +85,7 @@ export default function Dashboard({ setTela }) {
                 </div>
             </body>
             <div className="help-button">
-                <button className="shadow-button button button-effect is-primary m-5 ml-6 is-rounded is-size-4" onClick={abrirHelp}>?</button>
+                <button className="shadow-button button button-effect is-primary m-5 ml-6 ajuda-botao is-size-4" onClick={abrirHelp}>?</button>
 
                 <div className={`modal ${modalOpen ? 'is-active' : ''}`}>
                     <div className="modal-background" onClick={fecharHelp}></div>
