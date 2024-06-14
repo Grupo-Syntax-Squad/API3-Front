@@ -321,7 +321,6 @@ function CadastroDestinatarios({ setTela }) {
           <div>
           <div className="modal-background" onClick={fecharHelp}></div>
           <div className="modal-content">
-
               <div className="box ajuda m-3 has-text-white">
                   <p className='has-text-weight-bold' >Destinatário Cadastrado com sucesso!</p>
                   <button class="delete is-pulled-right" aria-label="close" onClick={fecharHelp}></button>
