@@ -233,19 +233,19 @@ function CadastroAtivos({ setTela }) {
           <h2 class="titulo-cadastro">Cadastro de Ativos</h2>
         </div>
 
-        <div class="columns m-3">
-          <div class="column is-half has-text-centered"> <img src={imgadd} alt="imgadd" style={{ width: '100px', height: '100px' }} />
-            <div>
-              <input className='image-button' type='file' id='img' name="img" accept="image/*" onChange={handleImageChange} />
+        <div class="columns m-3 is-justify-content-space-around">
+          <div class="column is-half has-text-centered"> <img src={imgadd} alt="imgadd" className='container' style={{ width: '100px', height: '100px' }} />
+            <div >
+              <input className='image-button ' type='file' id='img' name="img" accept="image/*" onChange={handleImageChange} />
             </div>
           </div>
 
-          <div class="mid-page">
+          <div class="column is-half">
             <div class="columns m-3">
               <form onSubmit={handleSubmit}>
 
                 <div class="field">
-                  <label class="label ">Código do Ativo <span className='has-text-danger'>*</span></label>
+                  <label class="form-label ">Código do Ativo <span className='has-text-danger'>*</span></label>
                   <input
                     class="input is-small"
                     type="text"
@@ -256,38 +256,40 @@ function CadastroAtivos({ setTela }) {
                   />
                 </div>
                 <div class="field">
-                  <label class="label ">Tipo <span className='has-text-danger'>*</span></label>
-                  <div class="select is-small">
-                    {tipos && tipos.length > 0 ? (
-                      <select class="is-hovered" onChange={e => setTipoAtivo(e.target.value)}>
-                        <option value="" disabled selected>Selecione um tipo</option>
-                        {tipos.map((tipo) => <option key={tipo.tip_titulo} value={tipo.tip_id}>{tipo.tip_titulo}</option>)}
-                      </select>
-                    ) : (
-                      <p>Nenhum tipo disponível</p>
-                    )}
-                  </div>
+                  <label class="form-label ">Tipo <span className='has-text-danger'>*</span></label>
+                  <div class="select is-small is-flex">
+                    <div>
+                      {tipos && tipos.length > 0 ? (
+                        <select class="is-hovered" onChange={e => setTipoAtivo(e.target.value)}>
+                          <option value="" disabled selected>Selecione um tipo</option>
+                          {tipos.map((tipo) => <option key={tipo.tip_titulo} value={tipo.tip_id}>{tipo.tip_titulo}</option>)}
+                        </select>
+                      ) : (
+                        <p>Nenhum tipo disponível</p>
+                      )}
+                    </div>
                   <img src={adicionar} style={{ marginLeft: '10px', width: '15%' }} title="Cadastrar novo tipo" onClick={handleTipoClick} />
+                  </div>
                 </div>
 
                 <div class="field">
-                  <label class="label ">Localização</label>
+                  <label class="form-label is-flex">Localização</label>
                   <div class="select is-small">
-                    {localizacoes && localizacoes.length > 0 ? (
-                      <select class="is-hovered" onChange={e => setLocalizacaoAtivo(e.target.value)}>
-                        <option value="" disabled selected>Selecione uma localização</option>
-
-                        {localizacoesMatriz.map((localizacao) => <option key={localizacao.loc_titulo} value={localizacao.loc_id}>{localizacao.loc_titulo} - Matriz</option>)}
-
-                        {localizacoes.map((localizacao) => <option key={localizacao.loc_titulo} value={localizacao.loc_id}>{localizacao.loc_titulo} - {filiais.find(filial => filial.fil_id === localizacao.loc_filial_id).fil_nome}</option>)}
-                      </select>
-                    ) : (
-                      <p>Nenhuma localização disponível</p>
-                    )}
+                    <div>
+                      {localizacoes && localizacoes.length > 0 ? (
+                        <select class="is-hovered" onChange={e => setLocalizacaoAtivo(e.target.value)}>
+                          <option value="" disabled selected>Selecione uma localização</option>
+                          {localizacoesMatriz.map((localizacao) => <option key={localizacao.loc_titulo} value={localizacao.loc_id}>{localizacao.loc_titulo} - Matriz</option>)}
+                          {localizacoes.map((localizacao) => <option key={localizacao.loc_titulo} value={localizacao.loc_id}>{localizacao.loc_titulo} - {filiais.find(filial => filial.fil_id === localizacao.loc_filial_id).fil_nome}</option>)}
+                        </select>
+                      ) : (
+                        <p>Nenhuma localização disponível</p>
+                      )}
+                    </div>
                   </div>
                 </div>
                 <div class="field">
-                  <label class="label ">Status <span className='has-text-danger'>*</span></label>
+                  <label class="form-label is-flex">Status <span className='has-text-danger'>*</span></label>
                   <div class="select is-small">
                     <select class="is-hovered" onChange={e => setStatusAtivo(e.target.value)}>
                       <option value="" disabled selected>Selecione um status</option>
@@ -299,7 +301,7 @@ function CadastroAtivos({ setTela }) {
                   </div>
                 </div>
                 <div className="field" >
-                  <label className="label ">Destinatário</label>
+                  <label className="form-label ">Destinatário</label>
                   {destinatarios && destinatarios.length > 0 ? (
                     <div class="select is-small">
                       <select class="is-hovered" onChange={e => setDestinatarioAtivo(destinatarios.find(destinatario => destinatario.des_nome === e.target.value))}>
@@ -446,8 +448,8 @@ function CadastroAtivos({ setTela }) {
         </div>
 
         <h1>Documentos</h1>
-        <div className="columns m-3">
-          <div class="column is-half has-text-centered"><img src={docadd} alt="docadd" style={{ width: '100px', height: '100px' }} />.
+        <div className="columns m-3 ">
+          <div class="column is-half has-text-centered "><img src={docadd} alt="docadd" className='container' style={{ width: '100px', height: '100px' }} />.
             <div>
               <input className='image-button' type='file' id='doc' name="doc" accept="doc/*" onChange={handleDocumentoChange} />
             </div>

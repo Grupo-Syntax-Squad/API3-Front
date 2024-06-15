@@ -397,7 +397,7 @@ function CadastroManutenção({ setTela }) {
         </div>
       </div>
       <div className="help-button">
-        <button className="shadow-button button button-effect is-primary m-5 ml-6 is-rounded is-size-4" onClick={abrirHelp}>?</button>
+        <button className="shadow-button button button-effect is-primary m-5 ml-6 ajuda-botao is-size-4" onClick={abrirHelp}>?</button>
 
         <div className={`modal ${modalOpen ? 'is-active' : ''}`}>
           <div className="modal-background" onClick={fecharHelp}></div>
