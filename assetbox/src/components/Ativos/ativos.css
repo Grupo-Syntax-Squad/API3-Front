@@ -31,8 +31,6 @@ button.dark {
    background-Color: var(--azul);
 }
 
-
-
  button{
     background-Color: var(--azul);
     border-radius: 20px;
@@ -147,6 +145,5 @@ h1{
    position: fixed;
    right: 0%;
    bottom: 0%;
-   opacity: 0.7;
 }
 

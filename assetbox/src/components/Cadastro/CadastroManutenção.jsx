@@ -188,10 +188,10 @@ function CadastroManutenção({ setTela }) {
                   </div>
                 </div>
                 <div className="field" >
-                  <label className="form-label ">Data da manutenção:<span className='has-text-danger'>*</span></label>
+                  <label className="form-label"><div>Data da manutenção:<span className='has-text-danger'>*</span></div></label>
 
                   <input
-                    class="input is-small mt-2"
+                    class="input is-small mt-2 input-menor"
                     type="date"
                     placeholder='Insira a Data da manutenção:'
                     value={dataSelecionada}
@@ -199,9 +199,9 @@ function CadastroManutenção({ setTela }) {
                   />
                 </div>
                 <div class="field">
-                  <label class="label has-text-weight-normal">Horario da Manutenção <span className='has-text-danger'>*</span></label>
+                  <label class="label has-text-weight-normal "><div>Horario da Manutenção <span className='has-text-danger'>*</span></div></label>
                   <input
-                    class="input is-small"
+                    class="input is-small input-menor"
                     type="time"
                     title="Digite o horario que a manutenção ocorerá"
                     placeholder='Digite o horario:'
@@ -210,9 +210,9 @@ function CadastroManutenção({ setTela }) {
                   />
                 </div>
                 <div class="field">
-                  <label class="label has-text-weight-normal">Atividade<span className='has-text-danger'>*</span></label>
+                  <label class="label has-text-weight-normal ">Atividade<span className='has-text-danger'>*</span></label>
                   <input
-                    class="input is-small"
+                    class="input is-small input-menor"
                     type="text"
                     title="Digite o número de série do ativo"
                     placeholder='Insira o a descrição da manutenção:'
@@ -235,7 +235,7 @@ function CadastroManutenção({ setTela }) {
                   <label className="label has-text-weight-normal">Responsável<span className='has-text-danger'>*</span></label>
 
                   <input
-                    class="input is-small"
+                    class="input is-small input-menor"
                     type="text"
                     title="Digite o responsavel da manutenção"
                     placeholder='Insira o o responsável pela manutenção'
@@ -246,7 +246,7 @@ function CadastroManutenção({ setTela }) {
                 <div class="field">
                   <label class="label has-text-weight-normal">Localização</label>
                   <input
-                    class="input is-small"
+                    class="input is-small input-menor"
                     type="text"
                     title="Digite a localização"
                     placeholder='Insira a Localização:'
@@ -257,7 +257,7 @@ function CadastroManutenção({ setTela }) {
                 <div className="field" >
                   <label className="label has-text-weight-normal">Observações</label>
                   <input
-                    class="input is-small"
+                    class="input is-small input-menor"
                     type="text"
                     placeholder='Insira um Complemento:'
                     title="Digite um complemento para a manutenção, por exemplo: problemas que não serão corrigidos, estado de preservação, etc."

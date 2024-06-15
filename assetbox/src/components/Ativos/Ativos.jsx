@@ -177,7 +177,7 @@ const Ativos = ({ setTela }) => {
 
 
                                 <div className="box ajuda m-3 has-text-white">
-                                    <button class="delete is-pulled-right" aria-label="close" onClick={fecharHelp}></button>
+                                    {/* <button class="delete is-pulled-right" aria-label="close" onClick={fecharHelp}></button> */}
                                     <p>Este é o <span className='has-text-weight-bold'>Painel de Ativos</span>, Aqui você visualizará todos os ativos cadastrados. Dica: Para encontrar o ativo desejado mais facilmente você poderá filtrar os ativos que deseja visualizar digitando nos campos ID, Título e/ou Status!
                                         Você poderá cadastrar um novo ativo clicando no botão Cadastrar Novo Ativo ou gerar um relatório do mês atual clicando no botão Relatório, acima do Painel.</p>
                                 </div>

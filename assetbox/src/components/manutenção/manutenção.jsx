@@ -90,9 +90,9 @@ const Manutencao = ({ setTela }) => {
                                 <div className='SemHover column is-one-fifth mr-2 dado-ativo is-flex is-justify-content-center is-align-items-center has-text-weight-medium'>
                                     <p className='has-text-black'>{new Date(manutencao.man_data).toLocaleDateString()}</p>
                                 </div>
-                                <div className='SemHover column is-one-fifth mr-2 dado-ativo is-flex is-justify-content-center is-align-items-center has-text-weight-medium'>
+                                {/* <div className='SemHover column is-one-fifth mr-2 dado-ativo is-flex is-justify-content-center is-align-items-center has-text-weight-medium'>
                                     <p className='has-text-black'>{manutencao.man_horario}</p>
-                                </div>
+                                </div> */}
                                 <div className='SemHover column is-one-third mr-2 dado-ativo is-flex is-justify-content-center is-align-items-center has-text-weight-medium'>
                                     <p className='has-text-black'>{manutencao.man_id}</p>
                                 </div>
@@ -113,7 +113,6 @@ const Manutencao = ({ setTela }) => {
 
 
                         <div className="box ajuda m-6 has-text-white">
-                            <button class="delete is-pulled-right" aria-label="close" onClick={fecharHelp}></button>
                             <p>Este é o <span className='has-text-weight-bold'>Painel de Manutenções</span>,  Aqui você você visualiza todas as <span className='has-text-weight-bold'>Manutenções cadastradas.</span> Dica: Para encontrar a manutenção desejada mais facilmente você poderá filtrar as manutenções que deseja visualizar digitando nos campos Horário, ID e/ou Status!
                             Você poderá cadastrar uma nova manutenção clicando no botão
                             <span className='has-text-weight-bold'>Cadastrar Manutenção</span>, acima do Painel.
