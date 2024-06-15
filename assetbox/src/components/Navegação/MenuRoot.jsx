@@ -250,14 +250,14 @@ function MenuRoot(props) {
                 </span>
               </p>
               {showNotify && (
-                <div className='dropdown navbar-dropdown is-right mr-1 px-5 '>
-                  <button className='navbar-item' onClick={e => props.seletorView("AtivoPendente", e)}>
+                <div className='dropdown navbar-dropdown is-right mr-1 px-5 colunas-menu'>
+                  <button className='navbar-item coluna-menu' onClick={e => props.seletorView("AtivoPendente", e)}>
                     Ativos pendentes ({ativosPendentes})
                   </button>
-                  <button className='navbar-item' onClick={e => props.seletorView("AtivoExpirado", e)}>
+                  <button className='navbar-item coluna-menu' onClick={e => props.seletorView("AtivoExpirado", e)}>
                     Ativos expirados ({ativosExpirados})
                   </button>
-                  <button className='navbar-item' onClick={e => props.seletorView("ManutencaoPendente", e)}>
+                  <button className='navbar-item coluna-menu' onClick={e => props.seletorView("ManutencaoPendente", e)}>
                     Manutenções pendentes ({manutencoesPendentes})
                   </button>
                 </div>
@@ -266,14 +266,14 @@ function MenuRoot(props) {
           </div>
           <div className="navbar-end">
             <div className="navbar-item has-dropdown is-active">
-              <p className="img img-notify" style={{ backgroundColor: 'transparent' }} onClick={handleSettingsClick}>
+              <p className="img img-notify img-margin" style={{ backgroundColor: 'transparent' }} onClick={handleSettingsClick}>
                 <div className='is-flex'><img src={SettingsIcon} alt="configurações" /><p className='pl-4 none'>Configurações</p></div></p>
               {showLogout && (
-                <div className='dropdown navbar-dropdown is-right mr-1 px-5 '>
-                  <button className='navbar-item' onClick={e => props.seletorView("EditarEmpresa", e)}>Empresa <img className='img' src={Edit} alt="editar"/></button>
-                  <button className='navbar-item' onClick={e => props.seletorView("EditarFilial", e)}>Filiais</button>
-                  <button onClick={ myFunction} className="navbar-item">{dark ? "Modo Claro" : "Modo Escuro"}</button>
-                  <button className='navbar-item is-flex dropdown-item' onClick={e => handleLogout(e)}>Sair<img className='img' src={Exit} alt="sair"/></button>
+                <div className='dropdown navbar-dropdown is-right mr-1 px-5 colunas-menu'>
+                  <button className='navbar-item coluna-menu' onClick={e => props.seletorView("EditarEmpresa", e)}>Empresa <img className='img' src={Edit} alt="editar"/></button>
+                  <button className='navbar-item coluna-menu' onClick={e => props.seletorView("EditarFilial", e)}>Filiais</button>
+                  <button onClick={ myFunction} className="navbar-item coluna-menu">{dark ? "Modo Claro" : "Modo Escuro"}</button>
+                  <button className='navbar-item  coluna-menu is-flex dropdown-item' onClick={e => handleLogout(e)}>Sair<img className='img' src={Exit} alt="sair"/></button>
                 </div>
               )}
             </div>

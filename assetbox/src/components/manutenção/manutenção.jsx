@@ -112,7 +112,7 @@ const Manutencao = ({ setTela }) => {
                     <div className="modal-content">
 
 
-                        <div className="box ajuda m-6 has-text-white">
+                        <div className="box ajuda m-6 has-text-white ajuda-content">
                             <p>Este é o <span className='has-text-weight-bold'>Painel de Manutenções</span>,  Aqui você você visualiza todas as <span className='has-text-weight-bold'>Manutenções cadastradas.</span> Dica: Para encontrar a manutenção desejada mais facilmente você poderá filtrar as manutenções que deseja visualizar digitando nos campos Horário, ID e/ou Status!
                             Você poderá cadastrar uma nova manutenção clicando no botão
                             <span className='has-text-weight-bold'>Cadastrar Manutenção</span>, acima do Painel.
