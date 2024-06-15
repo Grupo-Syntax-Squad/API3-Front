@@ -54,27 +54,10 @@ a.nav-item {
   background-color: var(--verde);
 }
 
-@media screen and (max-width: 1024px) {
-  .empresa {
-    display: none;
-  }
 
-  .navbar{
-    display:flex;
-    flex-direction: column;
-  }
 
-  .navbar-menu {
-    flex-direction: column;
-    background-color: transparent;
-    
-  }
-  .navbar-brand{
-    display:none
-  }
-  .navbar-item{
-    width: 100vh;
-  }
+.none{
+  display: none;
 }
 
 ul{
@@ -134,4 +117,39 @@ ul{
   position: absolute;
   top: 50px;
   right: 50px;
+}
+
+
+@media screen and (max-width: 1024px) {
+  .empresa {
+    display: none;
+  }
+
+  .navbar{
+    display:flex;
+    flex-direction: column;
+  }
+
+  .navbar-menu {
+    flex-direction: column;
+    background-color: transparent;
+    
+  }
+  .navbar-brand{
+    display:none
+  }
+  .navbar-item{
+    width: 100vh;
+  }
+
+  .img-notify{
+    padding-left: 2.5%;
+    padding-top: 1%;
+  }
+  
+  .none{
+    display: block;
+    font-size: 15pt;
+    font-weight: bold;
+  }
 }

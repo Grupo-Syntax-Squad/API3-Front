@@ -243,8 +243,8 @@ function MenuRoot(props) {
           </div>
           <div className="navbar-end">
             <div className="navbar-item has-dropdown is-active">
-              <p className="img" onClick={handleNotifyClick} style={{ position: 'relative' }}>
-                <img src={Notify} alt="notificações" />
+              <p className="img img-notify" onClick={handleNotifyClick} style={{ position: 'relative' }}>
+                <div className='is-flex'><img src={Notify} alt="notificações" /><p className='pl-4 none'>Notificações</p></div>
                 <span style={{ position: 'absolute', top: '0', right: '-4px', background: 'red', borderRadius: '50%', color: 'white', padding: '2px 5px', fontSize: '12px' }}>
                   {ativosPendentes + ativosExpirados + manutencoesPendentes}
                 </span>
@@ -266,7 +266,8 @@ function MenuRoot(props) {
           </div>
           <div className="navbar-end">
             <div className="navbar-item has-dropdown is-active">
-              <p className="img" style={{ backgroundColor: 'transparent' }} onClick={handleSettingsClick}><img src={SettingsIcon} alt="configurações" /></p>
+              <p className="img img-notify" style={{ backgroundColor: 'transparent' }} onClick={handleSettingsClick}>
+                <div className='is-flex'><img src={SettingsIcon} alt="configurações" /><p className='pl-4 none'>Configurações</p></div></p>
               {showLogout && (
                 <div className='dropdown navbar-dropdown is-right mr-1 px-5 '>
                   <button className='navbar-item' onClick={e => props.seletorView("EditarEmpresa", e)}>Empresa <img className='img' src={Edit} alt="editar"/></button>
