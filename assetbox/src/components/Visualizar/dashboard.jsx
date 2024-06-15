@@ -5,6 +5,8 @@ import axios from 'axios';
 
 export default function Dashboard({ setTela }) {
     const [filiais, setFiliais] = useState([]);
+    const [valorTotal, setValorTotal] = useState(0);
+    const [quantidadeTotal, setQuantidadeTotal] = useState(0);
     const [statusData, setStatusData] = useState({
         manutencao: 0,
         ocioso: 0,
@@ -14,6 +16,16 @@ export default function Dashboard({ setTela }) {
     const [modalOpen, setModalOpen] = useState(false);
     const chartRef = useRef();
     const [loading, setLoading] = useState(true);
+
+    const fetchValorTotal = async () => {
+        const response = await axios.get("http://localhost:8000/dashboard/valorTotal");
+        setValorTotal(response.data);
+    }
+
+    const fetchQuantidadeTotal = async () => {
+        const response = await axios.get("http://localhost:8000/dashboard/quantidadeTotal");
+        setQuantidadeTotal(response.data);
+    }
 
     const fetchFiliais = async () => {
         try {
@@ -61,6 +73,8 @@ export default function Dashboard({ setTela }) {
 
         fetchFiliais();
         fetchStatusData();
+        fetchValorTotal();
+        fetchQuantidadeTotal();
 
         setLoading(false);
     }, []);
@@ -73,7 +87,7 @@ export default function Dashboard({ setTela }) {
                 data: {
                     labels: ["Em manutenção", "Ocioso", "Em operação", "Desativado"], // Chaves de statusData como labels
                     datasets: [{
-                        label: 'Status',
+                        label: 'Quantidade',
                         data: Object.values(statusData), // Valores de statusData como dados
                         backgroundColor: [
                             'rgba(255, 99, 132, 0.2)',
@@ -135,11 +149,11 @@ export default function Dashboard({ setTela }) {
                     <div className='flex gap-6 p-1'>
                         <section className='bg-white rounded-lg text-center p-2 hover:scale-105 transition-all background-azul px-5'>
                             <label htmlFor="">Valor Total</label>
-                            <h1 className='has-text-weight-bold is-size-4 has-text-white'>R$ValorTotal</h1>
+                            <h1 className='has-text-weight-bold is-size-4 has-text-white'>{valorTotal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</h1>
                         </section>
                         <section className='bg-white rounded-lg text-center p-2 hover:scale-105 transition-all background-azul px-5'>
                             <label className='' htmlFor="">Quantidade Total</label>
-                            <h1 className='has-text-weight-bold is-size-4 has-text-white'>QuantidadeTotal</h1>
+                            <h1 className='has-text-weight-bold is-size-4 has-text-white'>{quantidadeTotal}</h1>
                         </section>
                     </div>
                     <div className='flex flex-wrap w-full h-full pt-6 gap-2 justify-center'>
