@@ -80,7 +80,7 @@ export default function Dashboard({ setTela }) {
                 data: {
                     labels: ["Em manutenção", "Ocioso", "Em operação", "Desativado"], // Chaves de statusData como labels
                     datasets: [{
-                        label: 'Status',
+                        label: 'Quantidade',
                         data: Object.values(statusData), // Valores de statusData como dados
                         backgroundColor: [
                             'rgba(255, 99, 132, 0.2)',
