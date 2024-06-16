@@ -62,15 +62,15 @@ const Manutencao = ({ setTela }) => {
                             </div>
                         </div>
                     </div>
-                    <div className="columns indice m-0 is-flex is-justify-content-center border-radius-top titulos-manutencao" >
+                    <div className="columns titulo-none indice m-0 is-flex is-justify-content-center border-radius-top titulos-manutencao" >
                         <div className="column is-one-fifth ml-2 is-flex is-justify-content-center is-align-items-center  ">
                             <label className='has-text-white is-size-4 has-text-weight-medium'>Data</label>
                         </div>
-                        <div className="column is-one-fifth ml-2 mr-2 is-flex is-justify-content-center is-align-items-center">
+                        {/* <div className="column is-one-fifth ml-2 mr-2 is-flex is-justify-content-center is-align-items-center">
                             <label className='has-text-white is-size-4 has-text-weight-medium'>Horário</label>
-                        </div>
+                        </div> */}
                         <div className="column is-one-third mr-2 is-flex is-justify-content-center is-align-items-center">
-                            <label className='has-text-white is-size-4 has-text-weight-medium'>ID da manutenção</label>
+                            <label className='has-text-white is-size-4 has-text-weight-medium'>ID Manutenção</label>
                         </div>
                         <div className="column is-one-fifth mr-2 is-flex is-justify-content-center is-align-items-center">
                             <label className='has-text-white is-size-4 has-text-weight-medium'>Status</label>
@@ -105,7 +105,7 @@ const Manutencao = ({ setTela }) => {
                 </div>
             </div>
             <div className="help-button">
-                <button className="shadow-button button button-effect is-primary m-5 ml-6 is-rounded is-size-4" onClick={abrirHelp}>?</button>
+                <button className="shadow-button button button-effect is-primary m-5 ml-6 ajuda-botao is-size-4" onClick={abrirHelp}>?</button>
 
                 <div className={`modal ${modalOpen ? 'is-active' : ''}`}>
                     <div className="modal-background" onClick={fecharHelp}></div>

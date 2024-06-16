@@ -34,6 +34,11 @@ h1{
   font-size: larger;
   padding: 0.5%;
 }
+
+.background-azul{
+  background-Color: var(--azul);
+}
+
 /* 
 
 .form-label {
