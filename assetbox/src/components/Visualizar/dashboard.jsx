@@ -12,10 +12,9 @@ export default function Dashboard({ setTela }) {
         desativado: 0
     });
     const [modalOpen, setModalOpen] = useState(false);
-    const chartRefs = useRef([]);
-    const charts = useRef([]);
+    const chartRef = useRef();
+    const [loading, setLoading] = useState(true);
 
-    // Fetch the list of filiais
     const fetchFiliais = async () => {
         try {
             const response = await axios.get('http://localhost:8000/filiais');
@@ -25,64 +24,69 @@ export default function Dashboard({ setTela }) {
         }
     };
 
-   
     const fetchStatusData = async () => {
         try {
-            const response = await axios.get('http://localhost:8000/status');
-            setStatusData(response.data);
+            const response = await axios.get('http://localhost:8000/dashboard/status');
+            let statusDataHandler = {
+                manutencao: 0,
+                ocioso: 0,
+                operacao: 0,
+                desativado: 0
+            }
+            response.data.forEach(entity => {
+                switch (entity.nome) {
+                    case "EM_MANUTENCAO":
+                        statusDataHandler.manutencao = entity.quantidade;
+                        break;
+                    case "OCIOSO":
+                        statusDataHandler.ocioso = entity.quantidade;
+                        break;
+                    case "EM_OPERACAO":
+                        statusDataHandler.operacao = entity.quantidade;
+                        break;
+                    case "DESATIVADO":
+                        statusDataHandler.desativado = entity.quantidade;
+                        break;
+                    default:
+                        break;
+                }
+            })
+            setStatusData(statusDataHandler);
         } catch (error) {
             console.error('Erro ao buscar dados do status:', error);
         }
     };
 
     useEffect(() => {
+
         fetchFiliais();
         fetchStatusData();
+
+        setLoading(false);
     }, []);
 
     useEffect(() => {
-        const chartData = [
-            {
-                label: 'Em Manutenção',
-                value: statusData.manutencao,
-                color: 'rgba(255, 99, 132, 0.2)',
-                borderColor: 'rgba(255, 99, 132, 1)',
-            },
-            {
-                label: 'Ocioso',
-                value: statusData.ocioso,
-                color: 'rgba(54, 162, 235, 0.2)',
-                borderColor: 'rgba(54, 162, 235, 1)',
-            },
-            {
-                label: 'Em Operação',
-                value: statusData.operacao,
-                color: 'rgba(75, 192, 192, 0.2)',
-                borderColor: 'rgba(75, 192, 192, 1)',
-            },
-            {
-                label: 'Desativado',
-                value: statusData.desativado,
-                color: 'rgba(153, 102, 255, 0.2)',
-                borderColor: 'rgba(153, 102, 255, 1)',
-            },
-        ];
-
-        chartData.forEach((data, index) => {
-            if (charts.current[index]) {
-                charts.current[index].destroy();
-            }
-
-            const ctx = chartRefs.current[index].getContext('2d');
-            charts.current[index] = new Chart(ctx, {
-                type: 'bar', 
+        if (chartRef.current && statusData) { // Certifique-se de que o ref e os dados existem
+            const ctx = chartRef.current.getContext('2d');
+            const chart = new Chart(ctx, {
+                type: 'bar', // Tipo de gráfico
                 data: {
-                    labels: [data.label],
+                    labels: ["Em manutenção", "Ocioso", "Em operação", "Desativado"], // Chaves de statusData como labels
                     datasets: [{
-                        label: data.label,
-                        data: [data.value],
-                        backgroundColor: data.color,
-                        borderColor: data.borderColor,
+                        label: 'Status',
+                        data: Object.values(statusData), // Valores de statusData como dados
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                        ],
+                        borderColor: [
+                            'rgba(255,99,132,1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                        ],
                         borderWidth: 1
                     }]
                 },
@@ -94,8 +98,10 @@ export default function Dashboard({ setTela }) {
                     }
                 }
             });
-        });
-    }, [statusData]);
+            // Limpeza: Destruir o gráfico quando o componente for desmontado
+            return () => chart.destroy();
+        }
+    }, [statusData])
 
     const abrirHelp = () => {
         setModalOpen(true);
@@ -104,6 +110,12 @@ export default function Dashboard({ setTela }) {
     const fecharHelp = () => {
         setModalOpen(false);
     };
+
+    if (loading) {
+        return (
+            <div>Carregando...</div>
+        );
+    }
 
     return (
         <>
@@ -131,11 +143,14 @@ export default function Dashboard({ setTela }) {
                         </section>
                     </div>
                     <div className='flex flex-wrap w-full h-full pt-6 gap-2 justify-center'>
-                        {['manutencao', 'ocioso', 'operacao', 'desativado'].map((status, index) => (
+                        <div className=' h-1/2 w-2/3 md:w-1/3 content-center text-center transition-all'>
+                            <canvas ref={chartRef}></canvas>
+                        </div>
+                        {/* {['manutencao', 'ocioso', 'operacao', 'desativado'].map((status, index) => (
                             <div key={index} className=' h-1/2 w-2/3 md:w-1/3 content-center text-center hover:scale-105 transition-all'>
                                 <canvas ref={el => chartRefs.current[index] = el}></canvas>
                             </div>
-                        ))}
+                        ))} */}
                     </div>
                 </div>
             </div>
