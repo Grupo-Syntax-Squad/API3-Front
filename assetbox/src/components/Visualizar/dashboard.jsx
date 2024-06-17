@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react';
-import "./visualizar.css";
 import { Chart } from 'chart.js/auto';
 import axios from 'axios';
 
@@ -13,19 +12,29 @@ export default function Dashboard({ setTela }) {
         operacao: 0,
         desativado: 0
     });
+    const [ativosPorLocalizacao, setAtivosPorLocalizacao] = useState([]);
     const [modalOpen, setModalOpen] = useState(false);
     const chartRef = useRef();
+    const chartLocalizacaoRef = useRef();
     const [loading, setLoading] = useState(true);
 
     const fetchValorTotal = async () => {
-        const response = await axios.get("http://localhost:8000/dashboard/valorTotal");
-        setValorTotal(response.data);
-    }
+        try {
+            const response = await axios.get("http://localhost:8000/dashboard/valorTotal");
+            setValorTotal(response.data);
+        } catch (error) {
+            console.error('Erro ao buscar valor total:', error);
+        }
+    };
 
     const fetchQuantidadeTotal = async () => {
-        const response = await axios.get("http://localhost:8000/dashboard/quantidadeTotal");
-        setQuantidadeTotal(response.data);
-    }
+        try {
+            const response = await axios.get("http://localhost:8000/dashboard/quantidadeTotal");
+            setQuantidadeTotal(response.data);
+        } catch (error) {
+            console.error('Erro ao buscar quantidade total:', error);
+        }
+    };
 
     const fetchFiliais = async () => {
         try {
@@ -44,7 +53,7 @@ export default function Dashboard({ setTela }) {
                 ocioso: 0,
                 operacao: 0,
                 desativado: 0
-            }
+            };
             response.data.forEach(entity => {
                 switch (entity.nome) {
                     case "EM_MANUTENCAO":
@@ -62,73 +71,123 @@ export default function Dashboard({ setTela }) {
                     default:
                         break;
                 }
-            })
+            });
             setStatusData(statusDataHandler);
+            createStatusChart(statusDataHandler); // Chama a função para criar o gráfico quando os dados estiverem disponíveis
         } catch (error) {
             console.error('Erro ao buscar dados do status:', error);
         }
     };
 
-    useEffect(() => {
+    const fetchAtivosPorLocalizacao = async () => {
+        try {
+            const response = await axios.get('http://localhost:8000/dashboard/localizacao');
+            setAtivosPorLocalizacao(response.data);
+            createLocalizacaoChart(response.data); // Chama a função para criar o gráfico quando os dados estiverem disponíveis
+        } catch (error) {
+            console.error('Erro ao buscar ativos por localização:', error);
+        }
+    };
 
+    useEffect(() => {
         fetchFiliais();
         fetchStatusData();
         fetchValorTotal();
         fetchQuantidadeTotal();
+        fetchAtivosPorLocalizacao();
 
         setLoading(false);
     }, []);
 
-    useEffect(() => {
-        if (chartRef.current && statusData) { // Certifique-se de que o ref e os dados existem
+    const createStatusChart = (data) => {
+        if (chartRef.current && data) {
             const ctx = chartRef.current.getContext('2d');
-            const chart = new Chart(ctx, {
-                type: 'bar', // Tipo de gráfico
+            new Chart(ctx, {
+                type: 'bar',
                 data: {
-                    labels: ["Status"],
-                    datasets: [
-                        {
-                            label: 'Em operação',
-                            data: [statusData.operacao], // Adicione a propriedade operacao ao seu objeto statusData
-                            backgroundColor: ['rgba(0, 255, 0, 0.2)'],
-                            borderColor: ['rgba(0, 255, 0, 1)'],
-                            borderWidth: 1
-                        },
-                        {
-                            label: 'Em manutenção',
-                            data: [statusData.manutencao], // Supondo que statusData.manutencao é um array de dados
-                            backgroundColor: ['rgba(255, 0, 0, 0.2)'],
-                            borderColor: ['rgba(255, 0, 0, 1)'],
-                            borderWidth: 1
-                        },
-                        {
-                            label: 'Ocioso',
-                            data: [statusData.ocioso], // Supondo que statusData.ocioso é um array de dados
-                            backgroundColor: ['rgba(54, 162, 235, 0.2)'],
-                            borderColor: ['rgba(54, 162, 235, 1)'],
-                            borderWidth: 1
-                        },
-                        {
-                            label: 'Desativado',
-                            data: [statusData.desativado], // Adicione a propriedade desativado ao seu objeto statusData
-                            backgroundColor: ['rgba(128, 128, 128, 0.2)'],
-                            borderColor: ['rgba(128, 128, 128, 1)'],
-                            borderWidth: 1
-                        }
-                    ]
+                    labels: ['Em Manutenção', 'Ocioso', 'Em Operação', 'Desativado'],
+                    datasets: [{
+                        label: 'Quantidade de Ativos por Status',
+                        data: [data.manutencao, data.ocioso, data.operacao, data.desativado],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                        ],
+                        borderWidth: 1
+                    }]
                 },
                 options: {
                     scales: {
                         y: {
-                            beginAtZero: true
+                            beginAtZero: true,
+                            ticks: {
+                                stepSize: 1
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top',
+                            labels: {
+                                font: {
+                                    size: 14,
+                                }
+                            }
                         }
                     }
                 }
             });
-            // Limpeza: Destruir o gráfico quando o componente for desmontado
-            return () => chart.destroy();
         }
-    }, [statusData])
+    };
+
+    const createLocalizacaoChart = (data) => {
+        if (chartLocalizacaoRef.current && data.length > 0) {
+            const ctx = chartLocalizacaoRef.current.getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: data.map(item => item.nome),
+                    datasets: [{
+                        label: 'Quantidade de Ativos por Localização',
+                        data: data.map(item => item.quantidade),
+                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                stepSize: 1
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top',
+                            labels: {
+                                font: {
+                                    size: 14,
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+    };
 
     const abrirHelp = () => {
         setModalOpen(true);
@@ -139,25 +198,12 @@ export default function Dashboard({ setTela }) {
     };
 
     if (loading) {
-        return (
-            <div>Carregando...</div>
-        );
+        return <div>Carregando...</div>;
     }
 
     return (
         <>
             <div className='flex w-screen h-screen'>
-                {/* <div className=' h-fit w-1/6 rounded-br-2xl text-sm md:text-base'>
-                    <div className='m-3'>
-                        <h3 className='mb-3 has-text-black'>Visualizar Por Filial</h3>
-                        {filiais.map((filial, index) => (
-                            <div key={index} className=''>
-                                <input type="checkbox" id={`filial-${index}`} />
-                                <label htmlFor={`filial-${index}`}>{filial.fil_nome}</label>
-                            </div>
-                        ))}
-                    </div>
-                </div> */}
                 <div className='flex flex-col w-full items-center p-6'>
                     <div className='flex gap-6 p-1'>
                         <section className='bg-white rounded-lg text-center p-2 hover:scale-105 transition-all background-azul px-5'>
@@ -174,11 +220,10 @@ export default function Dashboard({ setTela }) {
                             <h1 className='text-black'>Ativos por Status</h1>
                             <canvas ref={chartRef}></canvas>
                         </div>
-                        {/* {['manutencao', 'ocioso', 'operacao', 'desativado'].map((status, index) => (
-                            <div key={index} className=' h-1/2 w-2/3 md:w-1/3 content-center text-center hover:scale-105 transition-all'>
-                                <canvas ref={el => chartRefs.current[index] = el}></canvas>
-                            </div>
-                        ))} */}
+                        <div className=' h-1/2 w-2/3 md:w-1/3 content-center text-center transition-all'>
+                            <h1 className='text-black'>Ativos por Localização</h1>
+                            <canvas ref={chartLocalizacaoRef}></canvas>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -187,8 +232,8 @@ export default function Dashboard({ setTela }) {
                 <div className={`modal ${modalOpen ? 'is-active' : ''}`}>
                     <div className="modal-background" onClick={fecharHelp}></div>
                     <div className="modal-content">
-                        <div className="box ajuda m-6 has-text-white ajuda-content">
-                            <p>Esta é a <span className='has-text-weight-bold'>Pagina de Cadastro da Manutenção</span>,  Preencha os dados nescessários referentes à manutenção. OBSERVAÇÃO: No campo "Endereço" cadastre o endereço do local onde a manutenção será realizada, caso a manutenção seja feita na própria empresa, coloque o endereço da empresa, para os casos em que a manutenção será feita em uma loja técnica, oficina etc. Cadastre o endereço respectivo. No campo "Atividade": Informe a atividade que será feita, por exemplo: "Troca de peças", "Limpeza", "Calibração" etc.</p>
+                        <div className="box ajuda m-6 has-text-white">
+                            <p>Esta é a <span className='has-text-weight-bold'>Pagina do dashboard</span>,  Aqui você pode ver graficamente a situação e localização dos ativos, facilitando o controle de dados da empresa e suas filiais.  </p>
                         </div>
                     </div>
                     <button className="modal-close is-large" aria-label="close" onClick={fecharHelp}></button>
