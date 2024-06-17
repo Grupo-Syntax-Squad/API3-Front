@@ -49,7 +49,7 @@ function Home() {
                             {assets.map((asset, index) => (
                                 <div key={index}>
                                     <p className='has-text-weight-bold'>
-                                        Faltam {calculaQuantosDiasFaltam(asset.ati_data_expiracao)} dias para a expiração do ativo {asset.ati_titulo}. Renove ou agende uma manutenção!
+                                        Faltam {calculaQuantosDiasFaltam(asset.ati_data_expiracao)} dias para a expiração do ativo {asset.ati_titulo}. Agende uma manutenção!
                                     </p>
                                 </div>
                             ))}
@@ -65,8 +65,7 @@ function Home() {
                     <div className="modal-background" onClick={() => setShowPopup(false)}></div>
                     <div className="modal-content">
                     <button className="modal-close is-large" aria-label="close" onClick={() => setShowPopup(false)}></button>
-                        <div className="box ajuda m-6 has-text-white ajuda-content">
-                            <button className="delete is-pulled-right" aria-label="close" onClick={() => setShowPopup(false)}></button>
+                        <div className="box ajuda background-assetbox m-6 has-text-white ajuda-content">
                             <p>Este é o <span className='has-text-weight-bold'>Painel Inicial</span>, o seu ponto de partida no AssetBox. Aqui você receberá alertas importantes referentes à expiração de ativos assim que se logar. NÃO deixe de agendar uma manutenção para o ativo prestes a ser expirado, isso poderá afetar o bom funcionamento do ativo! Na parte superior você encontra o Menu de navegação com as seguintes opções: <span className='has-text-weight-bold'>Usuários</span>, <span className='has-text-weight-bold'>Ativos</span>, <span className='has-text-weight-bold'>Manutenção</span>, <span className='has-text-weight-bold'>Dashboard</span>, <span className='has-text-weight-bold'>Notificações</span> e <span className='has-text-weight-bold'>Configurações</span>. Você poderá cadastrar uma nova manutenção clicando no botão <span className='has-text-weight-bold'>Cadastrar Manutenção</span>, acima do Painel.
                             </p>
                         </div>

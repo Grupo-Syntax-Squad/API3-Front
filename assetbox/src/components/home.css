@@ -37,7 +37,6 @@
     background-Color: var(--azul);
 }
 
-
   @media screen and (max-width: 1200px) {
     .ajuda-content{
       max-width: 80%;
