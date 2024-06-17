@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import "./cadastro.css";
 import axios from 'axios';
-
+import Validador from '../../utils/validadorCpf';
 function CadastroDestinatarios({ setTela }) {
   const [des_nome, setNomeDestinatario] = useState('');
   const [email, setEmailDestinatario] = useState('');
@@ -18,6 +18,9 @@ function CadastroDestinatarios({ setTela }) {
   const [des_tip, setTipoDestinatario] = useState('');
   const [showPopup, setShowPopup] = useState(false); // Estado para controlar a exibição do pop-up
   const [cpf, setCPFDestinatario] = useState('');
+  
+  const validador = new Validador();
+  
 
   const handleTelefone = (value) => {
     // Remove tudo que não for dígito
@@ -31,6 +34,17 @@ function CadastroDestinatarios({ setTela }) {
       return onlyNums.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
     }
   };
+
+
+    const abrirHelp = () => {
+      setShowPopup(true)
+  };
+
+
+  const fecharHelp = () => {
+      setShowPopup(false)
+  };
+
 
   const HandleEmail = (value) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -79,6 +93,10 @@ function CadastroDestinatarios({ setTela }) {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
+    if (!validador.validarCPF(cpf)){
+      window.alert("CPF inválido!")
+      return;
+    }
 
     const camposObrigatorios = [des_nome, email, telefone, cpf, end_rua, end_numero, end_bairro, end_cidade, end_uf, end_cep];
     const camposVazios = camposObrigatorios.some(campo => !campo);
@@ -125,8 +143,8 @@ function CadastroDestinatarios({ setTela }) {
     response = await axios.post('http://localhost:8000/destinatarios', dadosDestinatario);
 
     console.log("Destinatário:", response.data);
-
     setShowPopup(true); // Exibe o pop-up após o cadastro
+    
 
     setNomeDestinatario('');
     setTelefoneDestinatario('');
@@ -140,6 +158,7 @@ function CadastroDestinatarios({ setTela }) {
     setUfDestinatario('');
     setTipoDestinatario('');
     setCPFDestinatario('');
+    
   };
 
   return (
@@ -294,16 +313,22 @@ function CadastroDestinatarios({ setTela }) {
             </p>
           </div>
 
-          {showPopup && (
-            <div className='shadow-pop-up' id='popup' style={{ display: 'block', height: '200px', backgroundColor: '#367E90', position: 'fixed', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', textAlign: 'center', width: '40%', alignContent: 'center', justifyContent: 'center', borderRadius: '10px' }}>
-              <p className='has-text-white is-size-3-desktop is-size-4-mobile has-text-weight-medium'>Destinatário Cadastrado com sucesso!</p>
-              <button className='has-text-white is-size-4 p-3 mt-3' style={{ marginLeft: '60%', backgroundColor: '#459EB5', borderRadius: '100%' }} onClick={() => { setShowPopup(false); setCEPDestinatario(''); setTela('Usuarios') }}>
-                <p className='is-size-4 has-text-weight-medium' onClick={()=>{setTela('Usuarios')}}>OK</p>
-              </button>
-            </div>
-          )}
+      
         </form>
       </div>
+      {showPopup && (
+          <div>
+          <div className="modal-background" onClick={fecharHelp}></div>
+          <div className="modal-content">
+              <div className="box ajuda m-3 has-text-white">
+                  <p className='has-text-weight-bold' >Destinatário Cadastrado com sucesso!</p>
+                  <button class="delete is-pulled-right" aria-label="close" onClick={fecharHelp}></button>
+              </div>
+
+          </div>
+          <button className="modal-close is-large" aria-label="close" onClick={fecharHelp}></button>
+      </div>
+      )}
     </body>
   );
 }

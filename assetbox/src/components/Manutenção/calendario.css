@@ -40,15 +40,13 @@
     --cinza: rgb(150, 150, 150);
     --branco: #fff;
     --cinzaclaro: #D9D9D9;
+}
 
-    @media (prefers-color-scheme: dark){
-        --fundoazul: #032594;
-        --cinzaclaro: rgb(58, 58, 58);
-        --branco: #000;
-        --cinza: #222;
-
-    }
-
+.dark{
+    --fundoazul: #032594;
+    --cinzaclaro: rgb(58, 58, 58);
+    --branco: #000;
+    --cinza: #222;
 }
 
 .tela-content{

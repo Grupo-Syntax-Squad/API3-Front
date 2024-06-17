@@ -25,6 +25,7 @@ function CadastroManutenção({ setTela }) {
   const [localizacoes, setLocalizacoes] = useState([]);
   const [tipos, setTipos] = useState([]);
   const [ativos, setAtivos] = useState([]);
+  const [showPopup, setShowPopup] = useState(false);
   const [dataSelecionada, setData] = useState(new Date())
   const [ativoSelecionado, setAtivo] = useState({
     "ati_localizacao_id": {
@@ -32,31 +33,30 @@ function CadastroManutenção({ setTela }) {
     }
   });
 
-  
-
-
   const getDataFromLocalStorage = () => {
     const dataSelecionada = new Date(localStorage.getItem('dataSelecionada')).toISOString().split("T")[0];
     setData(dataSelecionada);
     console.log("Data selecionada:", dataSelecionada);
     if (dataSelecionada) {
-        // Faça o que precisar com a data recuperada
-        console.log('Data selecionada:', dataSelecionada);
-        // Por exemplo, você pode definir o estado com a data recuperada
-        setManData(dataSelecionada);
+      // Faça o que precisar com a data recuperada
+      console.log('Data selecionada:', dataSelecionada);
+      // Por exemplo, você pode definir o estado com a data recuperada
+      setManData(dataSelecionada);
     }
-};
-
-useEffect(() => {
-  const fetchData = async () => {
-    let response = await axios.get('http://localhost:8000/ativos');
-    setAtivos(response.data);
-    getDataFromLocalStorage(); // Chamando a função para recuperar os dados do localStorage
   };
 
-  fetchData(); // Chamando a função fetchData
+  useEffect(() => {
+    const fetchData = async () => {
+      let response = await axios.get('http://localhost:8000/ativos');
+      setAtivos(response.data);
+      getDataFromLocalStorage(); // Chamando a função para recuperar os dados do localStorage
+    };
 
-}, []); 
+    fetchData(); // Chamando a função fetchData
+
+  }, []);
+
+
 
   function exibirPopUp() {
     var popup = document.getElementById('popup');
@@ -75,8 +75,8 @@ useEffect(() => {
     const camposVazios = camposObrigatorios.some(campo => !campo);
 
     if (camposVazios) {
-        alert('Por favor, preencha todos os campos obrigatórios.');
-        return;
+      alert('Por favor, preencha todos os campos obrigatórios.');
+      return;
     }
 
     let response;
@@ -90,14 +90,14 @@ useEffect(() => {
       end_complemento: man_complemento
     }
     response = await axios.post('http://localhost:8000/enderecos', EnderecoData)
-    
+
     const dataHoraServidor = new Date(`${man_data}T${man_horario}:00`).toISOString();
     // Enviando ativo
     const ativoData = {
       man_endereco_id: response.data,
       man_atividade,
-      man_data: new Date().setDate(new Date(dataSelecionada).getDate()+1),
-      man_horario : man_horario === '' ? '00:00:00' : man_horario + ':00',
+      man_data: new Date().setDate(new Date(dataSelecionada).getDate() + 1),
+      man_horario: man_horario === '' ? '00:00:00' : man_horario + ':00',
       man_localizacao: ativoSelecionado.ati_localizacao_id,
       man_ativo_id: ativoSelecionado,
       man_status,
@@ -124,6 +124,15 @@ useEffect(() => {
     let ativoSelecionado = ativos.find(ativo => ativo.ati_id == e.target.value);
     setAtivo(ativoSelecionado);
   }
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const abrirHelp = () => {
+    setModalOpen(true);
+  };
+
+  const fecharHelp = () => {
+    setModalOpen(false);
+  };
 
   // Função para lidar com a busca de CEP
   const handleCepChange = async (event) => {
@@ -156,12 +165,14 @@ useEffect(() => {
 
   return (
     <body>
+
+      <div class="help-button"><button class=" shadow-button button button-effect is-primary m-5 ml-6 ajuda-botao is-size-4">?</button></div>
       <div class='page-full shadow-button'>
         <div class='field'>
           <h2 class="titulo-cadastro p-2">Cadastro de Manutenção</h2>
         </div>
         <div class="columns m-3">
-          <div class="column is-half" style={{width: '80%'}}>
+          <div class="column is-half" style={{ width: '80%' }}>
             <form onSubmit={handleSubmit}>
               <div className='top-one'>
                 <div class="field">
@@ -177,10 +188,10 @@ useEffect(() => {
                   </div>
                 </div>
                 <div className="field" >
-                  <label className="form-label ">Data da manutenção:<span className='has-text-danger'>*</span></label>
+                  <label className="form-label"><div>Data da manutenção:<span className='has-text-danger'>*</span></div></label>
 
                   <input
-                    class="input is-small mt-2"
+                    class="input is-small mt-2 input-menor"
                     type="date"
                     placeholder='Insira a Data da manutenção:'
                     value={dataSelecionada}
@@ -188,9 +199,9 @@ useEffect(() => {
                   />
                 </div>
                 <div class="field">
-                  <label class="label has-text-weight-normal">Horario da Manutenção <span className='has-text-danger'>*</span></label>
+                  <label class="label has-text-weight-normal "><div>Horario da Manutenção <span className='has-text-danger'>*</span></div></label>
                   <input
-                    class="input is-small"
+                    class="input is-small input-menor"
                     type="time"
                     title="Digite o horario que a manutenção ocorerá"
                     placeholder='Digite o horario:'
@@ -199,9 +210,9 @@ useEffect(() => {
                   />
                 </div>
                 <div class="field">
-                  <label class="label has-text-weight-normal">Atividade<span className='has-text-danger'>*</span></label>
+                  <label class="label has-text-weight-normal ">Atividade<span className='has-text-danger'>*</span></label>
                   <input
-                    class="input is-small"
+                    class="input is-small input-menor"
                     type="text"
                     title="Digite o número de série do ativo"
                     placeholder='Insira o a descrição da manutenção:'
@@ -224,7 +235,7 @@ useEffect(() => {
                   <label className="label has-text-weight-normal">Responsável<span className='has-text-danger'>*</span></label>
 
                   <input
-                    class="input is-small"
+                    class="input is-small input-menor"
                     type="text"
                     title="Digite o responsavel da manutenção"
                     placeholder='Insira o o responsável pela manutenção'
@@ -235,7 +246,7 @@ useEffect(() => {
                 <div class="field">
                   <label class="label has-text-weight-normal">Localização</label>
                   <input
-                    class="input is-small"
+                    class="input is-small input-menor"
                     type="text"
                     title="Digite a localização"
                     placeholder='Insira a Localização:'
@@ -246,7 +257,7 @@ useEffect(() => {
                 <div className="field" >
                   <label className="label has-text-weight-normal">Observações</label>
                   <input
-                    class="input is-small"
+                    class="input is-small input-menor"
                     type="text"
                     placeholder='Insira um Complemento:'
                     title="Digite um complemento para a manutenção, por exemplo: problemas que não serão corrigidos, estado de preservação, etc."
@@ -369,12 +380,37 @@ useEffect(() => {
               Cancelar
             </button>
           </p>
-          <div id='popup' style={{ display: 'none', height: '200px', backgroundColor: '#367E90', position: 'fixed', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', textAlign: 'center', width: '40%', alignContent: 'center', justifyContent: 'center', borderRadius: '10px' }}>
-            <p className='has-text-white is-size-3-desktop is-size-4-mobile'>Manutenção Cadastrada com sucesso!</p>
-            <button className='has-text-white is-size-4 p-3 mt-3' style={{ marginLeft: '60%', backgroundColor: '#459EB5', borderRadius: '100%' }} onClick={() => exibirPopUp()}>
-              <p className='is-size-4' onClick={() => setTela('Manutenções')}>OK</p>
-            </button>
+          {showPopup && (
+            <div>
+              <div className="modal-background" onClick={fecharHelp}></div>
+              <div className="modal-content">
+
+                <div className="box ajuda m-3 has-text-white">
+                  <p className='has-text-weight-bold' >Manutenção Cadastrada com sucesso!</p>
+                  <button class="delete is-pulled-right" aria-label="close" onClick={fecharHelp}></button>
+                </div>
+
+              </div>
+              <button className="modal-close is-large" aria-label="close" onClick={fecharHelp}></button>
+            </div>
+          )}
+        </div>
+      </div>
+      <div className="help-button">
+        <button className="shadow-button button button-effect is-primary m-5 ml-6 ajuda-botao is-size-4" onClick={abrirHelp}>?</button>
+
+        <div className={`modal ${modalOpen ? 'is-active' : ''}`}>
+          <div className="modal-background" onClick={fecharHelp}></div>
+          <div className="modal-content">
+
+
+            <div className="box ajuda m-6 has-text-white">
+              <button class="delete is-pulled-right" aria-label="close" onClick={fecharHelp}></button>
+              <p>Esta é a <span className='has-text-weight-bold'>Pagina de Cadastro da Manutenção</span>,  Preencha os dados nescessários referentes à manutenção. OBSERVAÇÃO: No campo "Endereço" cadastre o endereço do local onde a manutenção será realizada, caso a manutenção seja feita na própria empresa, coloque o endereço da empresa, para os casos em que a manutenção será feita em uma loja técnica, oficina etc. Cadastre o endereço respectivo. No campo "Atividade": Informe a atividade que será feita, por exemplo: "Troca de peças", "Limpeza", "Calibração" etc.</p>
+            </div>
+
           </div>
+          <button className="modal-close is-large" aria-label="close" onClick={fecharHelp}></button>
         </div>
       </div>
     </body>

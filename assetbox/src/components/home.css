@@ -23,4 +23,26 @@
   .border-none{
     border-style: none;
   }
+
+
+  .alert-icon{
+    background-color: red;
+  }
  
+  .modal-content {
+    overflow: hidden;
+  }
+  .ajuda-content{
+    width:100%;
+    background-Color: var(--azul);
+}
+
+  @media screen and (max-width: 1200px) {
+    .ajuda-content{
+      max-width: 80%;
+    }
+ }
+
+ .ajuda-botao{
+  border-radius: 100%;
+ }
