@@ -13,9 +13,11 @@ export default function Dashboard({ setTela }) {
         desativado: 0
     });
     const [ativosPorLocalizacao, setAtivosPorLocalizacao] = useState([]);
+    const [tipoData, setTipoData] = useState([]);
     const [modalOpen, setModalOpen] = useState(false);
     const chartRef = useRef();
     const chartLocalizacaoRef = useRef();
+    const chartTipoRef = useRef();
     const [loading, setLoading] = useState(true);
 
     const fetchValorTotal = async () => {
@@ -73,7 +75,7 @@ export default function Dashboard({ setTela }) {
                 }
             });
             setStatusData(statusDataHandler);
-            createStatusChart(statusDataHandler); // Chama a função para criar o gráfico quando os dados estiverem disponíveis
+            createStatusChart(statusDataHandler);
         } catch (error) {
             console.error('Erro ao buscar dados do status:', error);
         }
@@ -83,11 +85,23 @@ export default function Dashboard({ setTela }) {
         try {
             const response = await axios.get('http://localhost:8000/dashboard/localizacao');
             setAtivosPorLocalizacao(response.data);
-            createLocalizacaoChart(response.data); // Chama a função para criar o gráfico quando os dados estiverem disponíveis
+            createLocalizacaoChart(response.data);
         } catch (error) {
             console.error('Erro ao buscar ativos por localização:', error);
         }
     };
+
+    const fetchTipoData = async () => {
+        try {
+            const response = await axios.get('http://localhost:8000/dashboard/tipo');
+            console.log('Tipo Data:', response.data); // Log de depuração
+            setTipoData(response.data);
+            createTipoChart(response.data);
+        } catch (error) {
+            console.error('Erro ao buscar dados de tipos:', error);
+        }
+    };
+    
 
     useEffect(() => {
         fetchFiliais();
@@ -95,6 +109,7 @@ export default function Dashboard({ setTela }) {
         fetchValorTotal();
         fetchQuantidadeTotal();
         fetchAtivosPorLocalizacao();
+        fetchTipoData();
 
         setLoading(false);
     }, []);
@@ -189,6 +204,47 @@ export default function Dashboard({ setTela }) {
         }
     };
 
+    const createTipoChart = (data) => {
+        if (chartTipoRef.current && data.length > 0) {
+            const ctx = chartTipoRef.current.getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: data.map(item => item.nome),
+                    datasets: [{
+                        label: 'Quantidade de Ativos por Tipo',
+                        data: data.map(item => item.quantidade),
+                        backgroundColor: 'rgba(255, 206, 86, 0.2)',
+                        borderColor: 'rgba(255, 206, 86, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                stepSize: 1
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top',
+                            labels: {
+                                font: {
+                                    size: 14,
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+    };
+    
+
     const abrirHelp = () => {
         setModalOpen(true);
     };
@@ -208,7 +264,7 @@ export default function Dashboard({ setTela }) {
                     <div className='flex gap-6 p-1'>
                         <section className='bg-white rounded-lg text-center p-2 hover:scale-105 transition-all background-azul px-5'>
                             <label htmlFor="">Valor Total</label>
-                            <h1 className='has-text-weight-bold is-size-4 has-text-white'>{valorTotal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</h1>
+                            <h1 className='has-text-weight-bold is-size-4 has-text-white'>{valorTotal}</h1>
                         </section>
                         <section className='bg-white rounded-lg text-center p-2 hover:scale-105 transition-all background-azul px-5'>
                             <label className='' htmlFor="">Quantidade Total</label>
@@ -216,13 +272,17 @@ export default function Dashboard({ setTela }) {
                         </section>
                     </div>
                     <div className='flex flex-wrap w-full h-full pt-6 gap-2 justify-center'>
-                        <div className=' h-1/2 w-2/3 md:w-1/3 content-center text-center transition-all'>
+                        <div className='h-1/2 w-2/3 md:w-1/3 content-center text-center transition-all'>
                             <h1 className='text-black'>Ativos por Status</h1>
                             <canvas ref={chartRef}></canvas>
                         </div>
-                        <div className=' h-1/2 w-2/3 md:w-1/3 content-center text-center transition-all'>
+                        <div className='h-1/2 w-2/3 md:w-1/3 content-center text-center transition-all'>
                             <h1 className='text-black'>Ativos por Localização</h1>
                             <canvas ref={chartLocalizacaoRef}></canvas>
+                        </div>
+                        <div className='h-1/2 w-2/3 md:w-1/3 content-center text-center transition-all'>
+                            <h1 className='text-black'>Ativos por Tipo</h1>
+                            <canvas ref={chartTipoRef}></canvas>
                         </div>
                     </div>
                 </div>
@@ -233,7 +293,7 @@ export default function Dashboard({ setTela }) {
                     <div className="modal-background" onClick={fecharHelp}></div>
                     <div className="modal-content">
                         <div className="box ajuda m-6 has-text-white">
-                            <p>Esta é a <span className='has-text-weight-bold'>Pagina do dashboard</span>,  Aqui você pode ver graficamente a situação e localização dos ativos, facilitando o controle de dados da empresa e suas filiais.  </p>
+                            <p>Esta é a <span className='has-text-weight-bold'>Pagina de Cadastro da Manutenção</span>,  Preencha os dados nescessários referentes à manutenção. OBSERVAÇÃO: No campo "Endereço" cadastre o endereço do local onde </p>
                         </div>
                     </div>
                     <button className="modal-close is-large" aria-label="close" onClick={fecharHelp}></button>
