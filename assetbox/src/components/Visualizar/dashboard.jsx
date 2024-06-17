@@ -85,24 +85,37 @@ export default function Dashboard({ setTela }) {
             const chart = new Chart(ctx, {
                 type: 'bar', // Tipo de gráfico
                 data: {
-                    labels: ["Em manutenção", "Ocioso", "Em operação", "Desativado"], // Chaves de statusData como labels
-                    datasets: [{
-                        label: 'Quantidade',
-                        data: Object.values(statusData), // Valores de statusData como dados
-                        backgroundColor: [
-                            'rgba(255, 99, 132, 0.2)',
-                            'rgba(54, 162, 235, 0.2)',
-                            'rgba(255, 206, 86, 0.2)',
-                            'rgba(75, 192, 192, 0.2)',
-                        ],
-                        borderColor: [
-                            'rgba(255,99,132,1)',
-                            'rgba(54, 162, 235, 1)',
-                            'rgba(255, 206, 86, 1)',
-                            'rgba(75, 192, 192, 1)',
-                        ],
-                        borderWidth: 1
-                    }]
+                    labels: ["Status"],
+                    datasets: [
+                        {
+                            label: 'Em operação',
+                            data: [statusData.operacao], // Adicione a propriedade operacao ao seu objeto statusData
+                            backgroundColor: ['rgba(0, 255, 0, 0.2)'],
+                            borderColor: ['rgba(0, 255, 0, 1)'],
+                            borderWidth: 1
+                        },
+                        {
+                            label: 'Em manutenção',
+                            data: [statusData.manutencao], // Supondo que statusData.manutencao é um array de dados
+                            backgroundColor: ['rgba(255, 0, 0, 0.2)'],
+                            borderColor: ['rgba(255, 0, 0, 1)'],
+                            borderWidth: 1
+                        },
+                        {
+                            label: 'Ocioso',
+                            data: [statusData.ocioso], // Supondo que statusData.ocioso é um array de dados
+                            backgroundColor: ['rgba(54, 162, 235, 0.2)'],
+                            borderColor: ['rgba(54, 162, 235, 1)'],
+                            borderWidth: 1
+                        },
+                        {
+                            label: 'Desativado',
+                            data: [statusData.desativado], // Adicione a propriedade desativado ao seu objeto statusData
+                            backgroundColor: ['rgba(128, 128, 128, 0.2)'],
+                            borderColor: ['rgba(128, 128, 128, 1)'],
+                            borderWidth: 1
+                        }
+                    ]
                 },
                 options: {
                     scales: {
@@ -134,7 +147,7 @@ export default function Dashboard({ setTela }) {
     return (
         <>
             <div className='flex w-screen h-screen'>
-                <div className=' h-fit w-1/6 rounded-br-2xl text-sm md:text-base'>
+                {/* <div className=' h-fit w-1/6 rounded-br-2xl text-sm md:text-base'>
                     <div className='m-3'>
                         <h3 className='mb-3 has-text-black'>Visualizar Por Filial</h3>
                         {filiais.map((filial, index) => (
@@ -144,7 +157,7 @@ export default function Dashboard({ setTela }) {
                             </div>
                         ))}
                     </div>
-                </div>
+                </div> */}
                 <div className='flex flex-col w-full items-center p-6'>
                     <div className='flex gap-6 p-1'>
                         <section className='bg-white rounded-lg text-center p-2 hover:scale-105 transition-all background-azul px-5'>
@@ -158,6 +171,7 @@ export default function Dashboard({ setTela }) {
                     </div>
                     <div className='flex flex-wrap w-full h-full pt-6 gap-2 justify-center'>
                         <div className=' h-1/2 w-2/3 md:w-1/3 content-center text-center transition-all'>
+                            <h1 className='text-black'>Ativos por Status</h1>
                             <canvas ref={chartRef}></canvas>
                         </div>
                         {/* {['manutencao', 'ocioso', 'operacao', 'desativado'].map((status, index) => (
