@@ -12,7 +12,7 @@ const Usuarios = ({ setTela }) => {
         const fetchData = async () => {
             try {
                 const destinatariosResponse = await axios.get('http://localhost:8000/destinatarios');
-                setdestinatarios(destinatariosResponse.data.filter(destinatario => destinatario.des_status === "ATIVO"));
+                setdestinatarios(destinatariosResponse.data);
 
                 const administradoresResponse = await axios.get('http://localhost:8000/administradores');
                 const admins = administradoresResponse.data.filter(administrador => administrador.status === "ATIVO");
@@ -49,11 +49,11 @@ const Usuarios = ({ setTela }) => {
         setModalOpen(false);
     };
 
-    const dadosFiltrados = destinatarios.filter(destinatario => {
-        return (filtroNome === '' || destinatario.des_nome.toLowerCase().includes(filtroNome.toLowerCase()));
-    });
     const dadosFiltrados2 = administradores.filter(administrador => {
         return (filtroNome === '' || administrador.adm_nome.toLowerCase().includes(filtroNome.toLowerCase()));
+    });
+    const dadosFiltrados = destinatarios.filter(destinatario => {
+        return (filtroNome === '' || destinatario.des_nome.toLowerCase().includes(filtroNome.toLowerCase()));
     });
 
     return (
@@ -94,18 +94,18 @@ const Usuarios = ({ setTela }) => {
                             <div className='asset flex-wrap is-justify-content-center'>
 
                                 {dadosFiltrados2.map((administrador) => {
-                                    if (administrador.adm_id === "1" && administradores.length === 0 && destinatarios.length === 0) {
+                                    if (administrador.adm_id === 1 && administradores.length === 0 && destinatarios.length === 0) {
                                         return <div className='asset is-flex is-justify-content-center'>
                                             <div className='SemHover column is-one-third mr-2 dado-ativo is-flex is-justify-content-center is-align-items-center has-text-weight-medium' style={{ width: '200%' }}>
                                                 <p className='has-text-black'>Nenhum Usuário Cadastrado</p>
                                             </div>
                                         </div>
-                                    } if (administrador.adm_id !== "1") {
+                                    } if (administrador.adm_id !== 1) {
                                         return (
                                             <div className='SemHover p-2 is-one-third mr-2 dado-ativo is-flex is-align-items-center ml-6 has-text-weight-medium'>
                                                 <div onClick={() => handleClickAdm(administrador.adm_id)} className='des' class=' des is-flex is-justify-content-center'>
                                                     <a class='SemHover is-one-third mr-2 dado-ativo is-flex is-justify-content-center is-align-items-center has-text-weight-medium' href='##'>
-                                                        <p className='has-text-black'>{administrador.adm_nome} | Administrado</p>
+                                                        <p className='has-text-black'>{administrador.adm_nome} | Administrador</p>
                                                     </a>
                                                 </div>
                                             </div>
