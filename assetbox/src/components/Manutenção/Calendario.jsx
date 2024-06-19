@@ -150,7 +150,7 @@ const Calendario = ({ setTela }) => {
 
     return (
         
-        <div className="tela columns shadow-button">
+        <div className="tela h-screen columns shadow-button">
             
             <div className="calendar column is-half">
                 <div className="calendar-header">

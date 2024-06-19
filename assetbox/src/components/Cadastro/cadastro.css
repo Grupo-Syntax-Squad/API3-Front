@@ -8,10 +8,10 @@
 }
 
 .dark{
-  --cinzaclaro: #616161;
+  --cinzaclaro: #ffffff;
   --azul: #2a3f9c;
   --branco: #000000;
-  --cinza: rgb(96, 96, 96);
+  --cinza: rgb(255, 255, 255);
   --h2azul: #2a3f9c;
   --vermelho: red;
 }

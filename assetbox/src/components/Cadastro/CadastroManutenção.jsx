@@ -167,7 +167,7 @@ function CadastroManutenção({ setTela }) {
     <body>
 
       <div class="help-button"><button class=" shadow-button button button-effect is-primary m-5 ml-6 ajuda-botao is-size-4">?</button></div>
-      <div class='page-full shadow-button'>
+      <div class='page-full h-screen shadow-button'>
         <div class='field'>
           <h2 class="titulo-cadastro p-2">Cadastro de Manutenção</h2>
         </div>

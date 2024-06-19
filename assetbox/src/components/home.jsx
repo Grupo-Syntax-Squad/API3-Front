@@ -38,7 +38,7 @@ function Home() {
     };
 
     return (
-        <div className='logo-container'>
+        <div className='logo-container h-screen'>
             <img src={LogoIcon} className='logo' alt="AssetBox Logo" />
             {showAlerta && (
                 <div>

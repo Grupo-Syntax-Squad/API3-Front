@@ -57,7 +57,7 @@ function EditarManutencao({ setTela }) {
     } else {
         return (
             <body>
-                <div class='page-full'>
+                <div class='page-full h-screen'>
                     <div class='field'>
                         <h2>{dadosManutencao.man_atividade}</h2>
                     </div>

@@ -27,7 +27,7 @@ const Login = ({ setTela }) => {
     }
 
     return (
-        <form className='fundo  is-flex is-align-items-center is-justify-content-center '>
+        <form className='fundo h-screen is-flex is-align-items-center is-justify-content-center '>
             <div className='is-flex is-justify-content-center'>
                 <img src={logo} className='is-centered pb-6' alt="" />
             </div>

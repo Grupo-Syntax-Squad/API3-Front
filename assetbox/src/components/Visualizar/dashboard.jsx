@@ -293,7 +293,7 @@ export default function Dashboard({ setTela }) {
                     <div className="modal-background" onClick={fecharHelp}></div>
                     <div className="modal-content">
                         <div className="box ajuda m-6 has-text-white">
-                            <p>Esta é a <span className='has-text-weight-bold'>Pagina de Cadastro da Manutenção</span>,  Preencha os dados nescessários referentes à manutenção. OBSERVAÇÃO: No campo "Endereço" cadastre o endereço do local onde </p>
+                            <p>Esta é a <span className='has-text-weight-bold'>Pagina de Dashboard</span>,  Preencha os dados nescessários referentes à manutenção. OBSERVAÇÃO: No campo "Endereço" cadastre o endereço do local onde </p>
                         </div>
                     </div>
                     <button className="modal-close is-large" aria-label="close" onClick={fecharHelp}></button>

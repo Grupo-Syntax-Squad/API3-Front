@@ -50,14 +50,14 @@ function Relatorio({ setTela }) {
     if (carregando) {
         return (
             <body>
-                <div class='page-full'>
+                <div class='page-full h-screen'>
                     <h1 className='has-text-weight-light'>Carregando...</h1>
                 </div>
             </body>);
     }
     return (
         <body>
-            <div class='page-full'>
+            <div class='page-full h-screen'>
                 <img src={Logo} className='w-40 h-40' alt="Ativos" />
                 <h1 className='has-text-weight-light'>Data: {dataAtual.toLocaleString('pt-BR').split(",")[0]}</h1>
                 <br />

@@ -146,7 +146,7 @@ function VisualizarAtivos({ setTela }) {
   } else {
     return (
       <body>
-        <div class='page-full'>
+        <div class='page-full h-screen'>
           <div class='field'>
             <h2>{dadosAtivo.ati_titulo}</h2>
           </div>

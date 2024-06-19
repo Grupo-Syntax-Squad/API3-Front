@@ -68,7 +68,7 @@ const Ativos = ({ setTela }) => {
     return (
         <body>
 
-            <div class='page-full' style={{ backgroundColor: 'transparent' }}>
+            <div class='page-full h-screen' style={{ backgroundColor: 'transparent' }}>
                 <button class=" shadow-button button button-effect is-primary m-5 ml-6 is-rounded is-size-4" onClick={() => setTela('CadastroAtivos')}>Cadastrar Ativo</button>
                 <button class=" shadow-button button button-effect is-primary m-5 ml-6 is-rounded is-size-4" onClick={abrirModal}>Relatório</button>
 

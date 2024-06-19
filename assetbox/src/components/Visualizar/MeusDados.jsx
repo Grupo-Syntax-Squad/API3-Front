@@ -83,7 +83,7 @@ export default function MeusDados({ setTela }) {
 
     // Renderizando página
     return (
-        <body className="m-2">
+        <body className="m-2 h-screen">
             <h1 className="has-text-black is-size-4">Meus dados</h1>
             <form className="form">
                 <div className="field">

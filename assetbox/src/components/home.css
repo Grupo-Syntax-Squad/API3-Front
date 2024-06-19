@@ -3,7 +3,7 @@
 .logo-container {
     display: flex;
     justify-content: center;
-    height: 800px;
+    height: 100vh !important;
   }
   
 .logo {

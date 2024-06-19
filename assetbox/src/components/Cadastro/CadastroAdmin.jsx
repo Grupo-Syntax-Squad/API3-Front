@@ -97,7 +97,7 @@ function CadastroAdministrador({ setTela }) {
 
     return (
         <body>
-            <div className='page-full shadow-button'>
+            <div className='page-full h-screen shadow-button'>
                 <div className='field'>
                     <h2 class="titulo-cadastro p-2">Cadastro de Administrador</h2>
                 </div>

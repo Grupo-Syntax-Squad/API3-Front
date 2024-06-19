@@ -87,7 +87,7 @@ function VisualizarFilial({ setTela }) {
     }
 
     return (
-        <div className="columns m-3">
+        <div className="columns m-3 h-screen">
             <div className="card" style={{ width: '200%' }}>
                 <header className="card-header">
                     <p className="card-header-title">Visualizar Filial</p>

@@ -33,7 +33,7 @@ const Historico = ({ setTela, ativoId }) => {
     console.log("Ativo ID:", ativo);
 
     return (
-        <div className="tela columns">
+        <div className="tela columns h-screen">
             <div className="listas column">
                 <button className="button is-light" onClick={() => setTela('Ativos')}>Voltar</button>
                 {ativo && (

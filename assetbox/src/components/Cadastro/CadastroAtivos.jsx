@@ -219,7 +219,7 @@ function CadastroAtivos({ setTela }) {
   if (carregando) {
     return (
       <body>
-        <div class='page-full'>
+        <div class='page-full h-screen'>
           <h1 className='has-text-weight-light'>Carregando...</h1>
         </div>
       </body>);
