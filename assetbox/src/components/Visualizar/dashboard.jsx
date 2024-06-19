@@ -264,7 +264,7 @@ export default function Dashboard({ setTela }) {
                     <div className='flex gap-6 p-1'>
                         <section className='bg-white rounded-lg text-center p-2 hover:scale-105 transition-all background-azul px-5'>
                             <label htmlFor="">Valor Total</label>
-                            <h1 className='has-text-weight-bold is-size-4 has-text-white'>{valorTotal}</h1>
+                            <h1 className='has-text-weight-bold is-size-4 has-text-white'>{valorTotal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</h1>
                         </section>
                         <section className='bg-white rounded-lg text-center p-2 hover:scale-105 transition-all background-azul px-5'>
                             <label className='' htmlFor="">Quantidade Total</label>
