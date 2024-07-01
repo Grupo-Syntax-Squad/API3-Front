@@ -300,7 +300,7 @@ function CadastroAtivos({ setTela }) {
                     </select>
                   </div>
                 </div>
-                <div className="field" >
+                <div className="field flex flex-col" >
                   <label className="form-label ">Destinatário</label>
                   {destinatarios && destinatarios.length > 0 ? (
                     <div class="select is-small">

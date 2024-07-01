@@ -59,12 +59,13 @@ function CadastroManutenção({ setTela }) {
 
 
   function exibirPopUp() {
-    var popup = document.getElementById('popup');
-    if (popup.style.display === 'none') {
-      popup.style.display = 'block';
-    } else {
-      popup.style.display = 'none';
-    }
+    showPopup ? setShowPopup(false) : setShowPopup(true);
+    // let popup = document.getElementById('popup');
+    // if (popup.style.display === 'none') {
+    //   popup.style.display = 'block';
+    // } else {
+    //   popup.style.display = 'none';
+    // }
   }
 
   // Função para lidar com o envio do formulário
@@ -387,11 +388,11 @@ function CadastroManutenção({ setTela }) {
 
                 <div className="box ajuda m-3 has-text-white">
                   <p className='has-text-weight-bold' >Manutenção Cadastrada com sucesso!</p>
-                  <button class="delete is-pulled-right" aria-label="close" onClick={fecharHelp}></button>
+                  <button class="delete is-pulled-right" aria-label="close" onClick={exibirPopUp}></button>
                 </div>
 
               </div>
-              <button className="modal-close is-large" aria-label="close" onClick={fecharHelp}></button>
+              <button className="modal-close is-large" aria-label="close" onClick={exibirPopUp}></button>
             </div>
           )}
         </div>
