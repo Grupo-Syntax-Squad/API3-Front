@@ -54,7 +54,7 @@ const CadastroLocalizacao = ({handleLocalizacaoClick, adicionarLocalizacao}) => 
 
     return (
         <form style={estilo.form} onSubmit={event => handleSubmit(event)}>
-            <h1 style={estilo.h1}>Cadastrar tipo</h1>
+            <h1 style={estilo.h1}>Cadastrar localizacação</h1>
             
             <label htmlFor="localizacao" style={estilo.label}>Localização:</label>
             
