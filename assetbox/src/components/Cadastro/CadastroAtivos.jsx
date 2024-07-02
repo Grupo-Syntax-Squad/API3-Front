@@ -256,11 +256,11 @@ function CadastroAtivos({ setTela }) {
                   />
                 </div>
                 <div class="field">
-                  <label class="form-label ">Tipo <span className='has-text-danger'>*</span></label>
-                  <div class="select is-small is-flex">
+                  <label class="form-label is-flex">Tipo <span className='has-text-danger'>*</span></label>
+                  <div class="select is-small">
                     <div>
                       {tipos && tipos.length > 0 ? (
-                        <select class="is-hovered" onChange={e => setTipoAtivo(e.target.value)}>
+                        <select class="is-hovered no-arrow" onChange={e => setTipoAtivo(e.target.value)}>
                           <option value="" disabled selected>Selecione um tipo</option>
                           {tipos.map((tipo) => <option key={tipo.tip_titulo} value={tipo.tip_id}>{tipo.tip_titulo}</option>)}
                         </select>
@@ -268,12 +268,12 @@ function CadastroAtivos({ setTela }) {
                         <p>Nenhum tipo disponível</p>
                       )}
                     </div>
-                  <img src={adicionar} style={{ marginLeft: '10px', width: '15%' }} title="Cadastrar novo tipo" onClick={handleTipoClick} />
                   </div>
+                  <img src={adicionar} style={{ marginLeft: '140px', width: '10%' }} title="Cadastrar novo tipo" onClick={handleTipoClick} />
                 </div>
 
-                <div class="field">
-                  <label class="form-label is-flex">Localização</label>
+                <div class="field gap-u">
+                  <label class="form-label is-flex ">Localização</label>
                   <div class="select is-small">
                     <div>
                       {localizacoes && localizacoes.length > 0 ? (
@@ -521,7 +521,7 @@ function CadastroAtivos({ setTela }) {
       {mostrarTipo && <CadastroTipo handleTipoClick={handleTipoClick} setTipos={setTipos} />}
       {mostrarLocalizacao && <CadastroLocalizacao handleLocalizacaoClick={handleLocalizacaoClick} setLocalizacoes={setLocalizacoes} />}
       <div className="help-button">
-        <button className="shadow-button button button-effect is-primary m-5 ml-6 is-rounded is-size-4" onClick={abrirHelp}>?</button>
+        <button className="shadow-button button button-effect is-primary m-5 ml-6 ajuda-botao is-size-4" onClick={abrirHelp}>?</button>
 
         <div className={`modal ${modalOpen ? 'is-active' : ''}`}>
           <div className="modal-background" onClick={fecharHelp}></div>

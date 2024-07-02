@@ -101,3 +101,12 @@ h1{
     max-width: 45%;
   }
 }
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: transparent;
+  border: 1px solid #ccc;
+  padding: 5px;
+  /* Se desejar, você pode adicionar mais estilos aqui */
+}

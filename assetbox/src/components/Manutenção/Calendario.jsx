@@ -150,7 +150,7 @@ const Calendario = ({ setTela }) => {
 
     return (
         
-        <div className="tela h-screen columns shadow-button">
+        <div className="tela container-calendario h-screen columns shadow-button">
             
             <div className="calendar column is-half">
                 <div className="calendar-header">
@@ -211,7 +211,7 @@ const Calendario = ({ setTela }) => {
                 </label>
             </div>
             <div className="help-button">
-                <button className="shadow-button button button-effect is-primary m-5 ml-6 is-rounded is-size-4" onClick={abrirHelp}>?</button>
+                <button className="shadow-button button button-effect is-primary m-5 ml-6 ajuda-botao is-size-4" onClick={abrirHelp}>?</button>
 
                 <div className={`modal ${modalOpen ? 'is-active' : ''}`}>
                     <div className="modal-background" onClick={fecharHelp}></div>

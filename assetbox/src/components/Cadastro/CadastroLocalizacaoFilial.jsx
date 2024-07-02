@@ -6,7 +6,7 @@ const CadastroLocalizacao = ({handleLocalizacaoClick, adicionarLocalizacao}) => 
 
     const estilo = {
         form: {
-            width: "30vw",
+            width: "40vw",
             position: "fixed",
             top: "50%",
             left: "50%",
@@ -53,8 +53,8 @@ const CadastroLocalizacao = ({handleLocalizacaoClick, adicionarLocalizacao}) => 
     }
 
     return (
-        <form style={estilo.form} onSubmit={event => handleSubmit(event)}>
-            <h1 style={estilo.h1}>Cadastrar localizacação</h1>
+        <form className="popup_pequeno" style={estilo.form} onSubmit={event => handleSubmit(event)}>
+            <h1 style={estilo.h1}>Cadastrar localização</h1>
             
             <label htmlFor="localizacao" style={estilo.label}>Localização:</label>
             
