@@ -137,7 +137,7 @@ function VisualizarDestinatarios({ setTela }) {
 
   return (
     <body>
-      <div class='page-full h-screen'>
+      <div class='page-full'>
         <div class='field'>
           <h2>Destinatário: </h2>
         </div>

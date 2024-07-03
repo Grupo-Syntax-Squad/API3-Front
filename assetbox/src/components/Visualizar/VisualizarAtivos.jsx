@@ -146,7 +146,7 @@ function VisualizarAtivos({ setTela }) {
   } else {
     return (
       <body>
-        <div class='page-full h-screen'>
+        <div class='page-full'>
           <div class='field'>
             <h2>{dadosAtivo.ati_titulo}</h2>
           </div>
@@ -154,7 +154,7 @@ function VisualizarAtivos({ setTela }) {
           <div class="columns m-3">
 
             <div class="column is-half has-text-centered">
-              {imageUrl == null ? <div>Ativo sem imagem</div> : <img src={imageUrl} alt="Ativo" style={{ width: '200px', height: '200px' }} />}
+              {imageUrl == null ? <div>Ativo sem imagem</div> : <img src={imageUrl} alt="Ativo" style={{ width: '100%', height: '70%' }} />}
             </div>
 
             <div class="column is-half">
